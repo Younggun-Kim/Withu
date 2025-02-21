@@ -93,6 +93,9 @@ jobs:
       - name: Flutter Build
         run: |
           cd ios
+          rm -rf Podfile.lock
+          pod deintegrate
+          pod cache clean --all
           pod install
           cd ..
           flutter build ios --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons --verbose --no-codesign
