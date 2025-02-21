@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -45,6 +47,8 @@ app.*.map.json
 # Android related
 */keystore
 */fastlane/withu-444918-ec97a541ee39.json
+withu-444918-5ca8b32fee4b.json
+*.pem
 
 # iOS related
 .env

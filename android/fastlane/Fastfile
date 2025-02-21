@@ -1,14 +1,17 @@
+
 default_platform(:android)
 
 # 환경변수 설정
-SECRET_ANDROID_JSON_KEY=ENV["SECRET_ANDROID_JSON_KEY"]
+# ENV["FLUTTER_BUILD_FLAVOR"] = "prod"
+# ENV["FLUTTER_TARGET"] = "lib/core/config/env/prod.dart"
+#
+# FLUTTER_BUILD_FLAVOR=ENV["FLUTTER_BUILD_FLAVOR"]
+# FLUTTER_TARGET=ENV["FLUTTER_TARGET"]
+ANDROID_JSON_KEY=Base64.decode64(ENV["ANDROID_JSON_KEY"])
 
 platform :android do
-  desc "Deploy to the Google Play Store"
+  desc "Android 프로덕션 빌드 및 플레이스토어 배포"
   lane :deploy do
-
-    # abb 추출
-    sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
 
     # 트랙 설정 (internal, alpha, beta, production)
     track = "internal"
@@ -21,7 +24,7 @@ platform :android do
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true,
-      json_key_data: "#{SECRET_ANDROID_JSON_KEY}"
+      json_key_data: "#{ANDROID_JSON_KEY}"
     )
   end
 end

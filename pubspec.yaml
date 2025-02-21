@@ -1,7 +1,7 @@
 name: withu_app
 description: "withu mobile application"
 
-version: 1.0.0+2
+version: 1.0.0+6
 
 environment:
   sdk: ^3.5.1
@@ -96,6 +96,10 @@ flutter:
 scripts:
   # build runner 실행
   build: dart run build_runner build --delete-conflicting-outputs
+
+  abb: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
+
+  ios: flutter build ios --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
 
   # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
   pre-commit: pre-commit run --all-files
