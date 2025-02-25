@@ -2,11 +2,6 @@
 default_platform(:android)
 
 # 환경변수 설정
-# ENV["FLUTTER_BUILD_FLAVOR"] = "prod"
-# ENV["FLUTTER_TARGET"] = "lib/core/config/env/prod.dart"
-#
-# FLUTTER_BUILD_FLAVOR=ENV["FLUTTER_BUILD_FLAVOR"]
-# FLUTTER_TARGET=ENV["FLUTTER_TARGET"]
 ANDROID_JSON_KEY=Base64.decode64(ENV["ANDROID_JSON_KEY"])
 
 platform :android do
