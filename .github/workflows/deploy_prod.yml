@@ -49,9 +49,9 @@ jobs:
       # key.properties 파일 생성
       - name: Create key.properties
         run: |
-          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}" > android/key.properties
-          echo "keyPassword=${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.ANDROID_KEYSTORE_ALIAS }}" >> android/key.properties
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}" > android/app/keystore/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}" >> android/app/keystore/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEYSTORE_ALIAS }}" >> android/app/keystore/key.properties
           echo "storeFile=../app/key.jks" >> android/app/keystore/key.properties
 
       - name: Build AppBundle
