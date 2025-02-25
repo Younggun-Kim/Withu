@@ -52,7 +52,7 @@ jobs:
           echo "storePassword=${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}" > android/app/keystore/key.properties
           echo "keyPassword=${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}" >> android/app/keystore/key.properties
           echo "keyAlias=${{ secrets.ANDROID_KEYSTORE_ALIAS }}" >> android/app/keystore/key.properties
-          echo "storeFile=../app/key.jks" >> android/app/keystore/key.properties
+          echo "storeFile=./keystore/upload-keystore.jks" >> android/app/keystore/key.properties
 
       - name: Build AppBundle
         run: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
