@@ -150,3 +150,27 @@ app.*.symbols
 .python-version
 .gclient_previous_custom_vars
 .gclient_previous_sync_commits
+
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Android related
+*/keystore
+*/fastlane/withu-444918-ec97a541ee39.json
+withu-444918-5ca8b32fee4b.json
+*.pem
+
+# iOS related
+.env
+*.app.dSYM.zip
+*.ipa
+
+# Freezed generated files
+*.freezed.dart
+*.g.dart
+
+# Mockito generated file
+*.mocks.dart
