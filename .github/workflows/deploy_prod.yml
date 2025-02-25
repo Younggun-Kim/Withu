@@ -40,6 +40,20 @@ jobs:
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
 
+
+      # 키스토어 파일 복원
+      - name: Setup keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_JKS_BASE_64 }}" | base64 --decode > android/app/keystore/upload-keystore.jks
+
+      # key.properties 파일 생성
+      - name: Create key.properties
+        run: |
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEYSTORE_ALIAS }}" >> android/key.properties
+          echo "storeFile=../app/key.jks" >> android/app/keystore/key.properties
+
       - name: Build AppBundle
         run: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
 
