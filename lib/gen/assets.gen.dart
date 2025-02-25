@@ -39,7 +39,7 @@ class $AssetsTranslationsGen {
 }
 
 class Assets {
-  const Assets._();
+  Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
