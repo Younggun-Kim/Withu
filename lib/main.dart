@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:withu/core/config/firebase/firebase_init.dart';
 import 'package:withu/core/core.dart';
@@ -13,7 +12,6 @@ void run({required EnvironmentType environment}) async {
   await EasyLocalization.ensureInitialized();
 
   await FirebaseInit.init();
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   // Init DI
   await initInjections();

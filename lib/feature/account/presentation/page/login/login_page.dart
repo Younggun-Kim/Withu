@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
@@ -152,18 +151,7 @@ class _LoginButton extends StatelessWidget {
           context: context,
           text: text,
           onTap: () async {
-            await FirebaseAuth.instance.verifyPhoneNumber(
-              phoneNumber: '+1 650-555-5555	',
-              verificationCompleted: (PhoneAuthCredential credential) {
-                logger.i(credential.smsCode);
-              },
-              verificationFailed: (FirebaseAuthException e) {
-                logger.e(e.message);
-              },
-              codeSent: (String verificationId, int? resendToken) {},
-              codeAutoRetrievalTimeout: (String verificationId) {},
-            );
-            // context.read<LoginBloc>().add(LoginBtnPressed());
+            context.read<LoginBloc>().add(LoginBtnPressed());
           },
         )
         : BaseButton.disabled(context: context, text: text, onTap: () {});

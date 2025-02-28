@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "819902987830",
+    "project_id": "withu-acbaf",
+    "storage_bucket": "withu-acbaf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819902987830:android:44097d27c1b55dced6a297",
+        "android_client_info": {
+          "package_name": "com.conner.withu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819902987830:android:88077bf2119ee0e0d6a297",
+        "android_client_info": {
+          "package_name": "com.conner.withu.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

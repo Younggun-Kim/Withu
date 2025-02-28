@@ -20,7 +20,7 @@ class AccountMockApi extends AccountApiImpl {
       loginPath,
       (server) => server.reply(
         200,
-        LoginResponseDtoMock.failure().toJson(),
+        LoginResponseDtoMock.success().toJson(),
         delay: const Duration(seconds: 1),
       ),
       data: requestData.toJson(),

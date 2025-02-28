@@ -13,32 +13,22 @@ void initAccountDataInjections() {
         ? AccountApiImpl(network: getIt())
         : AccountMockApi(network: getIt()),
   );
-  getIt.registerSingleton<AccountStorage>(
-    AccountStorageImpl(),
-  );
+  getIt.registerSingleton<AccountStorage>(AccountStorageImpl());
   getIt.registerSingleton<AccountRepository>(
-    AccountRepositoryImpl(
-      accountApi: getIt(),
-      accountStorage: getIt(),
-    ),
+    AccountRepositoryImpl(accountApi: getIt(), accountStorage: getIt()),
   );
 }
 
 void initAccountDomainInjections() {
-  getIt.registerSingleton<LoginUseCase>(
-    LoginUseCaseImpl(accountRepo: getIt()),
-  );
+  getIt.registerSingleton<LoginUseCase>(LoginUseCaseImpl(accountRepo: getIt()));
   getIt.registerSingleton<PhoneAuthUseCase>(
     PhoneAuthUseCaseImpl(accountRepo: getIt()),
   );
 }
 
 void initAccountPresentationInjections() {
-
   getIt.registerFactory<PhoneAuthBloc>(
-        () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
+    () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
-  getIt.registerFactory<LoginBloc>(
-        () => LoginBloc(loginUseCase: getIt()),
-  );
+  getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
 }

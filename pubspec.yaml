@@ -110,6 +110,10 @@ scripts:
   # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
   pre-commit: pre-commit run --all-files
 
+  # android keychain sha-1
+  sha1: keytool -list -v -alias upload -keystore ./android/app/keystore/upload-keystore.jks
+
+
 # Resource manager
 flutter_gen:
   output: lib/gen/
