@@ -18,9 +18,9 @@ class BaseSwitch extends StatelessWidget {
     this.height = 16,
   });
 
-  Color get trackColor => isOn ? ColorName.primary80 : ColorName.white;
+  Color get trackColor => isOn ? ColorName.primary : ColorName.background;
 
-  Color get thumbColor => isOn ? ColorName.white : ColorName.primary80;
+  Color get thumbColor => isOn ? ColorName.background : ColorName.primary;
 
   Alignment get align => isOn ? Alignment.centerRight : Alignment.centerLeft;
 
@@ -39,7 +39,7 @@ class BaseSwitch extends StatelessWidget {
         decoration: BoxDecoration(
           color: trackColor,
           borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: ColorName.primary80, width: 2),
+          border: Border.all(color: ColorName.primary, width: 2),
         ),
         child: Container(
           width: 8,

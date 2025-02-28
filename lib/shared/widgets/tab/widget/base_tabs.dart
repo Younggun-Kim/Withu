@@ -21,25 +21,22 @@ class BaseTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: ColorName.teritary,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: ColorName.tertiary)),
       ),
       child: Row(
-        children: tabs
-            .map(
-              (tab) => Expanded(
-                child: BaseTab(
-                  key: Key('base_tab_${tab.value.toString()}'),
-                  data: tab,
-                  isSelected: selectedTab == tab,
-                  onTap: () => onTap(tab),
-                ),
-              ),
-            )
-            .toList(),
+        children:
+            tabs
+                .map(
+                  (tab) => Expanded(
+                    child: BaseTab(
+                      key: Key('base_tab_${tab.value.toString()}'),
+                      data: tab,
+                      isSelected: selectedTab == tab,
+                      onTap: () => onTap(tab),
+                    ),
+                  ),
+                )
+                .toList(),
       ),
     );
   }

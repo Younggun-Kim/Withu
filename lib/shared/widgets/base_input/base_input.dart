@@ -83,7 +83,7 @@ class BaseInput extends StatelessWidget {
           width: width,
           padding: padding ?? const EdgeInsets.all(12),
           decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(color: ColorName.teritary)),
+            border: Border(bottom: BorderSide(color: ColorName.tertiary)),
           ),
           child: Row(
             children: [
@@ -96,7 +96,7 @@ class BaseInput extends StatelessWidget {
                   textInputAction: textInputAction ?? TextInputAction.done,
                   maxLength: maxLength,
                   cursorHeight: 16,
-                  cursorColor: ColorName.primary80,
+                  cursorColor: ColorName.primary,
                   textAlign: textAlign,
                   inputFormatters: inputFormatters,
                   obscureText: obscureText,
@@ -192,9 +192,7 @@ class _ErrorText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: context.textTheme.bodySmall?.copyWith(
-        color: ColorName.annotations,
-      ),
+      style: context.textTheme.bodySmall?.copyWith(color: ColorName.point),
     );
   }
 }

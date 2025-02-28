@@ -26,9 +26,7 @@ class LinedTextFormField extends StatelessWidget {
       painter: LinePainter(),
       child: TextFormField(
         controller: controller,
-        style: context.textTheme.bodyMediumBold?.copyWith(
-          height: 48 / 14,
-        ),
+        style: context.textTheme.bodyMediumBold?.copyWith(height: 48 / 14),
         cursorHeight: 20,
         minLines: 2,
         maxLines: 2,
@@ -36,9 +34,7 @@ class LinedTextFormField extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 12,
-          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           border: InputBorder.none,
           suffix: suffix,
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -51,9 +47,10 @@ class LinedTextFormField extends StatelessWidget {
 class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = ColorName.teritary
-      ..strokeWidth = 1;
+    final paint =
+        Paint()
+          ..color = ColorName.tertiary
+          ..strokeWidth = 1;
 
     // 첫 번째 줄
     canvas.drawLine(

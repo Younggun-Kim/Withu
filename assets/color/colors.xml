@@ -1,8 +1,8 @@
 <resources>
-    <color name='primary'>#142d00</color>
-    <color name='primary80'>#496433</color>
-    <color name='secondary'>#8a9680</color>
-    <color name='teritary'>#e6ede1</color>
-    <color name='annotations'>#F6BE2C</color>
-    <color name='white'>#ffffff</color>
+    <color name='primary'>#5F4B8B</color>
+    <color name='secondary'>#A498BD</color>
+    <color name='tertiary'>#E2DDEC</color>
+    <color name='point'>#FDA741</color>
+    <color name='text'>#2B2B2B</color>
+    <color name='background'>#F9F9FC</color>
 </resources>

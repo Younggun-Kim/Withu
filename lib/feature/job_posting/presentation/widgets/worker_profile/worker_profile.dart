@@ -41,8 +41,7 @@ class WorkerProfile extends StatelessWidget {
             ? StringRes.attendanceScheduled.tr
             : StringRes.attendanceCompleted.tr;
 
-    final Color badgeColor =
-        workStatus ? ColorName.annotations : ColorName.teritary;
+    final Color badgeColor = workStatus ? ColorName.point : ColorName.tertiary;
     return Column(
       children: [
         Stack(

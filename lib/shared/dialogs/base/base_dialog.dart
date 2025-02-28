@@ -9,7 +9,7 @@ class BaseDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: ColorName.white,
+      backgroundColor: ColorName.background,
       child: IntrinsicHeight(
         child: Stack(
           children: [

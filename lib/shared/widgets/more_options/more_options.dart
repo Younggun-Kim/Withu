@@ -16,7 +16,7 @@ class MoreOptions<T extends L10nKeyProvider> extends StatelessWidget {
     return PopupMenuButton<T>(
       initialValue: null,
       position: PopupMenuPosition.under,
-      color: ColorName.white,
+      color: ColorName.background,
       offset: const Offset(0, 10),
       popUpAnimationStyle: AnimationStyle(
         duration: const Duration(milliseconds: 200),

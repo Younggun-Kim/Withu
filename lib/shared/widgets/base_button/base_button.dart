@@ -50,7 +50,7 @@ class BaseButton extends StatelessWidget {
       text: Text(
         text,
         style: context.textTheme.bodyMediumBold?.copyWith(
-          color: ColorName.white,
+          color: ColorName.background,
         ),
       ),
       backgroundColor: ColorName.primary,
@@ -74,7 +74,7 @@ class BaseButton extends StatelessWidget {
           color: ColorName.secondary,
         ),
       ),
-      backgroundColor: ColorName.teritary,
+      backgroundColor: ColorName.tertiary,
       onTap: onTap,
     );
   }

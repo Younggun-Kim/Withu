@@ -27,24 +27,21 @@ class DescriptionBottomSheet extends StatelessWidget {
           Text(
             description,
             style: context.textTheme.bodySmall?.copyWith(
-              color: ColorName.white,
+              color: ColorName.background,
             ),
           ),
           const SizedBox(height: 10),
-          const Divider(
-            height: 0.5,
-            color: ColorName.secondary,
-          ),
+          const Divider(height: 0.5, color: ColorName.secondary),
           BaseButton(
             text: Text(
               actionText,
               style: context.textTheme.bodyMediumBold?.copyWith(
-                color: ColorName.white,
+                color: ColorName.background,
               ),
             ),
-            backgroundColor: ColorName.primary80,
+            backgroundColor: ColorName.primary,
             onTap: onTap,
-          )
+          ),
         ],
       ),
     );

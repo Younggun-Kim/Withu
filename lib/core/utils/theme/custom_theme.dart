@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class CustomTheme {
@@ -8,17 +9,18 @@ class CustomTheme {
     return ThemeData(
       primaryColor: ColorName.primary,
       textSelectionTheme: textSelectionTheme,
+      fontFamily: GoogleFonts.inter().fontFamily,
       textTheme: textTheme,
       progressIndicatorTheme: progressTheme,
 
       /// PopupMenu selected color
-      highlightColor: ColorName.teritary,
+      highlightColor: ColorName.tertiary,
     );
   }
 
   /// Indicator Theme
   static ProgressIndicatorThemeData get progressTheme {
-    return const ProgressIndicatorThemeData(color: ColorName.annotations);
+    return const ProgressIndicatorThemeData(color: ColorName.point);
   }
 
   /// Text Input related

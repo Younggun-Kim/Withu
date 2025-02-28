@@ -13,19 +13,18 @@ import 'package:withu/shared/shared.dart';
 class JobPostingFormPage extends StatelessWidget {
   final String? jobPostingId;
 
-  const JobPostingFormPage({
-    super.key,
-    this.jobPostingId,
-  });
+  const JobPostingFormPage({super.key, this.jobPostingId});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<JobPostingFormBloc>(
-          create: (context) => getIt()
-            ..add(JobPostingFormIdSet(id: jobPostingId))
-            ..add(JobPostingFormDetailFetched()),
+          create:
+              (context) =>
+                  getIt()
+                    ..add(JobPostingFormIdSet(id: jobPostingId))
+                    ..add(JobPostingFormDetailFetched()),
         ),
       ],
       child: BlocListener<JobPostingFormBloc, JobPostingFormState>(
@@ -49,9 +48,7 @@ class _JobPostingFormPage extends StatelessWidget {
         return PageRoot(
           isLoading: state.status.isLoading,
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          appBar: CustomAppBar.back(
-            context: context,
-          ),
+          appBar: CustomAppBar.back(context: context),
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
             child: Column(
@@ -117,10 +114,7 @@ class _FieldName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: context.textTheme.bodyMediumBold,
-    );
+    return Text(text, style: context.textTheme.bodyMediumBold);
   }
 }
 
@@ -202,9 +196,9 @@ class _JobPostingContentState extends State<_JobPostingContent> {
         hintText: StringRes.enterDescriptionOfJobPosting.tr,
         hintTextStyle: context.textTheme.bodyMedium,
         onChanged: (String text) {
-          context
-              .read<JobPostingFormBloc>()
-              .add(OnChangedContent(content: text));
+          context.read<JobPostingFormBloc>().add(
+            OnChangedContent(content: text),
+          );
         },
       ),
     );
@@ -218,20 +212,21 @@ class _CategorySelect extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Row(
-          children: JobCategoryType.valuesWithoutNone
-              .map(
-                (category) => RadioChip(
-                  text: category.tr,
-                  isSelected: category == state.category,
-                  onSelected: () {
-                    context
-                        .read<JobPostingFormBloc>()
-                        .add(OnPressedJobCategory(category: category));
-                  },
-                  margin: const EdgeInsets.only(right: 13),
-                ),
-              )
-              .toList(),
+          children:
+              JobCategoryType.valuesWithoutNone
+                  .map(
+                    (category) => RadioChip(
+                      text: category.tr,
+                      isSelected: category == state.category,
+                      onSelected: () {
+                        context.read<JobPostingFormBloc>().add(
+                          OnPressedJobCategory(category: category),
+                        );
+                      },
+                      margin: const EdgeInsets.only(right: 13),
+                    ),
+                  )
+                  .toList(),
         );
       },
     );
@@ -243,27 +238,28 @@ class _ContractType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
-        builder: (context, state) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _FieldName(text: StringRes.periodFormat.tr),
-          const Spacer(),
-          ...ContractType.valuesWithoutNone.map(
-            (type) => RadioChip(
-              text: type.tr,
-              isSelected: state.contractType == type,
-              onSelected: () {
-                context
-                    .read<JobPostingFormBloc>()
-                    .add(OnPressedContractType(contractType: type));
-              },
-              margin: const EdgeInsets.only(left: 16),
+      builder: (context, state) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _FieldName(text: StringRes.periodFormat.tr),
+            const Spacer(),
+            ...ContractType.valuesWithoutNone.map(
+              (type) => RadioChip(
+                text: type.tr,
+                isSelected: state.contractType == type,
+                onSelected: () {
+                  context.read<JobPostingFormBloc>().add(
+                    OnPressedContractType(contractType: type),
+                  );
+                },
+                margin: const EdgeInsets.only(left: 16),
+              ),
             ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -273,18 +269,19 @@ class _ContractStartDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
-        final fieldName = state.contractType.isLong == true
-            ? StringRes.workContractStartPeriod.tr
-            : StringRes.workContractPeriod.tr;
+        final fieldName =
+            state.contractType.isLong == true
+                ? StringRes.workContractStartPeriod.tr
+                : StringRes.workContractPeriod.tr;
         return Row(
           children: [
             _FieldName(text: fieldName),
             const Spacer(),
             InkWell(
               onTap: () {
-                context
-                    .read<JobPostingFormBloc>()
-                    .add(OnToggleStartCalendarVisible());
+                context.read<JobPostingFormBloc>().add(
+                  OnToggleStartCalendarVisible(),
+                );
               },
               borderRadius: BorderRadius.circular(4),
               child: Row(
@@ -297,7 +294,7 @@ class _ContractStartDate extends StatelessWidget {
                   const Icon(Icons.calendar_month_outlined),
                 ],
               ),
-            )
+            ),
           ],
         );
       },
@@ -310,43 +307,44 @@ class _ContractStartCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
-        builder: (context, state) {
-      return Visibility(
-        visible: state.isVisibleStartCalendar,
-        child: Container(
-          margin: const EdgeInsets.only(top: 14),
-          padding: const EdgeInsets.only(top: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: ColorName.teritary,
-          ),
-          child: CalendarDatePicker2(
-            config: CalendarDatePicker2Config(
-              calendarType: CalendarDatePicker2Type.single,
-              currentDate: DateTime.now(),
-              calendarViewMode: CalendarDatePicker2Mode.day,
-              nextMonthIcon: const SizedBox(),
-              lastMonthIcon: const SizedBox(),
-              centerAlignModePicker: false,
-              disableMonthPicker: true,
-              weekdayLabelTextStyle: context.textTheme.bodyMedium,
-              dayTextStyle: context.textTheme.bodyMedium,
-              controlsTextStyle: context.textTheme.headlineLarge,
-              selectedDayTextStyle: context.textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
-              selectedDayHighlightColor: ColorName.primary,
+      builder: (context, state) {
+        return Visibility(
+          visible: state.isVisibleStartCalendar,
+          child: Container(
+            margin: const EdgeInsets.only(top: 14),
+            padding: const EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: ColorName.tertiary,
             ),
-            value: [state.contractStartDate],
-            onValueChanged: (dates) {
-              context
-                  .read<JobPostingFormBloc>()
-                  .add(OnChangedContractStartDate(contractStartDate: dates[0]));
-            },
+            child: CalendarDatePicker2(
+              config: CalendarDatePicker2Config(
+                calendarType: CalendarDatePicker2Type.single,
+                currentDate: DateTime.now(),
+                calendarViewMode: CalendarDatePicker2Mode.day,
+                nextMonthIcon: const SizedBox(),
+                lastMonthIcon: const SizedBox(),
+                centerAlignModePicker: false,
+                disableMonthPicker: true,
+                weekdayLabelTextStyle: context.textTheme.bodyMedium,
+                dayTextStyle: context.textTheme.bodyMedium,
+                controlsTextStyle: context.textTheme.headlineLarge,
+                selectedDayTextStyle: context.textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                ),
+                selectedDayHighlightColor: ColorName.primary,
+              ),
+              value: [state.contractStartDate],
+              onValueChanged: (dates) {
+                context.read<JobPostingFormBloc>().add(
+                  OnChangedContractStartDate(contractStartDate: dates[0]),
+                );
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -364,9 +362,9 @@ class _ContractEndDate extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: () {
-                  context
-                      .read<JobPostingFormBloc>()
-                      .add(OnToggleEndCalendarVisible());
+                  context.read<JobPostingFormBloc>().add(
+                    OnToggleEndCalendarVisible(),
+                  );
                 },
                 borderRadius: BorderRadius.circular(4),
                 child: Row(
@@ -379,7 +377,7 @@ class _ContractEndDate extends StatelessWidget {
                     const Icon(Icons.calendar_month_outlined),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -393,44 +391,45 @@ class _ContractEndCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
-        builder: (context, state) {
-      return Visibility(
-        visible:
-            state.contractType.isLong == true && state.isVisibleEndCalendar,
-        child: Container(
-          margin: const EdgeInsets.only(top: 14),
-          padding: const EdgeInsets.only(top: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: ColorName.teritary,
-          ),
-          child: CalendarDatePicker2(
-            config: CalendarDatePicker2Config(
-              calendarType: CalendarDatePicker2Type.single,
-              currentDate: DateTime.now(),
-              calendarViewMode: CalendarDatePicker2Mode.day,
-              nextMonthIcon: const SizedBox(),
-              lastMonthIcon: const SizedBox(),
-              centerAlignModePicker: false,
-              disableMonthPicker: true,
-              weekdayLabelTextStyle: context.textTheme.bodyMedium,
-              dayTextStyle: context.textTheme.bodyMedium,
-              controlsTextStyle: context.textTheme.headlineLarge,
-              selectedDayTextStyle: context.textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
-              selectedDayHighlightColor: ColorName.primary,
+      builder: (context, state) {
+        return Visibility(
+          visible:
+              state.contractType.isLong == true && state.isVisibleEndCalendar,
+          child: Container(
+            margin: const EdgeInsets.only(top: 14),
+            padding: const EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: ColorName.tertiary,
             ),
-            value: [state.contractEndDate],
-            onValueChanged: (dates) {
-              context
-                  .read<JobPostingFormBloc>()
-                  .add(OnChangedContractEndDate(contractEndDate: dates[0]));
-            },
+            child: CalendarDatePicker2(
+              config: CalendarDatePicker2Config(
+                calendarType: CalendarDatePicker2Type.single,
+                currentDate: DateTime.now(),
+                calendarViewMode: CalendarDatePicker2Mode.day,
+                nextMonthIcon: const SizedBox(),
+                lastMonthIcon: const SizedBox(),
+                centerAlignModePicker: false,
+                disableMonthPicker: true,
+                weekdayLabelTextStyle: context.textTheme.bodyMedium,
+                dayTextStyle: context.textTheme.bodyMedium,
+                controlsTextStyle: context.textTheme.headlineLarge,
+                selectedDayTextStyle: context.textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                ),
+                selectedDayHighlightColor: ColorName.primary,
+              ),
+              value: [state.contractEndDate],
+              onValueChanged: (dates) {
+                context.read<JobPostingFormBloc>().add(
+                  OnChangedContractEndDate(contractEndDate: dates[0]),
+                );
+              },
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -445,10 +444,7 @@ class _WorkHoursField extends StatelessWidget {
           children: [
             _FieldName(text: StringRes.workHours.tr),
             const Spacer(),
-            Text(
-              StringRes.tbc.tr,
-              style: context.textTheme.bodyLarge,
-            ),
+            Text(StringRes.tbc.tr, style: context.textTheme.bodyLarge),
             const SizedBox(width: 10),
             BaseSwitch(
               isOn: state.isTBC,
@@ -479,22 +475,19 @@ class _WorkHoursTimePicker extends StatelessWidget {
                 Expanded(
                   child: TimePicker(
                     onDateTimeChanged: (DateTime time) {
-                      context
-                          .read<JobPostingFormBloc>()
-                          .add(OnChangedWorkStartTime(time: time));
+                      context.read<JobPostingFormBloc>().add(
+                        OnChangedWorkStartTime(time: time),
+                      );
                     },
                   ),
                 ),
-                Text(
-                  '-',
-                  style: context.textTheme.bodyMediumBold,
-                ),
+                Text('-', style: context.textTheme.bodyMediumBold),
                 Expanded(
                   child: TimePicker(
                     onDateTimeChanged: (DateTime time) {
-                      context
-                          .read<JobPostingFormBloc>()
-                          .add(OnChangedWorkEndTime(time: time));
+                      context.read<JobPostingFormBloc>().add(
+                        OnChangedWorkEndTime(time: time),
+                      );
                     },
                   ),
                 ),
@@ -553,13 +546,11 @@ class _ParticipantsState extends State<_Participants> {
             keyboardType: TextInputType.number,
             maxLength: 3,
             textAlign: TextAlign.end,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-            ],
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (String text) {
-              context
-                  .read<JobPostingFormBloc>()
-                  .add(OnChangedParticipants(participants: text));
+              context.read<JobPostingFormBloc>().add(
+                OnChangedParticipants(participants: text),
+              );
             },
           ),
         ],
@@ -607,9 +598,9 @@ class _PayTypeState extends State<_PayType> {
                 isSelected: type == state.payType,
                 margin: const EdgeInsets.only(right: 13),
                 onSelected: () {
-                  context
-                      .read<JobPostingFormBloc>()
-                      .add(OnSelectedPayType(payType: type));
+                  context.read<JobPostingFormBloc>().add(
+                    OnSelectedPayType(payType: type),
+                  );
                 },
               ),
             ),
@@ -624,9 +615,7 @@ class _PayTypeState extends State<_PayType> {
               suffixStyle: context.textTheme.bodyLarge,
               keyboardType: TextInputType.number,
               textAlign: TextAlign.end,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (String text) {
                 context.read<JobPostingFormBloc>().add(OnChangedPay(pay: text));
               },
@@ -716,9 +705,9 @@ class _PreferredQualificationState extends State<_PreferredQualification> {
       child: LinedTextFormField(
         controller: _controller,
         onChanged: (String text) {
-          context
-              .read<JobPostingFormBloc>()
-              .add(OnChangedPreferredQualifications(text: text));
+          context.read<JobPostingFormBloc>().add(
+            OnChangedPreferredQualifications(text: text),
+          );
         },
       ),
     );
@@ -766,9 +755,9 @@ class _TravelTimePaid extends StatelessWidget {
                   text: StringRes.wage.tr,
                   isSelected: state.isTravelTimePaid == true,
                   onSelected: () {
-                    context
-                        .read<JobPostingFormBloc>()
-                        .add(OnSelectTravelTimePaid(isPaid: true));
+                    context.read<JobPostingFormBloc>().add(
+                      OnSelectTravelTimePaid(isPaid: true),
+                    );
                   },
                 ),
                 const SizedBox(width: 13),
@@ -776,9 +765,9 @@ class _TravelTimePaid extends StatelessWidget {
                   text: StringRes.nonWage.tr,
                   isSelected: state.isTravelTimePaid == false,
                   onSelected: () {
-                    context
-                        .read<JobPostingFormBloc>()
-                        .add(OnSelectTravelTimePaid(isPaid: false));
+                    context.read<JobPostingFormBloc>().add(
+                      OnSelectTravelTimePaid(isPaid: false),
+                    );
                   },
                 ),
               ],
@@ -831,9 +820,9 @@ class _BreakTimePaid extends StatelessWidget {
                   text: StringRes.wage.tr,
                   isSelected: state.isBreakTimePaid == true,
                   onSelected: () {
-                    context
-                        .read<JobPostingFormBloc>()
-                        .add(OnSelectBreakTimePaid(isPaid: true));
+                    context.read<JobPostingFormBloc>().add(
+                      OnSelectBreakTimePaid(isPaid: true),
+                    );
                   },
                 ),
                 const SizedBox(width: 13),
@@ -841,9 +830,9 @@ class _BreakTimePaid extends StatelessWidget {
                   text: StringRes.nonWage.tr,
                   isSelected: state.isBreakTimePaid == false,
                   onSelected: () {
-                    context
-                        .read<JobPostingFormBloc>()
-                        .add(OnSelectBreakTimePaid(isPaid: false));
+                    context.read<JobPostingFormBloc>().add(
+                      OnSelectBreakTimePaid(isPaid: false),
+                    );
                   },
                 ),
               ],
@@ -885,9 +874,10 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
-        final String text = state.isRegistration
-            ? StringRes.registration.tr
-            : StringRes.update.tr;
+        final String text =
+            state.isRegistration
+                ? StringRes.registration.tr
+                : StringRes.update.tr;
 
         return InkWell(
           borderRadius: BorderRadius.circular(10),
@@ -899,13 +889,13 @@ class _SubmitButton extends StatelessWidget {
             height: 48,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: ColorName.primary80,
+              color: ColorName.primary,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               text,
               style: context.textTheme.bodyMediumBold?.copyWith(
-                color: ColorName.white,
+                color: ColorName.background,
               ),
             ),
           ),

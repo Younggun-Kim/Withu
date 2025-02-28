@@ -66,9 +66,15 @@ class _LoginPageState extends State<LoginPageContent> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 90),
-                Center(child: Assets.images.logo.svg()),
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
+                Center(child: Assets.images.logo.svg(width: 215, height: 69)),
+                const SizedBox(height: 20),
+                Center(
+                  child: Text(
+                    '당신의 기회, 우리와 함께 연결하세요',
+                    style: context.textTheme.bodyMediumBold,
+                  ),
+                ),
                 LoginTab(
                   selectedType: state.selectedTab,
                   onTap: (LoginTabData data) {
@@ -151,8 +157,7 @@ class _LoginButton extends StatelessWidget {
           context: context,
           text: text,
           onTap: () async {
-            throw Exception();
-            // context.read<LoginBloc>().add(LoginBtnPressed());
+            context.read<LoginBloc>().add(LoginBtnPressed());
           },
         )
         : BaseButton.disabled(context: context, text: text, onTap: () {});

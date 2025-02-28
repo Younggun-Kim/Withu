@@ -30,7 +30,7 @@ class JobPostingsItem extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: const BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: ColorName.teritary, width: 0.5),
+            bottom: BorderSide(color: ColorName.tertiary, width: 0.5),
           ),
         ),
         child: Row(
@@ -76,7 +76,7 @@ class _Information extends StatelessWidget {
             BaseBadge(
               text: entity.category.tr,
               textStyle: context.textTheme.bodySmall,
-              backgroundColor: ColorName.teritary,
+              backgroundColor: ColorName.tertiary,
             ),
             const SizedBox(width: 8),
             Text(entity.title, style: context.textTheme.headlineSmall),

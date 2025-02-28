@@ -22,12 +22,12 @@ class RadioChip extends StatelessWidget {
     this.margin,
   });
 
-  Color get backgroundColor => isSelected ? ColorName.primary80 : Colors.white;
+  Color get backgroundColor => isSelected ? ColorName.primary : Colors.white;
 
   Color get textColor => isSelected ? Colors.white : ColorName.primary;
 
   BoxBorder? get border =>
-      isSelected ? null : Border.all(color: ColorName.teritary);
+      isSelected ? null : Border.all(color: ColorName.tertiary);
 
   @override
   Widget build(BuildContext context) {

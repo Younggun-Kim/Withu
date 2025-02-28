@@ -35,17 +35,12 @@ class _JobPostingsPage extends StatelessWidget {
     return PageRoot(
       isLoading: false,
       fab: FloatingActionButton(
-        backgroundColor: ColorName.primary80,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
+        backgroundColor: ColorName.primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           context.pushRoute(JobPostingFormRoute());
         },
-        child: Assets.images.plus.svg(
-          width: 30,
-          height: 30,
-        ),
+        child: Assets.images.plus.svg(width: 30, height: 30),
       ),
       child: SafeArea(
         child: Container(
@@ -118,22 +113,19 @@ class JobPostingsList<B extends JobPostingsBloc> extends StatefulWidget {
 }
 
 class JobPostingsListState<B extends JobPostingsBloc>
-    extends State<JobPostingsList> with AutomaticKeepAliveClientMixin {
+    extends State<JobPostingsList>
+    with AutomaticKeepAliveClientMixin {
   final PagingController<int, JobPostingsItemEntity> _pagingController =
-      PagingController(
-    firstPageKey: 0,
-  );
+      PagingController(firstPageKey: 0);
 
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
-    _pagingController.addPageRequestListener(
-      (pageKey) {
-        context.read<B>().add(JobPostingsNextPaginated(page: pageKey));
-      },
-    );
+    _pagingController.addPageRequestListener((pageKey) {
+      context.read<B>().add(JobPostingsNextPaginated(page: pageKey));
+    });
     super.initState();
   }
 
@@ -156,7 +148,10 @@ class JobPostingsListState<B extends JobPostingsBloc>
                 _pagingController.appendLastPage(state.jobPostingItems);
               } else {
                 final nextPageKey = (_pagingController.nextPageKey ?? 0) + 1;
-                _pagingController.appendPage(state.jobPostingItems, nextPageKey);
+                _pagingController.appendPage(
+                  state.jobPostingItems,
+                  nextPageKey,
+                );
               }
             }
 
@@ -170,25 +165,26 @@ class JobPostingsListState<B extends JobPostingsBloc>
         onRefresh: () async {
           context.read<B>().add(JobPostingsRefreshed());
         },
-        backgroundColor: ColorName.teritary,
+        backgroundColor: ColorName.tertiary,
         color: ColorName.primary,
         child: PagedListView<int, JobPostingsItemEntity>(
           pagingController: _pagingController,
           padding: const EdgeInsets.symmetric(vertical: 20),
           builderDelegate: PagedChildBuilderDelegate<JobPostingsItemEntity>(
-            itemBuilder: (context, item, index) => JobPostingsItem(
-              entity: item,
-              onPressed: () async {
-                final bool? result = await _navigate(
-                  context: context,
+            itemBuilder:
+                (context, item, index) => JobPostingsItem(
                   entity: item,
-                );
+                  onPressed: () async {
+                    final bool? result = await _navigate(
+                      context: context,
+                      entity: item,
+                    );
 
-                if (result == true && context.mounted) {
-                  context.read<B>().add(JobPostingsRefreshed());
-                }
-              },
-            ),
+                    if (result == true && context.mounted) {
+                      context.read<B>().add(JobPostingsRefreshed());
+                    }
+                  },
+                ),
             firstPageProgressIndicatorBuilder: (context) => _emptyView(),
             noItemsFoundIndicatorBuilder: (context) => _emptyView(),
           ),

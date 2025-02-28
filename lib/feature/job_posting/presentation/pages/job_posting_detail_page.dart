@@ -155,7 +155,7 @@ class _AppBar extends StatelessWidget {
       builder: (context, state) {
         return SliverAppBar(
           scrolledUnderElevation: 0,
-          backgroundColor: ColorName.teritary,
+          backgroundColor: ColorName.tertiary,
           pinned: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -215,7 +215,7 @@ class _Header extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 28.5),
             decoration: BoxDecoration(
-              color: ColorName.teritary,
+              color: ColorName.tertiary,
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
@@ -239,10 +239,10 @@ class _Header extends StatelessWidget {
                       visible: state.entity?.categoryType != null,
                       child: BaseBadge(
                         text: state.entity?.categoryType.tr ?? '',
-                        backgroundColor: ColorName.primary80,
+                        backgroundColor: ColorName.primary,
                         margin: const EdgeInsets.only(right: 8),
                         textStyle: context.textTheme.bodySmall?.copyWith(
-                          color: ColorName.white,
+                          color: ColorName.background,
                         ),
                       ),
                     ),
@@ -377,7 +377,7 @@ class _PayAmount extends StatelessWidget {
         const Spacer(),
         Visibility(
           visible: payType.isNotEmpty,
-          child: BaseBadge(text: payType, backgroundColor: ColorName.teritary),
+          child: BaseBadge(text: payType, backgroundColor: ColorName.tertiary),
         ),
         const SizedBox(width: 9),
         Text(
@@ -423,7 +423,7 @@ class _Map extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(12, 16, 12, 0),
       decoration: BoxDecoration(
-        color: ColorName.teritary,
+        color: ColorName.tertiary,
         borderRadius: BorderRadius.circular(10),
       ),
       child: AspectRatio(
@@ -471,7 +471,7 @@ class _FieldAndSwitch extends StatelessWidget {
         const SizedBox(width: 12),
         InkWell(
           onTap: onPressedGuide,
-          child: const Icon(Icons.help, color: ColorName.primary80),
+          child: const Icon(Icons.help, color: ColorName.primary),
         ),
         const Spacer(),
         BaseSwitch(

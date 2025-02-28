@@ -45,7 +45,7 @@ class _ProfileImage extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-          color: ColorName.teritary,
+          color: ColorName.tertiary,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Image.network(

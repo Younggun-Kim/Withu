@@ -26,7 +26,7 @@ class BaseBottomSheet extends StatelessWidget {
           Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: ColorName.primary80,
+              color: ColorName.primary,
               borderRadius: BorderRadius.circular(10),
             ),
             child: child,
@@ -39,7 +39,7 @@ class BaseBottomSheet extends StatelessWidget {
                 color: ColorName.primary,
               ),
             ),
-            backgroundColor: ColorName.teritary,
+            backgroundColor: ColorName.tertiary,
             onTap: () {
               Navigator.pop(context);
             },
