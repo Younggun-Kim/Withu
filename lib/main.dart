@@ -1,15 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:withu/core/config/firebase/firebase_init.dart';
 import 'package:withu/core/core.dart';
 
-void run({
-  required EnvironmentType environment,
-}) async {
+void run({required EnvironmentType environment}) async {
   Environment.env = environment;
 
   WidgetsFlutterBinding.ensureInitialized();
 
   await EasyLocalization.ensureInitialized();
+
+  await FirebaseInit.init();
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   // Init DI
   await initInjections();
@@ -28,6 +32,8 @@ void run({
 class App extends StatelessWidget {
   const App({super.key});
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -35,7 +41,10 @@ class App extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: CustomTheme.theme,
-      routerConfig: getItAppRouter.config(),
+      routerConfig: getItAppRouter.config(
+        navigatorObservers:
+            () => [FirebaseAnalyticsObserver(analytics: analytics)],
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
@@ -67,16 +68,14 @@ class _LoginPageState extends State<LoginPageContent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 90),
-                Center(
-                  child: Assets.images.logo.svg(),
-                ),
+                Center(child: Assets.images.logo.svg()),
                 const SizedBox(height: 50),
                 LoginTab(
                   selectedType: state.selectedTab,
                   onTap: (LoginTabData data) {
-                    context
-                        .read<LoginBloc>()
-                        .add(LoginTabPressed(type: data.value));
+                    context.read<LoginBloc>().add(
+                      LoginTabPressed(type: data.value),
+                    );
                   },
                 ),
                 const SizedBox(height: 26),
@@ -96,14 +95,14 @@ class _LoginPageState extends State<LoginPageContent> {
                   obscureText: !state.isVisiblePassword,
                   errorVisible: !state.password.isValid,
                   onChanged: (String text) {
-                    context
-                        .read<LoginBloc>()
-                        .add(LoginPasswordInputted(value: text));
+                    context.read<LoginBloc>().add(
+                      LoginPasswordInputted(value: text),
+                    );
                   },
                   onSuffixPressed: () {
-                    context
-                        .read<LoginBloc>()
-                        .add(LoginVisiblePasswordToggled());
+                    context.read<LoginBloc>().add(
+                      LoginVisiblePasswordToggled(),
+                    );
                   },
                 ),
                 const SizedBox(height: 80),
@@ -127,9 +126,8 @@ class _LoginPageState extends State<LoginPageContent> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                _LoginButton(
-                  enabled: state.isEnabledLogin,
-                ),
+                const _LoginButton(enabled: true),
+                // _LoginButton(enabled: state.isEnabledLogin),
                 const SizedBox(height: 20),
               ],
             ),
@@ -143,26 +141,31 @@ class _LoginPageState extends State<LoginPageContent> {
 class _LoginButton extends StatelessWidget {
   final bool enabled;
 
-  const _LoginButton({
-    required this.enabled,
-  });
+  const _LoginButton({required this.enabled});
 
   @override
   Widget build(BuildContext context) {
     final text = StringRes.login.tr;
     return enabled
         ? BaseButton.primary(
-            key: const Key('login_button'),
-            context: context,
-            text: text,
-            onTap: () {
-              context.read<LoginBloc>().add(LoginBtnPressed());
-            },
-          )
-        : BaseButton.disabled(
-            context: context,
-            text: text,
-            onTap: () {},
-          );
+          key: const Key('login_button'),
+          context: context,
+          text: text,
+          onTap: () async {
+            await FirebaseAuth.instance.verifyPhoneNumber(
+              phoneNumber: '+1 650-555-5555	',
+              verificationCompleted: (PhoneAuthCredential credential) {
+                logger.i(credential.smsCode);
+              },
+              verificationFailed: (FirebaseAuthException e) {
+                logger.e(e.message);
+              },
+              codeSent: (String verificationId, int? resendToken) {},
+              codeAutoRetrievalTimeout: (String verificationId) {},
+            );
+            // context.read<LoginBloc>().add(LoginBtnPressed());
+          },
+        )
+        : BaseButton.disabled(context: context, text: text, onTap: () {});
   }
 }
