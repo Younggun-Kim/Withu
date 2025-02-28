@@ -151,7 +151,8 @@ class _LoginButton extends StatelessWidget {
           context: context,
           text: text,
           onTap: () async {
-            context.read<LoginBloc>().add(LoginBtnPressed());
+            throw Exception();
+            // context.read<LoginBloc>().add(LoginBtnPressed());
           },
         )
         : BaseButton.disabled(context: context, text: text, onTap: () {});
