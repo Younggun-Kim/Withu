@@ -54,15 +54,18 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   calendar_date_picker2: ^1.1.7
   flutter_keyboard_visibility: ^6.0.0
+
+  # Local Database
   shared_preferences: ^2.3.2
+
+  # Test Mocking
   mocktail: ^1.0.4
+
+  # firebase
   firebase_core: ^3.12.0
   firebase_analytics: ^11.4.3
   firebase_messaging: ^15.2.3
   firebase_crashlytics: ^4.3.3
-  firebase_auth: ^5.5.0
-  firebase_core_platform_interface: ^5.4.0
-  firebase_analytics_platform_interface: ^4.3.3
 
 
 dev_dependencies:
@@ -90,6 +93,9 @@ dev_dependencies:
   test: ^1.25.7
   bloc_test: ^9.1.7
 
+  # App Icon
+  flutter_launcher_icons: "^0.14.3"
+
 flutter:
 
   uses-material-design: true
@@ -113,6 +119,9 @@ scripts:
   # android keychain sha-1
   sha1: keytool -list -v -alias upload -keystore ./android/app/keystore/upload-keystore.jks
 
+  # App Icon 생성
+  gen-icons: dart run flutter_launcher_icons
+
 
 # Resource manager
 flutter_gen:
@@ -127,3 +136,10 @@ flutter_gen:
   colors:
     inputs:
       - assets/color/colors.xml
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path_android: "assets/images/app_icon.png"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 24
