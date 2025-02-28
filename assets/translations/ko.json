@@ -95,5 +95,6 @@
   "enterOnlyNumber": "숫자만 입력하세요.",
   "enterVerificationCode": "인증번호 입력",
   "verification": "인증",
-  "invalidVerificationCode": "인증번호가 틀립니다,"
+  "invalidVerificationCode": "인증번호가 틀립니다,",
+  "logoDescription": "당신의 기회, 우리와 함께 연결하세요"
 }

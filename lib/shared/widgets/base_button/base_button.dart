@@ -8,38 +8,55 @@ class BaseButton extends StatelessWidget {
 
   final Color backgroundColor;
 
+  final Border? border;
+
   final VoidCallback onTap;
 
-  final bool enabled;
+  final bool isEnabled;
 
   const BaseButton({
     super.key,
     required this.text,
     required this.backgroundColor,
     required this.onTap,
-    this.enabled = true,
+    this.isEnabled = true,
+    this.border,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      onTap: enabled ? onTap : () {},
+      onTap: isEnabled ? onTap : () {},
       child: Container(
         width: double.infinity,
-        height: 48,
+        height: 50,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
+          border: border,
         ),
         child: text,
       ),
     );
   }
 
-  /// Primary 배경색 버튼
-  factory BaseButton.primary({
+  factory BaseButton.basic({
+    required BuildContext context,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return BaseButton(
+      text: Text(text, style: context.textTheme.bodySmallBold),
+      backgroundColor: Colors.white,
+      border: Border.all(color: ColorName.tertiary),
+      onTap: onTap,
+    );
+  }
+
+  /// enabled 버튼
+  factory BaseButton.enabled({
     required BuildContext context,
     required String text,
     required VoidCallback onTap,
@@ -53,12 +70,13 @@ class BaseButton extends StatelessWidget {
           color: ColorName.background,
         ),
       ),
-      backgroundColor: ColorName.primary,
+      border: Border.all(color: ColorName.secondary),
+      backgroundColor: ColorName.secondary,
       onTap: onTap,
     );
   }
 
-  /// Primary 배경색 버튼
+  /// disabled 버튼
   factory BaseButton.disabled({
     required BuildContext context,
     required String text,
@@ -67,13 +85,14 @@ class BaseButton extends StatelessWidget {
   }) {
     return BaseButton(
       key: key,
-      enabled: false,
+      isEnabled: false,
       text: Text(
         text,
         style: context.textTheme.bodyMediumBold?.copyWith(
           color: ColorName.secondary,
         ),
       ),
+      border: Border.all(color: ColorName.tertiary),
       backgroundColor: ColorName.tertiary,
       onTap: onTap,
     );

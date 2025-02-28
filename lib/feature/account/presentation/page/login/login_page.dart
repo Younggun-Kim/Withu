@@ -71,17 +71,9 @@ class _LoginPageState extends State<LoginPageContent> {
                 const SizedBox(height: 20),
                 Center(
                   child: Text(
-                    '당신의 기회, 우리와 함께 연결하세요',
+                    StringRes.logoDescription.tr,
                     style: context.textTheme.bodyMediumBold,
                   ),
-                ),
-                LoginTab(
-                  selectedType: state.selectedTab,
-                  onTap: (LoginTabData data) {
-                    context.read<LoginBloc>().add(
-                      LoginTabPressed(type: data.value),
-                    );
-                  },
                 ),
                 const SizedBox(height: 26),
                 BaseInput.email(
@@ -152,7 +144,7 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = StringRes.login.tr;
     return enabled
-        ? BaseButton.primary(
+        ? BaseButton.enabled(
           key: const Key('login_button'),
           context: context,
           text: text,

@@ -36,7 +36,7 @@ class PageRoot extends StatelessWidget {
           Scaffold(
             appBar: appBar,
             floatingActionButton: fab,
-            backgroundColor: Colors.white,
+            backgroundColor: ColorName.background,
             body: SafeArea(
               top: safeAreaTop,
               bottom: safeAreaBottom,
@@ -51,9 +51,7 @@ class PageRoot extends StatelessWidget {
           Visibility(
             visible: isLoading,
             child: const Center(
-              child: CircularProgressIndicator(
-                color: ColorName.primary,
-              ),
+              child: CircularProgressIndicator(color: ColorName.primary),
             ),
           ),
         ],

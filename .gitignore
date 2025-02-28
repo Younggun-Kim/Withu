@@ -167,6 +167,7 @@ withu-444918-5ca8b32fee4b.json
 .env
 *.app.dSYM.zip
 *.ipa
+*.p8
 
 # Freezed generated files
 *.freezed.dart

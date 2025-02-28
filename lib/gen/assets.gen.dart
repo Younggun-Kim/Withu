@@ -15,12 +15,26 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Apple.svg
+  SvgGenImage get apple => const SvgGenImage('assets/images/Apple.svg');
+
+  /// File path: assets/images/Google.svg
+  SvgGenImage get google => const SvgGenImage('assets/images/Google.svg');
+
   /// File path: assets/images/app_icon.png
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app_icon.png');
 
+  /// File path: assets/images/apple_login_btn.svg
+  SvgGenImage get appleLoginBtn =>
+      const SvgGenImage('assets/images/apple_login_btn.svg');
+
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
+
+  /// File path: assets/images/google_login_btn.svg
+  SvgGenImage get googleLoginBtn =>
+      const SvgGenImage('assets/images/google_login_btn.svg');
 
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
@@ -29,7 +43,8 @@ class $AssetsImagesGen {
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, eye, logo, plus];
+  List<dynamic> get values =>
+      [apple, google, appIcon, appleLoginBtn, eye, googleLoginBtn, logo, plus];
 }
 
 class $AssetsTranslationsGen {

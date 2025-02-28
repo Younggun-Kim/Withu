@@ -11,7 +11,6 @@ part 'login_request_entity.converter.dart';
 @freezed
 class LoginRequestEntity with _$LoginRequestEntity {
   factory LoginRequestEntity({
-    required AccountType accountType,
     required LoginType loginType,
     required String loginId,
     required String password,

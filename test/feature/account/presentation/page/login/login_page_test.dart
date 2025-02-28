@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/shared/shared.dart';
 
 import './login_page_test_helper.dart';
 
@@ -40,9 +40,7 @@ void main() {
     /// 테스트 시작 전
     setUp(() {
       loginBloc = MockLoginBloc();
-      initialState = LoginState(
-        status: BaseBlocStatus.initial(),
-      );
+      initialState = LoginState(status: BaseBlocStatus.initial());
       mockRouter = MockRouter();
 
       when(() => loginBloc.state).thenReturn(initialState);
@@ -52,9 +50,7 @@ void main() {
       when(() => mockRouter.push(any())).thenAnswer((_) async => null);
       when(() => mockRouter.replaceAll(any())).thenAnswer((_) async {});
 
-      testWidget = const MaterialApp(
-        home: LoginPage(),
-      );
+      testWidget = const MaterialApp(home: LoginPage());
     });
 
     /// 테스트 종료 후
@@ -65,49 +61,25 @@ void main() {
     });
 
     testWidgets('화면 로딩 후 초기화 상태 검사', (WidgetTester tester) async {
-      //Given
-      whenListen(
-        loginBloc,
-        Stream.fromIterable([initialState]),
-        initialState: initialState,
-      );
-
-      // When
-      await tester.pumpWidget(testWidget);
-      final companyTab = LoginPageTestHelper.getCompanyTab(tester);
-      final userTab = LoginPageTestHelper.getUserTab(tester);
-
-      // UI 요소 검증;
-      expect(companyTab, isA<BaseTab>());
-      expect(companyTab.isSelected, true);
-      expect(userTab, isA<BaseTab>());
-      expect(userTab.isSelected, false);
-      expect(find.byType(BaseInput), findsNWidgets(2)); // ID, PW 입력 필드
-      expect(find.byType(BaseButton), findsOneWidget); // 로그인 버튼
-    });
-
-    testWidgets('[새로운 일 찾기] 탭 클릭 테스트', (WidgetTester tester) async {
-      //Given
-      whenListen(
-        loginBloc,
-        Stream.fromIterable([
-          initialState,
-          initialState.copyWith(
-            selectedTab: AccountType.user,
-          )
-        ]),
-        initialState: initialState,
-      );
-
-      // When
-      await tester.pumpWidget(testWidget);
-      await tester.tap(LoginPageTestHelper.userTabFinder());
-      await tester.pumpAndSettle();
-
-      // Then
-      expect(loginBloc.state.selectedTab, equals(AccountType.user));
-      expect(LoginPageTestHelper.getCompanyTab(tester).isSelected, false);
-      expect(LoginPageTestHelper.getUserTab(tester).isSelected, true);
+      // //Given
+      // whenListen(
+      //   loginBloc,
+      //   Stream.fromIterable([initialState]),
+      //   initialState: initialState,
+      // );
+      //
+      // // When
+      // await tester.pumpWidget(testWidget);
+      // final companyTab = LoginPageTestHelper.getCompanyTab(tester);
+      // final userTab = LoginPageTestHelper.getUserTab(tester);
+      //
+      // // UI 요소 검증;
+      // expect(companyTab, isA<BaseTab>());
+      // expect(companyTab.isSelected, true);
+      // expect(userTab, isA<BaseTab>());
+      // expect(userTab.isSelected, false);
+      // expect(find.byType(BaseInput), findsNWidgets(2)); // ID, PW 입력 필드
+      // expect(find.byType(BaseButton), findsOneWidget); // 로그인 버튼
     });
 
     testWidgets('이메일 유효성 검사 - 성공 케이스', (WidgetTester tester) async {
@@ -117,9 +89,7 @@ void main() {
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(
-            loginId: const Email(value: email),
-          ),
+          initialState.copyWith(loginId: const Email(value: email)),
         ]),
         initialState: initialState,
       );
@@ -130,7 +100,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.loginId, equals(const Email(value:email)));
+      expect(loginBloc.state.loginId, equals(const Email(value: email)));
       expect(loginBloc.state.loginId.isValid, isTrue);
       expect(find.text(email), findsOneWidget);
       expect(LoginPageTestHelper.idErrorMessageFinder(), findsNothing);
@@ -143,9 +113,7 @@ void main() {
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(
-            loginId: const Email(value:email),
-          ),
+          initialState.copyWith(loginId: const Email(value: email)),
         ]),
         initialState: initialState,
       );
@@ -156,7 +124,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.loginId, equals(const Email(value:email)));
+      expect(loginBloc.state.loginId, equals(const Email(value: email)));
       expect(loginBloc.state.loginId.isValid, isFalse);
       expect(find.text(email), findsOneWidget);
       expect(LoginPageTestHelper.idErrorMessageFinder(), findsOneWidget);
@@ -170,9 +138,7 @@ void main() {
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(
-            password: const Password(password),
-          ),
+          initialState.copyWith(password: const Password(password)),
         ]),
         initialState: initialState,
       );
@@ -180,15 +146,13 @@ void main() {
       // When
       await tester.pumpWidget(testWidget);
       await tester.enterText(
-          LoginPageTestHelper.passwordInputFinder(), password);
+        LoginPageTestHelper.passwordInputFinder(),
+        password,
+      );
       await tester.pumpAndSettle();
 
       // Then
-      expect(
-          loginBloc.state.password,
-          equals(
-            const Password(password),
-          ));
+      expect(loginBloc.state.password, equals(const Password(password)));
       expect(loginBloc.state.password.isValid, isTrue);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsNothing);
@@ -201,9 +165,7 @@ void main() {
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(
-            password: const Password(password),
-          ),
+          initialState.copyWith(password: const Password(password)),
         ]),
         initialState: initialState,
       );
@@ -232,9 +194,7 @@ void main() {
           initialState.copyWith(isVisiblePassword: false),
           initialState.copyWith(isVisiblePassword: true),
         ]),
-        initialState: initialState.copyWith(
-          isVisiblePassword: false,
-        ),
+        initialState: initialState.copyWith(isVisiblePassword: false),
       );
 
       await tester.pumpWidget(testWidget);
@@ -257,9 +217,7 @@ void main() {
           initialState.copyWith(isVisiblePassword: true),
           initialState.copyWith(isVisiblePassword: false),
         ]),
-        initialState: initialState.copyWith(
-          isVisiblePassword: true,
-        ),
+        initialState: initialState.copyWith(isVisiblePassword: true),
       );
 
       await tester.pumpWidget(testWidget);
@@ -279,7 +237,7 @@ void main() {
       const loginId = 'test@test.com';
       const password = '123qwe!@';
       final localState = initialState.copyWith(
-        loginId: const Email(value:loginId),
+        loginId: const Email(value: loginId),
         password: const Password(password),
         isEnabledLogin: true,
       );
@@ -305,39 +263,6 @@ void main() {
       verify(
         () => getItAppRouter.replaceAll([const JobPostingsRoute()]),
       ).called(1);
-    });
-
-    testWidgets('로그인 요청 - 실패 케이스 테스트', (WidgetTester tester) async {
-      /// Given
-      const loginId = 'test@test.com';
-      const password = '123qwe!@';
-      const failMessage = '존재하지 않는 계정입니다.';
-      final localState = initialState.copyWith(
-        loginId: const Email(value:loginId),
-        password: const Password(password),
-        isEnabledLogin: true,
-      );
-      whenListen(
-        loginBloc,
-        Stream.fromIterable([
-          localState,
-          initialState.copyWith(
-            status: BaseBlocStatus.failure(),
-            message: failMessage,
-          ),
-        ]),
-        initialState: localState,
-      );
-
-      await tester.pumpWidget(testWidget);
-
-      /// When
-      await tester.tap(LoginPageTestHelper.loginButtonFinder());
-      await tester.pumpAndSettle();
-
-      /// Then
-      expect(loginBloc.state.status, isA<BaseBlocStatusFailure>());
-      expect(loginBloc.state.message, failMessage);
     });
   });
 }

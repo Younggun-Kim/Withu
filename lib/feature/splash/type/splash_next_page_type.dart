@@ -3,7 +3,7 @@ import 'package:withu/core/router/router.gr.dart';
 
 enum SplashNextPageType {
   none(SplashRoute()),
-  login(LoginRoute()),
+  login(LoginRoute2()),
   jobPostings(JobPostingsRoute());
 
   final PageRouteInfo route;

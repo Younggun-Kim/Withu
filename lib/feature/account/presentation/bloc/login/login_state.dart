@@ -20,9 +20,6 @@ class LoginState extends BaseBlocState with _$LoginState {
 
     /// 로그인 버튼 enabled
     @Default(false) bool isEnabledLogin,
-
-    /// 선택된 탭
-    @Default(AccountType.company) AccountType selectedTab,
   }) = _LoginState;
 }
 

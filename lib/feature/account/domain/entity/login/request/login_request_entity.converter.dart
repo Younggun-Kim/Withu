@@ -4,10 +4,10 @@ extension LoginRequestEntityConverter on LoginRequestEntity {
   /// entity -> dto
   LoginRequestDto toDto() {
     return LoginRequestDto(
-      accountType: accountType,
       loginType: loginType,
       loginId: loginId,
       password: password,
+      accountType: AccountType.company,
     );
   }
 }

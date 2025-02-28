@@ -77,6 +77,7 @@ enum StringRes {
   enterVerificationCode,
   verification,
   invalidVerificationCode,
+  logoDescription,
 }
 
 extension StringResEx on StringRes {
