@@ -4,9 +4,9 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'api.dart';
 
 class AccountApiImpl extends AccountApi {
-  final DioNetwork network;
 
   AccountApiImpl({required this.network});
+  final DioNetwork network;
 
   /// 로그인 API
   @override
@@ -14,19 +14,13 @@ class AccountApiImpl extends AccountApi {
     required LoginRequestDto requestData,
   }) async {
     return network.dio
-        .post(
-          loginPath,
-          data: requestData.toJson(),
-        )
+        .post(loginPath, data: requestData.toJson())
         .then(
-          (response) => ApiResponse.success(
-            LoginResponseDto.fromJson(response.data),
-          ),
+          (response) =>
+              ApiResponse.success(LoginResponseDto.fromJson(response.data)),
         )
         .catchError(
-          (_) => ApiResponse<LoginResponseDto>.fail(
-            FailResponse.error(),
-          ),
+          (_) => ApiResponse<LoginResponseDto>.fail(FailResponse.error()),
         );
   }
 
@@ -36,19 +30,15 @@ class AccountApiImpl extends AccountApi {
     required String phone,
   }) async {
     return network.dio
-        .post(
-          sendAuthCodePath,
-          data: {phone: phone},
-        )
+        .post(sendAuthCodePath, data: {phone: phone})
         .then(
           (response) => ApiResponse.success(
             SendAuthCodeResponseDto.fromJson(response.data),
           ),
         )
         .catchError(
-          (_) => ApiResponse<SendAuthCodeResponseDto>.fail(
-            FailResponse.error(),
-          ),
+          (_) =>
+              ApiResponse<SendAuthCodeResponseDto>.fail(FailResponse.error()),
         );
   }
 
@@ -58,22 +48,14 @@ class AccountApiImpl extends AccountApi {
     required AuthCodeVerificationRequestDto dto,
   }) async {
     return network.dio
-        .post(
-          verifyAuthCodePath,
-          data: dto.toJson(),
-        )
+        .post(verifyAuthCodePath, data: dto.toJson())
         .then(
           (response) => ApiResponse.success(
-            BaseResponseDto.fromJson(
-              response.data,
-              (json) => json as bool,
-            ),
+            BaseResponseDto.fromJson(response.data, (json) => json as bool),
           ),
         )
         .catchError(
-          (_) => ApiResponse<BaseResponseDto<bool>>.fail(
-            FailResponse.error(),
-          ),
+          (_) => ApiResponse<BaseResponseDto<bool>>.fail(FailResponse.error()),
         );
   }
 }

@@ -9,10 +9,7 @@ class JobPostingsTabBloc extends BaseTabBloc {
   static List<BaseTabData<JobPostingStatusType>> _getTabs() {
     return JobPostingStatusType.values
         .map<BaseTabData<JobPostingStatusType>>(
-          (type) => BaseTabData(
-            text: type.tr,
-            value: type,
-          ),
+          (type) => BaseTabData(text: type.tr, value: type),
         )
         .toList();
   }

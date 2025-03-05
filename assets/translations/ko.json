@@ -96,5 +96,13 @@
   "enterVerificationCode": "인증번호 입력",
   "verification": "인증",
   "invalidVerificationCode": "인증번호가 틀립니다,",
-  "logoDescription": "당신의 기회, 우리와 함께 연결하세요"
+  "logoDescription": "당신의 기회, 우리와 함께 연결하세요",
+  "connectForOpportunities": "연결로 더 많은 기회를 만나세요!",
+  "checkBeforeJoining": "함께 하기 전 확인이 필요해요!",
+  "selectRoleForCustomService": "역할을 선택하시면 맞춤 서비스를 시작할 수 있어요.",
+  "termsRequired": "서비스 이용을 위해 이용약관 동의가 필수입니다!",
+  "dataProtection": "여러분의 소중한 정보를 보호해드려요!",
+  "workerSignup": "근로자로 시작하기",
+  "employerSignup": "고용주 시작하기",
+  "next": "다음"
 }

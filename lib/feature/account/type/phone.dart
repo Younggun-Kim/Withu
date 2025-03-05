@@ -3,9 +3,9 @@ import 'package:withu/core/utils/regex/regex_util.dart';
 
 /// 휴대폰번호 Value Object
 class Phone extends Equatable {
-  final String value;
 
   const Phone(this.value);
+  final String value;
 
   static const empty = Phone('');
 

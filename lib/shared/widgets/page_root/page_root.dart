@@ -3,6 +3,17 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class PageRoot extends StatelessWidget {
+
+  const PageRoot({
+    super.key,
+    required this.child,
+    required this.isLoading,
+    this.appBar,
+    this.fab,
+    this.padding,
+    this.safeAreaTop = true,
+    this.safeAreaBottom = true,
+  });
   final Widget child;
 
   final bool isLoading;
@@ -16,17 +27,6 @@ class PageRoot extends StatelessWidget {
   final bool safeAreaTop;
 
   final bool safeAreaBottom;
-
-  const PageRoot({
-    super.key,
-    required this.child,
-    required this.isLoading,
-    this.appBar,
-    this.fab,
-    this.padding,
-    this.safeAreaTop = true,
-    this.safeAreaBottom = true,
-  });
 
   @override
   Widget build(BuildContext context) {

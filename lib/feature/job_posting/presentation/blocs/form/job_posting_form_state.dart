@@ -26,7 +26,7 @@ class JobPostingFormState with _$JobPostingFormState {
     @Default(false) bool hasTravelTime,
     @Default(false) bool hasBreakTime,
     @Default(false) bool isMealProvided,
-    @Default(JobCategoryType.none ) JobCategoryType category,
+    @Default(JobCategoryType.none) JobCategoryType category,
     @Default(ContractType.none) ContractType contractType,
     @Default(PayType.none) PayType payType,
     String? jobPostingId,
@@ -36,5 +36,4 @@ class JobPostingFormState with _$JobPostingFormState {
     bool? isBreakTimePaid,
     String? message,
   }) = _JobPostingFormState;
-
 }

@@ -6,6 +6,16 @@ import 'package:withu/shared/shared.dart';
 
 /// 근로자 프로필
 class WorkerProfile extends StatelessWidget {
+
+  const WorkerProfile({
+    super.key,
+    required this.profile,
+    required this.name,
+    required this.age,
+    required this.startTime,
+    required this.endTime,
+    required this.workStatus,
+  });
   /// 프로필 이미지 URL
   final String profile;
 
@@ -23,16 +33,6 @@ class WorkerProfile extends StatelessWidget {
 
   /// 출근여부
   final bool workStatus;
-
-  const WorkerProfile({
-    super.key,
-    required this.profile,
-    required this.name,
-    required this.age,
-    required this.startTime,
-    required this.endTime,
-    required this.workStatus,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,10 @@ class WorkerProfile extends StatelessWidget {
 }
 
 class _WorkTime extends StatelessWidget {
-  final String startTime;
-  final String endTime;
 
   const _WorkTime({required this.startTime, required this.endTime});
+  final String startTime;
+  final String endTime;
 
   @override
   Widget build(BuildContext context) {

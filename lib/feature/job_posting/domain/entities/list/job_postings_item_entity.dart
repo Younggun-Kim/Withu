@@ -5,6 +5,17 @@ part 'job_postings_item_entity_ext.dart';
 
 /// 공고 목록 아이템 엔티티
 class JobPostingsItemEntity {
+
+  JobPostingsItemEntity({
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.startDate,
+    required this.endDate,
+    required this.status,
+    required this.currentMemberCount,
+    required this.maxMemberCount,
+  });
   /// id
   final String id;
 
@@ -28,15 +39,4 @@ class JobPostingsItemEntity {
 
   /// 최대 인원 수
   final int maxMemberCount;
-
-  JobPostingsItemEntity({
-    required this.id,
-    required this.title,
-    required this.category,
-    required this.startDate,
-    required this.endDate,
-    required this.status,
-    required this.currentMemberCount,
-    required this.maxMemberCount,
-  });
 }

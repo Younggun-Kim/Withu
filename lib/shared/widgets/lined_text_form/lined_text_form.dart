@@ -4,13 +4,6 @@ import 'package:withu/gen/colors.gen.dart';
 
 /// UnderLine이 있는 텍스트 폼
 class LinedTextFormField extends StatelessWidget {
-  final TextEditingController? controller;
-
-  final bool readOnly;
-
-  final Widget? suffix;
-
-  final Function(String text)? onChanged;
 
   const LinedTextFormField({
     super.key,
@@ -19,6 +12,13 @@ class LinedTextFormField extends StatelessWidget {
     this.suffix,
     this.onChanged,
   });
+  final TextEditingController? controller;
+
+  final bool readOnly;
+
+  final Widget? suffix;
+
+  final Function(String text)? onChanged;
 
   @override
   Widget build(BuildContext context) {

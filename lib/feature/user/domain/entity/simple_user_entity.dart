@@ -1,6 +1,13 @@
 import 'package:withu/feature/user/data/data_sources/dto/simple_user_dto.dart';
 
 class SimpleUserEntity {
+
+  SimpleUserEntity({
+    required this.id,
+    required this.name,
+    required this.age,
+    required this.profile,
+  });
   /// id
   final String id;
 
@@ -12,13 +19,6 @@ class SimpleUserEntity {
 
   /// 프로필 이미지
   final String profile;
-
-  SimpleUserEntity({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.profile,
-  });
 }
 
 extension SimpleUserEntityExt on SimpleUserEntity {

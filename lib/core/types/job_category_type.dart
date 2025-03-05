@@ -23,10 +23,7 @@ enum JobCategoryType with L10nKeyProvider {
 
   final String serverKey;
 
-  const JobCategoryType({
-    required this.l10nKey,
-    required this.serverKey,
-  });
+  const JobCategoryType({required this.l10nKey, required this.serverKey});
 
   /// None 여부
   bool get isNone => this == none;

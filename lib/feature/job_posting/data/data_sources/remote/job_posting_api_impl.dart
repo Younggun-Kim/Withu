@@ -33,25 +33,19 @@ class JobPostingApiImpl extends JobPostingApi {
 
   /// 공고 상세 조회
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> get({
-    required String id,
-  }) {
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({required String id}) {
     return const ApiResponse.error();
   }
 
   /// 공고 마감
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> close({
-    required String id,
-  }) {
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({required String id}) {
     return const ApiResponse.error();
   }
 
   /// 공고 삭제
   @override
-  FutureOr<ApiResponse<DeleteResponseDto>> delete({
-    required String id,
-  }) {
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({required String id}) {
     return const ApiResponse.error();
   }
 

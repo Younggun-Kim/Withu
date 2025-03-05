@@ -15,10 +15,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         '$path?page=$page&status=${status.serverKey}',
         (server) => server.reply(
           200,
-          JobPostingsDtoMock.mock(
-            page: page,
-            status: status,
-          ).toJson(),
+          JobPostingsDtoMock.mock(page: page, status: status).toJson(),
           delay: const Duration(seconds: 1),
         ),
       );
@@ -28,14 +25,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       );
 
       if (response.statusCode == 200) {
-        return ApiResponse.success(
-          JobPostingsDto.fromJson(response.data),
-        );
+        return ApiResponse.success(JobPostingsDto.fromJson(response.data));
       }
 
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
-      );
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -57,20 +50,13 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         data: requestData.toJson(),
       );
 
-      final response = await dio.post(
-        path,
-        data: requestData.toJson(),
-      );
+      final response = await dio.post(path, data: requestData.toJson());
 
       if (response.statusCode == 200) {
-        return ApiResponse.success(
-          JobPostingDetailDto.fromJson(response.data),
-        );
+        return ApiResponse.success(JobPostingDetailDto.fromJson(response.data));
       }
 
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
-      );
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -95,20 +81,13 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         data: requestData.toJson(),
       );
 
-      final response = await dio.put(
-        fullPath,
-        data: requestData.toJson(),
-      );
+      final response = await dio.put(fullPath, data: requestData.toJson());
 
       if (response.statusCode == 200) {
-        return ApiResponse.success(
-          JobPostingDetailDto.fromJson(response.data),
-        );
+        return ApiResponse.success(JobPostingDetailDto.fromJson(response.data));
       }
 
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
-      );
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -116,9 +95,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 상세 조회
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> get({
-    required String id,
-  }) async {
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({required String id}) async {
     try {
       final fullPath = '$path/$id';
 
@@ -134,14 +111,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       final response = await dio.get(fullPath);
 
       if (response.statusCode == 200) {
-        return ApiResponse.success(
-          JobPostingDetailDto.fromJson(response.data),
-        );
+        return ApiResponse.success(JobPostingDetailDto.fromJson(response.data));
       }
 
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
-      );
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -149,9 +122,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 마감
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> close({
-    required String id,
-  }) async {
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({required String id}) async {
     try {
       final fullPath = '$path/$id';
 
@@ -167,14 +138,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       final response = await dio.put(fullPath);
 
       if (response.statusCode == 200) {
-        return ApiResponse.success(
-          JobPostingDetailDto.fromJson(response.data),
-        );
+        return ApiResponse.success(JobPostingDetailDto.fromJson(response.data));
       }
 
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
-      );
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -182,9 +149,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 삭제
   @override
-  FutureOr<ApiResponse<DeleteResponseDto>> delete({
-    required String id,
-  }) async {
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({required String id}) async {
     try {
       final fullPath = '$path/$id';
 
@@ -198,9 +163,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       );
 
       final response = await dio.delete(fullPath);
-      return ApiResponse.success(
-        DeleteResponseDto.fromJson(response.data),
-      );
+      return ApiResponse.success(DeleteResponseDto.fromJson(response.data));
     } catch (e) {
       return const ApiResponse.error();
     }
@@ -227,9 +190,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
-          JobPostingWorkersDto.fromJson(
-            response.data,
-          ),
+          JobPostingWorkersDto.fromJson(response.data),
         );
       }
       return ApiResponse.fail(FailResponse.fromJson(response.data));

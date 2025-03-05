@@ -4,6 +4,13 @@ import 'package:withu/gen/colors.gen.dart';
 
 /// User 프로필 아이템
 class UserProfile extends StatelessWidget {
+
+  const UserProfile({
+    super.key,
+    required this.profile,
+    required this.name,
+    required this.age,
+  });
   /// 프로필 이미지 URL
   final String profile;
 
@@ -12,13 +19,6 @@ class UserProfile extends StatelessWidget {
 
   /// 나이
   final int age;
-
-  const UserProfile({
-    super.key,
-    required this.profile,
-    required this.name,
-    required this.age,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,9 @@ class UserProfile extends StatelessWidget {
 
 /// 프로필 이미지
 class _ProfileImage extends StatelessWidget {
-  final String src;
 
   const _ProfileImage({required this.src});
+  final String src;
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +65,11 @@ class _ProfileImage extends StatelessWidget {
 
 /// 유저 정보
 class _UserInfo extends StatelessWidget {
+
+  const _UserInfo({required this.name, required this.age});
   final String name;
 
   final int age;
-
-  const _UserInfo({required this.name, required this.age});
 
   @override
   Widget build(BuildContext context) {

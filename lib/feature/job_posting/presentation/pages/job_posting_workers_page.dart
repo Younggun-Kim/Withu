@@ -12,20 +12,19 @@ import 'package:withu/feature/job_posting/presentation/presentation.dart';
 /// 공고 상세 화면
 @RoutePage()
 class JobPostingWorkersPage extends StatelessWidget {
-  final String jobPostingId;
 
-  const JobPostingWorkersPage({
-    super.key,
-    required this.jobPostingId,
-  });
+  const JobPostingWorkersPage({super.key, required this.jobPostingId});
+  final String jobPostingId;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<JobPostingWorkersBloc>(
-            create: (context) =>
-                getIt()..add(JobPostingWorkersIdStored(id: jobPostingId))),
+          create:
+              (context) =>
+                  getIt()..add(JobPostingWorkersIdStored(id: jobPostingId)),
+        ),
       ],
       child: _JobPostingWorkersPage(),
     );
@@ -42,9 +41,9 @@ class _JobPostingWorkersPage extends StatelessWidget {
             context: context,
             content: state.message,
             closeCallback: () {
-              context
-                  .read<JobPostingWorkersBloc>()
-                  .add(JobPostingWorkersMessageCleared());
+              context.read<JobPostingWorkersBloc>().add(
+                JobPostingWorkersMessageCleared(),
+              );
             },
           );
         }
@@ -95,6 +94,12 @@ class _JobPostingWorkersPage extends StatelessWidget {
 
 /// 헤더 영역
 class _Header extends StatelessWidget {
+
+  const _Header({
+    required this.title,
+    required this.workPeriod,
+    required this.workStatus,
+  });
   /// 공고 제목
   final String title;
 
@@ -103,12 +108,6 @@ class _Header extends StatelessWidget {
 
   /// 출근현황
   final String workStatus;
-
-  const _Header({
-    required this.title,
-    required this.workPeriod,
-    required this.workStatus,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,14 +125,8 @@ class _Header extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: context.textTheme.headlineMedium,
-                    ),
-                    Text(
-                      workPeriod,
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    Text(title, style: context.textTheme.headlineMedium),
+                    Text(workPeriod, style: context.textTheme.bodyMedium),
                   ],
                 ),
                 const Spacer(),
@@ -142,7 +135,7 @@ class _Header extends StatelessWidget {
                   style: context.textTheme.bodyMediumBold,
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -162,15 +155,11 @@ class _WorkerListState extends State<_WorkerList> {
 
   @override
   void initState() {
-    _pagingController.addPageRequestListener(
-      (pageKey) {
-        context.read<JobPostingWorkersBloc>().add(
-              JobPostingWorkersSearched(
-                page: pageKey,
-              ),
-            );
-      },
-    );
+    _pagingController.addPageRequestListener((pageKey) {
+      context.read<JobPostingWorkersBloc>().add(
+        JobPostingWorkersSearched(page: pageKey),
+      );
+    });
     super.initState();
   }
 
@@ -196,10 +185,7 @@ class _WorkerListState extends State<_WorkerList> {
       },
       child: PagedGridView<int, JobPostingWorkerEntity>(
         pagingController: _pagingController,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 20,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         builderDelegate: PagedChildBuilderDelegate<JobPostingWorkerEntity>(
           firstPageProgressIndicatorBuilder: (context) => _emptyView(),
           noItemsFoundIndicatorBuilder: (context) => _emptyView(),

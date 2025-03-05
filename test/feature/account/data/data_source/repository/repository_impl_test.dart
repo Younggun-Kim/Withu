@@ -22,9 +22,7 @@ void main() {
   group('AccountRepository 테스트', () {
     test('로그인 성공', () async {
       // Given
-      when(
-        api.login(requestData: requestData),
-      ).thenAnswer(
+      when(api.login(requestData: requestData)).thenAnswer(
         (_) async => ApiResponse<LoginResponseDto>.success(
           LoginResponseDtoMock.success(),
         ),
@@ -41,9 +39,7 @@ void main() {
 
     test('로그인 실패', () async {
       // Given
-      when(
-        api.login(requestData: requestData),
-      ).thenAnswer(
+      when(api.login(requestData: requestData)).thenAnswer(
         (_) async => ApiResponse<LoginResponseDto>.success(
           LoginResponseDtoMock.failure(),
         ),
@@ -59,12 +55,8 @@ void main() {
 
     test('로그인 요청 API 500 에러', () async {
       // Given
-      when(
-        api.login(requestData: requestData),
-      ).thenAnswer(
-        (_) async => ApiResponse<LoginResponseDto>.fail(
-          FailResponse.error(),
-        ),
+      when(api.login(requestData: requestData)).thenAnswer(
+        (_) async => ApiResponse<LoginResponseDto>.fail(FailResponse.error()),
       );
 
       // When

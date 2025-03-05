@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'withu-acbaf.firebasestorage.app',
     iosBundleId: 'com.conner.withu.RunnerTests',
   );
-
 }

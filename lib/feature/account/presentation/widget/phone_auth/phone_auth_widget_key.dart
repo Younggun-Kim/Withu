@@ -1,10 +1,10 @@
 import 'package:withu/core/utils/mixins/widget_key_utils.dart';
 
 enum PhoneAuthWidgetKey with WidgetKeyUtils {
-  phoneInput(key: "phoneInput"),
-  sendAuthBtn(key: "sendAuthBtn"),
-  authCodeInput(key: "authCodeInput"),
-  authCodeInputError(key: "authCodeInput_error");
+  phoneInput(key: 'phoneInput'),
+  sendAuthBtn(key: 'sendAuthBtn'),
+  authCodeInput(key: 'authCodeInput'),
+  authCodeInputError(key: 'authCodeInput_error');
 
   final String key;
 

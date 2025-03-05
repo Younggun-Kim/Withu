@@ -6,9 +6,7 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     PhoneAuthPhoneInputted event,
     Emitter<PhoneAuthState> emit,
   ) {
-    emit(state.copyWith(
-      phone: event.phone,
-    ));
+    emit(state.copyWith(phone: event.phone));
   }
 
   /// 인증번호 발송 요청 이벤트.
@@ -16,9 +14,7 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     PhoneAuthAuthCodeSent event,
     Emitter<PhoneAuthState> emit,
   ) async {
-    await phoneAuthUseCase.sendAuthCode(
-      phone: state.phone.value,
-    );
+    await phoneAuthUseCase.sendAuthCode(phone: state.phone.value);
   }
 
   /// 인증번호 입력 이벤트.
@@ -26,14 +22,14 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     PhoneAuthAuthCodeInputted event,
     Emitter<PhoneAuthState> emit,
   ) async {
-    emit(state.copyWith(
-      authCode: event.code,
-    ));
+    emit(state.copyWith(authCode: event.code));
 
     if (state.canAuthCodeVerification) {
-      emit(state.copyWith(
-        authCodeErrorVisible: await requestAuthCodeVerification(),
-      ));
+      emit(
+        state.copyWith(
+          authCodeErrorVisible: await requestAuthCodeVerification(),
+        ),
+      );
     }
   }
 

@@ -3,15 +3,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class RadioChip extends StatelessWidget {
-  final String text;
-
-  final bool isSelected;
-
-  final bool enabled;
-
-  final VoidCallback? onSelected;
-
-  final EdgeInsets? margin;
 
   const RadioChip({
     super.key,
@@ -21,6 +12,15 @@ class RadioChip extends StatelessWidget {
     this.onSelected,
     this.margin,
   });
+  final String text;
+
+  final bool isSelected;
+
+  final bool enabled;
+
+  final VoidCallback? onSelected;
+
+  final EdgeInsets? margin;
 
   Color get backgroundColor => isSelected ? ColorName.primary : Colors.white;
 

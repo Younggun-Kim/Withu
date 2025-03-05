@@ -14,26 +14,16 @@ abstract class JobPostingUseCase {
   });
 
   /// 공고 등록/수정
-  Future<bool> submit({
-    required JobPostingRequestEntity entity,
-    String? id
-  });
-
+  Future<bool> submit({required JobPostingRequestEntity entity, String? id});
 
   /// 공고 상세 조회
-  Future<Either<JobPostingDetailEntity>> get({
-    required String id,
-  });
+  Future<Either<JobPostingDetailEntity>> get({required String id});
 
   /// 공고 마감
-  Future<Either<JobPostingDetailEntity>> close({
-    required String id,
-  });
+  Future<Either<JobPostingDetailEntity>> close({required String id});
 
   /// 공고 삭제
-  Future<Either<bool>> delete({
-    required String id,
-  });
+  Future<Either<bool>> delete({required String id});
 
   /// 지원자 목록
   Future<Either<JobPostingWorkersEntity>> searchJobPostingWorkers({

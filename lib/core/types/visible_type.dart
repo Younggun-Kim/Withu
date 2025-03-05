@@ -1,8 +1,4 @@
-enum VisibleType {
-  none,
-  visible,
-  invisible;
-}
+enum VisibleType { none, visible, invisible }
 
 extension VisibleTypeExt on VisibleType {
   bool get isVisible => this == VisibleType.visible;

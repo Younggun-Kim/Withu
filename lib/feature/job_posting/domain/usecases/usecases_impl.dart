@@ -1,11 +1,9 @@
 part of 'usecases.dart';
 
 class JobPostingUseCaseImpl implements JobPostingUseCase {
-  final JobPostingRepository jobPostingRepo;
 
-  JobPostingUseCaseImpl({
-    required this.jobPostingRepo,
-  });
+  JobPostingUseCaseImpl({required this.jobPostingRepo});
+  final JobPostingRepository jobPostingRepo;
 
   /// 공고 목록 조회
   @override
@@ -13,10 +11,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required JobPostingStatusType status,
     required int page,
   }) async {
-    final result = await jobPostingRepo.search(
-      status: status,
-      page: page,
-    );
+    final result = await jobPostingRepo.search(status: status, page: page);
 
     return result.maybeWhen(
       success: (JobPostingsDto dto) {
@@ -44,10 +39,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     if (id == null) {
       result = await _createJobPosting(dto: dto);
     } else {
-      result = await _updateJobPosting(
-        id: id,
-        dto: dto,
-      );
+      result = await _updateJobPosting(id: id, dto: dto);
     }
 
     return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
@@ -65,17 +57,12 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required String id,
     required JobPostingRequestDto dto,
   }) {
-    return jobPostingRepo.update(
-      id: id,
-      dto: dto,
-    );
+    return jobPostingRepo.update(id: id, dto: dto);
   }
 
   /// 공고 상세 조회
   @override
-  Future<Either<JobPostingDetailEntity>> get({
-    required String id,
-  }) async {
+  Future<Either<JobPostingDetailEntity>> get({required String id}) async {
     final result = await jobPostingRepo.get(id: id);
 
     return result.when(
@@ -93,9 +80,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 마감
   @override
-  Future<Either<JobPostingDetailEntity>> close({
-    required String id,
-  }) async {
+  Future<Either<JobPostingDetailEntity>> close({required String id}) async {
     final result = await jobPostingRepo.close(id: id);
 
     return result.when(
@@ -113,9 +98,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 삭제
   @override
-  Future<Either<bool>> delete({
-    required String id,
-  }) async {
+  Future<Either<bool>> delete({required String id}) async {
     final result = await jobPostingRepo.delete(id: id);
 
     return result.maybeWhen(

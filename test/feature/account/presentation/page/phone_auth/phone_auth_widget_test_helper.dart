@@ -1,3 +1,1 @@
-class PhoneAuthWidgetTestHelper {
-
-}
+class PhoneAuthWidgetTestHelper {}

@@ -24,19 +24,13 @@ abstract class JobPostingApi extends DioNetwork {
   });
 
   /// 공고 상세 조회
-  FutureOr<ApiResponse<JobPostingDetailDto>> get({
-    required String id,
-  });
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({required String id});
 
   /// 공고 마감
-  FutureOr<ApiResponse<JobPostingDetailDto>> close({
-    required String id,
-  });
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({required String id});
 
   /// 공고 삭제
-  FutureOr<ApiResponse<DeleteResponseDto>> delete({
-    required String id,
-  });
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({required String id});
 
   /// 지원자 목록
   FutureOr<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({

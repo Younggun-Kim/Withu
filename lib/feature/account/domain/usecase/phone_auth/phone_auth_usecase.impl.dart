@@ -1,16 +1,14 @@
 part of 'phone_auth_usecase.dart';
 
 class PhoneAuthUseCaseImpl implements PhoneAuthUseCase {
+
+  PhoneAuthUseCaseImpl({required this.accountRepo});
   @override
   final AccountRepository accountRepo;
 
-  PhoneAuthUseCaseImpl({required this.accountRepo});
-
   /// 휴대폰 인증번호 발송 요청
   @override
-  Future<SendAuthCodeResultEntity> sendAuthCode({
-    required String phone,
-  }) async {
+  Future<SendAuthCodeResultEntity> sendAuthCode({required String phone}) async {
     final result = await accountRepo.sendAuthCode(phone: phone);
 
     return result.maybeWhen(

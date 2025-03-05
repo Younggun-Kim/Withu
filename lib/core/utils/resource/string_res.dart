@@ -78,6 +78,17 @@ enum StringRes {
   verification,
   invalidVerificationCode,
   logoDescription,
+  connectForOpportunities,
+  checkBeforeJoining,
+  termsAgreementRequired,
+  protectYourValuableInfo,
+
+  selectRoleForCustomService,
+  termsRequired,
+  dataProtection,
+  workerSignup,
+  employerSignup,
+  next,
 }
 
 extension StringResEx on StringRes {

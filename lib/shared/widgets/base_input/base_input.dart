@@ -5,6 +5,83 @@ import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class BaseInput extends StatelessWidget {
+
+  const BaseInput({
+    super.key,
+    this.controller,
+    this.focusNode,
+    this.width,
+    this.style,
+    this.hintText,
+    this.hintTextStyle,
+    this.padding,
+    this.onChanged,
+    this.suffix,
+    this.suffixText,
+    this.suffixStyle,
+    this.keyboardType,
+    this.textInputAction,
+    this.maxLength,
+    this.textAlign = TextAlign.start,
+    this.inputFormatters,
+    this.obscureText = false,
+    this.errorText = '',
+    this.errorVisible = false,
+  });
+
+  /// 이메일 형식 입력
+  factory BaseInput.email({
+    Key? key,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    TextInputAction? textInputAction,
+    Function(String)? onChanged,
+    String errorText = '',
+    bool errorVisible = false,
+  }) {
+    return BaseInput(
+      key: key,
+      controller: controller,
+      focusNode: focusNode,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: textInputAction,
+      hintText: StringRes.pleaseEnterEmail.tr,
+      onChanged: onChanged,
+      errorText: errorText,
+      errorVisible: errorVisible,
+    );
+  }
+
+  /// 비밀번호 형식 입력
+  factory BaseInput.password({
+    Key? key,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    TextInputAction? textInputAction,
+    Function(String)? onChanged,
+    String errorText = '',
+    bool errorVisible = false,
+    bool obscureText = true,
+    VoidCallback? onSuffixPressed,
+  }) {
+    return BaseInput(
+      key: key,
+      controller: controller,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
+      obscureText: obscureText,
+      hintText: StringRes.pleaseEnterPassword.tr,
+      onChanged: onChanged,
+      errorText: errorText,
+      errorVisible: errorVisible,
+      suffix: InkWell(
+        key: const Key('password_visible_btn'),
+        splashColor: Colors.transparent,
+        onTap: onSuffixPressed,
+        child: Assets.images.eye.svg(),
+      ),
+    );
+  }
   final TextEditingController? controller;
 
   final FocusNode? focusNode;
@@ -42,29 +119,6 @@ class BaseInput extends StatelessWidget {
   final String errorText;
 
   final bool errorVisible;
-
-  const BaseInput({
-    super.key,
-    this.controller,
-    this.focusNode,
-    this.width,
-    this.style,
-    this.hintText,
-    this.hintTextStyle,
-    this.padding,
-    this.onChanged,
-    this.suffix,
-    this.suffixText,
-    this.suffixStyle,
-    this.keyboardType,
-    this.textInputAction,
-    this.maxLength,
-    this.textAlign = TextAlign.start,
-    this.inputFormatters,
-    this.obscureText = false,
-    this.errorText = '',
-    this.errorVisible = false,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,67 +180,13 @@ class BaseInput extends StatelessWidget {
       ],
     );
   }
-
-  /// 이메일 형식 입력
-  factory BaseInput.email({
-    Key? key,
-    TextEditingController? controller,
-    FocusNode? focusNode,
-    TextInputAction? textInputAction,
-    Function(String)? onChanged,
-    String errorText = '',
-    bool errorVisible = false,
-  }) {
-    return BaseInput(
-      key: key,
-      controller: controller,
-      focusNode: focusNode,
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: textInputAction,
-      hintText: StringRes.pleaseEnterEmail.tr,
-      onChanged: onChanged,
-      errorText: errorText,
-      errorVisible: errorVisible,
-    );
-  }
-
-  /// 비밀번호 형식 입력
-  factory BaseInput.password({
-    Key? key,
-    TextEditingController? controller,
-    FocusNode? focusNode,
-    TextInputAction? textInputAction,
-    Function(String)? onChanged,
-    String errorText = '',
-    bool errorVisible = false,
-    bool obscureText = true,
-    VoidCallback? onSuffixPressed,
-  }) {
-    return BaseInput(
-      key: key,
-      controller: controller,
-      focusNode: focusNode,
-      textInputAction: textInputAction,
-      obscureText: obscureText,
-      hintText: StringRes.pleaseEnterPassword.tr,
-      onChanged: onChanged,
-      errorText: errorText,
-      errorVisible: errorVisible,
-      suffix: InkWell(
-        key: const Key('password_visible_btn'),
-        splashColor: Colors.transparent,
-        onTap: onSuffixPressed,
-        child: Assets.images.eye.svg(),
-      ),
-    );
-  }
 }
 
 /// 에러 문구
 class _ErrorText extends StatelessWidget {
-  final String text;
 
   const _ErrorText({super.key, required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {

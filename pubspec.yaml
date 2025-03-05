@@ -79,7 +79,7 @@ dev_dependencies:
   freezed: 2.5.7
 
   # lint
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
   # router
   auto_route_generator: ^9.0.0
@@ -108,7 +108,7 @@ flutter:
 # Derry script manager
 scripts:
   # build runner 실행
-  build: dart run build_runner build --delete-conflicting-outputs
+  build: flutter pub run build_runner build --delete-conflicting-outputs
 
   abb: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
 

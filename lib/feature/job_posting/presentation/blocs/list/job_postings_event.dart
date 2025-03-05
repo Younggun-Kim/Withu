@@ -7,11 +7,9 @@ class JobPostingsInitialized extends JobPostingsEvent {}
 
 /// 다음 페이지 조회 이벤트
 class JobPostingsNextPaginated extends JobPostingsEvent {
-  final int page;
 
-  JobPostingsNextPaginated({
-    required this.page,
-  });
+  JobPostingsNextPaginated({required this.page});
+  final int page;
 }
 
 /// 리프레시

@@ -2,9 +2,7 @@ part of 'job_posting_detail_dto.dart';
 
 extension JobPostingDetailDtoMock on JobPostingDetailDto {
   /// Mock 데이터 생성.
-  static JobPostingDetailDto mock({
-    required String id,
-  }) {
+  static JobPostingDetailDto mock({required String id}) {
     return JobPostingDetailDto(
       id: id,
       company: CompanyDto.mock(),

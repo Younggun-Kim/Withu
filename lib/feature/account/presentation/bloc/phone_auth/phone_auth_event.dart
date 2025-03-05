@@ -4,9 +4,9 @@ abstract class PhoneAuthEvent extends Equatable {}
 
 /// 휴대폰 번호 입력 이벤트.
 class PhoneAuthPhoneInputted extends PhoneAuthEvent {
-  final String value;
 
   PhoneAuthPhoneInputted({required this.value});
+  final String value;
 
   Phone get phone => Phone(value);
 
@@ -22,9 +22,9 @@ class PhoneAuthAuthCodeSent extends PhoneAuthEvent {
 
 /// 인증번호 입력 이벤트.
 class PhoneAuthAuthCodeInputted extends PhoneAuthEvent {
-  final String value;
 
   PhoneAuthAuthCodeInputted({required this.value});
+  final String value;
 
   AuthCode get code => AuthCode(value);
 

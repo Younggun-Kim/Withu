@@ -11,9 +11,9 @@ import 'package:withu/shared/shared.dart';
 /// 공고 등록/수정 화면
 @RoutePage()
 class JobPostingFormPage extends StatelessWidget {
-  final String? jobPostingId;
 
   const JobPostingFormPage({super.key, this.jobPostingId});
+  final String? jobPostingId;
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +108,9 @@ class _JobPostingFormPage extends StatelessWidget {
 
 /// 필드명.
 class _FieldName extends StatelessWidget {
-  final String text;
 
   const _FieldName({required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {

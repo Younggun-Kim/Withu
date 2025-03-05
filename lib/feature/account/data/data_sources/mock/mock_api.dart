@@ -4,11 +4,11 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 
 class AccountMockApi extends AccountApiImpl {
-  late final DioAdapter dioAdapter;
 
   AccountMockApi({required super.network}) {
     dioAdapter = DioAdapter(dio: network.dio);
   }
+  late final DioAdapter dioAdapter;
 
   /// 로그인 API
   @override

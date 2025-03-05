@@ -10,13 +10,7 @@ class Either<T> with _$Either<T> {
 }
 
 extension EitherExt on Either {
-  bool get isSuccess => maybeWhen(
-        success: (_) => true,
-        orElse: () => false,
-      );
+  bool get isSuccess => maybeWhen(success: (_) => true, orElse: () => false);
 
-  bool get isFail => maybeWhen(
-        fail: (_) => true,
-        orElse: () => false,
-      );
+  bool get isFail => maybeWhen(fail: (_) => true, orElse: () => false);
 }

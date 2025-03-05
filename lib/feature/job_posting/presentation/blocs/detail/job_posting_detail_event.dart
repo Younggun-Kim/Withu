@@ -4,9 +4,9 @@ sealed class JobPostingDetailEvent {}
 
 /// 상세 데이터 조회
 class OnGettingDetailData extends JobPostingDetailEvent {
-  final String id;
 
   OnGettingDetailData({required this.id});
+  final String id;
 }
 
 /// 메시지 초기화

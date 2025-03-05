@@ -13,15 +13,12 @@ part 'splash_state.dart';
 part 'splash_bloc.freezed.dart';
 
 class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
-  final LoginUseCase loginUseCase;
 
-  SplashBloc({
-    required this.loginUseCase,
-  }) : super(SplashState(
-          status: BaseBlocStatus.initial(),
-        )) {
+  SplashBloc({required this.loginUseCase})
+    : super(SplashState(status: BaseBlocStatus.initial())) {
     on<OnInitializeApp>(_onOnInitializeApp);
   }
+  final LoginUseCase loginUseCase;
 
   FutureOr<void> _onOnInitializeApp(
     OnInitializeApp event,
@@ -37,9 +34,11 @@ class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
 
     logger.i(isLoggedIn);
 
-    emit(state.copyWith(
-      status: BaseBlocStatus.success(),
-      nextPage: SplashNextPageTypeExt.getNextPage(isLoggedIn),
-    ));
+    emit(
+      state.copyWith(
+        status: BaseBlocStatus.success(),
+        nextPage: SplashNextPageTypeExt.getNextPage(isLoggedIn),
+      ),
+    );
   }
 }

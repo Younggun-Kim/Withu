@@ -9,7 +9,5 @@ abstract class AccountStorage {
   Future<String> getSessionId();
 
   /// 세션 Id 저장
-  void setSessionId({
-    required String id,
-  });
+  void setSessionId({required String id});
 }

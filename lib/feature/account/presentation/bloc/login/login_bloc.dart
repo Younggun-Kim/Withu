@@ -14,7 +14,6 @@ part 'login_bloc.handler.dart';
 part 'login_bloc_converter.dart';
 
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
-  final LoginUseCase loginUseCase;
 
   LoginBloc({required this.loginUseCase})
     : super(LoginState(status: BaseBlocStatus.initial())) {
@@ -24,4 +23,5 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     on<LoginBtnPressed>(_onBtnPressed);
     on<LoginVisiblePasswordToggled>(_onVisiblePasswordToggled);
   }
+  final LoginUseCase loginUseCase;
 }

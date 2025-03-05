@@ -4,15 +4,6 @@ import 'package:withu/gen/colors.gen.dart';
 
 /// 기본 버튼
 class BaseButton extends StatelessWidget {
-  final Widget text;
-
-  final Color backgroundColor;
-
-  final Border? border;
-
-  final VoidCallback onTap;
-
-  final bool isEnabled;
 
   const BaseButton({
     super.key,
@@ -22,25 +13,6 @@ class BaseButton extends StatelessWidget {
     this.isEnabled = true,
     this.border,
   });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: isEnabled ? onTap : () {},
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(10),
-          border: border,
-        ),
-        child: text,
-      ),
-    );
-  }
 
   factory BaseButton.basic({
     required BuildContext context,
@@ -95,6 +67,34 @@ class BaseButton extends StatelessWidget {
       border: Border.all(color: ColorName.tertiary),
       backgroundColor: ColorName.tertiary,
       onTap: onTap,
+    );
+  }
+  final Widget text;
+
+  final Color backgroundColor;
+
+  final Border? border;
+
+  final VoidCallback onTap;
+
+  final bool isEnabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: isEnabled ? onTap : () {},
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(10),
+          border: border,
+        ),
+        child: text,
+      ),
     );
   }
 }

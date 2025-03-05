@@ -5,8 +5,7 @@ extension JobPostingFormStateExt on JobPostingFormState {
   bool get isRegistration => jobPostingId == null;
 
   /// 시작 날짜 문자열
-  String get contractStartDateStr =>
-      contractStartDate.format('yyyy-MM-dd');
+  String get contractStartDateStr => contractStartDate.format('yyyy-MM-dd');
 
   /// 종료 날짜 문자열
   String get contractEndDateStr => contractEndDate.format('yyyy-MM-dd');

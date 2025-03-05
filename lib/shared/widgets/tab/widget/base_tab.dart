@@ -5,11 +5,6 @@ import 'package:withu/shared/shared.dart';
 
 /// 탭 아이템
 class BaseTab extends StatelessWidget {
-  final BaseTabData data;
-
-  final bool isSelected;
-
-  final VoidCallback onTap;
 
   const BaseTab({
     super.key,
@@ -17,6 +12,11 @@ class BaseTab extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
+  final BaseTabData data;
+
+  final bool isSelected;
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +29,12 @@ class BaseTab extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: borderColor,
-              width: 3,
-            ),
-          ),
+          border: Border(bottom: BorderSide(color: borderColor, width: 3)),
         ),
         child: Text(
           data.text,
           textAlign: TextAlign.center,
-          style: context.textTheme.bodyLargeBold?.copyWith(
-            color: textColor,
-          ),
+          style: context.textTheme.bodyLargeBold?.copyWith(color: textColor),
         ),
       ),
     );

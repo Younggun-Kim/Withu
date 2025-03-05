@@ -11,7 +11,7 @@ enum JobPostingWorkersStatus {
   success,
 
   /// API 조회 실패
-  failure;
+  failure,
 }
 
 extension JobPostingWorkersStatusExt on JobPostingWorkersStatus {

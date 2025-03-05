@@ -1,13 +1,10 @@
 part of 'base_tab_bloc.dart';
 
 class BaseTabState<T> {
+
+  BaseTabState({required this.tabs, this.selectedTab});
   final List<BaseTabData<T>> tabs;
   final BaseTabData<T>? selectedTab;
-
-  BaseTabState({
-    required this.tabs,
-    this.selectedTab,
-  });
 
   BaseTabState copyWith({
     List<BaseTabData<T>>? tabs,

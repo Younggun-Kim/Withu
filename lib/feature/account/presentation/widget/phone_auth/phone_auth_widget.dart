@@ -13,12 +13,7 @@ class PhoneAuthWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<PhoneAuthBloc>(
       create: (context) => getIt(),
-      child: const Column(
-        children: [
-          PhoneInput(),
-          AuthCodeInput(),
-        ],
-      ),
+      child: const Column(children: [PhoneInput(), AuthCodeInput()]),
     );
   }
 }
@@ -36,14 +31,12 @@ class PhoneInput extends StatelessWidget {
           hintText: StringRes.enterOnlyNumber.tr,
           maxLength: 11,
           keyboardType: TextInputType.phone,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           suffix: const SendAuthBtn(),
           onChanged: (String text) {
-            context
-                .read<PhoneAuthBloc>()
-                .add(PhoneAuthPhoneInputted(value: text));
+            context.read<PhoneAuthBloc>().add(
+              PhoneAuthPhoneInputted(value: text),
+            );
           },
         );
       },
@@ -88,17 +81,15 @@ class AuthCodeInput extends StatelessWidget {
         return BaseInput(
           key: PhoneAuthWidgetKey.authCodeInput.toKey(),
           hintText: StringRes.enterVerificationCode.tr,
-          errorText: "! ${StringRes.invalidVerificationCode.tr}",
+          errorText: '! ${StringRes.invalidVerificationCode.tr}',
           errorVisible: state.isVisibleAuthCodeError,
           maxLength: 6,
           keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           onChanged: (String text) {
-            context
-                .read<PhoneAuthBloc>()
-                .add(PhoneAuthAuthCodeInputted(value: text));
+            context.read<PhoneAuthBloc>().add(
+              PhoneAuthAuthCodeInputted(value: text),
+            );
           },
         );
       },

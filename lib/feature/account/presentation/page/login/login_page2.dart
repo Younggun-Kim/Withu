@@ -188,7 +188,9 @@ class _SignUpAndLoginBtn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.router.push(TermRoute());
+          },
           child: Text(
             '회원가입',
             style: context.textTheme.bodyMediumBold?.copyWith(

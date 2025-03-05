@@ -5,15 +5,15 @@ import 'package:withu/shared/shared.dart';
 
 /// 기본 바텀 시트
 class BaseBottomSheet extends StatelessWidget {
-  final EdgeInsets padding;
-
-  final Widget child;
 
   const BaseBottomSheet({
     super.key,
     required this.padding,
     required this.child,
   });
+  final EdgeInsets padding;
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

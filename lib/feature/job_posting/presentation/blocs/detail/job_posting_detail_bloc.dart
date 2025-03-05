@@ -11,7 +11,6 @@ part 'job_posting_detail_bloc.freezed.dart';
 
 class JobPostingDetailBloc
     extends Bloc<JobPostingDetailEvent, JobPostingDetailState> {
-  final JobPostingUseCase useCase;
 
   JobPostingDetailBloc({required this.useCase})
     : super(
@@ -28,6 +27,7 @@ class JobPostingDetailBloc
     on<OnPopForm>(_onPopForm);
     on<JobPostingDetailRefreshed>(_onRefreshed);
   }
+  final JobPostingUseCase useCase;
 
   /// 메시지 초기화 이벤트.
   void _clearMessage(ClearMessage event, Emitter<JobPostingDetailState> emit) {

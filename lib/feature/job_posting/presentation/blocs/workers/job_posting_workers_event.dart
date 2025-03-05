@@ -4,17 +4,17 @@ sealed class JobPostingWorkersEvent {}
 
 /// 공고 Id 저장
 class JobPostingWorkersIdStored extends JobPostingWorkersEvent {
-  /// 공고 Id
-  final String id;
 
   JobPostingWorkersIdStored({required this.id});
+  /// 공고 Id
+  final String id;
 }
 
 /// 화면 초기화
 class JobPostingWorkersSearched extends JobPostingWorkersEvent {
-  final int page;
 
   JobPostingWorkersSearched({required this.page});
+  final int page;
 }
 
 /// 메시지 초기화

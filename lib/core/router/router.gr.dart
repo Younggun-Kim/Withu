@@ -8,12 +8,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:flutter/material.dart' as _i9;
+import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:withu/feature/account/presentation/page/login/login_page.dart'
     as _i5;
 import 'package:withu/feature/account/presentation/page/login/login_page2.dart'
     as _i6;
+import 'package:withu/feature/account/presentation/page/term/term_page.dart'
+    as _i8;
 import 'package:withu/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
     as _i1;
 import 'package:withu/feature/job_posting/presentation/pages/job_posting_form_page.dart'
@@ -28,11 +30,11 @@ import 'package:withu/feature/splash/presentation/pages/splash_page.dart'
 /// generated route for
 /// [_i1.JobPostingDetailPage]
 class JobPostingDetailRoute
-    extends _i8.PageRouteInfo<JobPostingDetailRouteArgs> {
+    extends _i9.PageRouteInfo<JobPostingDetailRouteArgs> {
   JobPostingDetailRoute({
-    _i9.Key? key,
+    _i10.Key? key,
     required String jobPostingId,
-    List<_i8.PageRouteInfo>? children,
+    List<_i9.PageRouteInfo>? children,
   }) : super(
           JobPostingDetailRoute.name,
           args: JobPostingDetailRouteArgs(
@@ -44,7 +46,7 @@ class JobPostingDetailRoute
 
   static const String name = 'JobPostingDetailRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingDetailRouteArgs>();
@@ -62,7 +64,7 @@ class JobPostingDetailRouteArgs {
     required this.jobPostingId,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String jobPostingId;
 
@@ -74,11 +76,11 @@ class JobPostingDetailRouteArgs {
 
 /// generated route for
 /// [_i2.JobPostingFormPage]
-class JobPostingFormRoute extends _i8.PageRouteInfo<JobPostingFormRouteArgs> {
+class JobPostingFormRoute extends _i9.PageRouteInfo<JobPostingFormRouteArgs> {
   JobPostingFormRoute({
-    _i9.Key? key,
+    _i10.Key? key,
     String? jobPostingId,
-    List<_i8.PageRouteInfo>? children,
+    List<_i9.PageRouteInfo>? children,
   }) : super(
           JobPostingFormRoute.name,
           args: JobPostingFormRouteArgs(
@@ -90,7 +92,7 @@ class JobPostingFormRoute extends _i8.PageRouteInfo<JobPostingFormRouteArgs> {
 
   static const String name = 'JobPostingFormRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingFormRouteArgs>(
@@ -109,7 +111,7 @@ class JobPostingFormRouteArgs {
     this.jobPostingId,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String? jobPostingId;
 
@@ -122,11 +124,11 @@ class JobPostingFormRouteArgs {
 /// generated route for
 /// [_i3.JobPostingWorkersPage]
 class JobPostingWorkersRoute
-    extends _i8.PageRouteInfo<JobPostingWorkersRouteArgs> {
+    extends _i9.PageRouteInfo<JobPostingWorkersRouteArgs> {
   JobPostingWorkersRoute({
-    _i9.Key? key,
+    _i10.Key? key,
     required String jobPostingId,
-    List<_i8.PageRouteInfo>? children,
+    List<_i9.PageRouteInfo>? children,
   }) : super(
           JobPostingWorkersRoute.name,
           args: JobPostingWorkersRouteArgs(
@@ -138,7 +140,7 @@ class JobPostingWorkersRoute
 
   static const String name = 'JobPostingWorkersRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingWorkersRouteArgs>();
@@ -156,7 +158,7 @@ class JobPostingWorkersRouteArgs {
     required this.jobPostingId,
   });
 
-  final _i9.Key? key;
+  final _i10.Key? key;
 
   final String jobPostingId;
 
@@ -168,8 +170,8 @@ class JobPostingWorkersRouteArgs {
 
 /// generated route for
 /// [_i4.JobPostingsPage]
-class JobPostingsRoute extends _i8.PageRouteInfo<void> {
-  const JobPostingsRoute({List<_i8.PageRouteInfo>? children})
+class JobPostingsRoute extends _i9.PageRouteInfo<void> {
+  const JobPostingsRoute({List<_i9.PageRouteInfo>? children})
       : super(
           JobPostingsRoute.name,
           initialChildren: children,
@@ -177,7 +179,7 @@ class JobPostingsRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'JobPostingsRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i4.JobPostingsPage();
@@ -187,8 +189,8 @@ class JobPostingsRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.LoginPage]
-class LoginRoute extends _i8.PageRouteInfo<void> {
-  const LoginRoute({List<_i8.PageRouteInfo>? children})
+class LoginRoute extends _i9.PageRouteInfo<void> {
+  const LoginRoute({List<_i9.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -196,7 +198,7 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i5.LoginPage();
@@ -206,8 +208,8 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.LoginPage2]
-class LoginRoute2 extends _i8.PageRouteInfo<void> {
-  const LoginRoute2({List<_i8.PageRouteInfo>? children})
+class LoginRoute2 extends _i9.PageRouteInfo<void> {
+  const LoginRoute2({List<_i9.PageRouteInfo>? children})
       : super(
           LoginRoute2.name,
           initialChildren: children,
@@ -215,7 +217,7 @@ class LoginRoute2 extends _i8.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute2';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i6.LoginPage2();
@@ -225,8 +227,8 @@ class LoginRoute2 extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.SplashPage]
-class SplashRoute extends _i8.PageRouteInfo<void> {
-  const SplashRoute({List<_i8.PageRouteInfo>? children})
+class SplashRoute extends _i9.PageRouteInfo<void> {
+  const SplashRoute({List<_i9.PageRouteInfo>? children})
       : super(
           SplashRoute.name,
           initialChildren: children,
@@ -234,10 +236,29 @@ class SplashRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'SplashRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i7.SplashPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i8.TermPage]
+class TermRoute extends _i9.PageRouteInfo<void> {
+  const TermRoute({List<_i9.PageRouteInfo>? children})
+      : super(
+          TermRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TermRoute';
+
+  static _i9.PageInfo page = _i9.PageInfo(
+    name,
+    builder: (data) {
+      return const _i8.TermPage();
     },
   );
 }

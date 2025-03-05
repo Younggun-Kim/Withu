@@ -37,9 +37,7 @@ class BaseBlocStatusFailure extends BaseBlocStatus {}
 
 /// BLoC State
 abstract class BaseBlocState {
-  final BaseBlocStatus status;
 
-  BaseBlocState({
-    required this.status,
-  });
+  BaseBlocState({required this.status});
+  final BaseBlocStatus status;
 }

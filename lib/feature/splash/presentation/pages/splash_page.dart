@@ -24,7 +24,7 @@ class _SplashPage extends StatelessWidget {
     return Scaffold(
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
-          if(!state.nextPage.isNone) {
+          if (!state.nextPage.isNone) {
             context.router.replaceAll([state.nextPage.getRoute]);
           }
         },

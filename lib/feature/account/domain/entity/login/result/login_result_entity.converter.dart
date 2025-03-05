@@ -11,9 +11,7 @@ extension LoginResultEntityConverter on LoginResultEntity {
   }) {
     return result.maybeWhen(
       success: (dto) {
-        return LoginResultEntity(
-          isLoggedIn: dto.status,
-        );
+        return LoginResultEntity(isLoggedIn: dto.status);
       },
       orElse: () {
         return LoginResultEntity(

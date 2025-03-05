@@ -6,15 +6,15 @@ import 'package:withu/shared/shared.dart';
 
 /// 공고 목록 아이템
 class JobPostingsItem extends StatelessWidget {
-  final JobPostingsItemEntity entity;
-
-  final VoidCallback onPressed;
 
   const JobPostingsItem({
     super.key,
     required this.entity,
     required this.onPressed,
   });
+  final JobPostingsItemEntity entity;
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,9 @@ class JobPostingsItem extends StatelessWidget {
 }
 
 class _Information extends StatelessWidget {
-  final JobPostingsItemEntity entity;
 
   const _Information({required this.entity});
+  final JobPostingsItemEntity entity;
 
   String get _date => _getDisplayDate();
 
@@ -94,9 +94,9 @@ class _Information extends StatelessWidget {
 }
 
 class _RightView extends StatelessWidget {
-  final JobPostingsItemEntity entity;
 
   const _RightView({required this.entity});
+  final JobPostingsItemEntity entity;
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +116,8 @@ class _RightView extends StatelessWidget {
 
 /// 진행 - 모집 인원
 class _InProgressView extends StatelessWidget {
+
+  const _InProgressView({required this.max, required this.current});
   /// 최대 인원
   final int max;
 
@@ -124,8 +126,6 @@ class _InProgressView extends StatelessWidget {
 
   /// 현재 / 최대
   String get counter => '$current/$max';
-
-  const _InProgressView({required this.max, required this.current});
 
   @override
   Widget build(BuildContext context) {

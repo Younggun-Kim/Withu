@@ -4,35 +4,12 @@ import 'package:withu/core/utils/utils.dart';
 import 'package:withu/shared/dialogs/dialogs.dart';
 
 class GuideDialog extends StatelessWidget {
-  final String title;
-
-  final String description;
 
   const GuideDialog({
     super.key,
     required this.title,
     required this.description,
   });
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseDialog(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: context.textTheme.bodyMediumBold,
-          ),
-          const SizedBox(height: 11),
-          Text(
-            description,
-            style: context.textTheme.bodySmall,
-          ),
-        ],
-      ),
-    );
-  }
 
   /// 이동시간 가이드
   factory GuideDialog.travelTime() {
@@ -55,6 +32,23 @@ class GuideDialog extends StatelessWidget {
     return GuideDialog(
       title: StringRes.mealPaidOrNot.tr,
       description: StringRes.mealGuideDescription.tr,
+    );
+  }
+  final String title;
+
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseDialog(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: context.textTheme.bodyMediumBold),
+          const SizedBox(height: 11),
+          Text(description, style: context.textTheme.bodySmall),
+        ],
+      ),
     );
   }
 

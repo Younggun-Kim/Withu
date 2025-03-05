@@ -136,9 +136,9 @@ class _LoginPageState extends State<LoginPageContent> {
 }
 
 class _LoginButton extends StatelessWidget {
-  final bool enabled;
 
   const _LoginButton({required this.enabled});
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {

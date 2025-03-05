@@ -4,9 +4,9 @@ sealed class JobPostingFormEvent extends Equatable {}
 
 /// 공고 제목 입력 이벤트
 class OnChangedTitle extends JobPostingFormEvent {
-  final String title;
 
   OnChangedTitle({required this.title});
+  final String title;
 
   @override
   List<Object?> get props => [title];
@@ -14,9 +14,9 @@ class OnChangedTitle extends JobPostingFormEvent {
 
 /// 근로 내용 입력
 class OnChangedContent extends JobPostingFormEvent {
-  final String content;
 
   OnChangedContent({required this.content});
+  final String content;
 
   @override
   List<Object?> get props => [content];
@@ -24,9 +24,9 @@ class OnChangedContent extends JobPostingFormEvent {
 
 /// 카테고리 선택 이벤트
 class OnPressedJobCategory extends JobPostingFormEvent {
-  final JobCategoryType category;
 
   OnPressedJobCategory({required this.category});
+  final JobCategoryType category;
 
   @override
   List<Object?> get props => [category];
@@ -34,9 +34,9 @@ class OnPressedJobCategory extends JobPostingFormEvent {
 
 /// 기간형식 선택 이벤트
 class OnPressedContractType extends JobPostingFormEvent {
-  final ContractType contractType;
 
   OnPressedContractType({required this.contractType});
+  final ContractType contractType;
 
   @override
   List<Object?> get props => [contractType];
@@ -44,9 +44,9 @@ class OnPressedContractType extends JobPostingFormEvent {
 
 /// 계약 시작 날짜 변경 이벤트
 class OnChangedContractStartDate extends JobPostingFormEvent {
-  final DateTime contractStartDate;
 
   OnChangedContractStartDate({required this.contractStartDate});
+  final DateTime contractStartDate;
 
   @override
   List<Object?> get props => [contractStartDate];
@@ -54,9 +54,9 @@ class OnChangedContractStartDate extends JobPostingFormEvent {
 
 /// 계약 종료 날짜 변경 이벤트
 class OnChangedContractEndDate extends JobPostingFormEvent {
-  final DateTime contractEndDate;
 
   OnChangedContractEndDate({required this.contractEndDate});
+  final DateTime contractEndDate;
 
   @override
   List<Object?> get props => [contractEndDate];
@@ -88,9 +88,9 @@ class OnToggleTBC extends JobPostingFormEvent {
 
 /// 근무 시작 날짜 변경 이벤트
 class OnChangedWorkStartTime extends JobPostingFormEvent {
-  final DateTime time;
 
   OnChangedWorkStartTime({required this.time});
+  final DateTime time;
 
   @override
   List<Object?> get props => [time];
@@ -98,9 +98,9 @@ class OnChangedWorkStartTime extends JobPostingFormEvent {
 
 /// 근무 종료 날짜  변경 이벤트
 class OnChangedWorkEndTime extends JobPostingFormEvent {
-  final DateTime time;
 
   OnChangedWorkEndTime({required this.time});
+  final DateTime time;
 
   @override
   List<Object?> get props => [time];
@@ -108,9 +108,9 @@ class OnChangedWorkEndTime extends JobPostingFormEvent {
 
 /// 모집인원 입력 이벤트
 class OnChangedParticipants extends JobPostingFormEvent {
-  final String participants;
 
   OnChangedParticipants({required this.participants});
+  final String participants;
 
   @override
   List<Object?> get props => [participants];
@@ -118,9 +118,9 @@ class OnChangedParticipants extends JobPostingFormEvent {
 
 /// 급여 타입 선택 이벤트.
 class OnSelectedPayType extends JobPostingFormEvent {
-  final PayType payType;
 
   OnSelectedPayType({required this.payType});
+  final PayType payType;
 
   @override
   List<Object?> get props => [payType];
@@ -128,9 +128,9 @@ class OnSelectedPayType extends JobPostingFormEvent {
 
 /// 급여 입력 이벤트
 class OnChangedPay extends JobPostingFormEvent {
-  final String pay;
 
   OnChangedPay({required this.pay});
+  final String pay;
 
   @override
   List<Object?> get props => [pay];
@@ -146,9 +146,9 @@ class OnPressedFindAddress extends JobPostingFormEvent {
 
 /// 주소 찾기 클릭 이벤트
 class OnChangedPreferredQualifications extends JobPostingFormEvent {
-  final String text;
 
   OnChangedPreferredQualifications({required this.text});
+  final String text;
 
   @override
   List<Object?> get props => [text];
@@ -164,9 +164,9 @@ class OnToggleHasTravelTime extends JobPostingFormEvent {
 
 /// 이동시간 급여/비급여 토글 이벤트.
 class OnSelectTravelTimePaid extends JobPostingFormEvent {
-  final bool isPaid;
 
   OnSelectTravelTimePaid({required this.isPaid});
+  final bool isPaid;
 
   @override
   List<Object?> get props => [isPaid];
@@ -182,9 +182,9 @@ class OnToggleHasBreakTime extends JobPostingFormEvent {
 
 /// 휴게시간 급여/비급여 토글 이벤트.
 class OnSelectBreakTimePaid extends JobPostingFormEvent {
-  final bool isPaid;
 
   OnSelectBreakTimePaid({required this.isPaid});
+  final bool isPaid;
 
   @override
   List<Object?> get props => [isPaid];
@@ -208,9 +208,9 @@ class JobPostingFormSubmitted extends JobPostingFormEvent {
 
 /// 공고 Id 저장
 class JobPostingFormIdSet extends JobPostingFormEvent {
-  final String? id;
 
   JobPostingFormIdSet({required this.id});
+  final String? id;
 
   @override
   List<Object?> get props => [id];

@@ -11,9 +11,9 @@ import 'package:withu/shared/shared.dart';
 /// 공고 상세 화면
 @RoutePage()
 class JobPostingDetailPage extends StatelessWidget {
-  final String jobPostingId;
 
   const JobPostingDetailPage({super.key, required this.jobPostingId});
+  final String jobPostingId;
 
   @override
   Widget build(BuildContext context) {
@@ -195,17 +195,17 @@ class _MoreOptionButton extends StatelessWidget {
 
 /// Header 영역
 class _Header extends StatelessWidget {
-  final String companyThumbnail;
-
-  final String companyName;
-
-  final int views;
 
   const _Header({
     required this.companyThumbnail,
     required this.companyName,
     required this.views,
   });
+  final String companyThumbnail;
+
+  final String companyName;
+
+  final int views;
 
   @override
   Widget build(BuildContext context) {
@@ -294,9 +294,9 @@ class _Header extends StatelessWidget {
 
 /// 필드명
 class _FieldName extends StatelessWidget {
-  final String text;
 
   const _FieldName({required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -306,9 +306,9 @@ class _FieldName extends StatelessWidget {
 
 /// 근로계약기간
 class _ContractPeriod extends StatelessWidget {
-  final String period;
 
   const _ContractPeriod({required this.period});
+  final String period;
 
   @override
   Widget build(BuildContext context) {
@@ -324,9 +324,9 @@ class _ContractPeriod extends StatelessWidget {
 
 /// 근무시간
 class _WorkHours extends StatelessWidget {
-  final String time;
 
   const _WorkHours({required this.time});
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -342,9 +342,9 @@ class _WorkHours extends StatelessWidget {
 
 /// 모집인원
 class _Participants extends StatelessWidget {
-  final String number;
 
   const _Participants({required this.number});
+  final String number;
 
   @override
   Widget build(BuildContext context) {
@@ -363,11 +363,11 @@ class _Participants extends StatelessWidget {
 
 /// 급여
 class _PayAmount extends StatelessWidget {
+
+  const _PayAmount({required this.payType, required this.amount});
   final String payType;
 
   final String amount;
-
-  const _PayAmount({required this.payType, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -391,9 +391,9 @@ class _PayAmount extends StatelessWidget {
 
 /// 주소
 class _Address extends StatelessWidget {
-  final String address;
 
   const _Address({required this.address});
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -436,9 +436,9 @@ class _Map extends StatelessWidget {
 
 /// 우대사항
 class _PreferredQualifications extends StatelessWidget {
-  final String text;
 
   const _PreferredQualifications({required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -451,17 +451,17 @@ class _PreferredQualifications extends StatelessWidget {
 
 /// 필드, 스위치
 class _FieldAndSwitch extends StatelessWidget {
-  final String fieldName;
-
-  final bool isOn;
-
-  final VoidCallback onPressedGuide;
 
   const _FieldAndSwitch({
     required this.fieldName,
     required this.isOn,
     required this.onPressedGuide,
   });
+  final String fieldName;
+
+  final bool isOn;
+
+  final VoidCallback onPressedGuide;
 
   @override
   Widget build(BuildContext context) {
@@ -487,11 +487,11 @@ class _FieldAndSwitch extends StatelessWidget {
 
 /// 급여/비급여 정보
 class _PayInfo extends StatelessWidget {
+
+  const _PayInfo({required this.visible, this.isPaid});
   final bool visible;
 
   final bool? isPaid;
-
-  const _PayInfo({required this.visible, this.isPaid});
 
   @override
   Widget build(BuildContext context) {

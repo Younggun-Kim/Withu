@@ -4,7 +4,7 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 
 abstract class AccountApi {
   /// API 주소
-  final path = "/api/account";
+  final path = '/api/account';
 
   /// 로그인 주소
   late final loginPath = '$path/login';

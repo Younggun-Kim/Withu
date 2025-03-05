@@ -3,9 +3,9 @@ import 'package:withu/core/core.dart';
 
 /// 타임 피커.
 class TimePicker extends StatelessWidget {
-  final Function(DateTime date) onDateTimeChanged;
 
   const TimePicker({super.key, required this.onDateTimeChanged});
+  final Function(DateTime date) onDateTimeChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,7 @@ class TimePicker extends StatelessWidget {
           child: CupertinoDatePicker(
             mode: CupertinoDatePickerMode.time,
             use24hFormat: true,
-            initialDateTime: DateTime.now().copyWith(
-              hour: 0,
-              minute: 0,
-            ),
+            initialDateTime: DateTime.now().copyWith(hour: 0, minute: 0),
             onDateTimeChanged: onDateTimeChanged,
             selectionOverlayBuilder: (
               BuildContext context, {
@@ -35,12 +32,7 @@ class TimePicker extends StatelessWidget {
             },
           ),
         ),
-        Center(
-          child: Text(
-            ':',
-            style: context.textTheme.bodyMediumBold,
-          ),
-        ),
+        Center(child: Text(':', style: context.textTheme.bodyMediumBold)),
       ],
     );
   }

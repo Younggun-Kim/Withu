@@ -45,7 +45,7 @@ void main() {
   group('PhoneAuthWidget 테스트', () {
     testWidgets('휴대폰 번호 입력 테스트', (WidgetTester tester) async {
       /// Given
-      const phone = "01012345678";
+      const phone = '01012345678';
       await tester.pumpWidget(testWidget);
 
       /// When
@@ -63,7 +63,7 @@ void main() {
       WidgetTester tester,
     ) async {
       /// Given
-      const phone = "01012345678";
+      const phone = '01012345678';
       when(
         () => phoneAuthBloc.state,
       ).thenReturn(initialState.copyWith(phone: const Phone(phone)));
@@ -83,7 +83,7 @@ void main() {
       WidgetTester tester,
     ) async {
       /// Given
-      const phone = "012345";
+      const phone = '012345';
       when(
         () => phoneAuthBloc.state,
       ).thenReturn(initialState.copyWith(phone: const Phone(phone)));
@@ -101,7 +101,7 @@ void main() {
 
     testWidgets('유효한 인증번호 입력 테스트', (WidgetTester tester) async {
       /// Given
-      const authCode = "123456";
+      const authCode = '123456';
       await tester.pumpWidget(testWidget);
 
       /// When
@@ -121,7 +121,7 @@ void main() {
 
     testWidgets('유효하지 않는 인증번호 입력 테스트', (WidgetTester tester) async {
       /// Given
-      const authCode = "123456";
+      const authCode = '123456';
       whenListen(
         phoneAuthBloc,
         Stream.fromIterable([

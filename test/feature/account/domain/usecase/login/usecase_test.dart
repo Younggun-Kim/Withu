@@ -26,20 +26,14 @@ void main() {
       final successResponseDto = LoginResponseDtoMock.success();
 
       when(
-            () => mockRepo.login(requestData: LoginRequestDtoMock.mock()),
-      ).thenAnswer(
-            (_) async => ApiResponse.success(successResponseDto),
-      );
+        () => mockRepo.login(requestData: LoginRequestDtoMock.mock()),
+      ).thenAnswer((_) async => ApiResponse.success(successResponseDto));
       when(
-            () => mockRepo.storeSessionId(id: any(named: 'id')),
-      ).thenAnswer(
-            (_) async => {},
-      );
+        () => mockRepo.storeSessionId(id: any(named: 'id')),
+      ).thenAnswer((_) async => {});
 
       // When
-      final result = await useCase.login(
-        entity: LoginRequestEntityMock.mock(),
-      );
+      final result = await useCase.login(entity: LoginRequestEntityMock.mock());
 
       // Then
       expect(result.isLoggedIn, isTrue);
@@ -50,19 +44,16 @@ void main() {
     test('서버 에러로 인한 로그인 실패', () async {
       // Given
       when(
-            () => mockRepo.login(requestData: any(named: 'requestData')),
-      ).thenAnswer(
-            (_) async => ApiResponse.fail(FailResponse.error()),
-      );
+        () => mockRepo.login(requestData: any(named: 'requestData')),
+      ).thenAnswer((_) async => ApiResponse.fail(FailResponse.error()));
 
       // When
-      final result = await useCase.login(
-        entity: LoginRequestEntityMock.mock(),
-      );
+      final result = await useCase.login(entity: LoginRequestEntityMock.mock());
 
       // Then
-      verify(() => mockRepo.login(requestData: any(named: 'requestData')))
-          .called(1);
+      verify(
+        () => mockRepo.login(requestData: any(named: 'requestData')),
+      ).called(1);
       expect(result.isLoggedIn, isFalse);
       expect(result.message, StringRes.serverError.tr);
     });

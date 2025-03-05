@@ -3,6 +3,15 @@ import 'package:withu/feature/job_posting/data/data.dart';
 import 'job_posting_worker_entity.dart';
 
 class JobPostingWorkersEntity {
+
+  JobPostingWorkersEntity({
+    required this.title,
+    required this.applicants,
+    required this.participants,
+    required this.workStartDate,
+    required this.workEndDate,
+    required this.workers,
+  });
   /// 공고명
   final String title;
 
@@ -20,15 +29,6 @@ class JobPostingWorkersEntity {
 
   /// 지원자 목록
   final List<JobPostingWorkerEntity> workers;
-
-  JobPostingWorkersEntity({
-    required this.title,
-    required this.applicants,
-    required this.participants,
-    required this.workStartDate,
-    required this.workEndDate,
-    required this.workers,
-  });
 }
 
 extension JobPostingWorkersEntityExt on JobPostingWorkersEntity {

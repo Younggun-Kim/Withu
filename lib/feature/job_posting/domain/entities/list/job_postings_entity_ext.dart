@@ -4,11 +4,10 @@ extension JobPostingsEntityParser on JobPostingsEntity {
   static JobPostingsEntity fromDto(JobPostingsDto dto) {
     return JobPostingsEntity(
       isLast: dto.isLast,
-      jobPostingItems: dto.content
-          .map(
-            (dto) => JobPostingsItemEntityParser.fromDto(dto),
-          )
-          .toList(),
+      jobPostingItems:
+          dto.content
+              .map((dto) => JobPostingsItemEntityParser.fromDto(dto))
+              .toList(),
     );
   }
 }

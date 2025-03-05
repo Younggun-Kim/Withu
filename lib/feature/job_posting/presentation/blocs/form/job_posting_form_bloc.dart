@@ -14,15 +14,14 @@ part 'job_posting_form_bloc.freezed.dart';
 
 class JobPostingFormBloc
     extends Bloc<JobPostingFormEvent, JobPostingFormState> {
-  final JobPostingUseCase useCase;
-
-  JobPostingFormBloc({
-    required this.useCase,
-  }) : super(JobPostingFormState(
+  JobPostingFormBloc({required this.useCase})
+    : super(
+        JobPostingFormState(
           status: JobPostingFormStatus.initial,
           contractStartDate: DateTime.now(),
           contractEndDate: DateTime.now(),
-        )) {
+        ),
+      ) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);
@@ -48,6 +47,8 @@ class JobPostingFormBloc
     on<JobPostingFormIdSet>(_onIdSet);
     on<JobPostingFormDetailFetched>(_onDetailFetched);
   }
+
+  final JobPostingUseCase useCase;
 
   /// 공고 제목 변경 이벤트.
   void _onChangedTitle(
@@ -114,10 +115,7 @@ class JobPostingFormBloc
   }
 
   /// 미정 토글 이벤트.
-  void _onToggleTBC(
-    OnToggleTBC event,
-    Emitter<JobPostingFormState> emit,
-  ) {
+  void _onToggleTBC(OnToggleTBC event, Emitter<JobPostingFormState> emit) {
     emit(state.copyWith(isTBC: !state.isTBC));
   }
 
@@ -154,10 +152,7 @@ class JobPostingFormBloc
   }
 
   /// 급여방법 입력 이벤트.
-  void _onChangedPay(
-    OnChangedPay event,
-    Emitter<JobPostingFormState> emit,
-  ) {
+  void _onChangedPay(OnChangedPay event, Emitter<JobPostingFormState> emit) {
     emit(state.copyWith(pay: event.pay));
   }
 
@@ -242,10 +237,7 @@ class JobPostingFormBloc
   }
 
   /// 공고 ID 설정
-  void _onIdSet(
-    JobPostingFormIdSet event,
-    Emitter<JobPostingFormState> emit,
-  ) {
+  void _onIdSet(JobPostingFormIdSet event, Emitter<JobPostingFormState> emit) {
     emit(state.copyWith(jobPostingId: event.id));
   }
 
@@ -260,20 +252,22 @@ class JobPostingFormBloc
     }
     emit(state.copyWith(status: JobPostingFormStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.get(
-      id: id,
-    );
+    final Either<JobPostingDetailEntity> result = await useCase.get(id: id);
 
-    result.when(success: (JobPostingDetailEntity data) {
-      emit(state.copyWithEntity(
-        status: JobPostingFormStatus.loaded,
-        entity: data,
-      ));
-    }, fail: (String message) {
-      emit(state.copyWith(
-        status: JobPostingFormStatus.fail,
-        message: message,
-      ));
-    });
+    result.when(
+      success: (JobPostingDetailEntity data) {
+        emit(
+          state.copyWithEntity(
+            status: JobPostingFormStatus.loaded,
+            entity: data,
+          ),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(status: JobPostingFormStatus.fail, message: message),
+        );
+      },
+    );
   }
 }

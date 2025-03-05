@@ -20,21 +20,14 @@ abstract class JobPostingRepository {
     required JobPostingRequestDto dto,
   });
 
-
   /// 공고 상세 조회
-  Future<ApiResponse<JobPostingDetailDto>> get({
-    required String id,
-  });
+  Future<ApiResponse<JobPostingDetailDto>> get({required String id});
 
   /// 공고 마감
-  Future<ApiResponse<JobPostingDetailDto>> close({
-    required String id,
-  });
+  Future<ApiResponse<JobPostingDetailDto>> close({required String id});
 
   /// 공고 삭제
-  Future<ApiResponse<DeleteResponseDto>> delete({
-    required String id,
-  });
+  Future<ApiResponse<DeleteResponseDto>> delete({required String id});
 
   /// 지원자 목록
   Future<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({

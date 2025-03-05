@@ -1,13 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 class BaseBadge extends StatelessWidget {
-  final String text;
-
-  final Color backgroundColor;
-
-  final TextStyle? textStyle;
-
-  final EdgeInsets? margin;
 
   const BaseBadge({
     super.key,
@@ -16,23 +9,24 @@ class BaseBadge extends StatelessWidget {
     this.textStyle,
     this.margin,
   });
+  final String text;
+
+  final Color backgroundColor;
+
+  final TextStyle? textStyle;
+
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 2,
-        horizontal: 6,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
       margin: margin,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Text(
-        text,
-        style: textStyle,
-      ),
+      child: Text(text, style: textStyle),
     );
   }
 }

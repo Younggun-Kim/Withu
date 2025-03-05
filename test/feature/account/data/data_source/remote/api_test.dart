@@ -27,12 +27,9 @@ void main() {
   group('AccountAPI 테스트', () {
     test('로그인 요청 성공', () async {
       // Given
-      when(
-        mockDio.post(
-          api.loginPath,
-          data: requestData.toJson(),
-        ),
-      ).thenAnswer((_) async {
+      when(mockDio.post(api.loginPath, data: requestData.toJson())).thenAnswer((
+        _,
+      ) async {
         return Response(
           data: LoginResponseDtoMock.success().toJson(),
           statusCode: 200,
@@ -51,12 +48,9 @@ void main() {
 
     test('로그인 실패', () async {
       // Given
-      when(
-        mockDio.post(
-          api.loginPath,
-          data: requestData.toJson(),
-        ),
-      ).thenAnswer((_) async {
+      when(mockDio.post(api.loginPath, data: requestData.toJson())).thenAnswer((
+        _,
+      ) async {
         return Response(
           data: LoginResponseDtoMock.failure().toJson(),
           statusCode: 200,
@@ -74,12 +68,9 @@ void main() {
 
     test('API 500 에러', () async {
       // Given
-      when(
-        mockDio.post(
-          api.loginPath,
-          data: requestData.toJson(),
-        ),
-      ).thenAnswer((_) async {
+      when(mockDio.post(api.loginPath, data: requestData.toJson())).thenAnswer((
+        _,
+      ) async {
         return Response(
           data: {},
           statusCode: 500,

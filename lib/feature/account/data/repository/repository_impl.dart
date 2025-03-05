@@ -4,16 +4,16 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
-  @override
-  final AccountStorage accountStorage;
-
-  @override
-  final AccountApi accountApi;
 
   AccountRepositoryImpl({
     required this.accountApi,
     required this.accountStorage,
   });
+  @override
+  final AccountStorage accountStorage;
+
+  @override
+  final AccountApi accountApi;
 
   /// 로그인 API 호출
   @override

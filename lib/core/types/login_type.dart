@@ -9,7 +9,5 @@ enum LoginType {
 
   final String serverKey;
 
-  const LoginType({
-    required this.serverKey,
-  });
+  const LoginType({required this.serverKey});
 }

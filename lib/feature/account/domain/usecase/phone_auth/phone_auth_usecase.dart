@@ -5,9 +5,9 @@ import 'package:withu/feature/account/account.dart';
 part 'phone_auth_usecase.impl.dart';
 
 abstract class PhoneAuthUseCase {
-  final AccountRepository accountRepo;
 
   PhoneAuthUseCase({required this.accountRepo});
+  final AccountRepository accountRepo;
 
   /// 휴대폰 인증번호 발송 요청
   Future<SendAuthCodeResultEntity> sendAuthCode({required String phone});

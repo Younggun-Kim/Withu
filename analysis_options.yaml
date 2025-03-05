@@ -1,6 +1,15 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "test/.test_coverage.dart"
+    - "bin/cache/**"
+
+  errors:
+    invalid_annotation_target: ignore
+
 linter:
   rules:
-    - eol_at_end_of_file: true
-    - require_trailing_commas: true
+    - require_trailing_commas

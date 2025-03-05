@@ -17,10 +17,7 @@ enum PayType with L10nKeyProvider {
 
   final String serverKey;
 
-  const PayType({
-    required this.l10nKey,
-    required this.serverKey,
-  });
+  const PayType({required this.l10nKey, required this.serverKey});
 
   /// None 여부
   bool get isNone => this == PayType.none;

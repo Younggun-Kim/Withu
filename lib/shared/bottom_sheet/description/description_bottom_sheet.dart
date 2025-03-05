@@ -5,11 +5,6 @@ import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
 class DescriptionBottomSheet extends StatelessWidget {
-  final String description;
-
-  final String actionText;
-
-  final VoidCallback onTap;
 
   const DescriptionBottomSheet({
     super.key,
@@ -17,6 +12,11 @@ class DescriptionBottomSheet extends StatelessWidget {
     required this.actionText,
     required this.onTap,
   });
+  final String description;
+
+  final String actionText;
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

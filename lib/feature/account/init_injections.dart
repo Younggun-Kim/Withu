@@ -1,5 +1,6 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
 
 void initAccountInjections() {
   initAccountDataInjections();
@@ -30,5 +31,6 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<PhoneAuthBloc>(
     () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
+  getIt.registerFactory<TermBloc>(() => TermBloc());
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
 }

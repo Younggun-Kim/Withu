@@ -11,26 +11,26 @@ part 'job_posting_workers_bloc.freezed.dart';
 
 class JobPostingWorkersBloc
     extends Bloc<JobPostingWorkersEvent, JobPostingWorkersState> {
-  final JobPostingUseCase useCase;
 
   JobPostingWorkersBloc({required this.useCase})
-      : super(
-          JobPostingWorkersState(
-            status: JobPostingWorkersStatus.initial,
-            message: '',
-            title: '',
-            applicants: 0,
-            participants: 0,
-            workStartDate: '',
-            workEndDate: '',
-            list: [],
-            isLast: true,
-          ),
-        ) {
+    : super(
+        JobPostingWorkersState(
+          status: JobPostingWorkersStatus.initial,
+          message: '',
+          title: '',
+          applicants: 0,
+          participants: 0,
+          workStartDate: '',
+          workEndDate: '',
+          list: [],
+          isLast: true,
+        ),
+      ) {
     on<JobPostingWorkersIdStored>(_onIdStored);
     on<JobPostingWorkersSearched>(_onSearched);
     on<JobPostingWorkersMessageCleared>(_onMessageCleared);
   }
+  final JobPostingUseCase useCase;
 }
 
 extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
@@ -55,30 +55,34 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
 
     emit(state.copyWith(status: JobPostingWorkersStatus.loading));
 
-    final Either<JobPostingWorkersEntity> result =
-        await useCase.searchJobPostingWorkers(
-      jobPostingId: jobPostingId,
-      page: event.page,
-    );
+    final Either<JobPostingWorkersEntity> result = await useCase
+        .searchJobPostingWorkers(jobPostingId: jobPostingId, page: event.page);
 
-    result.when(success: (JobPostingWorkersEntity data) {
-      emit(state.copyWith(
-        status: JobPostingWorkersStatus.success,
-        title: data.title,
-        applicants: data.applicants,
-        participants: data.participants,
-        workStartDate: data.workStartDate.format('yy / MM / dd (E)'),
-        workEndDate: data.workEndDate.format('yy / MM / dd (E)'),
-        list: data.workers,
-        isLast: data.workers.length < 10,
-        message: '',
-      ));
-    }, fail: (String message) {
-      emit(state.copyWith(
-        status: JobPostingWorkersStatus.failure,
-        message: message,
-      ));
-    });
+    result.when(
+      success: (JobPostingWorkersEntity data) {
+        emit(
+          state.copyWith(
+            status: JobPostingWorkersStatus.success,
+            title: data.title,
+            applicants: data.applicants,
+            participants: data.participants,
+            workStartDate: data.workStartDate.format('yy / MM / dd (E)'),
+            workEndDate: data.workEndDate.format('yy / MM / dd (E)'),
+            list: data.workers,
+            isLast: data.workers.length < 10,
+            message: '',
+          ),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(
+            status: JobPostingWorkersStatus.failure,
+            message: message,
+          ),
+        );
+      },
+    );
   }
 
   /// 메시지 초기화

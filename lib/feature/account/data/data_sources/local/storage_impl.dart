@@ -5,22 +5,17 @@ class AccountStorageImpl implements AccountStorage {
   @override
   Future<String> getSessionId() async {
     return SharedPreferences.getInstance().then(
-      (preference) => preference.getString(
-        AccountStorageKey.sessionId.name,
-      ) ?? '',
+      (preference) =>
+          preference.getString(AccountStorageKey.sessionId.name) ?? '',
     );
   }
 
   /// 세션 Id 저장
   @override
-  void setSessionId({
-    required String id,
-  }) {
+  void setSessionId({required String id}) {
     SharedPreferences.getInstance().then(
-      (preference) => preference.setString(
-        AccountStorageKey.sessionId.name,
-        id,
-      ),
+      (preference) =>
+          preference.setString(AccountStorageKey.sessionId.name, id),
     );
   }
 }

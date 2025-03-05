@@ -3,9 +3,9 @@ import 'package:withu/core/utils/regex/regex.dart';
 
 /// 비밀번호 Value Object
 class Password extends Equatable {
-  final String value;
 
   const Password(this.value);
+  final String value;
 
   static const empty = Password('');
 
@@ -13,5 +13,4 @@ class Password extends Equatable {
   List<Object?> get props => [value];
 
   bool get isValid => RegExUtil.passwordPattern.hasMatch(value);
-
 }

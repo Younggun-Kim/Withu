@@ -26,37 +26,24 @@ abstract class FailResponse with _$FailResponse {
       _$FailResponseFromJson(json);
 
   /// 서버 에러 시.
-  factory FailResponse.error() => const FailResponse(
-        status: 500,
-        message: '서버 에러',
-      );
+  factory FailResponse.error() =>
+      const FailResponse(status: 500, message: '서버 에러');
 }
 
 extension ApiResponseExt<T> on ApiResponse<T> {
-  bool get isSuccess => maybeWhen(
-        success: (_) => true,
-        orElse: () => false,
-      );
+  bool get isSuccess => maybeWhen(success: (_) => true, orElse: () => false);
 
-  bool get isFail => maybeWhen(
-        fail: (_) => true,
-        orElse: () => false,
-      );
+  bool get isFail => maybeWhen(fail: (_) => true, orElse: () => false);
 
-  bool get isError => maybeWhen(
-        error: () => true,
-        orElse: () => false,
-      );
+  bool get isError => maybeWhen(error: () => true, orElse: () => false);
 
   /// Success Data 가져오기
-  T? get successData => maybeWhen(
-        success: (T data) => data,
-        orElse: () => null,
-      );
+  T? get successData =>
+      maybeWhen(success: (T data) => data, orElse: () => null);
 
   /// Fail Data 가져오기
   FailResponse? get failData => maybeWhen(
-        fail: (FailResponse failResponse) => failResponse,
-        orElse: () => null,
-      );
+    fail: (FailResponse failResponse) => failResponse,
+    orElse: () => null,
+  );
 }

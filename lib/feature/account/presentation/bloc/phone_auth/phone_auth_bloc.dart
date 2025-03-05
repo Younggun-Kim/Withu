@@ -14,17 +14,13 @@ part 'phone_auth_bloc.handler.dart';
 
 part 'phone_auth_bloc.parser.dart';
 
-class PhoneAuthBloc
-    extends Bloc<PhoneAuthEvent, PhoneAuthState> {
-  final PhoneAuthUseCase phoneAuthUseCase;
+class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
 
-  PhoneAuthBloc({
-    required this.phoneAuthUseCase,
-  }) : super(
-          PhoneAuthState(status: BaseBlocStatus.initial()),
-        ) {
+  PhoneAuthBloc({required this.phoneAuthUseCase})
+    : super(PhoneAuthState(status: BaseBlocStatus.initial())) {
     on<PhoneAuthPhoneInputted>(_onPhoneInputted);
     on<PhoneAuthAuthCodeSent>(_onAuthCodeRequested);
     on<PhoneAuthAuthCodeInputted>(_onAuthCodeInputted);
   }
+  final PhoneAuthUseCase phoneAuthUseCase;
 }

@@ -1,15 +1,11 @@
 part of 'job_posting_workers_dto.dart';
 
 extension JobPostingWorkersDtoExt on JobPostingWorkersDto {
-  static JobPostingWorkersDto mock({
-    required int page,
-  }) {
+  static JobPostingWorkersDto mock({required int page}) {
     const int totalElements = 27;
     final List<JobPostingWorkerDto> workers = List.generate(
       (10 * page) > totalElements ? (10 * page) - totalElements : 10,
-          (int index) => JobPostingWorkerDtoExt.mock(
-        id: '${(page * 10) + index}',
-      ),
+      (int index) => JobPostingWorkerDtoExt.mock(id: '${(page * 10) + index}'),
     );
 
     return JobPostingWorkersDto(

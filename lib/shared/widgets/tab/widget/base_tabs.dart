@@ -4,11 +4,6 @@ import 'package:withu/shared/shared.dart';
 
 /// Dynamic Tab
 class BaseTabs extends StatelessWidget {
-  final List<BaseTabData> tabs;
-
-  final BaseTabData? selectedTab;
-
-  final void Function(BaseTabData tab) onTap;
 
   const BaseTabs({
     super.key,
@@ -16,6 +11,11 @@ class BaseTabs extends StatelessWidget {
     required this.selectedTab,
     required this.onTap,
   });
+  final List<BaseTabData> tabs;
+
+  final BaseTabData? selectedTab;
+
+  final void Function(BaseTabData tab) onTap;
 
   @override
   Widget build(BuildContext context) {

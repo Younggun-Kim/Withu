@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class BaseSwitch extends StatelessWidget {
-  final bool isOn;
-
-  final VoidCallback onTap;
-
-  final double width;
-
-  final double height;
 
   const BaseSwitch({
     super.key,
@@ -17,6 +10,13 @@ class BaseSwitch extends StatelessWidget {
     this.width = 32.0,
     this.height = 16,
   });
+  final bool isOn;
+
+  final VoidCallback onTap;
+
+  final double width;
+
+  final double height;
 
   Color get trackColor => isOn ? ColorName.primary : ColorName.background;
 

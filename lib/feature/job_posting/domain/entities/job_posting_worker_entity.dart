@@ -2,6 +2,14 @@ import 'package:withu/feature/job_posting/data/data.dart';
 import 'package:withu/feature/user/domain/domain.dart';
 
 class JobPostingWorkerEntity {
+
+  JobPostingWorkerEntity({
+    required this.id,
+    required this.userInfo,
+    required this.isOnsite,
+    this.workStartTime,
+    this.workEndTime,
+  });
   final String id;
 
   /// 유저 정보
@@ -15,14 +23,6 @@ class JobPostingWorkerEntity {
 
   /// 근무 종료 시간
   final DateTime? workEndTime;
-
-  JobPostingWorkerEntity({
-    required this.id,
-    required this.userInfo,
-    required this.isOnsite,
-    this.workStartTime,
-    this.workEndTime,
-  });
 }
 
 extension JobPostingWorkerEntityExt on JobPostingWorkerEntity {

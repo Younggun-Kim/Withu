@@ -1,8 +1,7 @@
 part of 'phone_auth_bloc.dart';
 
 @freezed
-class PhoneAuthState extends BaseBlocState
-    with _$PhoneAuthState {
+class PhoneAuthState extends BaseBlocState with _$PhoneAuthState {
   factory PhoneAuthState({
     required BaseBlocStatus status,
 

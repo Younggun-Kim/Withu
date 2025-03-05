@@ -7,6 +7,29 @@ part 'job_posting_request_entity.parser.dart';
 
 /// 공고 등록/수정 요청 엔티티
 class JobPostingRequestEntity {
+
+  JobPostingRequestEntity({
+    required this.companyId,
+    required this.title,
+    required this.content,
+    required this.isTBC,
+    required this.payAmount,
+    required this.workAddress,
+    required this.participants,
+    required this.hasTravelTime,
+    required this.hasBreakTime,
+    required this.isMealProvided,
+    required this.preferredQualifications,
+    required this.workStartTime,
+    required this.workEndTime,
+    required this.contractStartDate,
+    required this.contractEndDate,
+    this.categoryType = JobCategoryType.none,
+    this.contractType = ContractType.none,
+    this.payType = PayType.none,
+    this.isTravelTimePaid,
+    this.isBreakTimePaid,
+  });
   /// 회사 ID
   final String companyId;
 
@@ -66,27 +89,4 @@ class JobPostingRequestEntity {
 
   /// 근무 종료 시간
   final DateTime? workEndTime;
-
-  JobPostingRequestEntity({
-    required this.companyId,
-    required this.title,
-    required this.content,
-    required this.isTBC,
-    required this.payAmount,
-    required this.workAddress,
-    required this.participants,
-    required this.hasTravelTime,
-    required this.hasBreakTime,
-    required this.isMealProvided,
-    required this.preferredQualifications,
-    required this.workStartTime,
-    required this.workEndTime,
-    required this.contractStartDate,
-    required this.contractEndDate,
-    this.categoryType = JobCategoryType.none,
-    this.contractType = ContractType.none,
-    this.payType = PayType.none,
-    this.isTravelTimePaid,
-    this.isBreakTimePaid,
-  });
 }

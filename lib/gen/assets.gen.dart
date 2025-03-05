@@ -29,6 +29,14 @@ class $AssetsImagesGen {
   SvgGenImage get appleLoginBtn =>
       const SvgGenImage('assets/images/apple_login_btn.svg');
 
+  /// File path: assets/images/building-2.svg
+  SvgGenImage get building2 =>
+      const SvgGenImage('assets/images/building-2.svg');
+
+  /// File path: assets/images/chevron-left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/images/chevron-left.svg');
+
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
 
@@ -39,12 +47,37 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
 
+  /// File path: assets/images/logo_puzzle.svg
+  SvgGenImage get logoPuzzle =>
+      const SvgGenImage('assets/images/logo_puzzle.svg');
+
+  /// File path: assets/images/logo_puzzle2.svg
+  SvgGenImage get logoPuzzle2 =>
+      const SvgGenImage('assets/images/logo_puzzle2.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
+  /// File path: assets/images/users-round.svg
+  SvgGenImage get usersRound =>
+      const SvgGenImage('assets/images/users-round.svg');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [apple, google, appIcon, appleLoginBtn, eye, googleLoginBtn, logo, plus];
+  List<dynamic> get values => [
+        apple,
+        google,
+        appIcon,
+        appleLoginBtn,
+        building2,
+        chevronLeft,
+        eye,
+        googleLoginBtn,
+        logo,
+        logoPuzzle,
+        logoPuzzle2,
+        plus,
+        usersRound
+      ];
 }
 
 class $AssetsTranslationsGen {
