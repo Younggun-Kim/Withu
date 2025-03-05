@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/router/router.gr.dart';
+import 'package:withu/feature/account/domain/type/term_type.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_page_step_type.dart';
+import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
@@ -40,43 +43,8 @@ class _TermPageContent extends StatelessWidget {
               const SizedBox(height: 14),
               _Description(step: state.step),
               const SizedBox(height: 106),
-              SelectableIconBtn(
-                text: AccountType.company.toStartMsg,
-                isSelected: state.accountType.iSCompany,
-                icon:
-                    AccountType.company.toIcon?.svg(
-                      colorFilter: ColorFilter.mode(
-                        state.accountType.iSCompany
-                            ? Colors.white
-                            : Colors.black,
-                        BlendMode.srcIn,
-                      ),
-                    ) ??
-                    const SizedBox(),
-                onTap: () {
-                  context.read<TermBloc>().add(
-                    TermAccountTypeSelected(value: AccountType.company),
-                  );
-                },
-              ),
-              const SizedBox(height: 25),
-              SelectableIconBtn(
-                text: AccountType.user.toStartMsg,
-                isSelected: state.accountType.isUser,
-                icon:
-                    AccountType.user.toIcon?.svg(
-                      colorFilter: ColorFilter.mode(
-                        state.accountType.isUser ? Colors.white : Colors.black,
-                        BlendMode.srcIn,
-                      ),
-                    ) ??
-                    const SizedBox(),
-                onTap: () {
-                  context.read<TermBloc>().add(
-                    TermAccountTypeSelected(value: AccountType.user),
-                  );
-                },
-              ),
+              _FirstStepContents(),
+              _SecondStepContents(),
               Spacer(),
               _NextBtn(),
               const SizedBox(height: 30),
@@ -116,26 +84,6 @@ class _Description extends StatelessWidget {
   }
 }
 
-class _AccountBtnList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children:
-          AccountType.valuesWithoutNone
-              .map(
-                (type) => Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: ColorName.tertiary),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(type.toStartMsg),
-                ),
-              )
-              .toList(),
-    );
-  }
-}
-
 class _NextBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -171,12 +119,196 @@ class _SecondStepNextBtn extends StatelessWidget {
       builder: (context, state) {
         return EnabledBtn(
           text: StringRes.next.tr,
-          isEnabled: !state.step.isFirst,
+          isEnabled: state.isEnabledSecondStep,
           onTap: () {
-            context.read<TermBloc>().add(TermFirstNextPressed());
+            context.router.push(ValidateBusinessRoute());
           },
         );
       },
+    );
+  }
+}
+
+class _FirstStepContents extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TermBlocBuilder(
+      builder: (context, state) {
+        if (!state.step.isFirst) {
+          return const SizedBox();
+        }
+        return Column(
+          children: [
+            SelectableIconBtn(
+              text: AccountType.company.toStartMsg,
+              isSelected: state.accountType.iSCompany,
+              icon:
+                  AccountType.company.toIcon?.svg(
+                    colorFilter: ColorFilter.mode(
+                      state.accountType.iSCompany ? Colors.white : Colors.black,
+                      BlendMode.srcIn,
+                    ),
+                  ) ??
+                  const SizedBox(),
+              onTap: () {
+                context.read<TermBloc>().add(
+                  TermAccountTypeSelected(value: AccountType.company),
+                );
+              },
+            ),
+            const SizedBox(height: 25),
+            SelectableIconBtn(
+              text: AccountType.user.toStartMsg,
+              isSelected: state.accountType.isUser,
+              icon:
+                  AccountType.user.toIcon?.svg(
+                    colorFilter: ColorFilter.mode(
+                      state.accountType.isUser ? Colors.white : Colors.black,
+                      BlendMode.srcIn,
+                    ),
+                  ) ??
+                  const SizedBox(),
+              onTap: () {
+                context.read<TermBloc>().add(
+                  TermAccountTypeSelected(value: AccountType.user),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _SecondStepContents extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TermBlocBuilder(
+      builder: (context, state) {
+        if (state.step.isFirst) {
+          return const SizedBox();
+        }
+
+        return Column(
+          children: [
+            _TermCheckItem(
+              isChecked: state.isAllChecked,
+              isRequired: true,
+              text: '전체 동의',
+              onTap: () {
+                context.read<TermBloc>().add(
+                  TermAllAgreementTapped(isChecked: !state.isAllChecked),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            _TermCheckItem(
+              isChecked: state.isRequiredChecked,
+              isRequired: true,
+              text: '필수 약관 동의',
+              onTap: () {
+                context.read<TermBloc>().add(
+                  TermRequiredAgreementTapped(
+                    isChecked: !state.isRequiredChecked,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 25),
+            Divider(),
+            const SizedBox(height: 25),
+            _TermCheckItem(
+              isChecked: state.serviceTerm,
+              isRequired: TermType.service.isRequired,
+              text: TermType.service.toString(),
+              onTap: () {
+                context.read<TermBloc>().add(TermServiceAgreementTapped());
+              },
+            ),
+            const SizedBox(height: 18),
+            _TermCheckItem(
+              isChecked: state.privacyTerm,
+              isRequired: TermType.privacy.isRequired,
+              text: TermType.privacy.toString(),
+              onTap: () {
+                context.read<TermBloc>().add(TermPrivacyAgreementTapped());
+              },
+            ),
+            const SizedBox(height: 18),
+            _TermCheckItem(
+              isChecked: state.financeTerm,
+              isRequired: TermType.finance.isRequired,
+              text: TermType.finance.toString(),
+              onTap: () {
+                context.read<TermBloc>().add(TermFinanceAgreementTapped());
+              },
+            ),
+            const SizedBox(height: 18),
+            _TermCheckItem(
+              isChecked: state.locationTerm,
+              isRequired: TermType.location.isRequired,
+              text: TermType.location.toString(),
+              onTap: () {
+                context.read<TermBloc>().add(TermLocationAgreementTapped());
+              },
+            ),
+            const SizedBox(height: 18),
+            _TermCheckItem(
+              isChecked: state.marketingTerm,
+              isRequired: TermType.marketing.isRequired,
+              text: TermType.marketing.toString(),
+              onTap: () {
+                context.read<TermBloc>().add(TermMarketingAgreementTapped());
+              },
+            ),
+            const SizedBox(height: 18),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _TermCheckItem extends StatelessWidget {
+  final bool isChecked;
+
+  final bool isRequired;
+
+  final String text;
+
+  final VoidCallback onTap;
+
+  const _TermCheckItem({
+    required this.isChecked,
+    required this.isRequired,
+    required this.text,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? boldStyle = context.textTheme.bodyLargeBold?.setBlack;
+
+    final TextStyle? defaultStyle = context.textTheme.bodyLarge?.setBlack;
+
+    final TextStyle? style = isRequired ? boldStyle : defaultStyle;
+
+    final SvgGenImage checkbox =
+        isChecked ? Assets.images.checkBoxOn : Assets.images.checkBoxOff;
+
+    return InkWell(
+      onTap: onTap,
+      splashColor: Colors.transparent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          checkbox.svg(),
+          const SizedBox(width: 10),
+          Text(text, style: style),
+        ],
+      ),
     );
   }
 }

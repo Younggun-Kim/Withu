@@ -22,4 +22,91 @@ extension TermBlocHandler on TermBloc {
   ) {
     // TODO
   }
+
+  void _onTermAllAgreementTapped(
+    TermAllAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        serviceTerm: event.isChecked,
+        privacyTerm: event.isChecked,
+        financeTerm: event.isChecked,
+        locationTerm: event.isChecked,
+        marketingTerm: event.isChecked,
+      ),
+    );
+  }
+
+  void _onTermRequiredAgreementTapped(
+    TermRequiredAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        serviceTerm: event.isChecked,
+        privacyTerm: event.isChecked,
+      ),
+    );
+  }
+
+  void _onTermServiceAgreementTapped(
+    TermServiceAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(state.copyWith(serviceTerm: !state.serviceTerm));
+  }
+
+  void _onTermShowServiceTermTapped(
+    TermShowServiceTermTapped event,
+    Emitter<TermState> emit,
+  ) {}
+
+  void _onTermPrivacyAgreementTapped(
+    TermPrivacyAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(state.copyWith(privacyTerm: !state.privacyTerm));
+  }
+
+  void _onTermShowPrivacyTermTapped(
+    TermShowPrivacyTermTapped event,
+    Emitter<TermState> emit,
+  ) {}
+
+  void _onTermFinanceAgreementTapped(
+    TermFinanceAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(state.copyWith(financeTerm: !state.financeTerm));
+  }
+
+  void _onTermShowFinanceTermTapped(
+    TermShowFinanceTermTapped event,
+    Emitter<TermState> emit,
+  ) {}
+
+  void _onTermLocationAgreementTapped(
+    TermLocationAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(state.copyWith(locationTerm: !state.locationTerm));
+  }
+
+  void _onTermShowLocationTermTapped(
+    TermShowLocationTermTapped event,
+    Emitter<TermState> emit,
+  ) {}
+
+  void _onTermMarketingAgreementTapped(
+    TermMarketingAgreementTapped event,
+    Emitter<TermState> emit,
+  ) {
+    emit(state.copyWith(marketingTerm: !state.marketingTerm));
+  }
+
+  void _onTermShowMarketingTermTapped(
+    TermShowMarketingTermTapped event,
+    Emitter<TermState> emit,
+  ) {}
 }

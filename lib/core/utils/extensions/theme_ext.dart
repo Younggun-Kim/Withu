@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:withu/gen/colors.gen.dart';
 
 extension BulidContextTextThemeExt on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
@@ -13,4 +14,8 @@ extension TextThemeEx on TextTheme {
 
   TextStyle? get bodySmallBold =>
       bodySmall?.copyWith(fontWeight: FontWeight.w600);
+}
+
+extension TextStyleEx on TextStyle {
+  TextStyle get setBlack => copyWith(color: ColorName.text);
 }

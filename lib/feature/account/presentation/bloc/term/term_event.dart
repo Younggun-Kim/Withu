@@ -17,3 +17,47 @@ class TermFirstNextPressed extends TermEvent {}
 
 /// 화면 두 번쨰 스텝 다음 버튼 클릭
 class TermSecondNextPressed extends TermEvent {}
+
+/// 전체 동의 탭
+class TermAllAgreementTapped extends TermEvent {
+  final bool isChecked;
+
+  TermAllAgreementTapped({required this.isChecked});
+}
+
+/// 필수 동의 탭
+class TermRequiredAgreementTapped extends TermEvent {
+  final bool isChecked;
+
+  TermRequiredAgreementTapped({required this.isChecked});
+}
+
+/// 서비스이용약관 탭
+class TermServiceAgreementTapped extends TermEvent {}
+
+/// 서비스약관으로 이동
+class TermShowServiceTermTapped extends TermEvent {}
+
+/// 개인정보 탭
+class TermPrivacyAgreementTapped extends TermEvent {}
+
+/// 개인정보 이동
+class TermShowPrivacyTermTapped extends TermEvent {}
+
+/// 전자금융거래 탭
+class TermFinanceAgreementTapped extends TermEvent {}
+
+/// 전자금융거래 이동
+class TermShowFinanceTermTapped extends TermEvent {}
+
+/// 위치동의 탭
+class TermLocationAgreementTapped extends TermEvent {}
+
+/// 위치동의 이동
+class TermShowLocationTermTapped extends TermEvent {}
+
+/// 마케팅 탭
+class TermMarketingAgreementTapped extends TermEvent {}
+
+/// 마케팅 이동
+class TermShowMarketingTermTapped extends TermEvent {}

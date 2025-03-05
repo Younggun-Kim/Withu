@@ -4,7 +4,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
-
   AccountRepositoryImpl({
     required this.accountApi,
     required this.accountStorage,
@@ -50,4 +49,6 @@ class AccountRepositoryImpl implements AccountRepository {
   }) async {
     return await accountApi.verifyAuthCode(dto: dto);
   }
+
+  /// 회원가입
 }

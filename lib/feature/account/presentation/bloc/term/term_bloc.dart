@@ -20,5 +20,17 @@ class TermBloc extends BaseBloc<TermEvent, TermState> {
     on<TermAccountTypeSelected>(_onTermAccountTypeSelected);
     on<TermFirstNextPressed>(_onTermFirstNextPressed);
     on<TermSecondNextPressed>(_onTermSecondNextPressed);
+    on<TermAllAgreementTapped>(_onTermAllAgreementTapped);
+    on<TermRequiredAgreementTapped>(_onTermRequiredAgreementTapped);
+    on<TermServiceAgreementTapped>(_onTermServiceAgreementTapped);
+    on<TermShowServiceTermTapped>(_onTermShowServiceTermTapped);
+    on<TermPrivacyAgreementTapped>(_onTermPrivacyAgreementTapped);
+    on<TermShowPrivacyTermTapped>(_onTermShowPrivacyTermTapped);
+    on<TermFinanceAgreementTapped>(_onTermFinanceAgreementTapped);
+    on<TermShowFinanceTermTapped>(_onTermShowFinanceTermTapped);
+    on<TermLocationAgreementTapped>(_onTermLocationAgreementTapped);
+    on<TermShowLocationTermTapped>(_onTermShowLocationTermTapped);
+    on<TermMarketingAgreementTapped>(_onTermMarketingAgreementTapped);
+    on<TermShowMarketingTermTapped>(_onTermShowMarketingTermTapped);
   }
 }

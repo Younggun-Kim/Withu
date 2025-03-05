@@ -12,9 +12,33 @@ class TermState extends BaseBlocState with _$TermState {
     @Default(TermPageStepType.first) TermPageStepType step,
 
     @Default(AccountType.none) AccountType accountType,
+
+    @Default(false) bool serviceTerm,
+
+    @Default(false) bool privacyTerm,
+
+    @Default(false) bool financeTerm,
+
+    @Default(false) bool locationTerm,
+
+    @Default(false) bool marketingTerm,
   }) = _TermState;
 }
 
 extension TermStateEx on TermState {
   bool get isEnabledFirstStep => step.isFirst && !accountType.isNone;
+
+  bool get isEnabledSecondStep => !step.isFirst && isRequiredChecked;
+
+  bool get isAllChecked {
+    return serviceTerm &&
+        privacyTerm &&
+        financeTerm &&
+        locationTerm &&
+        marketingTerm;
+  }
+
+  bool get isRequiredChecked {
+    return serviceTerm && privacyTerm;
+  }
 }

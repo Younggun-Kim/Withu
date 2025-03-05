@@ -12,7 +12,7 @@ jobs:
   android_deploy:
     runs-on: macos-latest
     steps:
-      - name: Clone repository
+      - name: Clone repository.dart
         uses: actions/checkout@v4
 
       - name: Install Ruby
@@ -70,7 +70,7 @@ jobs:
   ios_deploy:
     runs-on: macos-latest
     steps:
-      - name: Clone repository
+      - name: Clone repository.dart
         uses: actions/checkout@v4
 
       - name: Install Ruby
