@@ -63,11 +63,11 @@ class _ValidateBusinessPageContent extends StatelessWidget {
                 const SizedBox(height: 20),
                 _FieldName(text: '대표자 이름'),
                 const SizedBox(height: 11),
-                _CeoNameInput(),
+                CeoNameInput(),
                 const SizedBox(height: 20),
                 _FieldName(text: '회사 이름'),
                 const SizedBox(height: 11),
-                _CompanyNameInput(),
+                CompanyNameInput(),
                 const SizedBox(height: 20),
                 _FieldName(text: '개업일자'),
                 const SizedBox(height: 11),
@@ -202,11 +202,36 @@ class BusinessNumberInputState extends State<BusinessNumberInput> {
   }
 }
 
-class _CeoNameInput extends StatelessWidget {
+class CeoNameInput extends StatefulWidget {
+  const CeoNameInput({super.key});
+
+  @override
+  State<StatefulWidget> createState() => CeoNameInputState();
+}
+
+class CeoNameInputState extends State<CeoNameInput> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller;
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseInput(
       hintText: '이름을 입력해주세요.',
+      controller: _controller,
+      focusNode: _focusNode,
       onChanged: (String text) {
         context.read<ValidateBusinessBloc>().add(
           ValidateBusinessCeoNameInputted(value: CeoNameValue(text)),
@@ -216,7 +241,30 @@ class _CeoNameInput extends StatelessWidget {
   }
 }
 
-class _CompanyNameInput extends StatelessWidget {
+class CompanyNameInput extends StatefulWidget {
+  const CompanyNameInput({super.key});
+
+  @override
+  State<StatefulWidget> createState() => CompanyNameInputState();
+}
+
+class CompanyNameInputState extends State<CompanyNameInput> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller;
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseInput(

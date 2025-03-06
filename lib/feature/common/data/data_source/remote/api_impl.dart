@@ -15,18 +15,30 @@ class CommonApiImpl implements CommonApi {
 
   /// 사업자등록 중복 검증
   @override
-  FutureOr<ApiResponse<ValidateBusinessResDto>> postValidateBusiness(
+  FutureOr<ValidateBusinessResDto> postValidateBusiness(
     ValidateBusinessReqDto reqDto,
   ) {
     return network.dio
         .post('$path/validate-business', data: reqDto.toJson())
         .then(
-          (response) => ApiResponse.success(
-            ValidateBusinessResDto.fromJson(response.data),
+          (response) => BaseResponseDto.fromJson(
+            response.data,
+            (json) =>
+                ValidateBusinessResData.fromJson(json as Map<String, dynamic>),
           ),
         )
-        .catchError(
-          (_) => ApiResponse<ValidateBusinessResDto>.fail(FailResponse.error()),
-        );
+        .catchError((error) {
+          logger.e(error);
+          if (error is DioException) {
+            return ValidateBusinessResDto.fromJson(
+              error.response?.data,
+              (json) => ValidateBusinessResData.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            );
+          }
+
+          return BaseResponseDtoMock.error() as ValidateBusinessResDto;
+        });
   }
 }

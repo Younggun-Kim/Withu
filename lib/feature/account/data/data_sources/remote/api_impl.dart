@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'api.dart';
 
 class AccountApiImpl extends AccountApi {
-
   AccountApiImpl({required this.network});
   final DioNetwork network;
 

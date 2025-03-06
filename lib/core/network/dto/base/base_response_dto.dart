@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'fail_response_dto.dart';
+
 part 'base_response_dto.freezed.dart';
 
 part 'base_response_dto.g.dart';
@@ -10,9 +12,10 @@ part 'base_response_dto.mock.dart';
 @Freezed(genericArgumentFactories: true)
 class BaseResponseDto<T> with _$BaseResponseDto<T> {
   factory BaseResponseDto({
-    required String returnCode,
-    required String returnMessage,
-    required T info,
+    required bool success,
+    required String message,
+    T? data,
+    FailResponse? error,
   }) = _BaseResponseDto;
 
   factory BaseResponseDto.fromJson(

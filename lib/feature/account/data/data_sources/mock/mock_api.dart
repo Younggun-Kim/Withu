@@ -4,7 +4,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 
 class AccountMockApi extends AccountApiImpl {
-
   AccountMockApi({required super.network}) {
     dioAdapter = DioAdapter(dio: network.dio);
   }
@@ -58,7 +57,7 @@ class AccountMockApi extends AccountApiImpl {
       verifyAuthCodePath,
       (server) => server.reply(
         200,
-        BaseResponseDtoMock.mock(true).toJson((value) => value),
+        BaseResponseDtoMock.success(true).toJson((value) => value),
         delay: const Duration(seconds: 1),
       ),
       data: dto.toJson(),

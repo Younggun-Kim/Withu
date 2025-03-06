@@ -18,6 +18,6 @@ class ValidateBusinessUseCaseImpl implements ValidateBusinessUseCase {
 
   @override
   Future<bool> checkDuplication(ValidateBusinessEntity entity) async {
-    return await commonRepo.checkDuplication(entity.toDto());
+    return await commonRepo.checkBusinessNumDuplication(entity.toDto());
   }
 }

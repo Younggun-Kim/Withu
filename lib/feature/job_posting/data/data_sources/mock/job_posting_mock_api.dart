@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 import 'package:withu/feature/job_posting/data/data.dart';
 import 'package:withu/shared/data/data.dart';
 

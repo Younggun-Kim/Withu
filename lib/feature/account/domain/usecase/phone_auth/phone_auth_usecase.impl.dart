@@ -1,7 +1,6 @@
 part of 'phone_auth_usecase.dart';
 
 class PhoneAuthUseCaseImpl implements PhoneAuthUseCase {
-
   PhoneAuthUseCaseImpl({required this.accountRepo});
   @override
   final AccountRepository accountRepo;
@@ -26,6 +25,6 @@ class PhoneAuthUseCaseImpl implements PhoneAuthUseCase {
       dto: entity.toDto(),
     );
 
-    return result.successData?.info == true;
+    return result.successData?.data == true;
   }
 }

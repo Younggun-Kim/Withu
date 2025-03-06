@@ -25,6 +25,9 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<PhoneAuthUseCase>(
     PhoneAuthUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<SignUpUseCase>(
+    SignUpUseCaseImpl(repository: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
@@ -33,4 +36,5 @@ void initAccountPresentationInjections() {
   );
   getIt.registerFactory<TermBloc>(() => TermBloc());
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
+  getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
 }

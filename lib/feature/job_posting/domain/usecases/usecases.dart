@@ -1,4 +1,5 @@
 import 'package:withu/core/core.dart';
+import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 import 'package:withu/feature/job_posting/data/data.dart';
 import 'package:withu/feature/job_posting/domain/domain.dart';
 import 'package:withu/feature/job_posting/domain/entities/list/job_postings_entity.dart';

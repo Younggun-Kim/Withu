@@ -1,11 +1,30 @@
 part of 'base_response_dto.dart';
 
 extension BaseResponseDtoMock<T> on BaseResponseDto<T> {
-  static BaseResponseDto<S> mock<S>(S data) {
+  static BaseResponseDto<S> success<S>(S data) {
     return BaseResponseDto<S>(
-      returnCode: 'SUCCESS',
-      returnMessage: '',
-      info: data,
+      success: true,
+      message: '',
+      data: data,
+      error: null,
+    );
+  }
+
+  static BaseResponseDto failure(FailResponse error) {
+    return BaseResponseDto(
+      success: false,
+      message: '',
+      data: null,
+      error: error,
+    );
+  }
+
+  static BaseResponseDto error() {
+    return BaseResponseDto(
+      success: false,
+      message: '',
+      data: null,
+      error: FailResponse.error(),
     );
   }
 }

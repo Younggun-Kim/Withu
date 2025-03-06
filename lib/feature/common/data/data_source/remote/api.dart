@@ -1,8 +1,11 @@
 import 'dart:async';
 
-import 'package:withu/core/network/api_response.dart';
+import 'package:dio/dio.dart';
 import 'package:withu/core/network/dio_network.dart';
+import 'package:withu/core/network/dto/base/base_response_dto.dart';
 import 'package:withu/feature/common/data/data_source/dto/validate_business/validate_business.dart';
+
+import '../../../../../core/utils/logger/logger.dart';
 
 part 'api_impl.dart';
 
@@ -14,7 +17,7 @@ abstract class CommonApi {
   late Map<CommonApiPathType, String> paths;
 
   /// 사업자등록 중복 검증
-  FutureOr<ApiResponse<ValidateBusinessResDto>> postValidateBusiness(
+  FutureOr<ValidateBusinessResDto> postValidateBusiness(
     ValidateBusinessReqDto reqDto,
   );
 }

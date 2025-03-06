@@ -1,5 +1,6 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:flutter_test/flutter_test.dart';
 
