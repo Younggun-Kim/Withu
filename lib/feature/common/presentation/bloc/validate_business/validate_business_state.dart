@@ -20,6 +20,9 @@ class ValidateBusinessState extends BaseBlocState with _$ValidateBusinessState {
 
     /// 개업일자
     @Default(OpenDateValue()) OpenDateValue openDate,
+
+    /// 등록여부
+    @Default(VisibleType.none) VisibleType iSDuplicated,
   }) = _ValidateBusinessState;
 }
 

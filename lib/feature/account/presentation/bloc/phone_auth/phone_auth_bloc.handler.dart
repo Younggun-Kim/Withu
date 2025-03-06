@@ -39,6 +39,6 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
       entity: toEntity(),
     );
 
-    return VisibleTypeExt.fromBool(!result);
+    return VisibleTypeEx.fromBool(!result);
   }
 }

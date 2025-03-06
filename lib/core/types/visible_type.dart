@@ -1,6 +1,6 @@
 enum VisibleType { none, visible, invisible }
 
-extension VisibleTypeExt on VisibleType {
+extension VisibleTypeEx on VisibleType {
   bool get isVisible => this == VisibleType.visible;
 
   /// Boolean -> 노출 여부

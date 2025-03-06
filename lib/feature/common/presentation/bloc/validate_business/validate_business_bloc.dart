@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:withu/core/utils/bloc/base_bloc.dart';
+import 'package:withu/core/core.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/feature/common/domain/usecase/validate_business_usecase.dart';
 

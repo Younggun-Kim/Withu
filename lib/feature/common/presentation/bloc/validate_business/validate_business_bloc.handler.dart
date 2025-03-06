@@ -42,16 +42,12 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
     emit(
       state.copyWith(
         status: getResultStatus(isRegistered),
-        message: getResultMessage(isRegistered),
+        iSDuplicated: VisibleTypeEx.fromBool(isRegistered),
       ),
     );
   }
 
   BaseBlocStatus getResultStatus(bool result) {
-    return result ? BaseBlocStatus.success() : BaseBlocStatus.failure();
-  }
-
-  String getResultMessage(bool result) {
-    return result ? "중복 아님" : "중복임";
+    return result ? BaseBlocStatus.failure() : BaseBlocStatus.success();
   }
 }

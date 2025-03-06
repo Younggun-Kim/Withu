@@ -9,6 +9,18 @@ extension ValidateBusinessResDtoMock on ValidateBusinessResDto {
       startDate: "2021-01-01",
       valid: "YES",
       status: "영업 중",
+      isRegistered: false,
+    );
+  }
+
+  static ValidateBusinessResDto duplicate() {
+    return ValidateBusinessResDto(
+      businessNumber: "123-45-67890",
+      representativeName: "홍길동",
+      companyName: "홍길동 상사",
+      startDate: "2021-01-01",
+      valid: "YES",
+      status: "영업 중",
       isRegistered: true,
     );
   }

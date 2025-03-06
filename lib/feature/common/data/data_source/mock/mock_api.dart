@@ -23,7 +23,7 @@ class CommonMockApi extends CommonApiImpl {
       paths[CommonApiPathType.validateBusiness] ?? '',
       (server) => server.reply(
         200,
-        ValidateBusinessResDtoMock.success().toJson(),
+        ValidateBusinessResDtoMock.duplicate().toJson(),
         delay: const Duration(seconds: 1),
       ),
       data: reqDto.toJson(),
