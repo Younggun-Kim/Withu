@@ -23,7 +23,10 @@ class ValidateBusinessPage extends StatelessWidget {
 class _ValidateBusinessPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ValidateBusinessBlocBuilder(
+    return ValidateBusinessBlocConsumer(
+      listener: (context, state) {
+        logger.i(state.isEnabledBtn);
+      },
       builder: (context, state) {
         return PageRoot(
           isLoading: state.status.isLoading,
@@ -96,7 +99,9 @@ class _CheckDuplicateBtn extends StatelessWidget {
           text: '중복확인',
           isEnabled: state.isEnabledBtn,
           onTap: () {
-            // TODO: Bloc을 통해 중복확인 API 호출
+            context.read<ValidateBusinessBloc>().add(
+              ValidateBusinessCheckDuplicationPressed(),
+            );
           },
         );
       },
@@ -190,7 +195,7 @@ class _CeoNameInput extends StatelessWidget {
       hintText: '이름을 입력해주세요.',
       onChanged: (String text) {
         context.read<ValidateBusinessBloc>().add(
-          ValidateCeoNameInputted(value: CeoNameValue(text)),
+          ValidateBusinessCeoNameInputted(value: CeoNameValue(text)),
         );
       },
     );
@@ -204,7 +209,7 @@ class _CompanyNameInput extends StatelessWidget {
       hintText: '회사 이름을 입력해주세요.',
       onChanged: (String text) {
         context.read<ValidateBusinessBloc>().add(
-          ValidateCompanyNameInputted(value: CompanyNameValue(text)),
+          ValidateBusinessCompanyNameInputted(value: CompanyNameValue(text)),
         );
       },
     );
@@ -272,7 +277,7 @@ class OpenDateInputState extends State<OpenDateInput> {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       onChanged: (String text) {
         context.read<ValidateBusinessBloc>().add(
-          ValidateOpenDateNameInputted(value: OpenDateValue(text)),
+          ValidateBusinessOpenDateNameInputted(value: OpenDateValue(text)),
         );
       },
     );

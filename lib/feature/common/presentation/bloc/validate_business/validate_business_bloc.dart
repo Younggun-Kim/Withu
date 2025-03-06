@@ -17,6 +17,9 @@ typedef ValidateBusinessBlocProvider = BlocProvider<ValidateBusinessBloc>;
 typedef ValidateBusinessBlocBuilder =
     BlocBuilder<ValidateBusinessBloc, ValidateBusinessState>;
 
+typedef ValidateBusinessBlocConsumer =
+    BlocConsumer<ValidateBusinessBloc, ValidateBusinessState>;
+
 class ValidateBusinessBloc
     extends BaseBloc<ValidateBusinessEvent, ValidateBusinessState> {
   final ValidateBusinessUseCase useCase;
@@ -24,8 +27,15 @@ class ValidateBusinessBloc
   ValidateBusinessBloc({required this.useCase})
     : super(ValidateBusinessState(status: BaseBlocStatus.initial())) {
     on<ValidateBusinessNumInputted>(_onValidateBusinessNumInputted);
-    on<ValidateCeoNameInputted>(_onValidateCeoNameInputted);
-    on<ValidateCompanyNameInputted>(_onValidateCompanyNameInputted);
-    on<ValidateOpenDateNameInputted>(_onValidateOpenDateNameInputted);
+    on<ValidateBusinessCeoNameInputted>(_onValidateBusinessCeoNameInputted);
+    on<ValidateBusinessCompanyNameInputted>(
+      _onValidateBusinessCompanyNameInputted,
+    );
+    on<ValidateBusinessOpenDateNameInputted>(
+      _onValidateBusinessOpenDateNameInputted,
+    );
+    on<ValidateBusinessCheckDuplicationPressed>(
+      _onValidateBusinessCheckDuplicationPressed,
+    );
   }
 }

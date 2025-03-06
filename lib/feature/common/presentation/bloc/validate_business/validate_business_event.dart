@@ -13,22 +13,25 @@ class ValidateBusinessNumInputted extends ValidateBusinessEvent {
 }
 
 /// 대표자명 입력
-class ValidateCeoNameInputted extends ValidateBusinessEvent {
+class ValidateBusinessCeoNameInputted extends ValidateBusinessEvent {
   final CeoNameValue value;
 
-  ValidateCeoNameInputted({required this.value});
+  ValidateBusinessCeoNameInputted({required this.value});
 }
 
 /// 회사명 입력
-class ValidateCompanyNameInputted extends ValidateBusinessEvent {
+class ValidateBusinessCompanyNameInputted extends ValidateBusinessEvent {
   final CompanyNameValue value;
 
-  ValidateCompanyNameInputted({required this.value});
+  ValidateBusinessCompanyNameInputted({required this.value});
 }
 
 /// 개업일자 입력
-class ValidateOpenDateNameInputted extends ValidateBusinessEvent {
+class ValidateBusinessOpenDateNameInputted extends ValidateBusinessEvent {
   final OpenDateValue value;
 
-  ValidateOpenDateNameInputted({required this.value});
+  ValidateBusinessOpenDateNameInputted({required this.value});
 }
+
+/// 중복확인 클릭
+class ValidateBusinessCheckDuplicationPressed extends ValidateBusinessEvent {}

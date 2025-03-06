@@ -5,4 +5,16 @@ class CommonRepositoryImpl implements CommonRepository {
   final CommonApi commonApi;
 
   CommonRepositoryImpl({required this.commonApi});
+
+  @override
+  Future<bool> checkDuplication(ValidateBusinessReqDto dto) async {
+    final response = await commonApi.postValidateBusiness(dto);
+
+    return response.maybeWhen(
+      success: (ValidateBusinessResDto response) {
+        return response.isRegistered;
+      },
+      orElse: () => false,
+    );
+  }
 }

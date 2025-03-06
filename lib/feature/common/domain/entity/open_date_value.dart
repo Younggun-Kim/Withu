@@ -9,7 +9,7 @@ class OpenDateValue with _$OpenDateValue {
 
   const OpenDateValue._();
 
-  // DateFormat에서는 yyyyMMdd 검사가 실패해서 /를 포함해서 저장한다.
+  // DateFormat에서는 yyyyMMdd 검사가 실패해서 '/' 를 포함해서 저장한다.
   bool isValid() => value.isDateFormat('yyyy/MM/dd');
 
   String get onlyDigit => value.onlyNum;

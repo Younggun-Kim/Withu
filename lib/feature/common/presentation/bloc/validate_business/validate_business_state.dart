@@ -30,4 +30,13 @@ extension ValidateBusinessStateEx on ValidateBusinessState {
         companyName.isValid() &&
         openDate.isValid();
   }
+
+  ValidateBusinessEntity toEntity() {
+    return ValidateBusinessEntity(
+      businessNum: businessNum,
+      ceoName: ceoName,
+      companyName: companyName,
+      openDate: openDate,
+    );
+  }
 }

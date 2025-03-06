@@ -3,8 +3,10 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:withu/feature/account/account.dart';
 
+import '../utils/logger/logger.dart';
+
 class DioNetwork {
-  final String url = 'https://example.com';
+  final String url = 'https://withu.staging.meetory.io';
 
   late final _dio =
       Dio(
@@ -23,6 +25,9 @@ class DioNetwork {
               );
               options.headers['sessionId'] = sessionId ?? '';
               return handler.next(options);
+            },
+            onError: (DioException error, ErrorInterceptorHandler handler) {
+              logger.e(error);
             },
           ),
         )
