@@ -63,6 +63,10 @@ class $AssetsImagesGen {
   SvgGenImage get logoPuzzle2 =>
       const SvgGenImage('assets/images/logo_puzzle2.svg');
 
+  /// File path: assets/images/logo_puzzle3.svg
+  SvgGenImage get logoPuzzle3 =>
+      const SvgGenImage('assets/images/logo_puzzle3.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
@@ -85,6 +89,7 @@ class $AssetsImagesGen {
         logo,
         logoPuzzle,
         logoPuzzle2,
+        logoPuzzle3,
         plus,
         usersRound
       ];

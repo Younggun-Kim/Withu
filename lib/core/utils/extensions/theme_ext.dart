@@ -18,4 +18,6 @@ extension TextThemeEx on TextTheme {
 
 extension TextStyleEx on TextStyle {
   TextStyle get setBlack => copyWith(color: ColorName.text);
+
+  TextStyle get setTransparent => copyWith(color: Colors.transparent);
 }

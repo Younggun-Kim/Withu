@@ -5,7 +5,6 @@ import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class BaseInput extends StatelessWidget {
-
   const BaseInput({
     super.key,
     this.controller,
@@ -16,6 +15,7 @@ class BaseInput extends StatelessWidget {
     this.hintTextStyle,
     this.padding,
     this.onChanged,
+    this.onEditingComplete,
     this.suffix,
     this.suffixText,
     this.suffixStyle,
@@ -82,6 +82,7 @@ class BaseInput extends StatelessWidget {
       ),
     );
   }
+
   final TextEditingController? controller;
 
   final FocusNode? focusNode;
@@ -114,6 +115,8 @@ class BaseInput extends StatelessWidget {
 
   final Function(String)? onChanged;
 
+  final VoidCallback? onEditingComplete;
+
   final List<TextInputFormatter>? inputFormatters;
 
   final String errorText;
@@ -122,22 +125,23 @@ class BaseInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultHintStyle = context.textTheme.bodyMediumBold?.copyWith(
+    final defaultHintStyle = context.textTheme.bodyLarge?.copyWith(
       color: ColorName.secondary,
     );
 
-    final defaultTextStyle = context.textTheme.bodyMediumBold?.copyWith(
-      color: ColorName.primary,
-    );
+    final defaultTextStyle = context.textTheme.bodyLarge?.setBlack;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: width,
-          padding: padding ?? const EdgeInsets.all(12),
-          decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(color: ColorName.tertiary)),
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          decoration: BoxDecoration(
+            border: Border.all(color: ColorName.tertiary),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             children: [
@@ -166,6 +170,7 @@ class BaseInput extends StatelessWidget {
                     counterText: '',
                   ),
                   onChanged: onChanged,
+                  onEditingComplete: onEditingComplete,
                 ),
               ),
               suffix ?? const SizedBox(),
@@ -184,8 +189,8 @@ class BaseInput extends StatelessWidget {
 
 /// 에러 문구
 class _ErrorText extends StatelessWidget {
-
   const _ErrorText({super.key, required this.text});
+
   final String text;
 
   @override

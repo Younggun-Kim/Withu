@@ -13,4 +13,7 @@ class RegExUtil {
   static RegExp phonePattern = RegExp(
     r'^(010|011|016|017|018|019)\d{3,4}\d{4}$',
   );
+
+  /// 사업자등록번호 10자리
+  static RegExp businessNumPattern = RegExp(r'^\d{10}$');
 }
