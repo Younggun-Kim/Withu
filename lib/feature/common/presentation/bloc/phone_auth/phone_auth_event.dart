@@ -4,11 +4,10 @@ abstract class PhoneAuthEvent extends Equatable {}
 
 /// 휴대폰 번호 입력 이벤트.
 class PhoneAuthPhoneInputted extends PhoneAuthEvent {
-
   PhoneAuthPhoneInputted({required this.value});
   final String value;
 
-  Phone get phone => Phone(value);
+  PhoneValue get phone => PhoneValue(value);
 
   @override
   List<Object?> get props => [value];
@@ -22,11 +21,10 @@ class PhoneAuthAuthCodeSent extends PhoneAuthEvent {
 
 /// 인증번호 입력 이벤트.
 class PhoneAuthAuthCodeInputted extends PhoneAuthEvent {
-
   PhoneAuthAuthCodeInputted({required this.value});
   final String value;
 
-  AuthCode get code => AuthCode(value);
+  AuthCodeValue get code => AuthCodeValue(value);
 
   @override
   List<Object?> get props => [];

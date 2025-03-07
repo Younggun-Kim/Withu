@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/common/presentation/bloc/bloc.dart'
+    show PhoneAuthBlocProvider;
+import 'package:withu/feature/common/presentation/widget/phone_auth/phone_auth_widget.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
+import 'package:withu/shared/widgets/multi_input/ymd_input.dart';
 
 @RoutePage()
 class SignUpPage extends StatelessWidget {
@@ -13,7 +17,10 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [SignUpBlocProvider(create: (context) => getIt())],
+      providers: [
+        PhoneAuthBlocProvider(create: (context) => getIt()),
+        SignUpBlocProvider(create: (context) => getIt()),
+      ],
       child: _SignUpPageContent(),
     );
   }
@@ -30,7 +37,7 @@ class _SignUpPageContent extends StatelessWidget {
         builder: (context, state) {
           return PageRoot(
             isLoading: state.status.isLoading,
-            appBar: CustomAppBar(),
+            appBar: CustomAppBar.back(context: context),
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 60, horizontal: 35),
               child: Column(
@@ -38,14 +45,19 @@ class _SignUpPageContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _FieldName.name(),
-                  NameInput(),
+                  _NameInput(),
                   const SizedBox(height: 20),
                   _FieldName.birthDate(),
-                  BirthDateInput(),
+                  _BirthDateInput(),
                   const SizedBox(height: 20),
                   _FieldName.gender(),
+                  _GenderBtnRow(),
                   const SizedBox(height: 20),
-                  TestBirthInput(),
+                  _FieldName.email(),
+                  _EmailInput(),
+                  const SizedBox(height: 20),
+                  _FieldName.phone(),
+                  PhoneAuthWidget(),
                 ],
               ),
             ),
@@ -84,14 +96,14 @@ class _FieldName extends StatelessWidget {
   factory _FieldName.channel() => _FieldName(text: '앱 유입경로');
 }
 
-class NameInput extends StatefulWidget {
-  const NameInput({super.key});
+class _NameInput extends StatefulWidget {
+  const _NameInput();
 
   @override
-  State<StatefulWidget> createState() => NameInputState();
+  State<StatefulWidget> createState() => _NameInputState();
 }
 
-class NameInputState extends State<NameInput> {
+class _NameInputState extends State<_NameInput> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -115,18 +127,96 @@ class NameInputState extends State<NameInput> {
       controller: _controller,
       focusNode: _focusNode,
       hintText: '홍길동',
+      textInputAction: TextInputAction.next,
     );
   }
 }
 
-class BirthDateInput extends StatefulWidget {
-  const BirthDateInput({super.key});
+class _BirthDateInput extends StatelessWidget {
+  const _BirthDateInput();
 
   @override
-  State<StatefulWidget> createState() => BirthDateInputState();
+  Widget build(BuildContext context) {
+    return YmdInput(
+      onChanged: (String text) {
+        context.read<SignUpBloc>().add(
+          SignUpBirthDateInputted(value: BirthDateValue(text)),
+        );
+      },
+    );
+  }
 }
 
-class BirthDateInputState extends State<BirthDateInput> {
+class _GenderBtn extends StatelessWidget {
+  final bool isSelected;
+
+  final GenderType gender;
+
+  final Function(GenderType) onTap;
+
+  const _GenderBtn({
+    required this.isSelected,
+    required this.gender,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final svgColor = isSelected ? ColorName.background : ColorName.primary;
+    return SelectableIconBtn(
+      icon:
+          gender.toSvg()?.svg(
+            colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
+          ) ??
+          const SizedBox(),
+      text: gender.toString(),
+      isSelected: isSelected,
+      onTap: () => onTap(gender),
+    );
+  }
+}
+
+class _GenderBtnRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        void handleSelected(GenderType gender) {
+          context.read<SignUpBloc>().add(SignUpGenderSelected(value: gender));
+        }
+
+        return Row(
+          children: [
+            Expanded(
+              child: _GenderBtn(
+                isSelected: state.gender.isFemale,
+                gender: GenderType.female,
+                onTap: handleSelected,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _GenderBtn(
+                isSelected: state.gender.isMale,
+                gender: GenderType.male,
+                onTap: handleSelected,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _EmailInput extends StatefulWidget {
+  const _EmailInput();
+
+  @override
+  State<StatefulWidget> createState() => _EmailInputState();
+}
+
+class _EmailInputState extends State<_EmailInput> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -149,40 +239,14 @@ class BirthDateInputState extends State<BirthDateInput> {
     return BaseInput(
       controller: _controller,
       focusNode: _focusNode,
-      hintText: 'YYYY/MM/DD',
-    );
-  }
-}
-
-class TestBirthInput extends StatefulWidget {
-  const TestBirthInput({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _TestBirthInputState();
-}
-
-class _TestBirthInputState extends State<TestBirthInput> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: ColorName.tertiary),
-      ),
-      child: Row(
-        children: [
-          TextField(decoration: InputDecoration(hintText: 'YYYY')),
-          Text(' / ', style: context.textTheme.bodyLarge?.setSecondary),
-          TextField(decoration: InputDecoration(hintText: 'MM')),
-          Text(' / ', style: context.textTheme.bodyLarge?.setSecondary),
-          Expanded(
-            child: TextField(decoration: InputDecoration(hintText: 'DD')),
-          ),
-        ],
-      ),
+      hintText: '이메일을 입력해주세요.',
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      onChanged: (String text) {
+        context.read<SignUpBloc>().add(
+          SignUpEmailInputted(value: EmailValue(text)),
+        );
+      },
     );
   }
 }

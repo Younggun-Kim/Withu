@@ -19,5 +19,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final SignUpUseCase signUpUseCase;
 
   SignUpBloc({required this.signUpUseCase})
-    : super(SignUpState(status: BaseBlocStatus.initial()));
+    : super(SignUpState(status: BaseBlocStatus.initial())) {
+    on<SignUpBirthDateInputted>(_onSignUpBirthDateInputted);
+    on<SignUpGenderSelected>(_onSignUpGenderSelected);
+    on<SignUpEmailInputted>(_onSignUpEmailInputted);
+  }
 }

@@ -16,4 +16,9 @@ class RegExUtil {
 
   /// 사업자등록번호 10자리
   static RegExp businessNumPattern = RegExp(r'^\d{10}$');
+
+  /// 생년월일 yyyyMMdd형태
+  static RegExp birthDatePattern = RegExp(
+    r'^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$',
+  );
 }

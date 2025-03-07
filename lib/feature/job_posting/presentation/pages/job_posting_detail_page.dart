@@ -4,14 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/feature.dart';
-import 'package:withu/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
+import 'package:withu/feature/job_posting/domain/domain.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
 /// 공고 상세 화면
 @RoutePage()
 class JobPostingDetailPage extends StatelessWidget {
-
   const JobPostingDetailPage({super.key, required this.jobPostingId});
   final String jobPostingId;
 
@@ -195,7 +194,6 @@ class _MoreOptionButton extends StatelessWidget {
 
 /// Header 영역
 class _Header extends StatelessWidget {
-
   const _Header({
     required this.companyThumbnail,
     required this.companyName,
@@ -294,7 +292,6 @@ class _Header extends StatelessWidget {
 
 /// 필드명
 class _FieldName extends StatelessWidget {
-
   const _FieldName({required this.text});
   final String text;
 
@@ -306,7 +303,6 @@ class _FieldName extends StatelessWidget {
 
 /// 근로계약기간
 class _ContractPeriod extends StatelessWidget {
-
   const _ContractPeriod({required this.period});
   final String period;
 
@@ -324,7 +320,6 @@ class _ContractPeriod extends StatelessWidget {
 
 /// 근무시간
 class _WorkHours extends StatelessWidget {
-
   const _WorkHours({required this.time});
   final String time;
 
@@ -342,7 +337,6 @@ class _WorkHours extends StatelessWidget {
 
 /// 모집인원
 class _Participants extends StatelessWidget {
-
   const _Participants({required this.number});
   final String number;
 
@@ -363,7 +357,6 @@ class _Participants extends StatelessWidget {
 
 /// 급여
 class _PayAmount extends StatelessWidget {
-
   const _PayAmount({required this.payType, required this.amount});
   final String payType;
 
@@ -391,7 +384,6 @@ class _PayAmount extends StatelessWidget {
 
 /// 주소
 class _Address extends StatelessWidget {
-
   const _Address({required this.address});
   final String address;
 
@@ -436,7 +428,6 @@ class _Map extends StatelessWidget {
 
 /// 우대사항
 class _PreferredQualifications extends StatelessWidget {
-
   const _PreferredQualifications({required this.text});
   final String text;
 
@@ -451,7 +442,6 @@ class _PreferredQualifications extends StatelessWidget {
 
 /// 필드, 스위치
 class _FieldAndSwitch extends StatelessWidget {
-
   const _FieldAndSwitch({
     required this.fieldName,
     required this.isOn,
@@ -487,7 +477,6 @@ class _FieldAndSwitch extends StatelessWidget {
 
 /// 급여/비급여 정보
 class _PayInfo extends StatelessWidget {
-
   const _PayInfo({required this.visible, this.isPaid});
   final bool visible;
 

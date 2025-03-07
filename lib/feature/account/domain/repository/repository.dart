@@ -4,7 +4,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data.dart';
 
 abstract class AccountRepository {
-
   AccountRepository({required this.accountApi, required this.accountStorage});
   final AccountStorage accountStorage;
 
@@ -20,14 +19,4 @@ abstract class AccountRepository {
 
   /// Session Id Storage 에 조회
   Future<String> getSessionId();
-
-  /// 휴대폰 인증번호 발송 요청
-  Future<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
-    required String phone,
-  });
-
-  /// 인증번호 검증
-  Future<ApiResponse<BaseResponseDto<bool>>> authCodeVerification({
-    required AuthCodeVerificationRequestDto dto,
-  });
 }

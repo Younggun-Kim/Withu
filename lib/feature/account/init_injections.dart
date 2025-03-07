@@ -1,6 +1,6 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
+import 'package:withu/feature/common/presentation/bloc/phone_auth/phone_auth_bloc.dart';
 
 void initAccountInjections() {
   initAccountDataInjections();
@@ -22,9 +22,6 @@ void initAccountDataInjections() {
 
 void initAccountDomainInjections() {
   getIt.registerSingleton<LoginUseCase>(LoginUseCaseImpl(accountRepo: getIt()));
-  getIt.registerSingleton<PhoneAuthUseCase>(
-    PhoneAuthUseCaseImpl(accountRepo: getIt()),
-  );
   getIt.registerSingleton<SignUpUseCase>(
     SignUpUseCaseImpl(repository: getIt()),
   );

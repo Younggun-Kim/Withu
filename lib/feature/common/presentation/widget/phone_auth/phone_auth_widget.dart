@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/common/presentation/bloc/phone_auth/phone_auth_bloc.dart';
 import 'package:withu/shared/shared.dart';
+
+import 'phone_auth_widget_key.dart';
 
 /// 휴대폰 번호 인증 UI
 class PhoneAuthWidget extends StatelessWidget {
@@ -13,7 +15,9 @@ class PhoneAuthWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<PhoneAuthBloc>(
       create: (context) => getIt(),
-      child: const Column(children: [PhoneInput(), AuthCodeInput()]),
+      child: const Column(
+        children: [PhoneInput(), SizedBox(height: 11), AuthCodeInput()],
+      ),
     );
   }
 }

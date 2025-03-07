@@ -4,7 +4,6 @@ import 'package:withu/gen/colors.gen.dart';
 
 /// 기본 버튼
 class BaseButton extends StatelessWidget {
-
   const BaseButton({
     super.key,
     required this.text,
@@ -15,11 +14,13 @@ class BaseButton extends StatelessWidget {
   });
 
   factory BaseButton.basic({
+    Key? key,
     required BuildContext context,
     required String text,
     required VoidCallback onTap,
   }) {
     return BaseButton(
+      key: key,
       text: Text(text, style: context.textTheme.bodySmallBold),
       backgroundColor: Colors.white,
       border: Border.all(color: ColorName.tertiary),
@@ -69,6 +70,7 @@ class BaseButton extends StatelessWidget {
       onTap: onTap,
     );
   }
+
   final Widget text;
 
   final Color backgroundColor;

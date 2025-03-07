@@ -35,8 +35,9 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
 
   /// 인증번호 6자리일 때 인증 요청
   Future<VisibleType> requestAuthCodeVerification() async {
-    final result = await phoneAuthUseCase.authCodeVerification(
-      entity: toEntity(),
+    final result = await phoneAuthUseCase.verifyAuthCode(
+      phone: state.phone,
+      authCode: state.authCode,
     );
 
     return VisibleTypeEx.fromBool(!result);

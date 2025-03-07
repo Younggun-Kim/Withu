@@ -67,12 +67,18 @@ class $AssetsImagesGen {
   SvgGenImage get logoPuzzle3 =>
       const SvgGenImage('assets/images/logo_puzzle3.svg');
 
+  /// File path: assets/images/mars.svg
+  SvgGenImage get mars => const SvgGenImage('assets/images/mars.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
   /// File path: assets/images/users-round.svg
   SvgGenImage get usersRound =>
       const SvgGenImage('assets/images/users-round.svg');
+
+  /// File path: assets/images/venus.svg
+  SvgGenImage get venus => const SvgGenImage('assets/images/venus.svg');
 
   /// List of all assets
   List<dynamic> get values => [
@@ -90,8 +96,10 @@ class $AssetsImagesGen {
         logoPuzzle,
         logoPuzzle2,
         logoPuzzle3,
+        mars,
         plus,
-        usersRound
+        usersRound,
+        venus
       ];
 }
 

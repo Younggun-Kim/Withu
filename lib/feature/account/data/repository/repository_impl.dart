@@ -34,21 +34,5 @@ class AccountRepositoryImpl implements AccountRepository {
     return await accountStorage.getSessionId();
   }
 
-  /// 휴대폰 인증번호 발송 요청
-  @override
-  Future<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
-    required String phone,
-  }) async {
-    return await accountApi.sendAuthCode(phone: phone);
-  }
-
-  /// 인증번호 검증
-  @override
-  Future<ApiResponse<BaseResponseDto<bool>>> authCodeVerification({
-    required AuthCodeVerificationRequestDto dto,
-  }) async {
-    return await accountApi.verifyAuthCode(dto: dto);
-  }
-
   /// 회원가입
 }

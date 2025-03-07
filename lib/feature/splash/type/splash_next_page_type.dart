@@ -5,7 +5,7 @@ enum SplashNextPageType {
   none(SplashRoute()),
   login(LoginRoute2()),
   jobPostings(JobPostingsRoute()),
-  temp(TempRoute());
+  test(SignUpRoute());
 
   final PageRouteInfo route;
 
@@ -20,6 +20,6 @@ extension SplashNextPageTypeExt on SplashNextPageType {
   static SplashNextPageType getNextPage(bool isLoggedIn) {
     return isLoggedIn
         ? SplashNextPageType.jobPostings
-        : SplashNextPageType.temp;
+        : SplashNextPageType.test;
   }
 }

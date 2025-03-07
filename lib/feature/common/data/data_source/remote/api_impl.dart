@@ -4,11 +4,6 @@ class CommonApiImpl implements CommonApi {
   @override
   String get path => '/common';
 
-  @override
-  late Map<CommonApiPathType, String> paths = {
-    CommonApiPathType.validateBusiness: '$path/validate-business',
-  };
-
   final DioNetwork network;
 
   CommonApiImpl({required this.network});
@@ -19,7 +14,10 @@ class CommonApiImpl implements CommonApi {
     ValidateBusinessReqDto reqDto,
   ) {
     return network.dio
-        .post('$path/validate-business', data: reqDto.toJson())
+        .post(
+          CommonApiPathType.validateBusiness.fullPath,
+          data: reqDto.toJson(),
+        )
         .then(
           (response) => BaseResponseDto.fromJson(
             response.data,
@@ -40,5 +38,35 @@ class CommonApiImpl implements CommonApi {
 
           return BaseResponseDtoMock.error() as ValidateBusinessResDto;
         });
+  }
+
+  /// 인증번호 요청
+  @override
+  FutureOr<SendAuthCodeResponseDto> sendAuthCode({
+    required String phone,
+  }) async {
+    return network.dio
+        .post(CommonApiPathType.sendAuthCode.fullPath, data: {phone: phone})
+        .then((response) => SendAuthCodeResponseDto.fromJson(response.data));
+    // .catchError(
+    //   (_) =>
+    //       ApiResponse<SendAuthCodeResponseDto>.fail(FailResponse.error()),
+    // );
+  }
+
+  /// 인증번호 검증
+  @override
+  FutureOr<BaseResponseDto<bool>> verifyAuthCode({
+    required VerifyAuthCodeReqDto dto,
+  }) async {
+    return network.dio
+        .post(CommonApiPathType.verifyAuthCode.fullPath, data: dto.toJson())
+        .then(
+          (response) =>
+              BaseResponseDto.fromJson(response.data, (json) => json as bool),
+        );
+    // .catchError(
+    //   (_) => ApiResponse<BaseResponseDto<bool>>.fail(FailResponse.error()),
+    // );
   }
 }
