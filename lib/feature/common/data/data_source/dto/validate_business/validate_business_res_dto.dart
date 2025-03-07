@@ -25,3 +25,7 @@ class ValidateBusinessResData with _$ValidateBusinessResData {
   factory ValidateBusinessResData.fromJson(Map<String, dynamic> json) =>
       _$ValidateBusinessResDataFromJson(json);
 }
+
+extension ValidateBusinessResDtoEn on ValidateBusinessResDto {
+  bool get isDuplicated => data == null || data?.valid == 'NO';
+}

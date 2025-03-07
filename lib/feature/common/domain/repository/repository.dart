@@ -8,5 +8,6 @@ abstract class CommonRepository {
   CommonRepository({required this.commonApi});
 
   /// 사업자등록 중복 검사
+  /// return: (bool) 중복이면 true
   Future<bool> checkBusinessNumDuplication(ValidateBusinessReqDto dto);
 }
