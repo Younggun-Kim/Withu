@@ -15,11 +15,15 @@ typedef SignUpBlocProvider = BlocProvider<SignUpBloc>;
 
 typedef SignUpBlocBuilder = BlocBuilder<SignUpBloc, SignUpState>;
 
+typedef SignUpBlocListener = BlocListener<SignUpBloc, SignUpState>;
+
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final SignUpUseCase signUpUseCase;
 
   SignUpBloc({required this.signUpUseCase})
     : super(SignUpState(status: BaseBlocStatus.initial())) {
+    on<SignUpRequestSent>(_onSignUpRequestSent);
+    on<SignUpRequestCompleted>(_onSignUpRequestCompleted);
     on<SignUpBirthDateInputted>(_onSignUpBirthDateInputted);
     on<SignUpGenderSelected>(_onSignUpGenderSelected);
     on<SignUpEmailInputted>(_onSignUpEmailInputted);

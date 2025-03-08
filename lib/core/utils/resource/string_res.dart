@@ -89,6 +89,7 @@ enum StringRes {
   workerSignup,
   employerSignup,
   next,
+  confirm,
 }
 
 extension StringResEx on StringRes {

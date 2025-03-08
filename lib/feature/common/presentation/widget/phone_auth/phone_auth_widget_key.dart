@@ -4,7 +4,8 @@ enum PhoneAuthWidgetKey with WidgetKeyUtils {
   phoneInput(key: 'phoneInput'),
   sendAuthBtn(key: 'sendAuthBtn'),
   authCodeInput(key: 'authCodeInput'),
-  authCodeInputError(key: 'authCodeInput_error');
+  authCodeInputError(key: 'authCodeInput_error'),
+  verifyBtn(key: 'verifyBtn');
 
   final String key;
 

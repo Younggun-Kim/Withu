@@ -26,7 +26,6 @@ class CommonApiImpl implements CommonApi {
           ),
         )
         .catchError((error) {
-          logger.e(error);
           if (error is DioException) {
             return ValidateBusinessResDto.fromJson(
               error.response?.data,
@@ -46,27 +45,38 @@ class CommonApiImpl implements CommonApi {
     required String phone,
   }) async {
     return network.dio
-        .post(CommonApiPathType.sendAuthCode.fullPath, data: {phone: phone})
-        .then((response) => SendAuthCodeResponseDto.fromJson(response.data));
-    // .catchError(
-    //   (_) =>
-    //       ApiResponse<SendAuthCodeResponseDto>.fail(FailResponse.error()),
-    // );
+        .post(
+          CommonApiPathType.sendAuthCode.fullPath,
+          data: {"phoneNumber": phone},
+        )
+        .then(
+          (response) => SendAuthCodeResponseDto.fromJson(
+            response.data,
+            (json) =>
+                SendAuthCodeResponseData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          return SendAuthCodeResponseDtoMock.failure();
+        });
   }
 
   /// 인증번호 검증
   @override
-  FutureOr<BaseResponseDto<bool>> verifyAuthCode({
+  FutureOr<VerifyAuthCodeResDto> verifyAuthCode({
     required VerifyAuthCodeReqDto dto,
   }) async {
     return network.dio
         .post(CommonApiPathType.verifyAuthCode.fullPath, data: dto.toJson())
         .then(
-          (response) =>
-              BaseResponseDto.fromJson(response.data, (json) => json as bool),
-        );
-    // .catchError(
-    //   (_) => ApiResponse<BaseResponseDto<bool>>.fail(FailResponse.error()),
-    // );
+          (response) => VerifyAuthCodeResDto.fromJson(
+            response.data,
+            (json) =>
+                VerifyAuthCodeResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          return VerifyAuthCodeResDtoMock.failure();
+        });
   }
 }

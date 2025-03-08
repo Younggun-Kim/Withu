@@ -1,6 +1,20 @@
 part of 'sign_up_bloc.dart';
 
 extension SignUpBlocHandler on SignUpBloc {
+  void _onSignUpRequestSent(
+    SignUpRequestSent event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(status: BaseBlocStatus.loading()));
+  }
+
+  void _onSignUpRequestCompleted(
+    SignUpRequestCompleted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(status: BaseBlocStatus.initial()));
+  }
+
   /// 생년월일 입력
   void _onSignUpBirthDateInputted(
     SignUpBirthDateInputted event,

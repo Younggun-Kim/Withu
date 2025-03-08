@@ -2,9 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
-import 'package:withu/feature/common/domain/entity/auth_code/auth_code_value.dart';
 
 class MockAccountUseCase extends Mock implements PhoneAuthUseCase {}
 
@@ -15,6 +13,7 @@ void main() {
   const invalidPhone = '0101238';
   const validAuthCode = '123456';
   const invalidAuthCode = '098765';
+  const validSessionId = 'test-session-id';
 
   setUp(() {
     mockUseCase = MockAccountUseCase();
@@ -25,7 +24,7 @@ void main() {
     expect(phoneAuthBloc.state.status, isA<BaseBlocStatusInitial>());
     expect(phoneAuthBloc.state.phone, equals(PhoneValue()));
     expect(phoneAuthBloc.state.authCode, equals(AuthCodeValue()));
-    expect(phoneAuthBloc.state.authCodeErrorVisible, equals(VisibleType.none));
+    expect(phoneAuthBloc.state.verifyState, equals(VerifyStateType.beforeSend));
   });
 
   blocTest(
@@ -62,11 +61,18 @@ void main() {
 
   blocTest(
     '인증번호 전송',
-    build: () => phoneAuthBloc,
+    build:
+        () =>
+            phoneAuthBloc..emit(
+              PhoneAuthState(
+                status: BaseBlocStatus.initial(),
+                phone: const PhoneValue(validPhone),
+              ),
+            ),
     setUp: () {
       when(
         () => mockUseCase.sendAuthCode(phone: any(named: 'phone')),
-      ).thenAnswer((_) async => true);
+      ).thenAnswer((_) async => SendAuthCodeResValueMock.success());
     },
     act: (bloc) => bloc.add(PhoneAuthAuthCodeSent()),
     verify: (_) {
@@ -74,6 +80,46 @@ void main() {
         () => mockUseCase.sendAuthCode(phone: any(named: 'phone')),
       ).called(1);
     },
+    expect:
+        () => [
+          isA<PhoneAuthState>()
+              .having(
+                (state) => state.status,
+                'loading status',
+                isA<BaseBlocStatusLoading>(),
+              )
+              .having(
+                (state) => state.verifyState,
+                'check verifyState',
+                VerifyStateType.beforeSend,
+              )
+              .having(
+                (state) => state.isSuccessSend,
+                'check isSuccessSend',
+                isFalse,
+              ),
+          isA<PhoneAuthState>()
+              .having(
+                (state) => state.status,
+                'success status',
+                isA<BaseBlocStatusSuccess>(),
+              )
+              .having(
+                (state) => state.isSuccessSend,
+                'check isSuccessSend',
+                isTrue,
+              )
+              .having(
+                (state) => state.sessionId,
+                'valid session id',
+                validSessionId,
+              )
+              .having(
+                (state) => state.verifyState,
+                'verifyState',
+                VerifyStateType.beforeVerify,
+              ),
+        ],
   );
 
   blocTest(
@@ -86,14 +132,7 @@ void main() {
         ),
       );
     },
-    setUp: () {
-      when(
-        () => mockUseCase.verifyAuthCode(
-          phone: PhoneValue(validPhone),
-          authCode: AuthCodeValue(validAuthCode),
-        ),
-      ).thenAnswer((_) async => true);
-    },
+
     act: (bloc) => bloc.add(PhoneAuthAuthCodeInputted(value: validAuthCode)),
     expect:
         () => [
@@ -108,20 +147,7 @@ void main() {
                 'authCodeValid',
                 isTrue,
               ),
-          isA<PhoneAuthState>().having(
-            (state) => state.authCodeErrorVisible,
-            'authCodeErrorVisible',
-            VisibleType.invisible,
-          ),
         ],
-    verify: (_) {
-      verify(
-        () => mockUseCase.verifyAuthCode(
-          phone: PhoneValue(validPhone),
-          authCode: AuthCodeValue(validAuthCode),
-        ),
-      ).called(1);
-    },
   );
 
   blocTest(
@@ -134,14 +160,6 @@ void main() {
                 phone: const PhoneValue(validPhone),
               ),
             ),
-    setUp: () {
-      when(
-        () => mockUseCase.verifyAuthCode(
-          phone: PhoneValue(validPhone),
-          authCode: AuthCodeValue(invalidAuthCode),
-        ),
-      ).thenAnswer((_) async => false);
-    },
     act: (bloc) => bloc.add(PhoneAuthAuthCodeInputted(value: invalidAuthCode)),
     expect:
         () => [
@@ -156,19 +174,129 @@ void main() {
                 'authCodeValid',
                 isTrue,
               ),
+        ],
+  );
+
+  blocTest(
+    '인증번호 검증 성공 테스트',
+    build: () {
+      return phoneAuthBloc..emit(
+        PhoneAuthState(
+          status: BaseBlocStatus.initial(),
+          phone: PhoneValue(validPhone),
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
+        ),
+      );
+    },
+    setUp: () {
+      when(
+        () => mockUseCase.verifyAuthCode(
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
+        ),
+      ).thenAnswer((_) async => true);
+    },
+    act: (bloc) => bloc.add(PhoneAuthVerifyRequested()),
+    expect:
+        () => [
           isA<PhoneAuthState>().having(
-            (state) => state.authCodeErrorVisible,
-            'authCodeErrorVisible',
-            VisibleType.visible,
+            (state) => state.status,
+            'loading status',
+            isA<BaseBlocStatusLoading>(),
           ),
+          isA<PhoneAuthState>()
+              .having(
+                (state) => state.status,
+                'success status',
+                isA<BaseBlocStatusSuccess>(),
+              )
+              .having(
+                (state) => state.verifyState.isSuccess,
+                'success verify state',
+                isTrue,
+              ),
         ],
     verify: (_) {
       verify(
         () => mockUseCase.verifyAuthCode(
-          phone: PhoneValue(validPhone),
-          authCode: AuthCodeValue(invalidAuthCode),
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
         ),
       ).called(1);
+    },
+  );
+
+  blocTest(
+    '인증번호 검증 실패 테스트',
+    build: () {
+      return phoneAuthBloc..emit(
+        PhoneAuthState(
+          status: BaseBlocStatus.initial(),
+          phone: PhoneValue(validPhone),
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
+        ),
+      );
+    },
+    setUp: () {
+      when(
+        () => mockUseCase.verifyAuthCode(
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
+        ),
+      ).thenAnswer((_) async => false);
+    },
+    act: (bloc) => bloc.add(PhoneAuthVerifyRequested()),
+    expect:
+        () => [
+          isA<PhoneAuthState>().having(
+            (state) => state.status,
+            'loading status',
+            isA<BaseBlocStatusLoading>(),
+          ),
+          isA<PhoneAuthState>()
+              .having(
+                (state) => state.status,
+                'success status',
+                isA<BaseBlocStatusFailure>(),
+              )
+              .having(
+                (state) => state.verifyState.isFailure,
+                'failure verify state',
+                isTrue,
+              ),
+        ],
+    verify: (_) {
+      verify(
+        () => mockUseCase.verifyAuthCode(
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(validAuthCode),
+        ),
+      ).called(1);
+    },
+  );
+
+  blocTest(
+    '유효하지 않은 인증번호 입력 상태에서 인증 버튼 눌렀을 때 테스트',
+    build: () {
+      return phoneAuthBloc..emit(
+        PhoneAuthState(
+          status: BaseBlocStatus.initial(),
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(invalidAuthCode),
+        ),
+      );
+    },
+    act: (bloc) => bloc.add(PhoneAuthVerifyRequested()),
+    expect: () => [],
+    verify: (_) {
+      verifyNever(
+        () => mockUseCase.verifyAuthCode(
+          sessionId: validSessionId,
+          authCode: AuthCodeValue(invalidAuthCode),
+        ),
+      ); // 인증 코드 검증 함수가 호출되지 않음을 확인
     },
   );
 }

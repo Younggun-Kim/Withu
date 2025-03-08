@@ -16,21 +16,26 @@ class CommonRepositoryImpl implements CommonRepository {
 
   /// 휴대폰 인증번호 발송 요청
   @override
-  FutureOr<bool> postAuthCodeSend({required String phone}) async {
+  FutureOr<SendAuthCodeResValue> postAuthCodeSend({
+    required String phone,
+  }) async {
     final response = await commonApi.sendAuthCode(phone: phone);
+    final data = response.data;
 
-    return response.status;
+    return data != null
+        ? SendAuthCodeResValueParser.fromDto(data)
+        : SendAuthCodeResValue.failure();
   }
 
   /// 인증번호 검증
   @override
   FutureOr<bool> postAuthCodeVerify({
-    required String phone,
+    required String sessionId,
     required String authCode,
   }) async {
     final response = await commonApi.verifyAuthCode(
-      dto: VerifyAuthCodeReqDto(phone: phone, authCode: authCode),
+      dto: VerifyAuthCodeReqDto(sessionId: sessionId, code: authCode),
     );
-    return response.data == true;
+    return response.data?.success == true;
   }
 }

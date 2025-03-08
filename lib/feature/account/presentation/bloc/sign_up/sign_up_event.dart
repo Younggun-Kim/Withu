@@ -2,6 +2,10 @@ part of 'sign_up_bloc.dart';
 
 abstract class SignUpEvent extends BaseBlocEvent {}
 
+class SignUpRequestSent extends SignUpEvent {}
+
+class SignUpRequestCompleted extends SignUpEvent {}
+
 /// 생년월일 입력
 class SignUpBirthDateInputted extends SignUpEvent {
   final BirthDateValue value;

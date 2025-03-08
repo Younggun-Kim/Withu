@@ -1,4 +1,4 @@
-import 'package:withu/feature/common/domain/entity/validate_business_entity.dart';
+import 'package:withu/feature/common/domain/entity/validate_business/validate_business_entity.dart';
 import 'package:withu/feature/common/domain/repository/repository.dart';
 
 abstract class ValidateBusinessUseCase {

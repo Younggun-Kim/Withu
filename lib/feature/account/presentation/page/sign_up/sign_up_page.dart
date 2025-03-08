@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/presentation/bloc/bloc.dart'
-    show PhoneAuthBlocProvider;
+    show PhoneAuthBloc, PhoneAuthBlocListener, PhoneAuthBlocProvider;
 import 'package:withu/feature/common/presentation/widget/phone_auth/phone_auth_widget.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -18,7 +18,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        PhoneAuthBlocProvider(create: (context) => getIt()),
+        PhoneAuthBlocProvider(create: (context) => getIt<PhoneAuthBloc>()),
         SignUpBlocProvider(create: (context) => getIt()),
       ],
       child: _SignUpPageContent(),
@@ -31,7 +31,16 @@ class _SignUpPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {}),
+        SignUpBlocListener(listener: (context, state) {}),
+        PhoneAuthBlocListener(
+          listener: (context, state) {
+            if (state.status.isLoading) {
+              context.read<SignUpBloc>().add(SignUpRequestSent());
+            } else {
+              context.read<SignUpBloc>().add(SignUpRequestCompleted());
+            }
+          },
+        ),
       ],
       child: SignUpBlocBuilder(
         builder: (context, state) {

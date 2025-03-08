@@ -8,5 +8,5 @@ class AuthCodeValue with _$AuthCodeValue {
 
   const AuthCodeValue._();
 
-  bool isValid() => value.length >= 2;
+  bool isValid() => value.length == 6;
 }

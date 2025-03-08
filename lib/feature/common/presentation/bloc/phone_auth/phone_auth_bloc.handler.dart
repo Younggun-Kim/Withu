@@ -6,15 +6,40 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     PhoneAuthPhoneInputted event,
     Emitter<PhoneAuthState> emit,
   ) {
-    emit(state.copyWith(phone: event.phone));
+    emit(
+      state.copyWith(
+        phone: event.phone,
+        isSuccessSend: false,
+        sessionId: '',
+        authCode: AuthCodeValue(),
+        verifyState: VerifyStateType.beforeSend,
+      ),
+    );
   }
 
-  /// 인증번호 발송 요청 이벤트.
+  /// 인증번호 전송 요청 이벤트.
   void _onAuthCodeRequested(
     PhoneAuthAuthCodeSent event,
     Emitter<PhoneAuthState> emit,
   ) async {
-    await phoneAuthUseCase.sendAuthCode(phone: state.phone.value);
+    if (!state.canRequestVerification) {
+      return;
+    }
+
+    emit(state.copyWith(status: BaseBlocStatus.loading()));
+
+    final response = await phoneAuthUseCase.sendAuthCode(
+      phone: state.phone.value,
+    );
+
+    emit(
+      state.copyWith(
+        status: BaseBlocStatus.fromSuccess(response.isSuccess),
+        isSuccessSend: response.isSuccess,
+        sessionId: response.sessionId,
+        verifyState: VerifyStateType.getSentState(response.isSuccess),
+      ),
+    );
   }
 
   /// 인증번호 입력 이벤트.
@@ -23,23 +48,27 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     Emitter<PhoneAuthState> emit,
   ) async {
     emit(state.copyWith(authCode: event.code));
+  }
 
+  /// 인증 요청
+  void _onPhoneAuthVerifyRequested(
+    PhoneAuthVerifyRequested event,
+    Emitter<PhoneAuthState> emit,
+  ) async {
     if (state.canAuthCodeVerification) {
+      emit(state.copyWith(status: BaseBlocStatus.loading()));
+
+      final isVerify = await phoneAuthUseCase.verifyAuthCode(
+        sessionId: state.sessionId,
+        authCode: state.authCode,
+      );
+
       emit(
         state.copyWith(
-          authCodeErrorVisible: await requestAuthCodeVerification(),
+          status: BaseBlocStatus.fromSuccess(isVerify),
+          verifyState: VerifyStateType.getVerificationState(isVerify),
         ),
       );
     }
-  }
-
-  /// 인증번호 6자리일 때 인증 요청
-  Future<VisibleType> requestAuthCodeVerification() async {
-    final result = await phoneAuthUseCase.verifyAuthCode(
-      phone: state.phone,
-      authCode: state.authCode,
-    );
-
-    return VisibleTypeEx.fromBool(!result);
   }
 }

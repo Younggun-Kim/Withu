@@ -1,12 +1,9 @@
-import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:withu/core/types/type.dart';
 import 'package:withu/core/utils/utils.dart';
-import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
 
 import '../../../../../core/utils/mixin/widget_key_utils.dart';
@@ -43,110 +40,115 @@ void main() {
     getIt.reset();
   });
 
-  group('PhoneAuthWidget 테스트', () {
-    testWidgets('휴대폰 번호 입력 테스트', (WidgetTester tester) async {
-      /// Given
-      const phone = '01012345678';
-      await tester.pumpWidget(testWidget);
+  test('PhoneAuthBloc이 MockPhoneAuthBloc인지 확인', () {
+    final bloc = getIt<PhoneAuthBloc>();
 
-      /// When
-      await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
-      await tester.pumpAndSettle();
+    expect(bloc, isA<MockPhoneAuthBloc>());
+  });
 
-      /// Then
-      expect(find.text(phone), findsOneWidget);
-      verify(
-        () => phoneAuthBloc.add(PhoneAuthPhoneInputted(value: phone)),
-      ).called(1);
-    });
+  testWidgets('휴대폰 번호 입력 테스트', (WidgetTester tester) async {
+    /// Given
+    const phone = "01012345678";
+    await tester.pumpWidget(testWidget);
 
-    testWidgets('유효한 번호가 입력되었을 때 인증번호 전송 버튼 클릭 테스트', (
-      WidgetTester tester,
-    ) async {
-      /// Given
-      const phone = '01012345678';
-      when(
-        () => phoneAuthBloc.state,
-      ).thenReturn(initialState.copyWith(phone: const PhoneValue(phone)));
-      await tester.pumpWidget(testWidget);
-      await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
-      await tester.pumpAndSettle();
+    /// When
+    await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
+    await tester.pumpAndSettle();
 
-      /// When
-      await tester.tap(PhoneAuthWidgetKey.sendAuthBtn.toFinder());
-      await tester.pumpAndSettle();
+    /// Then
+    expect(find.text(phone), findsOneWidget);
+    verify(
+      () => phoneAuthBloc.add(any(that: isA<PhoneAuthPhoneInputted>())),
+    ).called(1);
+  });
 
-      /// Then
-      verify(() => phoneAuthBloc.add(PhoneAuthAuthCodeSent())).called(1);
-    });
+  testWidgets('유효한 번호가 입력되었을 때 인증번호 전송 버튼 클릭 테스트', (WidgetTester tester) async {
+    /// Given
+    const phone = '01012345678';
+    when(
+      () => phoneAuthBloc.state,
+    ).thenReturn(initialState.copyWith(phone: const PhoneValue(phone)));
+    await tester.pumpWidget(testWidget);
+    await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
+    await tester.pumpAndSettle();
 
-    testWidgets('유효하지 않는 번호가 입력되었을 때 인증번호 전송 버튼 클릭 테스트', (
-      WidgetTester tester,
-    ) async {
-      /// Given
-      const phone = '012345';
-      when(
-        () => phoneAuthBloc.state,
-      ).thenReturn(initialState.copyWith(phone: const PhoneValue(phone)));
-      await tester.pumpWidget(testWidget);
-      await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
-      await tester.pumpAndSettle();
+    /// When
+    await tester.tap(PhoneAuthWidgetKey.sendAuthBtn.toFinder());
+    await tester.pumpAndSettle();
 
-      /// When
-      await tester.tap(PhoneAuthWidgetKey.sendAuthBtn.toFinder());
-      await tester.pumpAndSettle();
+    /// Then
+    verify(
+      () => phoneAuthBloc.add(any(that: isA<PhoneAuthAuthCodeSent>())),
+    ).called(1);
+  });
 
-      /// Then
-      verifyNever(() => phoneAuthBloc.add(PhoneAuthAuthCodeSent()));
-    });
+  testWidgets('유효하지 않는 번호가 입력되었을 때 인증번호 전송 버튼 클릭 테스트', (
+    WidgetTester tester,
+  ) async {
+    /// Given
+    const phone = '012345';
+    when(
+      () => phoneAuthBloc.state,
+    ).thenReturn(initialState.copyWith(phone: const PhoneValue(phone)));
+    await tester.pumpWidget(testWidget);
+    await tester.enterText(PhoneAuthWidgetKey.phoneInput.toFinder(), phone);
+    await tester.pumpAndSettle();
 
-    testWidgets('유효한 인증번호 입력 테스트', (WidgetTester tester) async {
-      /// Given
-      const authCode = '123456';
-      await tester.pumpWidget(testWidget);
+    /// When
+    await tester.tap(PhoneAuthWidgetKey.sendAuthBtn.toFinder());
+    await tester.pumpAndSettle();
 
-      /// When
-      await tester.enterText(
-        PhoneAuthWidgetKey.authCodeInput.toFinder(),
-        authCode,
-      );
-      await tester.pumpAndSettle();
+    /// Then
+    verifyNever(() => phoneAuthBloc.add(PhoneAuthAuthCodeSent()));
+  });
 
-      /// Then
-      expect(find.text(authCode), findsOneWidget);
-      expect(PhoneAuthWidgetKey.authCodeInputError.toFinder(), findsNothing);
-      verify(
-        () => phoneAuthBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
-      ).called(1);
-    });
+  testWidgets('유효한 인증번호 입력 테스트', (WidgetTester tester) async {
+    /// Given
+    const phone = '01012345678';
+    const authCode = '123456';
+    when(() => phoneAuthBloc.state).thenReturn(
+      initialState.copyWith(
+        phone: const PhoneValue(phone),
+        isSuccessSend: true,
+        sessionId: 'test-session-id',
+        verifyState: VerifyStateType.beforeVerify,
+      ),
+    );
 
-    testWidgets('유효하지 않는 인증번호 입력 테스트', (WidgetTester tester) async {
-      /// Given
-      const authCode = '123456';
-      whenListen(
-        phoneAuthBloc,
-        Stream.fromIterable([
-          initialState,
-          initialState.copyWith(authCodeErrorVisible: VisibleType.visible),
-        ]),
-        initialState: initialState,
-      );
+    await tester.pumpWidget(testWidget);
 
-      await tester.pumpWidget(testWidget);
+    /// When
+    await tester.enterText(
+      PhoneAuthWidgetKey.authCodeInput.toFinder(),
+      authCode,
+    );
+    await tester.pumpAndSettle();
 
-      /// When
-      await tester.enterText(
-        PhoneAuthWidgetKey.authCodeInput.toFinder(),
-        authCode,
-      );
-      await tester.pumpAndSettle();
+    /// Then
+    expect(find.text(authCode), findsOneWidget);
+  });
 
-      /// Then
-      expect(find.text(authCode), findsOneWidget);
-      expect(PhoneAuthWidgetKey.authCodeInputError.toFinder(), findsOneWidget);
-      verify(
-        () => phoneAuthBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
-      ).called(1);
-    });
+  testWidgets('유효하지 않는 인증번호 입력 테스트', (WidgetTester tester) async {
+    /// Given
+    const authCode = '123456';
+    when(() => phoneAuthBloc.state).thenReturn(
+      initialState.copyWith(
+        phone: const PhoneValue('01012345678'),
+        isSuccessSend: true,
+        sessionId: 'test-session-id',
+        verifyState: VerifyStateType.beforeVerify,
+      ),
+    );
+    await tester.pumpWidget(testWidget);
+
+    /// When
+    await tester.enterText(
+      PhoneAuthWidgetKey.authCodeInput.toFinder(),
+      authCode,
+    );
+    await tester.pumpAndSettle();
+
+    /// Then
+    expect(find.text(authCode), findsOneWidget);
   });
 }

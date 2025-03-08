@@ -7,8 +7,8 @@ part 'verify_auth_code_req_dto.g.dart';
 @freezed
 class VerifyAuthCodeReqDto with _$VerifyAuthCodeReqDto {
   factory VerifyAuthCodeReqDto({
-    required String phone,
-    required String authCode,
+    required String sessionId,
+    required String code,
   }) = _VerifyAuthCodeReqDto;
 
   factory VerifyAuthCodeReqDto.fromJson(Map<String, dynamic> json) =>

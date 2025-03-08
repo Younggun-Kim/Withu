@@ -8,18 +8,18 @@ class PhoneAuthUseCaseImpl implements PhoneAuthUseCase {
 
   /// 휴대폰 인증번호 발송 요청
   @override
-  Future<bool> sendAuthCode({required String phone}) async {
+  Future<SendAuthCodeResValue> sendAuthCode({required String phone}) async {
     return await commonRepo.postAuthCodeSend(phone: phone);
   }
 
   /// 인증번호 검증
   @override
   Future<bool> verifyAuthCode({
-    required PhoneValue phone,
+    required String sessionId,
     required AuthCodeValue authCode,
   }) async {
     return await commonRepo.postAuthCodeVerify(
-      phone: phone.value,
+      sessionId: sessionId,
       authCode: authCode.value,
     );
   }

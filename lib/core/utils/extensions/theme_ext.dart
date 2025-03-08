@@ -19,6 +19,8 @@ extension TextThemeEx on TextTheme {
 extension TextStyleEx on TextStyle {
   TextStyle get setBlack => copyWith(color: ColorName.text);
 
+  TextStyle get setWhite => copyWith(color: Colors.white);
+
   TextStyle get setSecondary => copyWith(color: ColorName.secondary);
 
   TextStyle get setPoint => copyWith(color: ColorName.point);

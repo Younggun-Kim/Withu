@@ -5,8 +5,6 @@ import 'package:withu/core/network/dio_network.dart';
 import 'package:withu/core/network/dto/base/base_response_dto.dart';
 import 'package:withu/feature/common/common.dart';
 
-import '../../../../../core/utils/logger/logger.dart';
-
 part 'api_impl.dart';
 
 enum CommonApiPathType {
@@ -33,7 +31,7 @@ abstract class CommonApi {
   FutureOr<SendAuthCodeResponseDto> sendAuthCode({required String phone});
 
   /// 인증번호 검증 API
-  FutureOr<BaseResponseDto<bool>> verifyAuthCode({
+  FutureOr<VerifyAuthCodeResDto> verifyAuthCode({
     required VerifyAuthCodeReqDto dto,
   });
 }

@@ -14,6 +14,10 @@ abstract class BaseBlocStatus {
 
   factory BaseBlocStatus.failure() => BaseBlocStatusFailure();
 
+  factory BaseBlocStatus.fromSuccess(bool isSuccess) {
+    return isSuccess ? BaseBlocStatus.success() : BaseBlocStatus.failure();
+  }
+
   bool get isInitial => this is BaseBlocStatusInitial;
 
   bool get isLoading => this is BaseBlocStatusLoading;
@@ -37,7 +41,7 @@ class BaseBlocStatusFailure extends BaseBlocStatus {}
 
 /// BLoC State
 abstract class BaseBlocState {
-
   BaseBlocState({required this.status});
+
   final BaseBlocStatus status;
 }

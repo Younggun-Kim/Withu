@@ -1,10 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
-import 'package:withu/feature/common/domain/entity/auth_code/auth_code_value.dart';
 
 part 'phone_auth_event.dart';
 
@@ -14,9 +11,13 @@ part 'phone_auth_bloc.freezed.dart';
 
 part 'phone_auth_bloc.handler.dart';
 
-part 'phone_auth_bloc.parser.dart';
+part 'verify_state_type.dart';
 
 typedef PhoneAuthBlocProvider = BlocProvider<PhoneAuthBloc>;
+
+typedef PhoneAuthBlocBuilder = BlocBuilder<PhoneAuthBloc, PhoneAuthState>;
+
+typedef PhoneAuthBlocListener = BlocListener<PhoneAuthBloc, PhoneAuthState>;
 
 class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   final PhoneAuthUseCase phoneAuthUseCase;
@@ -26,5 +27,6 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     on<PhoneAuthPhoneInputted>(_onPhoneInputted);
     on<PhoneAuthAuthCodeSent>(_onAuthCodeRequested);
     on<PhoneAuthAuthCodeInputted>(_onAuthCodeInputted);
+    on<PhoneAuthVerifyRequested>(_onPhoneAuthVerifyRequested);
   }
 }

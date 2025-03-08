@@ -28,6 +28,7 @@ class DioNetwork {
             },
             onError: (DioException error, ErrorInterceptorHandler handler) {
               logger.e(error);
+              return handler.next(error);
             },
           ),
         )

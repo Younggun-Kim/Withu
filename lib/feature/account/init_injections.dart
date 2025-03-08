@@ -1,6 +1,5 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/common/presentation/bloc/phone_auth/phone_auth_bloc.dart';
 
 void initAccountInjections() {
   initAccountDataInjections();
@@ -28,9 +27,6 @@ void initAccountDomainInjections() {
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerFactory<PhoneAuthBloc>(
-    () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
-  );
   getIt.registerFactory<TermBloc>(() => TermBloc());
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
