@@ -3,6 +3,13 @@ part of 'validate_business_bloc.dart';
 typedef ValidateBusinessEmitter = Emitter<ValidateBusinessState>;
 
 extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
+  void _onValidateBusinessArgsStored(
+    ValidateBusinessArgsStored event,
+    ValidateBusinessEmitter emit,
+  ) {
+    emit(state.copyWith(args: event.value));
+  }
+
   void _onValidateBusinessNumInputted(
     ValidateBusinessNumInputted event,
     ValidateBusinessEmitter emit,

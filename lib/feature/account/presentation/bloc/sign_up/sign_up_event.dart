@@ -2,6 +2,12 @@ part of 'sign_up_bloc.dart';
 
 abstract class SignUpEvent extends BaseBlocEvent {}
 
+class SignUpArgsStored extends SignUpEvent {
+  final SignUpPageArgs value;
+
+  SignUpArgsStored({required this.value});
+}
+
 class SignUpRequestSent extends SignUpEvent {}
 
 class SignUpRequestCompleted extends SignUpEvent {}

@@ -16,8 +16,11 @@ import 'package:withu/feature/account/presentation/page/login/login_page2.dart'
     as _i6;
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page.dart'
     as _i7;
+import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart'
+    as _i14;
 import 'package:withu/feature/account/presentation/page/term/term_page.dart'
     as _i10;
+import 'package:withu/feature/common/common.dart' as _i15;
 import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page.dart'
     as _i11;
 import 'package:withu/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
@@ -232,10 +235,17 @@ class LoginRoute2 extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.SignUpPage]
-class SignUpRoute extends _i12.PageRouteInfo<void> {
-  const SignUpRoute({List<_i12.PageRouteInfo>? children})
-      : super(
+class SignUpRoute extends _i12.PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({
+    _i13.Key? key,
+    required _i14.SignUpPageArgs args,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           SignUpRoute.name,
+          args: SignUpRouteArgs(
+            key: key,
+            args: args,
+          ),
           initialChildren: children,
         );
 
@@ -244,9 +254,29 @@ class SignUpRoute extends _i12.PageRouteInfo<void> {
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i7.SignUpPage();
+      final args = data.argsAs<SignUpRouteArgs>();
+      return _i7.SignUpPage(
+        key: args.key,
+        args: args.args,
+      );
     },
   );
+}
+
+class SignUpRouteArgs {
+  const SignUpRouteArgs({
+    this.key,
+    required this.args,
+  });
+
+  final _i13.Key? key;
+
+  final _i14.SignUpPageArgs args;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{key: $key, args: $args}';
+  }
 }
 
 /// generated route for
@@ -308,10 +338,18 @@ class TermRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.ValidateBusinessPage]
-class ValidateBusinessRoute extends _i12.PageRouteInfo<void> {
-  const ValidateBusinessRoute({List<_i12.PageRouteInfo>? children})
-      : super(
+class ValidateBusinessRoute
+    extends _i12.PageRouteInfo<ValidateBusinessRouteArgs> {
+  ValidateBusinessRoute({
+    _i13.Key? key,
+    required _i15.ValidateBusinessPageArgs args,
+    List<_i12.PageRouteInfo>? children,
+  }) : super(
           ValidateBusinessRoute.name,
+          args: ValidateBusinessRouteArgs(
+            key: key,
+            args: args,
+          ),
           initialChildren: children,
         );
 
@@ -320,7 +358,27 @@ class ValidateBusinessRoute extends _i12.PageRouteInfo<void> {
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i11.ValidateBusinessPage();
+      final args = data.argsAs<ValidateBusinessRouteArgs>();
+      return _i11.ValidateBusinessPage(
+        key: args.key,
+        args: args.args,
+      );
     },
   );
+}
+
+class ValidateBusinessRouteArgs {
+  const ValidateBusinessRouteArgs({
+    this.key,
+    required this.args,
+  });
+
+  final _i13.Key? key;
+
+  final _i15.ValidateBusinessPageArgs args;
+
+  @override
+  String toString() {
+    return 'ValidateBusinessRouteArgs{key: $key, args: $args}';
+  }
 }

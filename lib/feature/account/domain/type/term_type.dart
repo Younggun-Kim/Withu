@@ -13,7 +13,7 @@ enum TermType {
 
   /// 전자금융거래
   finance(
-    isRequired: false,
+    isRequired: true,
     url: 'https://www.notion.so/1a441ccd5a6280bbac63c686d5d89cd9?pvs=4',
   ),
 
@@ -43,7 +43,7 @@ enum TermType {
       case TermType.privacy:
         return '[ 필수 ] 개인정보 수집 및 이용 동의';
       case TermType.finance:
-        return '[ 선택 ] 전자금융거래 이용약관';
+        return '[ 필수 ] 전자금융거래 이용약관';
       case TermType.location:
         return '[ 선택 ] 위치정보 이용약관';
       case TermType.marketing:

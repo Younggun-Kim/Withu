@@ -5,6 +5,13 @@ abstract class ValidateBusinessEvent extends BaseBlocEvent {}
 /// 메시지 초기화
 class ValidateBusinessMessageCleared extends ValidateBusinessEvent {}
 
+/// Args 저장
+class ValidateBusinessArgsStored extends ValidateBusinessEvent {
+  final ValidateBusinessPageArgs value;
+
+  ValidateBusinessArgsStored({required this.value});
+}
+
 /// 사업자등록 입력
 class ValidateBusinessNumInputted extends ValidateBusinessEvent {
   final BusinessNumValue value;

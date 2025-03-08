@@ -4,18 +4,22 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
+import 'package:withu/feature/account/presentation/page/sign_up/sign_up.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
 
 @RoutePage()
 class ValidateBusinessPage extends StatelessWidget {
-  const ValidateBusinessPage({super.key});
+  final ValidateBusinessPageArgs args;
+
+  const ValidateBusinessPage({super.key, required this.args});
 
   @override
   Widget build(BuildContext context) {
     return ValidateBusinessBlocProvider(
-      create: (context) => getIt(),
+      create:
+          (context) => getIt()..add(ValidateBusinessArgsStored(value: args)),
       child: _ValidateBusinessPageContent(),
     );
   }
@@ -27,7 +31,17 @@ class _ValidateBusinessPageContent extends StatelessWidget {
     return ValidateBusinessBlocConsumer(
       listener: (context, state) {
         if (state.status.isSuccess) {
-          context.router.push(SignUpRoute());
+          context.router.push(
+            SignUpRoute(
+              args: SignUpPageArgs(
+                businessNum: state.businessNum.value,
+                ceoName: state.ceoName.value,
+                companyName: state.companyName.value,
+                isAgreeLocation: state.args?.isAgreeLocation ?? false,
+                isAgreeMarketing: state.args?.isAgreeMarketing ?? false,
+              ),
+            ),
+          );
         }
       },
       builder: (context, state) {

@@ -9,16 +9,21 @@ import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 import 'package:withu/shared/widgets/multi_input/ymd_input.dart';
 
+import 'sign_up_page_args.dart';
+
 @RoutePage()
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  final SignUpPageArgs args;
+  const SignUpPage({super.key, required this.args});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         PhoneAuthBlocProvider(create: (context) => getIt<PhoneAuthBloc>()),
-        SignUpBlocProvider(create: (context) => getIt()),
+        SignUpBlocProvider(
+          create: (context) => getIt()..add(SignUpArgsStored(value: args)),
+        ),
       ],
       child: _SignUpPageContent(),
     );

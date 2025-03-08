@@ -6,6 +6,9 @@ class ValidateBusinessState extends BaseBlocState with _$ValidateBusinessState {
     /// 상태.
     required BaseBlocStatus status,
 
+    /// Args
+    @Default(null) ValidateBusinessPageArgs? args,
+
     /// 다이얼로그 메시지
     @Default('') String message,
 

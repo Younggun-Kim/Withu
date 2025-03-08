@@ -26,6 +26,7 @@ class ValidateBusinessBloc
 
   ValidateBusinessBloc({required this.useCase})
     : super(ValidateBusinessState(status: BaseBlocStatus.initial())) {
+    on<ValidateBusinessArgsStored>(_onValidateBusinessArgsStored);
     on<ValidateBusinessNumInputted>(_onValidateBusinessNumInputted);
     on<ValidateBusinessCeoNameInputted>(_onValidateBusinessCeoNameInputted);
     on<ValidateBusinessCompanyNameInputted>(

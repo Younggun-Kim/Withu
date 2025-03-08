@@ -7,6 +7,8 @@ class SignUpState extends BaseBlocState with _$SignUpState {
 
     @Default('') String message,
 
+    @Default(null) SignUpPageArgs? args,
+
     /// 이름
     @Default(NameValue()) NameValue name,
 

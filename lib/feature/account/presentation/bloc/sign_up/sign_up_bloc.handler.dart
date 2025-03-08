@@ -1,6 +1,10 @@
 part of 'sign_up_bloc.dart';
 
 extension SignUpBlocHandler on SignUpBloc {
+  void _onSignUpArgsStored(SignUpArgsStored event, Emitter<SignUpState> emit) {
+    emit(state.copyWith(args: event.value));
+  }
+
   void _onSignUpRequestSent(
     SignUpRequestSent event,
     Emitter<SignUpState> emit,
