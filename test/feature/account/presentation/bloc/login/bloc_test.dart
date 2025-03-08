@@ -25,7 +25,7 @@ void main() {
     test('Initial state', () {
       expect(loginBloc.state.status.isInitial, true);
       expect(loginBloc.state.loginId, Email.empty);
-      expect(loginBloc.state.password, Password.empty);
+      expect(loginBloc.state.password, PasswordValue());
       expect(loginBloc.state.isVisiblePassword, false);
       expect(loginBloc.state.isEnabledLogin, false);
     });
@@ -82,9 +82,9 @@ void main() {
                 .having(
                   (state) => state.password,
                   'password',
-                  const Password('123qwe!@'),
+                  const PasswordValue('123qwe!@'),
                 )
-                .having((state) => state.password.isValid, 'isValid', true)
+                .having((state) => state.password.isValid(), 'isValid', true)
                 .having(
                   (state) => state.isEnabledLogin,
                   'isEnabledLogin',
@@ -103,10 +103,10 @@ void main() {
                 .having(
                   (state) => state.password,
                   'password',
-                  const Password('12qw!@'),
+                  const PasswordValue('12qw!@'),
                 )
                 .having(
-                  (state) => state.password.isValid,
+                  (state) => state.password.isValid(),
                   'isValidPassword',
                   false,
                 )
@@ -128,7 +128,7 @@ void main() {
           ],
       expect: () {
         const loginId = Email(value: 'test@test.com');
-        const password = Password('123qwe!@');
+        const password = PasswordValue('123qwe!@');
         return [
           /// 이메일 입력 후 상태
           isA<LoginState>()
@@ -138,7 +138,7 @@ void main() {
           /// 비밀번호도 입력 후 상태
           isA<LoginState>()
               .having((state) => state.password, 'password', password)
-              .having((state) => state.password.isValid, 'isValid', true),
+              .having((state) => state.password.isValid(), 'isValid', true),
 
           /// 비밀번호도 입력 후 상태
           isA<LoginState>().having(

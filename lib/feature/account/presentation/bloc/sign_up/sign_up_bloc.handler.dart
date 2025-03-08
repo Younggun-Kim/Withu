@@ -38,4 +38,28 @@ extension SignUpBlocHandler on SignUpBloc {
   ) {
     emit(state.copyWith(email: event.value));
   }
+
+  /// 비밀번호 입력
+  void _onSignUpPasswordInputted(
+    SignUpPasswordInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(password: event.password));
+  }
+
+  /// 채널 선택
+  void _onSignUpChannelSelected(
+    SignUpChannelSelected event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(channel: event.value));
+  }
+
+  /// 추천인 아이디 입력
+  void _onSignUpReferrerUserInputted(
+    SignUpReferrerUserInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(referrerUser: event.value));
+  }
 }

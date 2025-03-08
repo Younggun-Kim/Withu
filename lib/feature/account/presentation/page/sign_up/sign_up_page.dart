@@ -6,6 +6,7 @@ import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/presentation/bloc/bloc.dart'
     show PhoneAuthBloc, PhoneAuthBlocListener, PhoneAuthBlocProvider;
 import 'package:withu/feature/common/presentation/widget/phone_auth/phone_auth_widget.dart';
+import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 import 'package:withu/shared/widgets/multi_input/ymd_input.dart';
@@ -67,6 +68,19 @@ class _SignUpPageContent extends StatelessWidget {
                   const SizedBox(height: 20),
                   _FieldName.phone(),
                   PhoneAuthWidget(),
+                  const SizedBox(height: 20),
+                  _FieldName.password(),
+                  _PasswordInput(),
+                  _PasswordDescription1(),
+                  _PasswordDescription2(),
+                  const SizedBox(height: 20),
+                  _FieldName.channel(),
+                  const SizedBox(height: 11),
+                  _ChannelBtn(),
+                  const SizedBox(height: 11),
+                  _ReferrerUserInput(),
+                  const SizedBox(height: 20),
+                  _SubmitBtn(),
                 ],
               ),
             ),
@@ -257,5 +271,173 @@ class _EmailInputState extends State<_EmailInput> {
         );
       },
     );
+  }
+}
+
+class _PasswordInput extends StatefulWidget {
+  const _PasswordInput();
+
+  @override
+  State<StatefulWidget> createState() => _PasswordInputState();
+}
+
+class _PasswordInputState extends State<_PasswordInput> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller;
+  }
+
+  @override
+  void dispose() {
+    _controller;
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseInput(
+      controller: _controller,
+      focusNode: _focusNode,
+      maxLength: 20,
+      hintText: '비밀번호를 입력해주세요.',
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      obscureText: true,
+      onChanged: (String text) {
+        context.read<SignUpBloc>().add(SignUpPasswordInputted(value: text));
+      },
+    );
+  }
+}
+
+class _PasswordDescription1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 7),
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: Row(
+        children: [
+          Assets.images.check.svg(),
+          const SizedBox(width: 2),
+          Text(
+            '3개 이상 연속되거라 동일한 문자/숫자 제외',
+            style: context.textTheme.bodySmall?.setPoint,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PasswordDescription2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 7),
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: Row(
+        children: [
+          Assets.images.check.svg(),
+          const SizedBox(width: 2),
+          Text(
+            '영문/숫자 조합 (8 - 20자 이내)',
+            style: context.textTheme.bodySmall?.setPoint,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ChannelBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        return InkWell(
+          onTap: () {
+            ListDialog.channels(
+              context: context,
+              selectedType: state.channel,
+              onPressed: (ChannelType value) {
+                context.read<SignUpBloc>().add(
+                  SignUpChannelSelected(value: value),
+                );
+              },
+            );
+          },
+          radius: 10,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: ColorName.tertiary),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(state.channelText, style: context.textTheme.bodyLarge),
+                const Spacer(),
+                Assets.images.chevronDown.svg(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ReferrerUserInput extends StatefulWidget {
+  const _ReferrerUserInput();
+
+  @override
+  State<StatefulWidget> createState() => _ReferrerUserInputState();
+}
+
+class _ReferrerUserInputState extends State<_ReferrerUserInput> {
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller;
+  }
+
+  @override
+  void dispose() {
+    _controller;
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseInput(
+      controller: _controller,
+      focusNode: _focusNode,
+      hintText: '추천인 아이디가 있나요? (선택)',
+      textInputAction: TextInputAction.done,
+      onChanged: (String text) {
+        context.read<SignUpBloc>().add(SignUpReferrerUserInputted(value: text));
+      },
+    );
+  }
+}
+
+class _SubmitBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return EnabledBtn(text: StringRes.next.tr, isEnabled: true, onTap: () {});
   }
 }

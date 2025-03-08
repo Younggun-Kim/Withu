@@ -6,7 +6,7 @@ class RegExUtil {
 
   /// 패스워드
   static RegExp passwordPattern = RegExp(
-    r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
+    r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$',
   );
 
   /// 휴대폰번호 11자리

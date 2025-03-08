@@ -140,6 +140,7 @@ class BaseInput extends StatelessWidget {
               padding ??
               const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(color: ColorName.tertiary),
             borderRadius: BorderRadius.circular(10),
           ),

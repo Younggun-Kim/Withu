@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPageContent> {
                   key: const Key('password_input'),
                   errorText: StringRes.pleaseEnterValidPassword.tr,
                   obscureText: !state.isVisiblePassword,
-                  errorVisible: !state.password.isValid,
+                  errorVisible: !state.password.isValid(),
                   onChanged: (String text) {
                     context.read<LoginBloc>().add(
                       LoginPasswordInputted(value: text),
@@ -136,7 +136,6 @@ class _LoginPageState extends State<LoginPageContent> {
 }
 
 class _LoginButton extends StatelessWidget {
-
   const _LoginButton({required this.enabled});
   final bool enabled;
 

@@ -33,6 +33,9 @@ class $AssetsImagesGen {
   SvgGenImage get building2 =>
       const SvgGenImage('assets/images/building-2.svg');
 
+  /// File path: assets/images/check.svg
+  SvgGenImage get check => const SvgGenImage('assets/images/check.svg');
+
   /// File path: assets/images/checkBox-off.svg
   SvgGenImage get checkBoxOff =>
       const SvgGenImage('assets/images/checkBox-off.svg');
@@ -40,6 +43,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/checkBox-on.svg
   SvgGenImage get checkBoxOn =>
       const SvgGenImage('assets/images/checkBox-on.svg');
+
+  /// File path: assets/images/chevron-down.svg
+  SvgGenImage get chevronDown =>
+      const SvgGenImage('assets/images/chevron-down.svg');
 
   /// File path: assets/images/chevron-left.svg
   SvgGenImage get chevronLeft =>
@@ -87,8 +94,10 @@ class $AssetsImagesGen {
         appIcon,
         appleLoginBtn,
         building2,
+        check,
         checkBoxOff,
         checkBoxOn,
+        chevronDown,
         chevronLeft,
         eye,
         googleLoginBtn,

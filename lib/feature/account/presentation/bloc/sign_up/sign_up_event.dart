@@ -26,3 +26,26 @@ class SignUpEmailInputted extends SignUpEvent {
 
   SignUpEmailInputted({required this.value});
 }
+
+/// 비밀번호 입력
+class SignUpPasswordInputted extends SignUpEvent {
+  final String value;
+
+  SignUpPasswordInputted({required this.value});
+
+  PasswordValue get password => PasswordValue(value);
+}
+
+/// 채널 선택
+class SignUpChannelSelected extends SignUpEvent {
+  final ChannelType value;
+
+  SignUpChannelSelected({required this.value});
+}
+
+/// 추천인 아이디 입력
+class SignUpReferrerUserInputted extends SignUpEvent {
+  final String value;
+
+  SignUpReferrerUserInputted({required this.value});
+}

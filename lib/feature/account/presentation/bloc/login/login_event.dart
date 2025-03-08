@@ -7,7 +7,6 @@ class LoginMessageCleared extends LoginEvent {}
 
 /// 아이디 입력 이벤트
 class LoginIdInputted extends LoginEvent {
-
   LoginIdInputted({required this.value});
   final String value;
 
@@ -16,11 +15,10 @@ class LoginIdInputted extends LoginEvent {
 
 /// 비밀번호 입력 이벤트
 class LoginPasswordInputted extends LoginEvent {
-
   LoginPasswordInputted({required this.value});
   final String value;
 
-  Password get password => Password(value);
+  PasswordValue get password => PasswordValue(value);
 }
 
 /// 로그인 버튼 클릭 이벤트
@@ -30,7 +28,6 @@ class LoginBtnPressed extends LoginEvent {
 
 /// 탭 클릭 이벤트
 class LoginTabPressed extends LoginEvent {
-
   LoginTabPressed({required this.type});
   final AccountType type;
 }

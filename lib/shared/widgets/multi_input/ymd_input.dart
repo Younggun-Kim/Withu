@@ -111,6 +111,7 @@ class _YmdInputState extends State<YmdInput> {
       height: 50,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(color: ColorName.tertiary),
         borderRadius: BorderRadius.circular(10),
       ),

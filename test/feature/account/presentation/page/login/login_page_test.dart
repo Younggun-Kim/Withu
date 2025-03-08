@@ -133,12 +133,12 @@ void main() {
 
     testWidgets('비밀번호 유효성 검사 - 성공 케이스', (WidgetTester tester) async {
       //Given
-      const password = '123qwe!@';
+      const password = '125qwg!@';
       whenListen(
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(password: const Password(password)),
+          initialState.copyWith(password: const PasswordValue(password)),
         ]),
         initialState: initialState,
       );
@@ -152,8 +152,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.password, equals(const Password(password)));
-      expect(loginBloc.state.password.isValid, isTrue);
+      expect(loginBloc.state.password, equals(const PasswordValue(password)));
+      expect(loginBloc.state.password.isValid(), isTrue);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsNothing);
     });
@@ -165,7 +165,7 @@ void main() {
         loginBloc,
         Stream.fromIterable([
           initialState,
-          initialState.copyWith(password: const Password(password)),
+          initialState.copyWith(password: const PasswordValue(password)),
         ]),
         initialState: initialState,
       );
@@ -179,8 +179,8 @@ void main() {
       await tester.pumpAndSettle();
 
       /// Then
-      expect(loginBloc.state.password, equals(const Password(password)));
-      expect(loginBloc.state.password.isValid, isFalse);
+      expect(loginBloc.state.password, equals(const PasswordValue(password)));
+      expect(loginBloc.state.password.isValid(), isFalse);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsOneWidget);
       expect(find.text(StringRes.pleaseEnterValidPassword.tr), findsOneWidget);
@@ -238,7 +238,7 @@ void main() {
       const password = '123qwe!@';
       final localState = initialState.copyWith(
         loginId: const Email(value: loginId),
-        password: const Password(password),
+        password: const PasswordValue(password),
         isEnabledLogin: true,
       );
 

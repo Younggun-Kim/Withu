@@ -13,7 +13,7 @@ class LoginState extends BaseBlocState with _$LoginState {
     @Default(Email.empty) LoginId loginId,
 
     /// password
-    @Default(Password.empty) Password password,
+    @Default(PasswordValue()) PasswordValue password,
 
     /// password Visible 여부
     @Default(false) bool isVisiblePassword,
@@ -27,9 +27,9 @@ extension LoginStateExt on LoginState {
   /// 로그인 버튼 enabled 검사
   bool checkLoginEnabled({
     LoginId loginId = Email.empty,
-    Password password = Password.empty,
+    required PasswordValue password,
   }) {
-    return loginId.isValid && password.isValid;
+    return loginId.isValid && password.isValid();
   }
 
   /// 메시지가 있는지 검사.
