@@ -6,6 +6,15 @@ class SignUpRequestSent extends SignUpEvent {}
 
 class SignUpRequestCompleted extends SignUpEvent {}
 
+/// 이름 입력 입력
+class SignUpNameInputted extends SignUpEvent {
+  final String value;
+
+  SignUpNameInputted({required this.value});
+
+  NameValue get name => NameValue(value);
+}
+
 /// 생년월일 입력
 class SignUpBirthDateInputted extends SignUpEvent {
   final BirthDateValue value;
@@ -18,6 +27,20 @@ class SignUpGenderSelected extends SignUpEvent {
   final GenderType value;
 
   SignUpGenderSelected({required this.value});
+}
+
+/// 휴대폰 번호 입력
+class SignUpPhoneNumInputted extends SignUpEvent {
+  final PhoneValue value;
+
+  SignUpPhoneNumInputted({required this.value});
+}
+
+/// 인증 여부 변경
+class SignUpPhoneVerifyChanged extends SignUpEvent {
+  final bool value;
+
+  SignUpPhoneVerifyChanged({required this.value});
 }
 
 /// 이메일 입력
@@ -49,3 +72,6 @@ class SignUpReferrerUserInputted extends SignUpEvent {
 
   SignUpReferrerUserInputted({required this.value});
 }
+
+/// 다음 버튼 클릭
+class SignUpRequested extends SignUpEvent {}

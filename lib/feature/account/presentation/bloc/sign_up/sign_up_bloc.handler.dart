@@ -15,6 +15,14 @@ extension SignUpBlocHandler on SignUpBloc {
     emit(state.copyWith(status: BaseBlocStatus.initial()));
   }
 
+  /// 이름 입력
+  void _onSignUpNameInputted(
+    SignUpNameInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(name: event.name));
+  }
+
   /// 생년월일 입력
   void _onSignUpBirthDateInputted(
     SignUpBirthDateInputted event,
@@ -29,6 +37,20 @@ extension SignUpBlocHandler on SignUpBloc {
     Emitter<SignUpState> emit,
   ) {
     emit(state.copyWith(gender: event.value));
+  }
+
+  void _onSignUpPhoneNumInputted(
+    SignUpPhoneNumInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(phone: event.value));
+  }
+
+  void _onSignUpPhoneVerifyChanged(
+    SignUpPhoneVerifyChanged event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(isPhoneVerify: event.value));
   }
 
   /// 이메일 입력
@@ -61,5 +83,10 @@ extension SignUpBlocHandler on SignUpBloc {
     Emitter<SignUpState> emit,
   ) {
     emit(state.copyWith(referrerUser: event.value));
+  }
+
+  /// 다음 버튼 클릭
+  void _onSignUpRequested(SignUpRequested event, Emitter<SignUpState> emit) {
+    logger.i(state.toEntity());
   }
 }

@@ -7,11 +7,17 @@ class SignUpState extends BaseBlocState with _$SignUpState {
 
     @Default('') String message,
 
+    /// 이름
+    @Default(NameValue()) NameValue name,
+
     /// 생년월일
     @Default(BirthDateValue()) BirthDateValue birthDate,
 
     /// 휴대폰
     @Default(PhoneValue()) PhoneValue phone,
+
+    /// 휴대폰 인증 여부
+    @Default(false) bool isPhoneVerify,
 
     /// 성별
     @Default(GenderType.none) GenderType gender,
@@ -36,5 +42,32 @@ extension SignUpStateEx on SignUpState {
       return '저희 앱을 어떻게 찾아주셨나요?';
     }
     return channel.toString();
+  }
+
+  /// 버튼 Enabled 여부
+  bool get isEnabledSubmitBtn {
+    return name.isValid() &&
+        birthDate.isValid() &&
+        !gender.isNone &&
+        phone.isValid() &&
+        isPhoneVerify &&
+        email.isValid() &&
+        password.isValid();
+  }
+
+  CompanySignUpEntity toEntity() {
+    return CompanySignUpEntity(
+      name: name.value,
+      birthDate: birthDate.value,
+      gender: gender,
+      phoneNo: phone.value,
+      email: email.value,
+      password: password.value,
+      signUpMethod: SignUpMethodType.email,
+      businessNumber: '',
+      companyName: '',
+      locationInfoConsent: false,
+      marketingInfoConsent: false,
+    );
   }
 }

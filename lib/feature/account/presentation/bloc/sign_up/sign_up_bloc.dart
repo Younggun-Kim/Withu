@@ -25,11 +25,15 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     : super(SignUpState(status: BaseBlocStatus.initial())) {
     on<SignUpRequestSent>(_onSignUpRequestSent);
     on<SignUpRequestCompleted>(_onSignUpRequestCompleted);
+    on<SignUpNameInputted>(_onSignUpNameInputted);
     on<SignUpBirthDateInputted>(_onSignUpBirthDateInputted);
     on<SignUpGenderSelected>(_onSignUpGenderSelected);
+    on<SignUpPhoneNumInputted>(_onSignUpPhoneNumInputted);
+    on<SignUpPhoneVerifyChanged>(_onSignUpPhoneVerifyChanged);
     on<SignUpEmailInputted>(_onSignUpEmailInputted);
     on<SignUpPasswordInputted>(_onSignUpPasswordInputted);
     on<SignUpChannelSelected>(_onSignUpChannelSelected);
     on<SignUpReferrerUserInputted>(_onSignUpReferrerUserInputted);
+    on<SignUpRequested>(_onSignUpRequested);
   }
 }

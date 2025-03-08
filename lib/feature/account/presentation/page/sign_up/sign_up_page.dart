@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/common/presentation/bloc/bloc.dart'
-    show PhoneAuthBloc, PhoneAuthBlocListener, PhoneAuthBlocProvider;
-import 'package:withu/feature/common/presentation/widget/phone_auth/phone_auth_widget.dart';
+import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -40,6 +38,16 @@ class _SignUpPageContent extends StatelessWidget {
             } else {
               context.read<SignUpBloc>().add(SignUpRequestCompleted());
             }
+
+            /// 휴대폰 번호 전달
+            context.read<SignUpBloc>().add(
+              SignUpPhoneNumInputted(value: state.phone),
+            );
+
+            /// 인증 완료 여부 전달
+            context.read<SignUpBloc>().add(
+              SignUpPhoneVerifyChanged(value: state.verifyState.isSuccess),
+            );
           },
         ),
       ],
@@ -49,11 +57,12 @@ class _SignUpPageContent extends StatelessWidget {
             isLoading: state.status.isLoading,
             appBar: CustomAppBar.back(context: context),
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 35),
+              padding: EdgeInsets.symmetric(horizontal: 35),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 20),
                   _FieldName.name(),
                   _NameInput(),
                   const SizedBox(height: 20),
@@ -81,6 +90,7 @@ class _SignUpPageContent extends StatelessWidget {
                   _ReferrerUserInput(),
                   const SizedBox(height: 20),
                   _SubmitBtn(),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
@@ -151,6 +161,9 @@ class _NameInputState extends State<_NameInput> {
       focusNode: _focusNode,
       hintText: '홍길동',
       textInputAction: TextInputAction.next,
+      onChanged: (String text) {
+        context.read<SignUpBloc>().add(SignUpNameInputted(value: text));
+      },
     );
   }
 }
@@ -319,19 +332,26 @@ class _PasswordInputState extends State<_PasswordInput> {
 class _PasswordDescription1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 7),
-      padding: EdgeInsets.symmetric(horizontal: 3),
-      child: Row(
-        children: [
-          Assets.images.check.svg(),
-          const SizedBox(width: 2),
-          Text(
-            '3개 이상 연속되거라 동일한 문자/숫자 제외',
-            style: context.textTheme.bodySmall?.setPoint,
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        if (state.password.isValid()) {
+          return const SizedBox();
+        }
+        return Container(
+          margin: const EdgeInsets.only(top: 7),
+          padding: EdgeInsets.symmetric(horizontal: 3),
+          child: Row(
+            children: [
+              Assets.images.check.svg(),
+              const SizedBox(width: 2),
+              Text(
+                '3개 이상 연속되거라 동일한 문자/숫자 제외',
+                style: context.textTheme.bodySmall?.setPoint,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -339,19 +359,26 @@ class _PasswordDescription1 extends StatelessWidget {
 class _PasswordDescription2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 7),
-      padding: EdgeInsets.symmetric(horizontal: 3),
-      child: Row(
-        children: [
-          Assets.images.check.svg(),
-          const SizedBox(width: 2),
-          Text(
-            '영문/숫자 조합 (8 - 20자 이내)',
-            style: context.textTheme.bodySmall?.setPoint,
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        if (state.password.isValid()) {
+          return const SizedBox();
+        }
+        return Container(
+          margin: const EdgeInsets.only(top: 7),
+          padding: EdgeInsets.symmetric(horizontal: 3),
+          child: Row(
+            children: [
+              Assets.images.check.svg(),
+              const SizedBox(width: 2),
+              Text(
+                '영문/숫자 조합 (8 - 20자 이내)',
+                style: context.textTheme.bodySmall?.setPoint,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -438,6 +465,16 @@ class _ReferrerUserInputState extends State<_ReferrerUserInput> {
 class _SubmitBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return EnabledBtn(text: StringRes.next.tr, isEnabled: true, onTap: () {});
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        return EnabledBtn(
+          text: StringRes.next.tr,
+          isEnabled: state.isEnabledSubmitBtn,
+          onTap: () {
+            context.read<SignUpBloc>().add(SignUpRequested());
+          },
+        );
+      },
+    );
   }
 }
