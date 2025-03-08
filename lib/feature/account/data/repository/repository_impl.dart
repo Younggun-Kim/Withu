@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   AccountRepositoryImpl({
     required this.accountApi,
     required this.accountStorage,
   });
+
   @override
   final AccountStorage accountStorage;
 
@@ -35,4 +37,11 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   /// 회원가입
+  @override
+  FutureOr<CompanySignUpResEntity> requestCompanySignUp(
+    CompanySignUpReqDto dto,
+  ) async {
+    final response = await accountApi.requestCompanySignUp(dto: dto);
+    return CompanySignUpResEntityParser.fromDto(response.data);
+  }
 }

@@ -2,6 +2,7 @@ part of 'sign_up_bloc.dart';
 
 extension SignUpBlocHandler on SignUpBloc {
   void _onSignUpArgsStored(SignUpArgsStored event, Emitter<SignUpState> emit) {
+    logger.i(event.value);
     emit(state.copyWith(args: event.value));
   }
 
@@ -90,7 +91,19 @@ extension SignUpBlocHandler on SignUpBloc {
   }
 
   /// 다음 버튼 클릭
-  void _onSignUpRequested(SignUpRequested event, Emitter<SignUpState> emit) {
-    logger.i(state.toEntity());
+  void _onSignUpRequested(
+    SignUpRequested event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(state.copyWith(status: BaseBlocStatus.loading()));
+
+    final result = await signUpUseCase.signUpCompanyRequested(state.toEntity());
+
+    emit(
+      state.copyWith(
+        status: BaseBlocStatus.fromSuccess(result.isSuccess),
+        message: result.message,
+      ),
+    );
   }
 }

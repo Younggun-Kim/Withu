@@ -46,6 +46,7 @@ extension TermBlocHandler on TermBloc {
       state.copyWith(
         serviceTerm: event.isChecked,
         privacyTerm: event.isChecked,
+        financeTerm: event.isChecked,
       ),
     );
   }

@@ -17,4 +17,10 @@ extension StringExt on String {
 
     return formatter.format(double.parse(this));
   }
+
+  String ymdToYmdSlash() {
+    if (length != 8) return this; // 예외 처리
+
+    return '${substring(0, 4)}-${substring(4, 6)}-${substring(6, 8)}';
+  }
 }

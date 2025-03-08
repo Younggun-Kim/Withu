@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data.dart';
+import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 
 abstract class AccountRepository {
   AccountRepository({required this.accountApi, required this.accountStorage});
+
   final AccountStorage accountStorage;
 
   final AccountApi accountApi;
@@ -19,4 +21,9 @@ abstract class AccountRepository {
 
   /// Session Id Storage 에 조회
   Future<String> getSessionId();
+
+  /// 회사 회원가입 요청
+  FutureOr<CompanySignUpResEntity> requestCompanySignUp(
+    CompanySignUpReqDto dto,
+  );
 }

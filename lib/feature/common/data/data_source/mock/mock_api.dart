@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:withu/core/utils/injections.dart';
 import 'package:withu/feature/common/common.dart';
 
 class CommonMockApi extends CommonApiImpl {
   CommonMockApi({required super.network}) {
-    dioAdapter = DioAdapter(dio: network.dio);
+    dioAdapter = getIt();
   }
 
   late final DioAdapter dioAdapter;
@@ -18,12 +19,12 @@ class CommonMockApi extends CommonApiImpl {
     /// Mock 응답 등록
     dioAdapter.onPost(
       CommonApiPathType.validateBusiness.fullPath,
+      data: reqDto.toJson(),
       (server) => server.reply(
-        400,
-        ValidateBusinessResDtoMock.duplicate().toJson((_) => null),
+        200,
+        ValidateBusinessResDtoMock.success().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
-      data: reqDto.toJson(),
     );
 
     return await super.postValidateBusiness(reqDto);
@@ -56,12 +57,12 @@ class CommonMockApi extends CommonApiImpl {
     /// Mock 응답 등록
     dioAdapter.onPost(
       CommonApiPathType.verifyAuthCode.fullPath,
+      data: dto.toJson(),
       (server) => server.reply(
         200,
         VerifyAuthCodeResDtoMock.success().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
-      data: dto.toJson(),
     );
 
     return await super.verifyAuthCode(dto: dto);

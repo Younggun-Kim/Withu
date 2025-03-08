@@ -35,7 +35,13 @@ class _SignUpPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        SignUpBlocListener(listener: (context, state) {}),
+        SignUpBlocListener(
+          listener: (context, state) {
+            if (state.status.isSuccess) {
+              context.router.popUntilRoot();
+            }
+          },
+        ),
         PhoneAuthBlocListener(
           listener: (context, state) {
             if (state.status.isLoading) {

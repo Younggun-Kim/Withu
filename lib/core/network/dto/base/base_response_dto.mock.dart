@@ -10,8 +10,8 @@ extension BaseResponseDtoMock<T> on BaseResponseDto<T> {
     );
   }
 
-  static BaseResponseDto failure(FailResponse error) {
-    return BaseResponseDto(
+  static BaseResponseDto failure<S>(FailResponse error) {
+    return BaseResponseDto<S>(
       success: false,
       message: '',
       data: null,

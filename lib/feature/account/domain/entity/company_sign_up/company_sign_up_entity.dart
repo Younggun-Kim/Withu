@@ -19,3 +19,21 @@ class CompanySignUpEntity with _$CompanySignUpEntity {
     required bool marketingInfoConsent,
   }) = _CompanySignUpEntity;
 }
+
+extension CompanySignUpEntityParser on CompanySignUpEntity {
+  CompanySignUpReqDto toDto() {
+    return CompanySignUpReqDto(
+      name: name,
+      birthDate: birthDate,
+      gender: gender.serverKey,
+      phoneNo: phoneNo,
+      email: email,
+      password: password,
+      signUpMethod: signUpMethod.serverKey,
+      businessNumber: businessNumber,
+      companyName: companyName,
+      locationInfoConsent: locationInfoConsent,
+      marketingInfoConsent: marketingInfoConsent,
+    );
+  }
+}

@@ -22,7 +22,7 @@ void initAccountDataInjections() {
 void initAccountDomainInjections() {
   getIt.registerSingleton<LoginUseCase>(LoginUseCaseImpl(accountRepo: getIt()));
   getIt.registerSingleton<SignUpUseCase>(
-    SignUpUseCaseImpl(repository: getIt()),
+    SignUpUseCaseImpl(accountRepo: getIt()),
   );
 }
 

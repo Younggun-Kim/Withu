@@ -60,7 +60,7 @@ extension SignUpStateEx on SignUpState {
   CompanySignUpEntity toEntity() {
     return CompanySignUpEntity(
       name: name.value,
-      birthDate: birthDate.value,
+      birthDate: birthDate.formattedDate,
       gender: gender,
       phoneNo: phone.value,
       email: email.value,

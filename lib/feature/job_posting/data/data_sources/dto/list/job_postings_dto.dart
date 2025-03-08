@@ -7,6 +7,7 @@ import 'job_postings_item_dto.dart';
 part 'job_postings_dto.freezed.dart';
 
 part 'job_postings_dto.g.dart';
+
 part 'job_postings_dto.mock.dart';
 
 @freezed
