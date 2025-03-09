@@ -264,6 +264,9 @@ class _Login extends StatelessWidget {
 
         const Spacer(),
         InkWell(
+          onTap: () {
+            Toast.show(context: context, text: '프로필 등록으로 이동할 예정입니다.');
+          },
           child: Text('프로필 등록', style: context.textTheme.bodyMedium?.setBlack),
         ),
         const SizedBox(height: 20),
@@ -272,7 +275,9 @@ class _Login extends StatelessWidget {
           child: BaseButton.enabled(
             context: context,
             text: '지금 바로 시작',
-            onTap: () {},
+            onTap: () {
+              Toast.show(context: context, text: '홈으로 이동할 예정입니다.');
+            },
           ),
         ),
 
