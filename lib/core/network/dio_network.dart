@@ -19,11 +19,14 @@ class DioNetwork {
         ..interceptors.add(
           InterceptorsWrapper(
             onRequest: (options, handler) async {
-              final preference = await SharedPreferences.getInstance();
-              final sessionId = preference.getString(
-                AccountStorageKey.sessionId.name,
-              );
-              options.headers['sessionId'] = sessionId ?? '';
+              if (options.uri.path.contains('/api')) {
+                final preference = await SharedPreferences.getInstance();
+                final token = preference.getString(
+                  AccountStorageKey.token.name,
+                );
+                options.headers['Authorization'] = token ?? 'bearer $token';
+              }
+
               return handler.next(options);
             },
             onError: (DioException error, ErrorInterceptorHandler handler) {

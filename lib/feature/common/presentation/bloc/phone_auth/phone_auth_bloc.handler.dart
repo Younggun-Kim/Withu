@@ -1,6 +1,14 @@
 part of 'phone_auth_bloc.dart';
 
 extension PhoneAuthBlocHandler on PhoneAuthBloc {
+  /// 초기화
+  void _onPhoneAuthInitialized(
+    PhoneAuthInitialized event,
+    Emitter<PhoneAuthState> emit,
+  ) {
+    emit(PhoneAuthState(status: BaseBlocStatus.initial()));
+  }
+
   /// 휴대폰 번호 입력 이벤트.
   void _onPhoneInputted(
     PhoneAuthPhoneInputted event,

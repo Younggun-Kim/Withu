@@ -24,6 +24,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
 
   PhoneAuthBloc({required this.phoneAuthUseCase})
     : super(PhoneAuthState(status: BaseBlocStatus.initial())) {
+    on<PhoneAuthInitialized>(_onPhoneAuthInitialized);
     on<PhoneAuthPhoneInputted>(_onPhoneInputted);
     on<PhoneAuthAuthCodeSent>(_onAuthCodeRequested);
     on<PhoneAuthAuthCodeInputted>(_onAuthCodeInputted);

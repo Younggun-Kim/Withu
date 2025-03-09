@@ -2,29 +2,24 @@ part of 'base_response_dto.dart';
 
 extension BaseResponseDtoMock<T> on BaseResponseDto<T> {
   static BaseResponseDto<S> success<S>(S data) {
-    return BaseResponseDto<S>(
-      success: true,
-      message: '',
-      data: data,
-      error: null,
-    );
+    return BaseResponseDto<S>(success: true, message: '', data: data);
   }
 
-  static BaseResponseDto failure<S>(FailResponse error) {
+  static BaseResponseDto failure<S>(String message) {
     return BaseResponseDto<S>(
       success: false,
-      message: '',
+      message: message,
       data: null,
-      error: error,
+      errorCode: 'SERVER_ERROR',
     );
   }
 
   static BaseResponseDto error() {
     return BaseResponseDto(
       success: false,
-      message: '',
+      message: '서버에러',
       data: null,
-      error: FailResponse.error(),
+      errorCode: 'SERVER_ERROR',
     );
   }
 }

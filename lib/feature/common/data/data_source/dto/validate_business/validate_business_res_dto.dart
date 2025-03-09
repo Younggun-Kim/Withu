@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 
 part 'validate_business_res_dto.freezed.dart';
 

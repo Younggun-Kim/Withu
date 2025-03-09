@@ -16,6 +16,17 @@ class Toast {
       },
     );
   }
+
+  static showWithNavigatorKey({required String text}) {
+    return toastification.showCustom(
+      overlayState: getItAppRouter.navigatorKey.currentState?.overlay,
+      autoCloseDuration: const Duration(seconds: 1),
+      alignment: Alignment.bottomCenter,
+      builder: (BuildContext context, ToastificationItem holder) {
+        return CustomToast(text: text);
+      },
+    );
+  }
 }
 
 class CustomToast extends StatelessWidget {
@@ -28,7 +39,7 @@ class CustomToast extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.fromLTRB(50, 0, 50, 60),
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: ColorName.primary,

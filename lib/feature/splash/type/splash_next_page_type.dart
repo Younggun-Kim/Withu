@@ -20,6 +20,6 @@ extension SplashNextPageTypeExt on SplashNextPageType {
   static SplashNextPageType getNextPage(bool isLoggedIn) {
     return isLoggedIn
         ? SplashNextPageType.jobPostings
-        : SplashNextPageType.test;
+        : SplashNextPageType.login;
   }
 }

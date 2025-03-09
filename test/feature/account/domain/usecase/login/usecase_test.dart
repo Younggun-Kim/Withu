@@ -30,7 +30,7 @@ void main() {
         () => mockRepo.login(requestData: LoginRequestDtoMock.mock()),
       ).thenAnswer((_) async => ApiResponse.success(successResponseDto));
       when(
-        () => mockRepo.storeSessionId(id: any(named: 'id')),
+        () => mockRepo.storeToken(token: any(named: 'token')),
       ).thenAnswer((_) async => {});
 
       // When
@@ -39,7 +39,7 @@ void main() {
       // Then
       expect(result.isLoggedIn, isTrue);
       expect(result.isLoggedIn, isTrue);
-      verify(() => mockRepo.storeSessionId(id: any(named: 'id'))).called(1);
+      verify(() => mockRepo.storeToken(token: any(named: 'token'))).called(1);
     });
 
     test('서버 에러로 인한 로그인 실패', () async {

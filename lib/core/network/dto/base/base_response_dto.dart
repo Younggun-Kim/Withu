@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'fail_response_dto.dart';
 
 part 'base_response_dto.freezed.dart';
 
@@ -15,7 +14,7 @@ class BaseResponseDto<T> with _$BaseResponseDto<T> {
     required bool success,
     required String message,
     T? data,
-    FailResponse? error,
+    @Default('') String errorCode,
   }) = _BaseResponseDto;
 
   factory BaseResponseDto.fromJson(

@@ -25,7 +25,7 @@ extension CompanySignUpResDtoMock on CompanySignUpResDto {
       success: true,
       message: '요청 성공',
       data: CompanySignUpResDataMock.success(),
-      error: null,
+      errorCode: '',
     );
   }
 
@@ -34,7 +34,7 @@ extension CompanySignUpResDtoMock on CompanySignUpResDto {
       success: false,
       message: '요청 실패',
       data: CompanySignUpResDataMock.failure(),
-      error: null,
+      errorCode: 'SERVER_ERROR',
     );
   }
 }

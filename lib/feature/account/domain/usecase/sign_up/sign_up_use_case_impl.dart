@@ -10,6 +10,17 @@ class SignUpUseCaseImpl implements SignUpUseCase {
   FutureOr<CompanySignUpResEntity> signUpCompanyRequested(
     CompanySignUpEntity entity,
   ) async {
-    return await accountRepo.requestCompanySignUp(entity.toDto());
+    late final CompanySignUpResEntity response;
+    if (entity.accountType.isUser) {
+      response = await accountRepo.requestUserSignUp(entity.toUserDto());
+    } else {
+      response = await accountRepo.requestCompanySignUp(entity.toCompanyDto());
+    }
+
+    if (!response.isSuccess) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    return response;
   }
 }

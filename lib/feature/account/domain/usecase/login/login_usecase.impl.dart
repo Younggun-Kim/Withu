@@ -1,7 +1,6 @@
 part of 'login_usecase.dart';
 
 class LoginUseCaseImpl implements LoginUseCase {
-
   LoginUseCaseImpl({required this.accountRepo});
   @override
   final AccountRepository accountRepo;
@@ -11,22 +10,22 @@ class LoginUseCaseImpl implements LoginUseCase {
   Future<LoginResultEntity> login({required LoginRequestEntity entity}) async {
     final result = await accountRepo.login(requestData: entity.toDto());
 
-    storeSessionId(id: result.successData?.sessionId ?? '');
+    storeToken(token: result.successData?.sessionId ?? '');
 
     return LoginResultEntityConverter.fromDto(result: result);
   }
 
   /// 세션 Id 저장
-  void storeSessionId({required String id}) {
-    if (id.isNotEmpty) {
-      accountRepo.storeSessionId(id: id);
+  void storeToken({required String token}) {
+    if (token.isNotEmpty) {
+      accountRepo.storeToken(token: token);
     }
   }
 
   /// 로그인 여부
   @override
   Future<bool> checkLogin() async {
-    final sessionId = await accountRepo.getSessionId();
+    final sessionId = await accountRepo.getToken();
     return sessionId.isNotEmpty;
   }
 }

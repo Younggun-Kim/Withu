@@ -52,4 +52,30 @@ class AccountApiImpl extends AccountApi {
           return BaseResponseDtoMock.error() as CompanySignUpResDto;
         });
   }
+
+  /// 근로자 회원가입 요청
+  @override
+  FutureOr<UserSignUpResDto> requestUserSignUp({
+    required UserSignUpReqDto dto,
+  }) async {
+    return network.dio
+        .post(AccountApiPathType.userSignUp.fullPath, data: dto.toJson())
+        .then(
+          (response) => UserSignUpResDto.fromJson(
+            response.data,
+            (json) => UserSignUpResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          if (error is DioException) {
+            return UserSignUpResDto.fromJson(
+              error.response?.data,
+              (json) =>
+                  UserSignUpResData.fromJson(json as Map<String, dynamic>),
+            );
+          }
+
+          return BaseResponseDtoMock.error() as UserSignUpResDto;
+        });
+  }
 }

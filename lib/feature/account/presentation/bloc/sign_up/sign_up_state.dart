@@ -59,15 +59,17 @@ extension SignUpStateEx on SignUpState {
 
   CompanySignUpEntity toEntity() {
     return CompanySignUpEntity(
+      accountType: args?.accountType ?? AccountType.none,
       name: name.value,
       birthDate: birthDate.formattedDate,
       gender: gender,
-      phoneNo: phone.value,
+      phoneNo: phone.formatPhoneNumber(),
       email: email.value,
       password: password.value,
       signUpMethod: SignUpMethodType.email,
       businessNumber: args?.businessNum ?? '',
       companyName: args?.companyName ?? '',
+      appAcquisitionChannel: channel,
       locationInfoConsent: args?.isAgreeLocation ?? false,
       marketingInfoConsent: args?.isAgreeMarketing ?? false,
     );

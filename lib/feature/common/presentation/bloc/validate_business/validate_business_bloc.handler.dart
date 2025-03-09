@@ -7,7 +7,6 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
     ValidateBusinessArgsStored event,
     ValidateBusinessEmitter emit,
   ) {
-    logger.i(event.value);
     emit(state.copyWith(args: event.value));
   }
 

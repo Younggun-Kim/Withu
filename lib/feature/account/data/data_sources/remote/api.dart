@@ -3,13 +3,14 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 
 enum AccountApiPathType {
-  companySignUp('/auth/signup');
+  companySignUp('/company/auth/signup'),
+  userSignUp('/staff/auth/signup');
 
   final String path;
 
   const AccountApiPathType(this.path);
 
-  String get fullPath => '/api/company$path';
+  String get fullPath => '/api$path';
 }
 
 abstract class AccountApi {
@@ -28,4 +29,7 @@ abstract class AccountApi {
   FutureOr<CompanySignUpResDto> requestCompanySignUp({
     required CompanySignUpReqDto dto,
   });
+
+  /// 근로자 회원가입 요청
+  FutureOr<UserSignUpResDto> requestUserSignUp({required UserSignUpReqDto dto});
 }

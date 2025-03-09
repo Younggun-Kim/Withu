@@ -14,23 +14,16 @@ extension ValidateBusinessResDtoMock on ValidateBusinessResDto {
         status: "영업 중",
         isRegistered: false,
       ),
-      error: null,
+      errorCode: '',
     );
   }
 
   static ValidateBusinessResDto duplicate() {
     return ValidateBusinessResDto(
       success: false,
-      message: '',
+      message: '중복된 사업자입니다.',
       data: null,
-      error: FailResponse(
-        timestamp: "2025-02-26T10:15:30",
-        status: 409,
-        error: "BUSINESS_NUMBER_ALREADY_REGISTERED",
-        message: "이미 가입된 사업자번호입니다",
-        engMessage: "Business number already registered",
-        path: "/common/validate-business",
-      ),
+      errorCode: 'SERVER_ERROR',
     );
   }
 }

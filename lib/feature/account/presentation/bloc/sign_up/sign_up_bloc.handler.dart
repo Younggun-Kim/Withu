@@ -2,7 +2,6 @@ part of 'sign_up_bloc.dart';
 
 extension SignUpBlocHandler on SignUpBloc {
   void _onSignUpArgsStored(SignUpArgsStored event, Emitter<SignUpState> emit) {
-    logger.i(event.value.businessNum);
     emit(state.copyWith(args: event.value));
   }
 

@@ -17,13 +17,16 @@ abstract class AccountRepository {
   });
 
   /// Session Id Storage 에 저장
-  void storeSessionId({required String id});
+  void storeToken({required String token});
 
   /// Session Id Storage 에 조회
-  Future<String> getSessionId();
+  Future<String> getToken();
 
   /// 회사 회원가입 요청
   FutureOr<CompanySignUpResEntity> requestCompanySignUp(
     CompanySignUpReqDto dto,
   );
+
+  /// 근로자 회원가입 요청
+  FutureOr<CompanySignUpResEntity> requestUserSignUp(UserSignUpReqDto dto);
 }

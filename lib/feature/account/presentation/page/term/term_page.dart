@@ -216,6 +216,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.isAllChecked,
               isRequired: true,
               text: '전체 동의',
+              url: '',
               onTap: () {
                 context.read<TermBloc>().add(
                   TermAllAgreementTapped(isChecked: !state.isAllChecked),
@@ -227,6 +228,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.isRequiredChecked,
               isRequired: true,
               text: '필수 약관 동의',
+              url: '',
               onTap: () {
                 context.read<TermBloc>().add(
                   TermRequiredAgreementTapped(
@@ -242,6 +244,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.serviceTerm,
               isRequired: TermType.service.isRequired,
               text: TermType.service.toString(),
+              url: TermType.service.url,
               onTap: () {
                 context.read<TermBloc>().add(TermServiceAgreementTapped());
               },
@@ -251,6 +254,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.privacyTerm,
               isRequired: TermType.privacy.isRequired,
               text: TermType.privacy.toString(),
+              url: TermType.privacy.url,
               onTap: () {
                 context.read<TermBloc>().add(TermPrivacyAgreementTapped());
               },
@@ -260,6 +264,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.financeTerm,
               isRequired: TermType.finance.isRequired,
               text: TermType.finance.toString(),
+              url: TermType.finance.url,
               onTap: () {
                 context.read<TermBloc>().add(TermFinanceAgreementTapped());
               },
@@ -269,6 +274,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.locationTerm,
               isRequired: TermType.location.isRequired,
               text: TermType.location.toString(),
+              url: TermType.location.url,
               onTap: () {
                 context.read<TermBloc>().add(TermLocationAgreementTapped());
               },
@@ -278,6 +284,7 @@ class _SecondStepContents extends StatelessWidget {
               isChecked: state.marketingTerm,
               isRequired: TermType.marketing.isRequired,
               text: TermType.marketing.toString(),
+              url: TermType.marketing.url,
               onTap: () {
                 context.read<TermBloc>().add(TermMarketingAgreementTapped());
               },
@@ -297,12 +304,15 @@ class _TermCheckItem extends StatelessWidget {
 
   final String text;
 
+  final String url;
+
   final VoidCallback onTap;
 
   const _TermCheckItem({
     required this.isChecked,
     required this.isRequired,
     required this.text,
+    required this.url,
     required this.onTap,
   });
 
@@ -327,8 +337,28 @@ class _TermCheckItem extends StatelessWidget {
           checkbox.svg(),
           const SizedBox(width: 10),
           Text(text, style: style),
+          const Spacer(),
+          _LinkBtn(url: url),
         ],
       ),
+    );
+  }
+}
+
+class _LinkBtn extends StatelessWidget {
+  final String url;
+
+  const _LinkBtn({required this.url});
+  @override
+  Widget build(BuildContext context) {
+    if (url.isEmpty) {
+      return const SizedBox();
+    }
+    return InkWell(
+      onTap: () {
+        OutLink.openUrl(context, url);
+      },
+      child: Text('보기', style: context.textTheme.bodySmall?.setSecondary),
     );
   }
 }

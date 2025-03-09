@@ -2,6 +2,8 @@ part of 'phone_auth_bloc.dart';
 
 abstract class PhoneAuthEvent {}
 
+class PhoneAuthInitialized extends PhoneAuthEvent {}
+
 /// 휴대폰 번호 입력 이벤트.
 class PhoneAuthPhoneInputted extends PhoneAuthEvent {
   PhoneAuthPhoneInputted({required this.value});

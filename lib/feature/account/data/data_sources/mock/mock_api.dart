@@ -47,4 +47,23 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.requestCompanySignUp(dto: dto);
   }
+
+  /// 근로자 회원가입 API
+  @override
+  FutureOr<UserSignUpResDto> requestUserSignUp({
+    required UserSignUpReqDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.userSignUp.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        UserSignUpResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.requestUserSignUp(dto: dto);
+  }
 }

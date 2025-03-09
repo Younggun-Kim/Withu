@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
@@ -20,7 +21,10 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        PhoneAuthBlocProvider(create: (context) => getIt<PhoneAuthBloc>()),
+        PhoneAuthBlocProvider(
+          create:
+              (context) => getIt<PhoneAuthBloc>()..add(PhoneAuthInitialized()),
+        ),
         SignUpBlocProvider(
           create: (context) => getIt()..add(SignUpArgsStored(value: args)),
         ),
@@ -38,7 +42,7 @@ class _SignUpPageContent extends StatelessWidget {
         SignUpBlocListener(
           listener: (context, state) {
             if (state.status.isSuccess) {
-              context.router.popUntilRoot();
+              context.router.push(GuideRoute());
             }
           },
         ),
@@ -330,7 +334,7 @@ class _PasswordInputState extends State<_PasswordInput> {
       focusNode: _focusNode,
       maxLength: 20,
       hintText: '비밀번호를 입력해주세요.',
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       obscureText: true,
       onChanged: (String text) {

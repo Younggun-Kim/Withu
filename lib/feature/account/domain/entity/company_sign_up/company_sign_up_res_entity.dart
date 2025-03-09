@@ -17,11 +17,18 @@ extension CompanySignUpResEntityEx on CompanySignUpResEntity {
 }
 
 extension CompanySignUpResEntityParser on CompanySignUpResEntity {
-  static CompanySignUpResEntity fromDto(CompanySignUpResData? dto) {
-    if (dto == null) {
-      return error();
-    }
-    return CompanySignUpResEntity(token: dto.token, message: dto.message);
+  static CompanySignUpResEntity fromDto(CompanySignUpResDto? dto) {
+    return CompanySignUpResEntity(
+      token: dto?.data?.token ?? '',
+      message: dto?.message ?? StringRes.serverError.tr,
+    );
+  }
+
+  static CompanySignUpResEntity fromUserDto(UserSignUpResDto? dto) {
+    return CompanySignUpResEntity(
+      token: dto?.data?.token ?? '',
+      message: dto?.message ?? StringRes.serverError.tr,
+    );
   }
 
   static CompanySignUpResEntity error() {

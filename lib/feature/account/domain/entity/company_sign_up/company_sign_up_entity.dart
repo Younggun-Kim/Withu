@@ -6,6 +6,7 @@ part 'company_sign_up_entity.freezed.dart';
 @freezed
 class CompanySignUpEntity with _$CompanySignUpEntity {
   factory CompanySignUpEntity({
+    required AccountType accountType,
     required String name,
     required String birthDate,
     required GenderType gender,
@@ -15,13 +16,14 @@ class CompanySignUpEntity with _$CompanySignUpEntity {
     required SignUpMethodType signUpMethod,
     required String businessNumber,
     required String companyName,
+    required ChannelType appAcquisitionChannel,
     required bool locationInfoConsent,
     required bool marketingInfoConsent,
   }) = _CompanySignUpEntity;
 }
 
 extension CompanySignUpEntityParser on CompanySignUpEntity {
-  CompanySignUpReqDto toDto() {
+  CompanySignUpReqDto toCompanyDto() {
     return CompanySignUpReqDto(
       name: name,
       birthDate: birthDate,
@@ -32,6 +34,22 @@ extension CompanySignUpEntityParser on CompanySignUpEntity {
       signUpMethod: signUpMethod.serverKey,
       businessNumber: businessNumber,
       companyName: companyName,
+      appAcquisitionChannel: appAcquisitionChannel.serverKey,
+      locationInfoConsent: locationInfoConsent,
+      marketingInfoConsent: marketingInfoConsent,
+    );
+  }
+
+  UserSignUpReqDto toUserDto() {
+    return UserSignUpReqDto(
+      name: name,
+      birthDate: birthDate,
+      gender: gender.serverKey,
+      phoneNo: phoneNo,
+      email: email,
+      password: password,
+      signUpMethod: signUpMethod.serverKey,
+      appAcquisitionChannel: appAcquisitionChannel.serverKey,
       locationInfoConsent: locationInfoConsent,
       marketingInfoConsent: marketingInfoConsent,
     );

@@ -1,1 +1,1 @@
-enum AccountStorageKey { sessionId }
+enum AccountStorageKey { token }

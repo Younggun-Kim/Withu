@@ -1,21 +1,19 @@
 part of 'storage.dart';
 
 class AccountStorageImpl implements AccountStorage {
-  /// 세션 Id 불러오기
+  /// Token 불러오기
   @override
-  Future<String> getSessionId() async {
+  Future<String> getToken() async {
     return SharedPreferences.getInstance().then(
-      (preference) =>
-          preference.getString(AccountStorageKey.sessionId.name) ?? '',
+      (preference) => preference.getString(AccountStorageKey.token.name) ?? '',
     );
   }
 
-  /// 세션 Id 저장
+  /// Token 저장
   @override
-  void setSessionId({required String id}) {
+  void setToken({required String token}) {
     SharedPreferences.getInstance().then(
-      (preference) =>
-          preference.setString(AccountStorageKey.sessionId.name, id),
+      (preference) => preference.setString(AccountStorageKey.token.name, token),
     );
   }
 }
