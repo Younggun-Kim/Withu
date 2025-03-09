@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
+import 'package:withu/shared/dialogs/dialogs.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   AccountRepositoryImpl({
@@ -69,5 +70,23 @@ class AccountRepositoryImpl implements AccountRepository {
       accountStorage.setToken(token: token);
     }
     return CompanySignUpResEntityParser.fromUserDto(response);
+  }
+
+  /// 애플 로그인 요청
+  @override
+  FutureOr<bool> requestAppleLogin(AppleLoginReqDto dto) async {
+    final response = await accountApi.postAppleLogin(dto: dto);
+    final token = response.data?.token;
+    final isRegistered = response.data?.isRegistered;
+
+    if (response.hasMessage) {
+      Toast.showWithNavigatorKey(text: response.data!.message);
+    }
+
+    if (isRegistered == true && token != null && response.hasToken) {
+      accountStorage.setToken(token: token);
+    }
+
+    return response.data?.isRegistered == true;
   }
 }

@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/page/term/term_page_args.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -112,21 +112,9 @@ class _AppleBtn extends StatelessWidget {
         radius: 20,
         onTap: () async {
           // TODO: Apple Login & 회원가입 Flow
-          final credential = await SignInWithApple.getAppleIDCredential(
-            scopes: [
-              AppleIDAuthorizationScopes.email,
-              AppleIDAuthorizationScopes.fullName,
-            ],
-            webAuthenticationOptions: WebAuthenticationOptions(
-              clientId: 'com.withu.conner',
-              redirectUri: Uri.parse(
-                'https://withu.staging.meetory.io/api/company/auth/apple/callback',
-              ),
-            ),
-          );
-
-          logger.i(
-            '\n${credential.authorizationCode}\n${credential.identityToken}\n',
+          final identifyToken = await AppleLogin().getCredential();
+          context.read<LoginBloc>().add(
+            LoginAppleRequested(identifyToken: identifyToken),
           );
         },
         child: Row(
@@ -228,7 +216,9 @@ class _SignUpAndLoginBtn extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            context.router.push(TermRoute());
+            context.router.push(
+              TermRoute(args: TermPageArgs(type: LoginType.email)),
+            );
           },
           child: Text(
             '회원가입',

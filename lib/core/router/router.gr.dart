@@ -24,7 +24,9 @@ import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_arg
     as _i16;
 import 'package:withu/feature/account/presentation/page/term/term_page.dart'
     as _i12;
-import 'package:withu/feature/common/common.dart' as _i17;
+import 'package:withu/feature/account/presentation/page/term/term_page_args.dart'
+    as _i17;
+import 'package:withu/feature/common/common.dart' as _i18;
 import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page.dart'
     as _i13;
 import 'package:withu/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
@@ -361,10 +363,17 @@ class TempRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.TermPage]
-class TermRoute extends _i14.PageRouteInfo<void> {
-  const TermRoute({List<_i14.PageRouteInfo>? children})
-      : super(
+class TermRoute extends _i14.PageRouteInfo<TermRouteArgs> {
+  TermRoute({
+    _i15.Key? key,
+    required _i17.TermPageArgs args,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
           TermRoute.name,
+          args: TermRouteArgs(
+            key: key,
+            args: args,
+          ),
           initialChildren: children,
         );
 
@@ -373,9 +382,29 @@ class TermRoute extends _i14.PageRouteInfo<void> {
   static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i12.TermPage();
+      final args = data.argsAs<TermRouteArgs>();
+      return _i12.TermPage(
+        key: args.key,
+        args: args.args,
+      );
     },
   );
+}
+
+class TermRouteArgs {
+  const TermRouteArgs({
+    this.key,
+    required this.args,
+  });
+
+  final _i15.Key? key;
+
+  final _i17.TermPageArgs args;
+
+  @override
+  String toString() {
+    return 'TermRouteArgs{key: $key, args: $args}';
+  }
 }
 
 /// generated route for
@@ -384,7 +413,7 @@ class ValidateBusinessRoute
     extends _i14.PageRouteInfo<ValidateBusinessRouteArgs> {
   ValidateBusinessRoute({
     _i15.Key? key,
-    required _i17.ValidateBusinessPageArgs args,
+    required _i18.ValidateBusinessPageArgs args,
     List<_i14.PageRouteInfo>? children,
   }) : super(
           ValidateBusinessRoute.name,
@@ -417,7 +446,7 @@ class ValidateBusinessRouteArgs {
 
   final _i15.Key? key;
 
-  final _i17.ValidateBusinessPageArgs args;
+  final _i18.ValidateBusinessPageArgs args;
 
   @override
   String toString() {

@@ -9,6 +9,8 @@ class TermState extends BaseBlocState with _$TermState {
     /// 다이얼로그 메시지
     @Default('') String message,
 
+    @Default(TermPageArgs(type: LoginType.email)) TermPageArgs args,
+
     @Default(TermPageStepType.first) TermPageStepType step,
 
     @Default(AccountType.none) AccountType accountType,

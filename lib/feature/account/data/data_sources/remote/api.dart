@@ -5,7 +5,8 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 enum AccountApiPathType {
   emailLogin('/auth/login'),
   companySignUp('/company/auth/signup'),
-  userSignUp('/staff/auth/signup');
+  userSignUp('/staff/auth/signup'),
+  appleLogin('/auth/social/apple/verify');
 
   final String path;
 
@@ -36,4 +37,7 @@ abstract class AccountApi {
 
   /// 근로자 회원가입 요청
   FutureOr<UserSignUpResDto> requestUserSignUp({required UserSignUpReqDto dto});
+
+  /// 애플 로그인
+  FutureOr<AppleLoginResDto> postAppleLogin({required AppleLoginReqDto dto});
 }

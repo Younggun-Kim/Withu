@@ -10,8 +10,8 @@ enum AccountType {
   /// 고용주
   company(serverKey: 'COMPANY'),
 
-  /// 직원
-  user(serverKey: 'USER');
+  /// 근로자
+  user(serverKey: 'STAFF');
 
   final String serverKey;
 

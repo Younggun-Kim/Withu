@@ -36,3 +36,10 @@ class LoginTabPressed extends LoginEvent {
 class LoginVisiblePasswordToggled extends LoginEvent {
   LoginVisiblePasswordToggled();
 }
+
+/// 애플 로그인 요청
+class LoginAppleRequested extends LoginEvent {
+  final String identifyToken;
+
+  LoginAppleRequested({required this.identifyToken});
+}

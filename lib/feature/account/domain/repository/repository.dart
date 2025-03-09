@@ -32,4 +32,8 @@ abstract class AccountRepository {
 
   /// 근로자 회원가입 요청
   FutureOr<CompanySignUpResEntity> requestUserSignUp(UserSignUpReqDto dto);
+
+  /// 애플 로그인 요청
+  /// return - (bool) 로그인 성공 여부, false 회원가입
+  FutureOr<bool> requestAppleLogin(AppleLoginReqDto dto);
 }

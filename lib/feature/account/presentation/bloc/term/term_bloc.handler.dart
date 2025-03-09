@@ -1,6 +1,8 @@
 part of 'term_bloc.dart';
 
 extension TermBlocHandler on TermBloc {
+  void _onTermArgsStored(TermArgsStored event, Emitter<TermState> emit) {}
+
   /// 계정 타입 선택 이벤트.
   void _onTermAccountTypeSelected(
     TermAccountTypeSelected event,

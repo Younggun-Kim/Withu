@@ -2,6 +2,7 @@ part of 'login_usecase.dart';
 
 class LoginUseCaseImpl implements LoginUseCase {
   LoginUseCaseImpl({required this.accountRepo});
+
   @override
   final AccountRepository accountRepo;
 
@@ -27,5 +28,13 @@ class LoginUseCaseImpl implements LoginUseCase {
   Future<bool> checkLogin() async {
     final sessionId = await accountRepo.getToken();
     return sessionId.isNotEmpty;
+  }
+
+  /// 애플 로그인 요청
+  @override
+  FutureOr<bool> requestAppleLogin(String token) async {
+    return await accountRepo.requestAppleLogin(
+      AppleLoginReqDto(idToken: token, firstName: '', lastName: ''),
+    );
   }
 }

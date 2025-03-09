@@ -85,4 +85,23 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.requestUserSignUp(dto: dto);
   }
+
+  /// 애플 로그인
+  @override
+  FutureOr<AppleLoginResDto> postAppleLogin({
+    required AppleLoginReqDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.appleLogin.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        AppleLoginResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postAppleLogin(dto: dto);
+  }
 }

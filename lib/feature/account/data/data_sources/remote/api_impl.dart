@@ -107,4 +107,31 @@ class AccountApiImpl extends AccountApi {
           return UserSignUpResDtoMock.error();
         });
   }
+
+  /// 애플 로그인
+  @override
+  FutureOr<AppleLoginResDto> postAppleLogin({
+    required AppleLoginReqDto dto,
+  }) async {
+    return network.dio
+        .post(AccountApiPathType.appleLogin.fullPath, data: dto.toJson())
+        .then(
+          (response) => AppleLoginResDto.fromJson(
+            response.data,
+            (json) => AppleLoginResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          if (error is DioException && error.response?.statusCode != 500) {
+            return AppleLoginResDto.fromJson(
+              error.response?.data,
+              (json) =>
+                  AppleLoginResData.fromJson(json as Map<String, dynamic>),
+            );
+          }
+
+          return AppleLoginResDtoMock.error();
+        })
+        .catchError((_) => AppleLoginResDtoMock.error());
+  }
 }
