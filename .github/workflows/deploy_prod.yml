@@ -104,11 +104,14 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Flutter Build
+      - name: Pod install
         run: |
           cd ios
           pod install
           cd ..
+
+      - name: Build ios
+        run: |
           flutter build ios --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons --verbose --no-codesign
 
       # 배포
