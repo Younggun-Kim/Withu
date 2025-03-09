@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
@@ -107,8 +110,24 @@ class _AppleBtn extends StatelessWidget {
       ),
       child: InkWell(
         radius: 20,
-        onTap: () {
+        onTap: () async {
           // TODO: Apple Login & 회원가입 Flow
+          final credential = await SignInWithApple.getAppleIDCredential(
+            scopes: [
+              AppleIDAuthorizationScopes.email,
+              AppleIDAuthorizationScopes.fullName,
+            ],
+            webAuthenticationOptions: WebAuthenticationOptions(
+              clientId: 'com.withu.conner',
+              redirectUri: Uri.parse(
+                'https://withu.staging.meetory.io/api/company/auth/apple/callback',
+              ),
+            ),
+          );
+
+          logger.i(
+            '\n${credential.authorizationCode}\n${credential.identityToken}\n',
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -141,8 +160,22 @@ class _GoogleBtn extends StatelessWidget {
       ),
       child: InkWell(
         radius: 20,
-        onTap: () {
-          // TODO: Google Login & 회원가입 Flow
+        onTap: () async {
+          // Trigger the authentication flow
+          final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+          // Obtain the auth details from the request
+          final GoogleSignInAuthentication? googleAuth =
+              await googleUser?.authentication;
+
+          // Create a new credential
+          final credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken,
+            idToken: googleAuth?.idToken,
+          );
+
+          // Once signed in, return the UserCredential
+          await FirebaseAuth.instance.signInWithCredential(credential);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
