@@ -24,10 +24,16 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<SignUpUseCase>(
     SignUpUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<EmailLoginUseCase>(
+    EmailLoginUseCaseImpl(accountRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
   getIt.registerFactory<TermBloc>(() => TermBloc());
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
+  getIt.registerFactory<EmailLoginBloc>(
+    () => EmailLoginBloc(emailLoginUseCase: getIt()),
+  );
 }

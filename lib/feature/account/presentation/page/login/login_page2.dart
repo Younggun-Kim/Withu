@@ -177,7 +177,13 @@ class _Divider extends StatelessWidget {
 class _EmailBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseButton.basic(context: context, text: '이메일 로그인', onTap: () {});
+    return BaseButton.basic(
+      context: context,
+      text: '이메일 로그인',
+      onTap: () {
+        context.router.push(EmailLoginRoute());
+      },
+    );
   }
 }
 

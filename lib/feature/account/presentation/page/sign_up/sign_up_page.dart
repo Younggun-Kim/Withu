@@ -15,6 +15,7 @@ import 'sign_up_page_args.dart';
 @RoutePage()
 class SignUpPage extends StatelessWidget {
   final SignUpPageArgs args;
+
   const SignUpPage({super.key, required this.args});
 
   @override

@@ -136,9 +136,7 @@ class BaseInput extends StatelessWidget {
       children: [
         Container(
           width: width,
-          padding:
-              padding ??
-              const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: ColorName.tertiary),
@@ -164,7 +162,7 @@ class BaseInput extends StatelessWidget {
                     hintStyle: hintTextStyle ?? defaultHintStyle,
                     border: InputBorder.none,
                     isDense: true,
-                    contentPadding: const EdgeInsets.all(0),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     suffixText: suffixText,
                     suffixStyle: suffixStyle,

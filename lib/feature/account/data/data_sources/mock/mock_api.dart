@@ -29,6 +29,25 @@ class AccountMockApi extends AccountApiImpl {
     return await super.login(requestData: requestData);
   }
 
+  /// 이메일 로그인 API
+  @override
+  FutureOr<EmailLoginResDto> postEmailLogin({
+    required EmailLoginReqData dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.emailLogin.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        EmailLoginResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postEmailLogin(dto: dto);
+  }
+
   /// 회원가입 API
   @override
   FutureOr<CompanySignUpResDto> requestCompanySignUp({

@@ -10,10 +10,9 @@ part 'login_request_dto.mock.dart';
 @freezed
 class LoginRequestDto with _$LoginRequestDto {
   factory LoginRequestDto({
-    required AccountType accountType,
-    required LoginType loginType,
-    required String loginId,
+    required String email,
     required String password,
+    required String accountType,
   }) = _LoginRequestDto;
 
   factory LoginRequestDto.fromJson(Map<String, dynamic> json) =>

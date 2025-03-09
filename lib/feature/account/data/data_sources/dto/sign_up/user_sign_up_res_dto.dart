@@ -37,6 +37,15 @@ extension UserSignUpResDtoMock on UserSignUpResDto {
       errorCode: 'SERVER_ERROR',
     );
   }
+
+  static UserSignUpResDto error() {
+    return UserSignUpResDto(
+      success: false,
+      message: '서버에러',
+      data: null,
+      errorCode: 'SERVER_ERROR',
+    );
+  }
 }
 
 extension UserSignUpResDataMock on UserSignUpResData {

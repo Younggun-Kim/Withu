@@ -8,39 +8,60 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i13;
-import 'package:flutter/material.dart' as _i14;
-import 'package:withu/feature/account/presentation/page/guide/guide_page.dart'
+import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
+import 'package:withu/feature/account/presentation/page/email_login/email_login_page.dart'
     as _i1;
-import 'package:withu/feature/account/presentation/page/login/login_page.dart'
-    as _i6;
-import 'package:withu/feature/account/presentation/page/login/login_page2.dart'
-    as _i7;
-import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page.dart'
-    as _i8;
-import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart'
-    as _i15;
-import 'package:withu/feature/account/presentation/page/term/term_page.dart'
-    as _i11;
-import 'package:withu/feature/common/common.dart' as _i16;
-import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page.dart'
-    as _i12;
-import 'package:withu/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
+import 'package:withu/feature/account/presentation/page/guide/guide_page.dart'
     as _i2;
-import 'package:withu/feature/job_posting/presentation/pages/job_posting_form_page.dart'
-    as _i3;
-import 'package:withu/feature/job_posting/presentation/pages/job_posting_workers_page.dart'
-    as _i4;
-import 'package:withu/feature/job_posting/presentation/pages/job_postings_page.dart'
-    as _i5;
-import 'package:withu/feature/splash/presentation/pages/splash_page.dart'
+import 'package:withu/feature/account/presentation/page/login/login_page.dart'
+    as _i7;
+import 'package:withu/feature/account/presentation/page/login/login_page2.dart'
+    as _i8;
+import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page.dart'
     as _i9;
-import 'package:withu/feature/test/presentatin/temp_page.dart' as _i10;
+import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart'
+    as _i16;
+import 'package:withu/feature/account/presentation/page/term/term_page.dart'
+    as _i12;
+import 'package:withu/feature/common/common.dart' as _i17;
+import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page.dart'
+    as _i13;
+import 'package:withu/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
+    as _i3;
+import 'package:withu/feature/job_posting/presentation/pages/job_posting_form_page.dart'
+    as _i4;
+import 'package:withu/feature/job_posting/presentation/pages/job_posting_workers_page.dart'
+    as _i5;
+import 'package:withu/feature/job_posting/presentation/pages/job_postings_page.dart'
+    as _i6;
+import 'package:withu/feature/splash/presentation/pages/splash_page.dart'
+    as _i10;
+import 'package:withu/feature/test/presentatin/temp_page.dart' as _i11;
 
 /// generated route for
-/// [_i1.GuidePage]
-class GuideRoute extends _i13.PageRouteInfo<void> {
-  const GuideRoute({List<_i13.PageRouteInfo>? children})
+/// [_i1.EmailLoginPage]
+class EmailLoginRoute extends _i14.PageRouteInfo<void> {
+  const EmailLoginRoute({List<_i14.PageRouteInfo>? children})
+      : super(
+          EmailLoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmailLoginRoute';
+
+  static _i14.PageInfo page = _i14.PageInfo(
+    name,
+    builder: (data) {
+      return const _i1.EmailLoginPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i2.GuidePage]
+class GuideRoute extends _i14.PageRouteInfo<void> {
+  const GuideRoute({List<_i14.PageRouteInfo>? children})
       : super(
           GuideRoute.name,
           initialChildren: children,
@@ -48,22 +69,22 @@ class GuideRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'GuideRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i1.GuidePage();
+      return const _i2.GuidePage();
     },
   );
 }
 
 /// generated route for
-/// [_i2.JobPostingDetailPage]
+/// [_i3.JobPostingDetailPage]
 class JobPostingDetailRoute
-    extends _i13.PageRouteInfo<JobPostingDetailRouteArgs> {
+    extends _i14.PageRouteInfo<JobPostingDetailRouteArgs> {
   JobPostingDetailRoute({
-    _i14.Key? key,
+    _i15.Key? key,
     required String jobPostingId,
-    List<_i13.PageRouteInfo>? children,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
           JobPostingDetailRoute.name,
           args: JobPostingDetailRouteArgs(
@@ -75,11 +96,11 @@ class JobPostingDetailRoute
 
   static const String name = 'JobPostingDetailRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingDetailRouteArgs>();
-      return _i2.JobPostingDetailPage(
+      return _i3.JobPostingDetailPage(
         key: args.key,
         jobPostingId: args.jobPostingId,
       );
@@ -93,7 +114,7 @@ class JobPostingDetailRouteArgs {
     required this.jobPostingId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String jobPostingId;
 
@@ -104,12 +125,12 @@ class JobPostingDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i3.JobPostingFormPage]
-class JobPostingFormRoute extends _i13.PageRouteInfo<JobPostingFormRouteArgs> {
+/// [_i4.JobPostingFormPage]
+class JobPostingFormRoute extends _i14.PageRouteInfo<JobPostingFormRouteArgs> {
   JobPostingFormRoute({
-    _i14.Key? key,
+    _i15.Key? key,
     String? jobPostingId,
-    List<_i13.PageRouteInfo>? children,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
           JobPostingFormRoute.name,
           args: JobPostingFormRouteArgs(
@@ -121,12 +142,12 @@ class JobPostingFormRoute extends _i13.PageRouteInfo<JobPostingFormRouteArgs> {
 
   static const String name = 'JobPostingFormRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingFormRouteArgs>(
           orElse: () => const JobPostingFormRouteArgs());
-      return _i3.JobPostingFormPage(
+      return _i4.JobPostingFormPage(
         key: args.key,
         jobPostingId: args.jobPostingId,
       );
@@ -140,7 +161,7 @@ class JobPostingFormRouteArgs {
     this.jobPostingId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String? jobPostingId;
 
@@ -151,13 +172,13 @@ class JobPostingFormRouteArgs {
 }
 
 /// generated route for
-/// [_i4.JobPostingWorkersPage]
+/// [_i5.JobPostingWorkersPage]
 class JobPostingWorkersRoute
-    extends _i13.PageRouteInfo<JobPostingWorkersRouteArgs> {
+    extends _i14.PageRouteInfo<JobPostingWorkersRouteArgs> {
   JobPostingWorkersRoute({
-    _i14.Key? key,
+    _i15.Key? key,
     required String jobPostingId,
-    List<_i13.PageRouteInfo>? children,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
           JobPostingWorkersRoute.name,
           args: JobPostingWorkersRouteArgs(
@@ -169,11 +190,11 @@ class JobPostingWorkersRoute
 
   static const String name = 'JobPostingWorkersRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<JobPostingWorkersRouteArgs>();
-      return _i4.JobPostingWorkersPage(
+      return _i5.JobPostingWorkersPage(
         key: args.key,
         jobPostingId: args.jobPostingId,
       );
@@ -187,7 +208,7 @@ class JobPostingWorkersRouteArgs {
     required this.jobPostingId,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   final String jobPostingId;
 
@@ -198,9 +219,9 @@ class JobPostingWorkersRouteArgs {
 }
 
 /// generated route for
-/// [_i5.JobPostingsPage]
-class JobPostingsRoute extends _i13.PageRouteInfo<void> {
-  const JobPostingsRoute({List<_i13.PageRouteInfo>? children})
+/// [_i6.JobPostingsPage]
+class JobPostingsRoute extends _i14.PageRouteInfo<void> {
+  const JobPostingsRoute({List<_i14.PageRouteInfo>? children})
       : super(
           JobPostingsRoute.name,
           initialChildren: children,
@@ -208,18 +229,18 @@ class JobPostingsRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'JobPostingsRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i5.JobPostingsPage();
+      return const _i6.JobPostingsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i6.LoginPage]
-class LoginRoute extends _i13.PageRouteInfo<void> {
-  const LoginRoute({List<_i13.PageRouteInfo>? children})
+/// [_i7.LoginPage]
+class LoginRoute extends _i14.PageRouteInfo<void> {
+  const LoginRoute({List<_i14.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -227,18 +248,18 @@ class LoginRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i6.LoginPage();
+      return const _i7.LoginPage();
     },
   );
 }
 
 /// generated route for
-/// [_i7.LoginPage2]
-class LoginRoute2 extends _i13.PageRouteInfo<void> {
-  const LoginRoute2({List<_i13.PageRouteInfo>? children})
+/// [_i8.LoginPage2]
+class LoginRoute2 extends _i14.PageRouteInfo<void> {
+  const LoginRoute2({List<_i14.PageRouteInfo>? children})
       : super(
           LoginRoute2.name,
           initialChildren: children,
@@ -246,21 +267,21 @@ class LoginRoute2 extends _i13.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute2';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i7.LoginPage2();
+      return const _i8.LoginPage2();
     },
   );
 }
 
 /// generated route for
-/// [_i8.SignUpPage]
-class SignUpRoute extends _i13.PageRouteInfo<SignUpRouteArgs> {
+/// [_i9.SignUpPage]
+class SignUpRoute extends _i14.PageRouteInfo<SignUpRouteArgs> {
   SignUpRoute({
-    _i14.Key? key,
-    required _i15.SignUpPageArgs args,
-    List<_i13.PageRouteInfo>? children,
+    _i15.Key? key,
+    required _i16.SignUpPageArgs args,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
           SignUpRoute.name,
           args: SignUpRouteArgs(
@@ -272,11 +293,11 @@ class SignUpRoute extends _i13.PageRouteInfo<SignUpRouteArgs> {
 
   static const String name = 'SignUpRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<SignUpRouteArgs>();
-      return _i8.SignUpPage(
+      return _i9.SignUpPage(
         key: args.key,
         args: args.args,
       );
@@ -290,9 +311,9 @@ class SignUpRouteArgs {
     required this.args,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
-  final _i15.SignUpPageArgs args;
+  final _i16.SignUpPageArgs args;
 
   @override
   String toString() {
@@ -301,9 +322,9 @@ class SignUpRouteArgs {
 }
 
 /// generated route for
-/// [_i9.SplashPage]
-class SplashRoute extends _i13.PageRouteInfo<void> {
-  const SplashRoute({List<_i13.PageRouteInfo>? children})
+/// [_i10.SplashPage]
+class SplashRoute extends _i14.PageRouteInfo<void> {
+  const SplashRoute({List<_i14.PageRouteInfo>? children})
       : super(
           SplashRoute.name,
           initialChildren: children,
@@ -311,18 +332,18 @@ class SplashRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'SplashRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i9.SplashPage();
+      return const _i10.SplashPage();
     },
   );
 }
 
 /// generated route for
-/// [_i10.TempPage]
-class TempRoute extends _i13.PageRouteInfo<void> {
-  const TempRoute({List<_i13.PageRouteInfo>? children})
+/// [_i11.TempPage]
+class TempRoute extends _i14.PageRouteInfo<void> {
+  const TempRoute({List<_i14.PageRouteInfo>? children})
       : super(
           TempRoute.name,
           initialChildren: children,
@@ -330,18 +351,18 @@ class TempRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'TempRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i10.TempPage();
+      return const _i11.TempPage();
     },
   );
 }
 
 /// generated route for
-/// [_i11.TermPage]
-class TermRoute extends _i13.PageRouteInfo<void> {
-  const TermRoute({List<_i13.PageRouteInfo>? children})
+/// [_i12.TermPage]
+class TermRoute extends _i14.PageRouteInfo<void> {
+  const TermRoute({List<_i14.PageRouteInfo>? children})
       : super(
           TermRoute.name,
           initialChildren: children,
@@ -349,22 +370,22 @@ class TermRoute extends _i13.PageRouteInfo<void> {
 
   static const String name = 'TermRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i11.TermPage();
+      return const _i12.TermPage();
     },
   );
 }
 
 /// generated route for
-/// [_i12.ValidateBusinessPage]
+/// [_i13.ValidateBusinessPage]
 class ValidateBusinessRoute
-    extends _i13.PageRouteInfo<ValidateBusinessRouteArgs> {
+    extends _i14.PageRouteInfo<ValidateBusinessRouteArgs> {
   ValidateBusinessRoute({
-    _i14.Key? key,
-    required _i16.ValidateBusinessPageArgs args,
-    List<_i13.PageRouteInfo>? children,
+    _i15.Key? key,
+    required _i17.ValidateBusinessPageArgs args,
+    List<_i14.PageRouteInfo>? children,
   }) : super(
           ValidateBusinessRoute.name,
           args: ValidateBusinessRouteArgs(
@@ -376,11 +397,11 @@ class ValidateBusinessRoute
 
   static const String name = 'ValidateBusinessRoute';
 
-  static _i13.PageInfo page = _i13.PageInfo(
+  static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ValidateBusinessRouteArgs>();
-      return _i12.ValidateBusinessPage(
+      return _i13.ValidateBusinessPage(
         key: args.key,
         args: args.args,
       );
@@ -394,9 +415,9 @@ class ValidateBusinessRouteArgs {
     required this.args,
   });
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
-  final _i16.ValidateBusinessPageArgs args;
+  final _i17.ValidateBusinessPageArgs args;
 
   @override
   String toString() {

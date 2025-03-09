@@ -24,6 +24,19 @@ class AccountRepositoryImpl implements AccountRepository {
     return await accountApi.login(requestData: requestData);
   }
 
+  /// 로그인 API 호출
+  @override
+  FutureOr<bool> emailLogin({required EmailLoginReqData dto}) async {
+    final response = await accountApi.postEmailLogin(dto: dto);
+
+    if (response.hasToken) {
+      accountStorage.setToken(token: response.data!.token);
+    } else {
+      response.showErrorMessage();
+    }
+    return response.isSuccessLogin;
+  }
+
   /// Session Id Storage 에 저장
   @override
   void storeToken({required String token}) {

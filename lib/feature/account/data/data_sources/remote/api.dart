@@ -3,6 +3,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 
 enum AccountApiPathType {
+  emailLogin('/auth/login'),
   companySignUp('/company/auth/signup'),
   userSignUp('/staff/auth/signup');
 
@@ -24,6 +25,9 @@ abstract class AccountApi {
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,
   });
+
+  /// 로그인 API
+  FutureOr<EmailLoginResDto> postEmailLogin({required EmailLoginReqData dto});
 
   /// 회사 회원가입 요청
   FutureOr<CompanySignUpResDto> requestCompanySignUp({

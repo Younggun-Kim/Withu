@@ -16,6 +16,9 @@ abstract class AccountRepository {
     required LoginRequestDto requestData,
   });
 
+  /// 이메일 로그인
+  FutureOr<bool> emailLogin({required EmailLoginReqData dto});
+
   /// Session Id Storage 에 저장
   void storeToken({required String token});
 

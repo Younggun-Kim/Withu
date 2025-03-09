@@ -26,6 +26,35 @@ class AccountApiImpl extends AccountApi {
         );
   }
 
+  /// 이메일 로그인 API
+  @override
+  FutureOr<EmailLoginResDto> postEmailLogin({
+    required EmailLoginReqData dto,
+  }) async {
+    return network.dio
+        .post(AccountApiPathType.emailLogin.fullPath, data: dto.toJson())
+        .then(
+          (response) => EmailLoginResDto.fromJson(
+            response.data,
+            (json) => EmailLoginResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          if (error is DioException) {
+            return EmailLoginResDto.fromJson(
+              error.response?.data,
+              (json) =>
+                  EmailLoginResData.fromJson(json as Map<String, dynamic>),
+            );
+          }
+
+          return EmailLoginResDtoMock.error();
+        })
+        .catchError((_) {
+          return EmailLoginResDtoMock.error();
+        });
+  }
+
   /// 회사 회원가입 요청
   @override
   FutureOr<CompanySignUpResDto> requestCompanySignUp({
@@ -67,7 +96,7 @@ class AccountApiImpl extends AccountApi {
           ),
         )
         .catchError((error) {
-          if (error is DioException) {
+          if (error is DioException && error.response?.statusCode != 500) {
             return UserSignUpResDto.fromJson(
               error.response?.data,
               (json) =>
@@ -75,7 +104,7 @@ class AccountApiImpl extends AccountApi {
             );
           }
 
-          return BaseResponseDtoMock.error() as UserSignUpResDto;
+          return UserSignUpResDtoMock.error();
         });
   }
 }

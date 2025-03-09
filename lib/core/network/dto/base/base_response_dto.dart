@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:withu/shared/dialogs/dialogs.dart';
 
 part 'base_response_dto.freezed.dart';
 
@@ -21,4 +21,12 @@ class BaseResponseDto<T> with _$BaseResponseDto<T> {
     Map<String, dynamic> json,
     T Function(Object?) fromJsonT,
   ) => _$BaseResponseDtoFromJson(json, fromJsonT);
+}
+
+extension BaseResponseDtoEx on BaseResponseDto {
+  void showErrorMessage() {
+    if (!success && message.isNotEmpty) {
+      Toast.showWithNavigatorKey(text: message);
+    }
+  }
 }
