@@ -12,7 +12,20 @@
           "package_name": "com.conner.withu"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "819902987830-f3kt7ec815cn4bn83biuhv88vrsfr27d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.conner.withu",
+            "certificate_hash": "7e676ab61bd27ad55facd2d8fa153b1ae64484e8"
+          }
+        },
+        {
+          "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
@@ -20,7 +33,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819902987830-dh82fpjhtrkr267843onod6fh762o4nh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.conner.withu",
+                "app_store_id": "6739505809"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +57,20 @@
           "package_name": "com.conner.withu.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "819902987830-s7gvaq64jq3sl5317tc3rvjti08ass06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.conner.withu.dev",
+            "certificate_hash": "1164270baf87e00bf72fad253ac1eb3b284a0109"
+          }
+        },
+        {
+          "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
@@ -39,7 +78,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819902987830-dh82fpjhtrkr267843onod6fh762o4nh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.conner.withu",
+                "app_store_id": "6739505809"
+              }
+            }
+          ]
         }
       }
     }

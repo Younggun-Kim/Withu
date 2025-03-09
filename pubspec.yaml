@@ -123,7 +123,16 @@ scripts:
   pre-commit: pre-commit run --all-files
 
   # android keychain sha-1
-  sha1: keytool -list -v -alias upload -keystore ./android/app/keystore/upload-keystore.jks
+  sha1:
+    prod: keytool -list -v -alias prod-key -keystore ./android/app/keystore/prod.keystore
+
+    dev: keytool -list -v -alias dev-key -keystore ./android/app/keystore/dev.keystore
+
+  # Google Playstore에 등록을 위해 업로드키 추출
+  key-export:
+    prod: keytool -exportcert -alias prod-key -keystore ./android/app/keystore/prod.keystore -rfc -file prod.pem
+
+    dev: keytool -exportcert -alias dev-key -keystore ./android/app/keystore/dev.keystore -rfc -file dev.pem
 
   # App Icon 생성
   gen-icons: dart run flutter_launcher_icons

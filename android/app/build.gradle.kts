@@ -39,35 +39,43 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("prod") {
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storePassword = keystoreProperties["storePassword"] as String
+            storeFile = keystoreProperties["prodStoreFile"]?.let { file(it) }
+            keyAlias = keystoreProperties["devKeyAlias"] as String
+        }
+        create("dev") {
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storePassword = keystoreProperties["storePassword"] as String
+            storeFile = keystoreProperties["devStoreFile"]?.let { file(it) }
+            keyAlias = keystoreProperties["devKeyAlias"] as String
+        }
+    }
+
     flavorDimensions += "env"
 
     productFlavors {
         create("prod") {
             dimension = "env"
             resValue(type = "string", name = "app_name", value = "위드유")
+            signingConfig = signingConfigs.getByName("prod")
         }
         create("dev") {
             dimension = "env"
             resValue(type = "string", name = "app_name", value = "위드유개발")
             applicationIdSuffix = ".dev"
-        }
-    }
-
-    signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String
+            signingConfig = signingConfigs.getByName("dev")
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+
         }
         debug {
-            signingConfig = signingConfigs.getByName("debug")
+
         }
     }
 }
