@@ -66,10 +66,10 @@ extension SignUpStateEx on SignUpState {
       email: email.value,
       password: password.value,
       signUpMethod: SignUpMethodType.email,
-      businessNumber: '',
-      companyName: '',
-      locationInfoConsent: false,
-      marketingInfoConsent: false,
+      businessNumber: args?.businessNum ?? '',
+      companyName: args?.companyName ?? '',
+      locationInfoConsent: args?.isAgreeLocation ?? false,
+      marketingInfoConsent: args?.isAgreeMarketing ?? false,
     );
   }
 }

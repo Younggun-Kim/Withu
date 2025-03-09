@@ -13,8 +13,9 @@ part 'login_bloc.handler.dart';
 
 part 'login_bloc_converter.dart';
 
-class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
+typedef LoginBlocBuilder = BlocBuilder<LoginBloc, LoginState>;
 
+class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   LoginBloc({required this.loginUseCase})
     : super(LoginState(status: BaseBlocStatus.initial())) {
     on<LoginMessageCleared>(_onMessageCleared);

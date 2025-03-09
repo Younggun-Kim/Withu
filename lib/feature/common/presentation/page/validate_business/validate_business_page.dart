@@ -33,7 +33,7 @@ class _ValidateBusinessPageContent extends StatelessWidget {
         if (state.status.isSuccess) {
           context.router.push(
             SignUpRoute(
-              args: SignUpPageArgs(
+              args: SignUpPageArgs.company(
                 businessNum: state.businessNum.value,
                 ceoName: state.ceoName.value,
                 companyName: state.companyName.value,

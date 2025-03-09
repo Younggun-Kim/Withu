@@ -6,6 +6,7 @@ import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/domain/type/term_type.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_page_step_type.dart';
+import 'package:withu/feature/account/presentation/page/sign_up/sign_up.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
@@ -124,14 +125,23 @@ class _SecondStepNextBtn extends StatelessWidget {
           text: StringRes.next.tr,
           isEnabled: state.isEnabledSecondStep,
           onTap: () {
-            context.router.push(
-              ValidateBusinessRoute(
-                args: ValidateBusinessPageArgs(
-                  isAgreeLocation: state.locationTerm,
-                  isAgreeMarketing: state.marketingTerm,
-                ),
-              ),
-            );
+            state.accountType.iSCompany
+                ? context.router.push(
+                  ValidateBusinessRoute(
+                    args: ValidateBusinessPageArgs(
+                      isAgreeLocation: state.locationTerm,
+                      isAgreeMarketing: state.marketingTerm,
+                    ),
+                  ),
+                )
+                : context.router.push(
+                  SignUpRoute(
+                    args: SignUpPageArgs.user(
+                      isAgreeLocation: state.locationTerm,
+                      isAgreeMarketing: state.marketingTerm,
+                    ),
+                  ),
+                );
           },
         );
       },

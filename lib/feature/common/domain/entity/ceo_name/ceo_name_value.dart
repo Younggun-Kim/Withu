@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:withu/core/utils/regex/regex_util.dart';
 
 part 'ceo_name_value.freezed.dart';
 
@@ -8,5 +9,5 @@ class CeoNameValue with _$CeoNameValue {
 
   const CeoNameValue._();
 
-  bool isValid() => value.length >= 2;
+  bool isValid() => RegExUtil.namePattern.hasMatch(value);
 }

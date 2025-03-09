@@ -16,13 +16,6 @@ extension TermBlocHandler on TermBloc {
     emit(state.copyWith(step: TermPageStepType.second));
   }
 
-  void _onTermSecondNextPressed(
-    TermSecondNextPressed event,
-    Emitter<TermState> emit,
-  ) {
-    // TODO
-  }
-
   void _onTermAllAgreementTapped(
     TermAllAgreementTapped event,
     Emitter<TermState> emit,
