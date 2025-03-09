@@ -4,7 +4,8 @@ import 'package:withu/core/router/router.gr.dart';
 enum SplashNextPageType {
   none(SplashRoute()),
   login(LoginRoute2()),
-  jobPostings(JobPostingsRoute());
+  jobPostings(JobPostingsRoute()),
+  test(GuideRoute());
 
   final PageRouteInfo route;
 
@@ -19,6 +20,6 @@ extension SplashNextPageTypeExt on SplashNextPageType {
   static SplashNextPageType getNextPage(bool isLoggedIn) {
     return isLoggedIn
         ? SplashNextPageType.jobPostings
-        : SplashNextPageType.login;
+        : SplashNextPageType.test;
   }
 }

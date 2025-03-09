@@ -59,6 +59,18 @@ class $AssetsImagesGen {
   SvgGenImage get googleLoginBtn =>
       const SvgGenImage('assets/images/google_login_btn.svg');
 
+  /// File path: assets/images/guide1.svg
+  SvgGenImage get guide1 => const SvgGenImage('assets/images/guide1.svg');
+
+  /// File path: assets/images/guide2.svg
+  SvgGenImage get guide2 => const SvgGenImage('assets/images/guide2.svg');
+
+  /// File path: assets/images/guide3.svg
+  SvgGenImage get guide3 => const SvgGenImage('assets/images/guide3.svg');
+
+  /// File path: assets/images/guide4.svg
+  SvgGenImage get guide4 => const SvgGenImage('assets/images/guide4.svg');
+
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
 
@@ -101,6 +113,10 @@ class $AssetsImagesGen {
         chevronLeft,
         eye,
         googleLoginBtn,
+        guide1,
+        guide2,
+        guide3,
+        guide4,
         logo,
         logoPuzzle,
         logoPuzzle2,
