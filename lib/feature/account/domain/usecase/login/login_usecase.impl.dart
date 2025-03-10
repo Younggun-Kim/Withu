@@ -32,7 +32,7 @@ class LoginUseCaseImpl implements LoginUseCase {
 
   /// 애플 로그인 요청
   @override
-  FutureOr<bool> requestAppleLogin(String token) async {
+  FutureOr<SnsLoginResValue> requestAppleLogin(String token) async {
     return await accountRepo.requestAppleLogin(
       AppleLoginReqDto(idToken: token, firstName: '', lastName: ''),
     );

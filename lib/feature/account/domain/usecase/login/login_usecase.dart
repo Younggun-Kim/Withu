@@ -15,5 +15,5 @@ abstract class LoginUseCase {
   Future<bool> checkLogin();
 
   /// 애플 로그인 요청
-  FutureOr<bool> requestAppleLogin(String token);
+  FutureOr<SnsLoginResValue> requestAppleLogin(String token);
 }

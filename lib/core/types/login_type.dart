@@ -9,4 +9,8 @@ enum LoginType {
   final String serverKey;
 
   const LoginType({required this.serverKey});
+
+  bool get isEmail => this == email;
+
+  bool get isSns => this != email;
 }

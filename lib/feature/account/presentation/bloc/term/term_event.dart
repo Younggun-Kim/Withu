@@ -22,6 +22,9 @@ class TermAccountTypeSelected extends TermEvent {
 /// 화면 첫 번째 스텝 다음 버튼 클릭
 class TermFirstNextPressed extends TermEvent {}
 
+/// 화면 두 번째 스텝 다음 버튼 클릭
+class TermSecondNextPressed extends TermEvent {}
+
 /// 전체 동의 탭
 class TermAllAgreementTapped extends TermEvent {
   final bool isChecked;

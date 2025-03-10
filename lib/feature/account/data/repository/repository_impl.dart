@@ -74,7 +74,7 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 애플 로그인 요청
   @override
-  FutureOr<bool> requestAppleLogin(AppleLoginReqDto dto) async {
+  FutureOr<SnsLoginResValue> requestAppleLogin(AppleLoginReqDto dto) async {
     final response = await accountApi.postAppleLogin(dto: dto);
     final token = response.data?.token;
     final isRegistered = response.data?.isRegistered;
@@ -87,6 +87,6 @@ class AccountRepositoryImpl implements AccountRepository {
       accountStorage.setToken(token: token);
     }
 
-    return response.data?.isRegistered == true;
+    return SnsLoginResValueParser.fromDto(response);
   }
 }

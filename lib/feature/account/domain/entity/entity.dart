@@ -4,3 +4,4 @@ export 'email/email_value.dart';
 export 'password/password_value.dart';
 export 'company_sign_up/company_sign_up_entity.dart';
 export 'name/name_value.dart';
+export 'sns_login_res/sns_login_res_value.dart';

@@ -59,19 +59,27 @@ extension LoginBlocHandler on LoginBloc {
   ) async {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final isLoggedIn = await loginUseCase.requestAppleLogin(
-      event.identifyToken,
-    );
+    final response = await loginUseCase.requestAppleLogin(event.identifyToken);
 
-    emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isLoggedIn)));
-    moveAppleNextPage(isLoggedIn);
+    emit(
+      state.copyWith(status: BaseBlocStatus.fromSuccess(response.isLoggedIn)),
+    );
+    moveAppleNextPage(response);
   }
 
-  void moveAppleNextPage(bool isLoggedIn) {
-    if (isLoggedIn) {
+  void moveAppleNextPage(SnsLoginResValue response) {
+    if (response.isLoggedIn) {
+      // TODO: Refresh 추가하기
       Toast.showWithNavigatorKey(text: '홈으로 이동할 예정입니다.');
     } else {
-      getItAppRouter.push(TermRoute(args: TermPageArgs(type: LoginType.apple)));
+      getItAppRouter.push(
+        TermRoute(
+          args: TermPageArgs(
+            type: LoginType.apple,
+            tempToken: response.tempToken,
+          ),
+        ),
+      );
     }
   }
 }

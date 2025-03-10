@@ -25,7 +25,10 @@ class AppleLoginResData with _$AppleLoginResData {
 
 extension AppleLoginResDtoMock on AppleLoginResDto {
   bool get hasMessage => data?.message.isNotEmpty == true;
+
   bool get hasToken => data?.token.isNotEmpty == true;
+
+  bool get isLoggedIn => data?.isRegistered == true && hasToken;
 
   static AppleLoginResDto success() {
     return AppleLoginResDto(

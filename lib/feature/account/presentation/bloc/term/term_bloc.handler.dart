@@ -18,6 +18,53 @@ extension TermBlocHandler on TermBloc {
     emit(state.copyWith(step: TermPageStepType.second));
   }
 
+  void _onTermSecondNextPressed(
+    TermSecondNextPressed event,
+    Emitter<TermState> emit,
+  ) async {
+    if (state.args.type.isEmail) {
+      emailUserProcess();
+    } else {
+      await snsUserProcess();
+    }
+  }
+
+  void emailUserProcess() {
+    state.accountType.iSCompany
+        ? getItAppRouter.push(
+          ValidateBusinessRoute(
+            args: ValidateBusinessPageArgs(
+              isAgreeLocation: state.locationTerm,
+              isAgreeMarketing: state.marketingTerm,
+            ),
+          ),
+        )
+        : getItAppRouter.push(
+          SignUpRoute(
+            args: SignUpPageArgs.user(
+              isAgreeLocation: state.locationTerm,
+              isAgreeMarketing: state.marketingTerm,
+            ),
+          ),
+        );
+  }
+
+  FutureOr<void> snsUserProcess() async {
+    if (state.accountType.iSCompany) {
+      ValidateBusinessRoute(
+        args: ValidateBusinessPageArgs(
+          isAgreeLocation: state.locationTerm,
+          isAgreeMarketing: state.marketingTerm,
+          snsTempToken: state.args.tempToken,
+        ),
+      );
+    } else {
+      // TODO: Sns 회원 가입
+    }
+  }
+
+  void callApi() async {}
+
   void _onTermAllAgreementTapped(
     TermAllAgreementTapped event,
     Emitter<TermState> emit,
