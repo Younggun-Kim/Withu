@@ -21,11 +21,15 @@ extension VerifyAuthCodeResDataMock on VerifyAuthCodeResData {
     return VerifyAuthCodeResData(
       success: true,
       message: '인증이 완료되었습니다.',
-      userId: '01049212480',
+      phoneNo: '01049212480',
     );
   }
 
   static VerifyAuthCodeResData failure() {
-    return VerifyAuthCodeResData(success: false, message: '인증 실패.', userId: '');
+    return VerifyAuthCodeResData(
+      success: false,
+      message: '인증 실패.',
+      phoneNo: '',
+    );
   }
 }

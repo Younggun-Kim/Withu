@@ -15,7 +15,7 @@ class VerifyAuthCodeResData with _$VerifyAuthCodeResData {
   factory VerifyAuthCodeResData({
     required bool success,
     required String message,
-    required String userId,
+    required String phoneNo,
   }) = _VerifyAuthCodeResData;
 
   factory VerifyAuthCodeResData.fromJson(Map<String, dynamic> json) =>

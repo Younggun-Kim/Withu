@@ -134,4 +134,28 @@ class AccountApiImpl extends AccountApi {
         })
         .catchError((_) => AppleLoginResDtoMock.error());
   }
+
+  /// 아이디 찾기
+  @override
+  FutureOr<FindIdResDto> postFindId({required FindIdReqDto dto}) async {
+    return network.dio
+        .post(AccountApiPathType.findId.fullPath, data: dto.toJson())
+        .then(
+          (response) => FindIdResDto.fromJson(
+            response.data,
+            (json) => FindIdResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          if (error is DioException && error.response?.statusCode != 500) {
+            return FindIdResDto.fromJson(
+              error.response?.data,
+              (json) => FindIdResData.fromJson(json as Map<String, dynamic>),
+            );
+          }
+
+          return BaseResponseDtoMock.error<FindIdResData>();
+        })
+        .catchError((_) => BaseResponseDtoMock.error<FindIdResData>());
+  }
 }

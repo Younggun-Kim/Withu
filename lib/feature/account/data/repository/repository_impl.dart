@@ -89,4 +89,13 @@ class AccountRepositoryImpl implements AccountRepository {
 
     return SnsLoginResValueParser.fromDto(response);
   }
+
+  @override
+  FutureOr<FindIdResValue> findId(String phone) async {
+    final response = await accountApi.postFindId(
+      dto: FindIdReqDto(phone: phone),
+    );
+
+    return FindIdResValueParser.fromDto(response);
+  }
 }

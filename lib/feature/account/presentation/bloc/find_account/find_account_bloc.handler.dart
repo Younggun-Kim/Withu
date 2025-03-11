@@ -54,17 +54,17 @@ extension FindAccountBlocHandler on FindAccountBloc {
     FindAccountFindIdPressed event,
     Emitter<FindAccountState> emit,
   ) async {
-    // TODO: 아이디 찾기 API
-    final response = 'test@test.com';
-    final isFound = false;
+    final response = await findAccountUseCase.findId(
+      state.phone.formatPhoneNumber(),
+    );
 
-    /// 아이디 찾기 성공시 화면 이동
+    /// 아이디 찾기 결과 화면 이동
     getItAppRouter.popAndPush(
       FindIdResultRoute(
         args: FindIdResultPageArgs(
-          isFound: isFound,
+          isFound: response.success,
           name: state.name.value,
-          email: response,
+          email: response.email,
         ),
       ),
     );

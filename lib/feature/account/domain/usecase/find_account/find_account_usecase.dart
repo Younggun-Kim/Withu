@@ -9,7 +9,7 @@ abstract class FindAccountUseCase {
   FindAccountUseCase({required this.accountRepo});
 
   /// 아이디찾기
-  FutureOr<bool> findId({required LoginRequestEntity entity});
+  FutureOr<FindIdResValue> findId(String phone);
 
   /// 비밀번호 찾기
   FutureOr<bool> findPw({required LoginRequestEntity entity});

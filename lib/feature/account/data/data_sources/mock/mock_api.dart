@@ -104,4 +104,21 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.postAppleLogin(dto: dto);
   }
+
+  /// 아이디 찾기
+  @override
+  FutureOr<FindIdResDto> postFindId({required FindIdReqDto dto}) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.findId.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        AppleLoginResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postFindId(dto: dto);
+  }
 }

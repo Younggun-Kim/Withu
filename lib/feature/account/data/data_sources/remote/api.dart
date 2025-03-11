@@ -3,6 +3,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 
 enum AccountApiPathType {
+  findId('/auth/recovery/find-account?userType=AUTO'),
   emailLogin('/auth/login'),
   companySignUp('/company/auth/signup'),
   userSignUp('/staff/auth/signup'),
@@ -40,4 +41,7 @@ abstract class AccountApi {
 
   /// 애플 로그인
   FutureOr<AppleLoginResDto> postAppleLogin({required AppleLoginReqDto dto});
+
+  /// 아이디 찾기
+  FutureOr<FindIdResDto> postFindId({required FindIdReqDto dto});
 }

@@ -7,9 +7,8 @@ class FindAccountUseCaseImpl implements FindAccountUseCase {
   FindAccountUseCaseImpl({required this.accountRepo});
 
   @override
-  FutureOr<bool> findId({required LoginRequestEntity entity}) {
-    // TODO: implement findId
-    throw UnimplementedError();
+  FutureOr<FindIdResValue> findId(String phone) async {
+    return await accountRepo.findId(phone);
   }
 
   @override
