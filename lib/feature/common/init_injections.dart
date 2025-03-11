@@ -33,7 +33,7 @@ void _initPresentationInjections() {
   getIt.registerFactory<ValidateBusinessBloc>(
     () => ValidateBusinessBloc(useCase: getIt()),
   );
-  getIt.registerLazySingleton<PhoneAuthBloc>(
+  getIt.registerFactory<PhoneAuthBloc>(
     () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
 }

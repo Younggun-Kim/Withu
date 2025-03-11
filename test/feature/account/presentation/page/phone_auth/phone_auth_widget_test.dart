@@ -1,4 +1,3 @@
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,7 +31,14 @@ void main() {
     initialState = PhoneAuthState(status: BaseBlocStatus.initial());
     when(() => phoneAuthBloc.state).thenReturn(initialState);
     getIt.registerFactory<PhoneAuthBloc>(() => phoneAuthBloc);
-    testWidget = const MaterialApp(home: Scaffold(body: PhoneAuthWidget()));
+    testWidget = MaterialApp(
+      home: Scaffold(
+        body: PhoneAuthBlocProvider(
+          create: (contex) => getIt(),
+          child: PhoneAuthWidget(),
+        ),
+      ),
+    );
   });
 
   tearDown(() {

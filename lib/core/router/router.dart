@@ -16,6 +16,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ValidateBusinessRoute.page, path: '/validate-business'),
     AutoRoute(page: SignUpRoute.page, path: '/sign-up'),
     AutoRoute(page: EmailLoginRoute.page, path: '/email-login'),
+    AutoRoute(page: FindAccountRoute.page, path: '/find/account'),
+    AutoRoute(page: FindIdResultRoute.page, path: '/find/id/result'),
     AutoRoute(page: GuideRoute.page, path: '/guide'),
     AutoRoute(page: JobPostingsRoute.page, path: '/job-postings'),
     AutoRoute(page: JobPostingFormRoute.page, path: '/job-posting-form'),

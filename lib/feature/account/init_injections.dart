@@ -27,6 +27,9 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<EmailLoginUseCase>(
     EmailLoginUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<FindAccountUseCase>(
+    FindAccountUseCaseImpl(accountRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
@@ -35,5 +38,8 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
   getIt.registerFactory<EmailLoginBloc>(
     () => EmailLoginBloc(emailLoginUseCase: getIt()),
+  );
+  getIt.registerFactory<FindAccountBloc>(
+    () => FindAccountBloc(findAccountUseCase: getIt()),
   );
 }

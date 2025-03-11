@@ -31,6 +31,8 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     Emitter<PhoneAuthState> emit,
   ) async {
     if (!state.canRequestVerification) {
+      Toast.showWithNavigatorKey(text: '유효한 휴대폰번호를 입력해주세요.');
+
       return;
     }
 

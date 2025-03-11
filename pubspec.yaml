@@ -66,12 +66,23 @@ dependencies:
   firebase_analytics: ^11.4.3
   firebase_messaging: ^15.2.3
   firebase_crashlytics: ^4.3.4
+  firebase_auth: ^5.5.1
+
+  # fonts
   google_fonts: ^6.2.1
-  toastification: ^3.0.1
+
+  # app launch 화면 관련
   url_launcher: ^6.3.1
+
+  # sns Login
   sign_in_with_apple: ^6.1.4
   google_sign_in: ^6.3.0
-  firebase_auth: ^5.5.1
+
+  # toast
+  toastification: ^3.0.1
+
+  # lottie
+  lottie: ^3.3.1
 
 
 dev_dependencies:
@@ -109,6 +120,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
+    - assets/lottie/
 
 # Derry script manager
 scripts:
@@ -147,6 +159,7 @@ flutter_gen:
   integrations:
     image: true
     flutter_svg: true
+    lottie: true
 
   colors:
     inputs:

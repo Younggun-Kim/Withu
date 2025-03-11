@@ -6,4 +6,6 @@ class TermPageArgs {
   final String tempToken;
 
   const TermPageArgs({required this.type, this.tempToken = ''});
+
+  factory TermPageArgs.email() => TermPageArgs(type: LoginType.email);
 }

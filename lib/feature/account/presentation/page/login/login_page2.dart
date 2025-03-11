@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/find_account/find_account.dart';
 import 'package:withu/feature/account/presentation/page/term/term_page_args.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
@@ -229,7 +230,11 @@ class _SignUpAndLoginBtn extends StatelessWidget {
         ),
         const SizedBox(width: 40),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context.router.push(
+              FindAccountRoute(args: FindAccountPageArgs.id()),
+            );
+          },
           child: Text(
             '아이디찾기',
             style: context.textTheme.bodyMediumBold?.copyWith(
