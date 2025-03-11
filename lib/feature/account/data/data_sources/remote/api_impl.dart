@@ -158,4 +158,26 @@ class AccountApiImpl extends AccountApi {
         })
         .catchError((_) => BaseResponseDtoMock.error<FindIdResData>());
   }
+
+  /// 비밀번호 변경
+  @override
+  FutureOr<ChangePwResDto> postChangePw({required ChangePwReqDto dto}) async {
+    return network.dio
+        .post(AccountApiPathType.changePw.fullPath, data: dto.toJson())
+        .then(
+          (response) =>
+              ChangePwResDto.fromJson(response.data, (json) => json as bool),
+        )
+        .catchError((error) {
+          if (error is DioException && error.response?.statusCode != 500) {
+            return ChangePwResDto.fromJson(
+              error.response?.data,
+              (json) => json as bool,
+            );
+          }
+
+          return BaseResponseDtoMock.error<bool>();
+        })
+        .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
 }

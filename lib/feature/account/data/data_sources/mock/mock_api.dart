@@ -121,4 +121,21 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.postFindId(dto: dto);
   }
+
+  /// 비밀번호 변경
+  @override
+  FutureOr<ChangePwResDto> postChangePw({required ChangePwReqDto dto}) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.changePw.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        ChangePwResDtoMock.failure().toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postChangePw(dto: dto);
+  }
 }

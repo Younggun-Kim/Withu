@@ -49,6 +49,3 @@ class FindAccountPageTypeChanged extends FindAccountEvent {
 
 /// 아이디찾기 클릭
 class FindAccountFindIdPressed extends FindAccountEvent {}
-
-/// 비밀번호 찾기 클릭
-class FindAccountFindPasswordPressed extends FindAccountEvent {}

@@ -38,6 +38,5 @@ class FindAccountBloc extends Bloc<FindAccountEvent, FindAccountState> {
     on<FindAccountEmailInputted>(_onFindAccountEmailInputted);
     on<FindAccountPageTypeChanged>(_onFindAccountPageTypeChanged);
     on<FindAccountFindIdPressed>(_onFindAccountFindIdPressed);
-    on<FindAccountFindPasswordPressed>(_onFindAccountFindPasswordPressed);
   }
 }

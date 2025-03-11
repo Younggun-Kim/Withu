@@ -41,4 +41,8 @@ abstract class AccountRepository {
 
   /// 아이디 찾기 요청
   FutureOr<FindIdResValue> findId(String phone);
+
+  /// 비밀번호 변경 요청
+  /// return - (bool) 변경 성공 여부
+  FutureOr<bool> changePw(ChangePwReqDto dto);
 }

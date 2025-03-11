@@ -98,4 +98,15 @@ class AccountRepositoryImpl implements AccountRepository {
 
     return FindIdResValueParser.fromDto(response);
   }
+
+  @override
+  FutureOr<bool> changePw(ChangePwReqDto dto) async {
+    final response = await accountApi.postChangePw(dto: dto);
+
+    if (response.message.isNotEmpty) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    return response.success;
+  }
 }

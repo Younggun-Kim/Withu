@@ -3,6 +3,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 
 enum AccountApiPathType {
+  changePw('/auth/recovery/enhanced-reset-password?userType=AUTO'),
   findId('/auth/recovery/find-account?userType=AUTO'),
   emailLogin('/auth/login'),
   companySignUp('/company/auth/signup'),
@@ -44,4 +45,7 @@ abstract class AccountApi {
 
   /// 아이디 찾기
   FutureOr<FindIdResDto> postFindId({required FindIdReqDto dto});
+
+  /// 비밀번호 변경
+  FutureOr<ChangePwResDto> postChangePw({required ChangePwReqDto dto});
 }

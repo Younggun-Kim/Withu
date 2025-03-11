@@ -18,6 +18,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: EmailLoginRoute.page, path: '/email-login'),
     AutoRoute(page: FindAccountRoute.page, path: '/find/account'),
     AutoRoute(page: FindIdResultRoute.page, path: '/find/id/result'),
+    AutoRoute(page: ChangePwRoute.page, path: '/change/pw'),
     AutoRoute(page: GuideRoute.page, path: '/guide'),
     AutoRoute(page: JobPostingsRoute.page, path: '/job-postings'),
     AutoRoute(page: JobPostingFormRoute.page, path: '/job-posting-form'),

@@ -69,11 +69,4 @@ extension FindAccountBlocHandler on FindAccountBloc {
       ),
     );
   }
-
-  void _onFindAccountFindPasswordPressed(
-    FindAccountFindPasswordPressed event,
-    Emitter<FindAccountState> emit,
-  ) {
-    // TODO: 비밀번호 찾기 API
-  }
 }

@@ -1,8 +1,10 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/presentation/bloc/find_account/find_account_bloc.dart';
+import 'package:withu/feature/account/presentation/change_pw/change_pw.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/shared/shared.dart';
 
@@ -291,8 +293,14 @@ class _FindPwBtn extends StatelessWidget {
           text: '비밀번호 찾기',
           isEnabled: state.isEnabledFindId,
           onTap: () {
-            context.read<FindAccountBloc>().add(
-              FindAccountFindPasswordPressed(),
+            context.router.push(
+              ChangePwRoute(
+                args: ChangePwPageArgs(
+                  name: state.name,
+                  email: state.email,
+                  phone: state.phone,
+                ),
+              ),
             );
           },
         );
