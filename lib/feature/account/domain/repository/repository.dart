@@ -5,6 +5,7 @@ import 'package:withu/feature/account/data/data.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
 import 'package:withu/feature/account/domain/entity/sns_login_res/sns_login_res_value.dart';
+import 'package:withu/feature/account/domain/entity/stored_sns_sign_up/stored_sns_sign_up_value.dart';
 
 abstract class AccountRepository {
   AccountRepository({required this.accountApi, required this.accountStorage});
@@ -45,4 +46,10 @@ abstract class AccountRepository {
   /// 비밀번호 변경 요청
   /// return - (bool) 변경 성공 여부
   FutureOr<bool> changePw(ChangePwReqDto dto);
+
+  /// SNS 회원가입 정보 저장
+  void storeSnsSignUpData(LoginType type, String tempToken);
+
+  /// SNS 회원가입 정보 가져오기
+  FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData();
 }

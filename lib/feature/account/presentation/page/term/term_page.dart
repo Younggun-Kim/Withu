@@ -7,7 +7,6 @@ import 'package:withu/feature/account/domain/type/term_type.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_page_step_type.dart';
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up.dart';
-import 'package:withu/feature/account/presentation/page/term/term_page_args.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
@@ -15,14 +14,12 @@ import 'package:withu/shared/shared.dart';
 
 @RoutePage()
 class TermPage extends StatelessWidget {
-  final TermPageArgs args;
-
-  const TermPage({super.key, required this.args});
+  const TermPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TermBlocProvider(
-      create: (context) => getIt()..add(TermArgsStored(args: args)),
+      create: (context) => getIt(),
       child: _TermPageContent(),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:withu/core/types/login_type.dart';
 
 import 'storage_key.dart';
 
@@ -10,4 +11,12 @@ abstract class AccountStorage {
 
   /// Token 저장
   void setToken({required String token});
+
+  Future<LoginType> getSignUpType();
+
+  void setSignUpType(LoginType type);
+
+  Future<String> getTempToken();
+
+  void setTempToken(String tempToken);
 }

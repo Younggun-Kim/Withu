@@ -7,7 +7,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/presentation/find_account/find_account.dart';
-import 'package:withu/feature/account/presentation/page/term/term_page_args.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -48,11 +47,6 @@ class _LoginPage2State extends State<LoginPage2Content> {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
-        /// 로그인 성공
-        if (state.status.isSuccess) {
-          getItAppRouter.replaceAll([const JobPostingsRoute()]);
-        }
-
         if (state.hasFailMessage) {
           await CustomAlertDialog.showContentAlert(
             context: context,
@@ -111,12 +105,8 @@ class _AppleBtn extends StatelessWidget {
       ),
       child: InkWell(
         radius: 20,
-        onTap: () async {
-          // TODO: Apple Login & 회원가입 Flow
-          final identifyToken = await AppleLogin().getCredential();
-          context.read<LoginBloc>().add(
-            LoginAppleRequested(identifyToken: identifyToken),
-          );
+        onTap: () {
+          context.read<LoginBloc>().add(LoginAppleRequested());
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -217,9 +207,7 @@ class _SignUpAndLoginBtn extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            context.router.push(
-              TermRoute(args: TermPageArgs(type: LoginType.email)),
-            );
+            context.router.push(TermRoute());
           },
           child: Text(
             '회원가입',

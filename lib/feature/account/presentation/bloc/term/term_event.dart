@@ -5,13 +5,6 @@ abstract class TermEvent extends BaseBlocEvent {}
 /// 메시지 초기화
 class TermMessageCleared extends TermEvent {}
 
-/// Args 저장
-class TermArgsStored extends TermEvent {
-  final TermPageArgs args;
-
-  TermArgsStored({required this.args});
-}
-
 /// 계정 타입 선택
 class TermAccountTypeSelected extends TermEvent {
   final AccountType value;

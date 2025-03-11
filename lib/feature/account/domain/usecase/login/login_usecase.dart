@@ -16,4 +16,7 @@ abstract class LoginUseCase {
 
   /// 애플 로그인 요청
   FutureOr<SnsLoginResValue> requestAppleLogin(String token);
+
+  /// Sns 가입 정보 저장
+  void storeSnsSignUpData(LoginType type, String tempToken);
 }

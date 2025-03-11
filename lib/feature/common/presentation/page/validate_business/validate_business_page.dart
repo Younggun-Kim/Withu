@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/core/router/router.gr.dart';
-import 'package:withu/feature/account/presentation/page/sign_up/sign_up.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -29,21 +27,7 @@ class _ValidateBusinessPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValidateBusinessBlocConsumer(
-      listener: (context, state) {
-        if (state.status.isSuccess) {
-          context.router.push(
-            SignUpRoute(
-              args: SignUpPageArgs.company(
-                businessNum: state.businessNum.value,
-                ceoName: state.ceoName.value,
-                companyName: state.companyName.value,
-                isAgreeLocation: state.args?.isAgreeLocation ?? false,
-                isAgreeMarketing: state.args?.isAgreeMarketing ?? false,
-              ),
-            ),
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return PageRoot(
           isLoading: state.status.isLoading,

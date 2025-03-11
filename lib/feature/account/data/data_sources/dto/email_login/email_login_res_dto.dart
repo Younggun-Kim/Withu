@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/feature/account/data/data_sources/dto/token_list/token_list.dart';
 
 part 'email_login_res_dto.freezed.dart';
 
@@ -10,7 +11,7 @@ typedef EmailLoginResDto = BaseResponseDto<EmailLoginResData>;
 @freezed
 class EmailLoginResData with _$EmailLoginResData {
   factory EmailLoginResData({
-    required String token,
+    required TokenListDto tokens,
     required String userId,
     required String message,
     AccountType? accountType,
@@ -21,7 +22,7 @@ class EmailLoginResData with _$EmailLoginResData {
 }
 
 extension EmailLoginResDtoMock on EmailLoginResDto {
-  bool get hasToken => data?.token.isNotEmpty == true;
+  bool get hasToken => data?.tokens.accessToken.isNotEmpty == true;
 
   bool get isSuccessLogin => this.success && hasToken;
 
@@ -30,7 +31,7 @@ extension EmailLoginResDtoMock on EmailLoginResDto {
       success: true,
       message: '로그인 성공',
       data: EmailLoginResData(
-        token: 'test-token',
+        tokens: TokenListDtoMock.mock(),
         userId: 'test-user-id',
         message: '',
       ),

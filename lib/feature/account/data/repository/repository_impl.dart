@@ -31,7 +31,7 @@ class AccountRepositoryImpl implements AccountRepository {
     final response = await accountApi.postEmailLogin(dto: dto);
 
     if (response.hasToken) {
-      accountStorage.setToken(token: response.data!.token);
+      accountStorage.setToken(token: response.data!.tokens.accessToken);
     } else {
       response.showErrorMessage();
     }
@@ -108,5 +108,19 @@ class AccountRepositoryImpl implements AccountRepository {
     }
 
     return response.success;
+  }
+
+  @override
+  void storeSnsSignUpData(LoginType type, String tempToken) {
+    accountStorage.setSignUpType(type);
+    accountStorage.setTempToken(tempToken);
+  }
+
+  @override
+  FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData() async {
+    final tempToken = await accountStorage.getTempToken();
+    final signUpType = await accountStorage.getSignUpType();
+
+    return StoredSnsSignUpValue(type: signUpType, tempToken: tempToken);
   }
 }

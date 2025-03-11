@@ -44,17 +44,41 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
   ) async {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final isRegistered = await useCase.checkDuplication(state.toEntity());
+    final canRegistration = await useCase.checkDuplication(state.toEntity());
 
     emit(
       state.copyWith(
-        status: getResultStatus(isRegistered),
-        iSDuplicated: VisibleTypeEx.fromBool(isRegistered),
+        status: getResultStatus(canRegistration),
+        iSDuplicated: VisibleTypeEx.fromBool(!canRegistration),
       ),
     );
+
+    moveSignUpPage();
   }
 
   BaseBlocStatus getResultStatus(bool result) {
-    return result ? BaseBlocStatus.failure() : BaseBlocStatus.success();
+    return result ? BaseBlocStatus.success() : BaseBlocStatus.failure();
+  }
+
+  void moveSignUpPage() async {
+    if (!state.status.isSuccess) {
+      return;
+    }
+
+    final storedData = await useCase.getStoredSnsSignUpData();
+
+    getItAppRouter.push(
+      SignUpRoute(
+        args: SignUpPageArgs.company(
+          businessNum: state.businessNum.value,
+          ceoName: state.ceoName.value,
+          companyName: state.companyName.value,
+          isAgreeLocation: state.args?.isAgreeLocation ?? false,
+          isAgreeMarketing: state.args?.isAgreeMarketing ?? false,
+          signUpType: storedData.type,
+          tempToken: storedData.tempToken,
+        ),
+      ),
+    );
   }
 }

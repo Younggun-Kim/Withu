@@ -38,7 +38,7 @@ void initAccountDomainInjections() {
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerFactory<TermBloc>(() => TermBloc());
+  getIt.registerFactory<TermBloc>(() => TermBloc(accountRepo: getIt()));
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
   getIt.registerFactory<EmailLoginBloc>(

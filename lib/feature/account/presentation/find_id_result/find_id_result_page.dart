@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
-import 'package:withu/feature/account/presentation/page/term/term.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
 
@@ -92,7 +91,7 @@ class _FindFailure extends StatelessWidget {
           context: context,
           text: '회원가입',
           onTap: () {
-            context.router.popAndPush(TermRoute(args: TermPageArgs.email()));
+            context.router.popAndPush(TermRoute());
           },
         ),
         const SizedBox(height: 55),

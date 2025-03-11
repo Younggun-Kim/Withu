@@ -1,3 +1,4 @@
+import 'package:withu/core/types/login_type.dart';
 import 'package:withu/feature/account/domain/type/account_type.dart';
 
 class SignUpPageArgs {
@@ -19,6 +20,12 @@ class SignUpPageArgs {
   /// 마케팅 동의 여부
   final bool isAgreeMarketing;
 
+  /// 회원가입 종류
+  final LoginType signUpType;
+
+  /// SnS 회원가입 임시 토큰
+  final String tempToken;
+
   SignUpPageArgs({
     required this.accountType,
     required this.businessNum,
@@ -26,11 +33,15 @@ class SignUpPageArgs {
     required this.companyName,
     required this.isAgreeLocation,
     required this.isAgreeMarketing,
+    this.signUpType = LoginType.email,
+    this.tempToken = '',
   });
 
   factory SignUpPageArgs.user({
     required bool isAgreeLocation,
     required bool isAgreeMarketing,
+    LoginType signUpType = LoginType.email,
+    String tempToken = '',
   }) {
     return SignUpPageArgs(
       accountType: AccountType.user,
@@ -39,6 +50,8 @@ class SignUpPageArgs {
       companyName: '',
       isAgreeLocation: isAgreeLocation,
       isAgreeMarketing: isAgreeMarketing,
+      signUpType: signUpType,
+      tempToken: tempToken,
     );
   }
 
@@ -48,6 +61,8 @@ class SignUpPageArgs {
     required String companyName,
     required bool isAgreeLocation,
     required bool isAgreeMarketing,
+    LoginType signUpType = LoginType.email,
+    String tempToken = '',
   }) {
     return SignUpPageArgs(
       accountType: AccountType.company,
@@ -56,6 +71,8 @@ class SignUpPageArgs {
       companyName: companyName,
       isAgreeLocation: isAgreeLocation,
       isAgreeMarketing: isAgreeMarketing,
+      signUpType: signUpType,
+      tempToken: tempToken,
     );
   }
 }

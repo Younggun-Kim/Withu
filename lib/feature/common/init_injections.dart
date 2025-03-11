@@ -22,7 +22,7 @@ void _initDataInjections() {
 
 void _initDomainInjections() {
   getIt.registerSingleton<ValidateBusinessUseCase>(
-    ValidateBusinessUseCaseImpl(commonRepo: getIt()),
+    ValidateBusinessUseCaseImpl(commonRepo: getIt(), accountRepo: getIt()),
   );
   getIt.registerSingleton<PhoneAuthUseCase>(
     PhoneAuthUseCaseImpl(commonRepo: getIt()),

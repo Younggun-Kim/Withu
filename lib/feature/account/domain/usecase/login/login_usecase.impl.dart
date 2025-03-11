@@ -37,4 +37,9 @@ class LoginUseCaseImpl implements LoginUseCase {
       AppleLoginReqDto(idToken: token, firstName: '', lastName: ''),
     );
   }
+
+  @override
+  void storeSnsSignUpData(LoginType type, String tempToken) {
+    accountRepo.storeSnsSignUpData(type, tempToken);
+  }
 }

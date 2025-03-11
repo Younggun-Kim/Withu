@@ -1,8 +1,6 @@
 part of 'term_bloc.dart';
 
 extension TermBlocHandler on TermBloc {
-  void _onTermArgsStored(TermArgsStored event, Emitter<TermState> emit) {}
-
   /// 계정 타입 선택 이벤트.
   void _onTermAccountTypeSelected(
     TermAccountTypeSelected event,
@@ -22,48 +20,33 @@ extension TermBlocHandler on TermBloc {
     TermSecondNextPressed event,
     Emitter<TermState> emit,
   ) async {
-    if (state.args.type.isEmail) {
-      emailUserProcess();
-    } else {
-      await snsUserProcess();
-    }
+    state.accountType.iSCompany ? _moveCompanyNextPage() : _moveUserNextPage();
   }
 
-  void emailUserProcess() {
-    state.accountType.iSCompany
-        ? getItAppRouter.push(
-          ValidateBusinessRoute(
-            args: ValidateBusinessPageArgs(
-              isAgreeLocation: state.locationTerm,
-              isAgreeMarketing: state.marketingTerm,
-            ),
-          ),
-        )
-        : getItAppRouter.push(
-          SignUpRoute(
-            args: SignUpPageArgs.user(
-              isAgreeLocation: state.locationTerm,
-              isAgreeMarketing: state.marketingTerm,
-            ),
-          ),
-        );
-  }
-
-  FutureOr<void> snsUserProcess() async {
-    if (state.accountType.iSCompany) {
+  void _moveCompanyNextPage() {
+    getItAppRouter.push(
       ValidateBusinessRoute(
         args: ValidateBusinessPageArgs(
           isAgreeLocation: state.locationTerm,
           isAgreeMarketing: state.marketingTerm,
-          snsTempToken: state.args.tempToken,
         ),
-      );
-    } else {
-      // TODO: Sns 회원 가입
-    }
+      ),
+    );
   }
 
-  void callApi() async {}
+  void _moveUserNextPage() async {
+    final storedData = await accountRepo.getStoredSnsSignUpData();
+    getItAppRouter.push(
+      SignUpRoute(
+        args: SignUpPageArgs.user(
+          isAgreeLocation: state.locationTerm,
+          isAgreeMarketing: state.marketingTerm,
+          signUpType: storedData.type,
+          tempToken: storedData.tempToken,
+        ),
+      ),
+    );
+  }
 
   void _onTermAllAgreementTapped(
     TermAllAgreementTapped event,

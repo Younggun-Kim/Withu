@@ -57,13 +57,19 @@ extension LoginBlocHandler on LoginBloc {
     LoginAppleRequested event,
     Emitter<LoginState> emit,
   ) async {
+    /// Apple 토큰
+    final identifyToken = await AppleLogin().getCredential();
+
+    if (identifyToken.isEmpty) return;
+
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final response = await loginUseCase.requestAppleLogin(event.identifyToken);
+    final response = await loginUseCase.requestAppleLogin(identifyToken);
 
     emit(
       state.copyWith(status: BaseBlocStatus.fromSuccess(response.isLoggedIn)),
     );
+
     moveAppleNextPage(response);
   }
 
@@ -72,14 +78,10 @@ extension LoginBlocHandler on LoginBloc {
       // TODO: Refresh 추가하기
       Toast.showWithNavigatorKey(text: '홈으로 이동할 예정입니다.');
     } else {
-      getItAppRouter.push(
-        TermRoute(
-          args: TermPageArgs(
-            type: LoginType.apple,
-            tempToken: response.tempToken,
-          ),
-        ),
-      );
+      // 이걸 Storage를 이용해볼까
+      // signuptype, temp토큰 전달해야 함
+      loginUseCase.storeSnsSignUpData(LoginType.apple, response.tempToken);
+      getItAppRouter.push(TermRoute());
     }
   }
 }

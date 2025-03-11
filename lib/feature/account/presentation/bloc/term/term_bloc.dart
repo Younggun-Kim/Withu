@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
+import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_page_step_type.dart';
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart';
-import 'package:withu/feature/account/presentation/page/term/term_page_args.dart';
 import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page_args.dart';
 
 part 'term_bloc.handler.dart';
@@ -22,9 +20,11 @@ typedef TermBlocProvider = BlocProvider<TermBloc>;
 typedef TermBlocBuilder = BlocBuilder<TermBloc, TermState>;
 
 class TermBloc extends BaseBloc<TermEvent, TermState> {
-  TermBloc() : super(TermState(status: BaseBlocStatus.initial())) {
+  final AccountRepository accountRepo;
+
+  TermBloc({required this.accountRepo})
+    : super(TermState(status: BaseBlocStatus.initial())) {
     on<TermAccountTypeSelected>(_onTermAccountTypeSelected);
-    on<TermArgsStored>(_onTermArgsStored);
     on<TermFirstNextPressed>(_onTermFirstNextPressed);
     on<TermSecondNextPressed>(_onTermSecondNextPressed);
     on<TermAllAgreementTapped>(_onTermAllAgreementTapped);
