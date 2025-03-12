@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:withu/core/config/firebase/firebase_init.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/utils/firebase/firebase_init.dart';
 
 void run({required EnvironmentType environment}) async {
   Environment.env = environment;
@@ -12,6 +12,8 @@ void run({required EnvironmentType environment}) async {
   await EasyLocalization.ensureInitialized();
 
   await DotEnvUtils.init();
+
+  await LocalPushUtils.initialize();
 
   await FirebaseInit.init();
 
