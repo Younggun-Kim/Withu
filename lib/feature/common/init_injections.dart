@@ -11,7 +11,7 @@ void initCommonInjections() {
 
 void _initDataInjections() {
   getIt.registerSingleton<CommonApi>(
-    Environment.isProd
+    Environment.isRelease
         ? CommonApiImpl(network: getIt())
         : CommonMockApi(network: getIt()),
   );

@@ -14,7 +14,7 @@ AppRouter get getItAppRouter => getIt<AppRouter>();
 void initNetworkInjections() {
   getIt.registerSingleton<DioNetwork>(DioNetwork());
 
-  if (!Environment.isProd) {
+  if (!Environment.isRelease) {
     getIt.registerSingleton<DioAdapter>(
       DioAdapter(dio: getIt<DioNetwork>().dio),
     );

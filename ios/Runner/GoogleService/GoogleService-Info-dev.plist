@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>819902987830-it09chg456rvnh9filt1uvpn8cuije1g.apps.googleusercontent.com</string>
+	<string>756392437978-8fo38pm4b4rt6pkui5foib1b97v1ilo3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.819902987830-it09chg456rvnh9filt1uvpn8cuije1g</string>
+	<string>com.googleusercontent.apps.756392437978-8fo38pm4b4rt6pkui5foib1b97v1ilo3</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>819902987830-qjuv8nohnj3pmooed4chi3bkelnvu36l.apps.googleusercontent.com</string>
+	<string>756392437978-5o1th5nr3e3ul5jv3jvqa8r95a9nj7r2.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAi8ATTjdK7M3Rw2MxB9KVWVCD4Kkf-D5Y</string>
+	<string>AIzaSyDA2Lb1wUf7s8BO2Hu5peU7xwdwL8gJtXo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>819902987830</string>
+	<string>756392437978</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.conner.withu.dev</string>
 	<key>PROJECT_ID</key>
-	<string>withu-acbaf</string>
+	<string>with-u-b3025</string>
 	<key>STORAGE_BUCKET</key>
-	<string>withu-acbaf.firebasestorage.app</string>
+	<string>with-u-b3025.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:819902987830:ios:bdbff834719ab644d6a297</string>
+	<string>1:756392437978:ios:8e0b35823eff4c9a335de3</string>
 </dict>
 </plist>

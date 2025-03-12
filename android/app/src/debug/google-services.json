@@ -1,49 +1,49 @@
 {
   "project_info": {
-    "project_number": "819902987830",
-    "project_id": "withu-acbaf",
-    "storage_bucket": "withu-acbaf.firebasestorage.app"
+    "project_number": "756392437978",
+    "project_id": "with-u-b3025",
+    "storage_bucket": "with-u-b3025.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819902987830:android:44097d27c1b55dced6a297",
+        "mobilesdk_app_id": "1:756392437978:android:d63977735982d99d335de3",
         "android_client_info": {
           "package_name": "com.conner.withu"
         }
       },
       "oauth_client": [
         {
-          "client_id": "819902987830-f3kt7ec815cn4bn83biuhv88vrsfr27d.apps.googleusercontent.com",
+          "client_id": "756392437978-5o1th5nr3e3ul5jv3jvqa8r95a9nj7r2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.conner.withu",
-            "certificate_hash": "7e676ab61bd27ad55facd2d8fa153b1ae64484e8"
+            "certificate_hash": "6e4f547b873a50d32eba39b692f3646297b0d424"
           }
         },
         {
-          "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+          "client_id": "756392437978-kov8i7arvdda3ke5k7e6b149qgjic645.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
+          "current_key": "AIzaSyD6TGbLvRRkZT0i7jX40kfrp8Gd9VL8xdg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+              "client_id": "756392437978-kov8i7arvdda3ke5k7e6b149qgjic645.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "819902987830-dh82fpjhtrkr267843onod6fh762o4nh.apps.googleusercontent.com",
+              "client_id": "756392437978-8fo38pm4b4rt6pkui5foib1b97v1ilo3.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.conner.withu",
-                "app_store_id": "6739505809"
+                "bundle_id": "com.conner.withu.dev",
+                "app_store_id": "6742642218"
               }
             }
           ]
@@ -52,43 +52,43 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819902987830:android:88077bf2119ee0e0d6a297",
+        "mobilesdk_app_id": "1:756392437978:android:f0ecb6e29b4eaa34335de3",
         "android_client_info": {
           "package_name": "com.conner.withu.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "819902987830-s7gvaq64jq3sl5317tc3rvjti08ass06.apps.googleusercontent.com",
+          "client_id": "756392437978-s1q9nq6lha06oebvcllpup7847et9tek.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.conner.withu.dev",
-            "certificate_hash": "1164270baf87e00bf72fad253ac1eb3b284a0109"
+            "certificate_hash": "44c2d6558d997dbd2b7442db1b02b9f20719c309"
           }
         },
         {
-          "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+          "client_id": "756392437978-kov8i7arvdda3ke5k7e6b149qgjic645.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE"
+          "current_key": "AIzaSyD6TGbLvRRkZT0i7jX40kfrp8Gd9VL8xdg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819902987830-r6kcab10ctngbvukli99ee5a1glg129d.apps.googleusercontent.com",
+              "client_id": "756392437978-kov8i7arvdda3ke5k7e6b149qgjic645.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "819902987830-dh82fpjhtrkr267843onod6fh762o4nh.apps.googleusercontent.com",
+              "client_id": "756392437978-8fo38pm4b4rt6pkui5foib1b97v1ilo3.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.conner.withu",
-                "app_store_id": "6739505809"
+                "bundle_id": "com.conner.withu.dev",
+                "app_store_id": "6742642218"
               }
             }
           ]

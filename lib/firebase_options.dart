@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC7Y9sp2yXBb1Pnp8ciKKUZZt34VS47aYE',
-    appId: '1:819902987830:android:44097d27c1b55dced6a297',
-    messagingSenderId: '819902987830',
-    projectId: 'withu-acbaf',
-    storageBucket: 'withu-acbaf.firebasestorage.app',
+    apiKey: 'AIzaSyD6TGbLvRRkZT0i7jX40kfrp8Gd9VL8xdg',
+    appId: '1:756392437978:android:d63977735982d99d335de3',
+    messagingSenderId: '756392437978',
+    projectId: 'with-u-b3025',
+    storageBucket: 'with-u-b3025.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAi8ATTjdK7M3Rw2MxB9KVWVCD4Kkf-D5Y',
-    appId: '1:819902987830:ios:55c793e25089918cd6a297',
-    messagingSenderId: '819902987830',
-    projectId: 'withu-acbaf',
-    storageBucket: 'withu-acbaf.firebasestorage.app',
+    apiKey: 'AIzaSyDA2Lb1wUf7s8BO2Hu5peU7xwdwL8gJtXo',
+    appId: '1:756392437978:ios:a0d2e311f3e5a63a335de3',
+    messagingSenderId: '756392437978',
+    projectId: 'with-u-b3025',
+    storageBucket: 'with-u-b3025.firebasestorage.app',
     iosBundleId: 'com.conner.withu.RunnerTests',
   );
+
 }

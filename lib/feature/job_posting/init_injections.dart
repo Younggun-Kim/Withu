@@ -6,7 +6,7 @@ import 'package:withu/feature/job_posting/presentation/blocs/workers/job_posting
 
 initJobPostingInjections() {
   getIt.registerSingleton<JobPostingApi>(
-    Environment.isProd ? JobPostingApiImpl() : JobPostingMockApi(),
+    Environment.isRelease ? JobPostingApiImpl() : JobPostingMockApi(),
   );
   getIt.registerSingleton<JobPostingRepository>(
     JobPostingRepositoryImpl(jobPostingApi: getIt()),

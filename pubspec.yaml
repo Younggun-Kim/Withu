@@ -134,7 +134,10 @@ scripts:
   # build runner 실행
   build: flutter pub run build_runner build --delete-conflicting-outputs
 
-  abb: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
+  abb:
+    prod: flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
+
+    dev: flutter build appbundle --release --flavor dev -t lib/core/config/env/dev.dart --no-tree-shake-icons
 
   ios: flutter build ios --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons
 

@@ -11,7 +11,7 @@ void initAccountInjections() {
 
 void initAccountDataInjections() {
   getIt.registerSingleton<AccountApi>(
-    Environment.isProd
+    Environment.isRelease
         ? AccountApiImpl(network: getIt())
         : AccountMockApi(network: getIt()),
   );
