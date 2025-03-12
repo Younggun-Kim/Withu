@@ -22,7 +22,6 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     on<LoginMessageCleared>(_onMessageCleared);
     on<LoginIdInputted>(_onIdInputted);
     on<LoginPasswordInputted>(_onPasswordInputted);
-    on<LoginBtnPressed>(_onBtnPressed);
     on<LoginVisiblePasswordToggled>(_onVisiblePasswordToggled);
     on<LoginAppleRequested>(_onLoginAppleRequested);
     on<LoginEmailSignUpPressed>(_onLoginEmailSignUpPressed);

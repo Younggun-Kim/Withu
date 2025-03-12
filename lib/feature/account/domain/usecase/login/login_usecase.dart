@@ -15,9 +15,6 @@ abstract class LoginUseCase {
   /// 로그아웃
   Future<void> logout();
 
-  /// 로그인
-  Future<LoginResultEntity> login({required LoginRequestEntity entity});
-
   /// 로그인 여부
   Future<bool> checkLogin();
 

@@ -33,17 +33,6 @@ extension LoginBlocHandler on LoginBloc {
     _checkLoginEnabled(emit);
   }
 
-  /// 로그인 버튼 클릭
-  void _onBtnPressed(LoginBtnPressed event, Emitter<LoginState> emit) async {
-    emit(state.copyWith(status: BaseBlocStatus.loading()));
-
-    final LoginResultEntity result = await loginUseCase.login(
-      entity: toEntity(),
-    );
-
-    emit(state.copyWith(status: result.blocStatus, message: result.message));
-  }
-
   /// 비밀번호 표시 토글
   void _onVisiblePasswordToggled(
     LoginVisiblePasswordToggled event,

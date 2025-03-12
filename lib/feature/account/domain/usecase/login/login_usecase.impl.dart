@@ -16,17 +16,7 @@ class LoginUseCaseImpl implements LoginUseCase {
   @override
   Future<void> logout() async {
     await accountRepo.logout();
-    getItAppRouter.replaceAll([LoginRoute2()]);
-  }
-
-  /// 로그인
-  @override
-  Future<LoginResultEntity> login({required LoginRequestEntity entity}) async {
-    final result = await accountRepo.login(requestData: entity.toDto());
-
-    storeToken(token: result.successData?.sessionId ?? '');
-
-    return LoginResultEntityConverter.fromDto(result: result);
+    getItAppRouter.replaceAll([LoginRoute()]);
   }
 
   /// 세션 Id 저장

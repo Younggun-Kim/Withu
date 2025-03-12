@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/find_account/find_account.dart';
 import 'package:withu/gen/assets.gen.dart';
+import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
 /// 로그인 화면
@@ -16,19 +20,19 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) => getIt(),
-      child: const LoginPageContent(),
+      child: const LoginPage2Content(),
     );
   }
 }
 
-class LoginPageContent extends StatefulWidget {
-  const LoginPageContent({super.key});
+class LoginPage2Content extends StatefulWidget {
+  const LoginPage2Content({super.key});
 
   @override
-  State<StatefulWidget> createState() => _LoginPageState();
+  State<StatefulWidget> createState() => _LoginPage2State();
 }
 
-class _LoginPageState extends State<LoginPageContent> {
+class _LoginPage2State extends State<LoginPage2Content> {
   @override
   void initState() {
     super.initState();
@@ -43,11 +47,6 @@ class _LoginPageState extends State<LoginPageContent> {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
-        /// 로그인 성공
-        if (state.status.isSuccess) {
-          getItAppRouter.replaceAll([const JobPostingsRoute()]);
-        }
-
         if (state.hasFailMessage) {
           await CustomAlertDialog.showContentAlert(
             context: context,
@@ -60,7 +59,7 @@ class _LoginPageState extends State<LoginPageContent> {
       },
       builder: (context, state) {
         return PageRoot(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 35),
           isLoading: state.status.isLoading,
           child: SingleChildScrollView(
             child: Column(
@@ -75,57 +74,15 @@ class _LoginPageState extends State<LoginPageContent> {
                     style: context.textTheme.bodyMediumBold,
                   ),
                 ),
-                const SizedBox(height: 26),
-                BaseInput.email(
-                  key: const Key('email_input'),
-                  textInputAction: TextInputAction.next,
-                  errorText: StringRes.pleaseEnterValidEmail.tr,
-                  errorVisible: !state.loginId.isValid,
-                  onChanged: (String text) {
-                    context.read<LoginBloc>().add(LoginIdInputted(value: text));
-                  },
-                ),
-                const SizedBox(height: 30),
-                BaseInput.password(
-                  key: const Key('password_input'),
-                  errorText: StringRes.pleaseEnterValidPassword.tr,
-                  obscureText: !state.isVisiblePassword,
-                  errorVisible: !state.password.isValid(),
-                  onChanged: (String text) {
-                    context.read<LoginBloc>().add(
-                      LoginPasswordInputted(value: text),
-                    );
-                  },
-                  onSuffixPressed: () {
-                    context.read<LoginBloc>().add(
-                      LoginVisiblePasswordToggled(),
-                    );
-                  },
-                ),
-                const SizedBox(height: 80),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        StringRes.signUp.tr,
-                        style: context.textTheme.bodySmall,
-                      ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        StringRes.findIdPw.tr,
-                        style: context.textTheme.bodySmall,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const _LoginButton(enabled: true),
-                // _LoginButton(enabled: state.isEnabledLogin),
-                const SizedBox(height: 20),
+                const SizedBox(height: 130),
+                _AppleBtn(),
+                const SizedBox(height: 15),
+                _GoogleBtn(),
+                _Divider(),
+                _EmailBtn(),
+                const SizedBox(height: 44),
+                _SignUpAndLoginBtn(),
+                const SizedBox(height: 40),
               ],
             ),
           ),
@@ -135,22 +92,145 @@ class _LoginPageState extends State<LoginPageContent> {
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({required this.enabled});
-  final bool enabled;
-
+class _AppleBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final text = StringRes.login.tr;
-    return enabled
-        ? BaseButton.enabled(
-          key: const Key('login_button'),
-          context: context,
-          text: text,
-          onTap: () async {
-            context.read<LoginBloc>().add(LoginBtnPressed());
+    return Container(
+      width: double.infinity,
+      height: 50,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        radius: 20,
+        onTap: () {
+          context.read<LoginBloc>().add(LoginAppleRequested());
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Assets.images.apple.svg(width: 35, height: 35),
+            const SizedBox(width: 10),
+            Text(
+              'Apple로 시작하기',
+              style: context.textTheme.bodyLargeBold?.copyWith(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GoogleBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 50,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        radius: 20,
+        onTap: () async {
+          // Trigger the authentication flow
+          final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+          // Obtain the auth details from the request
+          final GoogleSignInAuthentication? googleAuth =
+              await googleUser?.authentication;
+
+          // Create a new credential
+          final credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken,
+            idToken: googleAuth?.idToken,
+          );
+
+          // Once signed in, return the UserCredential
+          await FirebaseAuth.instance.signInWithCredential(credential);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Assets.images.google.svg(width: 20, height: 20),
+            const SizedBox(width: 10),
+            Text(
+              'Sign in with Google',
+              style: context.textTheme.bodyLargeBold?.copyWith(
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 1,
+      margin: const EdgeInsets.symmetric(vertical: 35),
+      color: ColorName.tertiary,
+    );
+  }
+}
+
+class _EmailBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BaseButton.basic(
+      context: context,
+      text: '이메일 로그인',
+      onTap: () {
+        context.router.push(EmailLoginRoute());
+      },
+    );
+  }
+}
+
+class _SignUpAndLoginBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () {
+            context.read<LoginBloc>().add(LoginEmailSignUpPressed());
           },
-        )
-        : BaseButton.disabled(context: context, text: text, onTap: () {});
+          child: Text(
+            '회원가입',
+            style: context.textTheme.bodyMediumBold?.copyWith(
+              color: ColorName.text,
+            ),
+          ),
+        ),
+        const SizedBox(width: 40),
+        TextButton(
+          onPressed: () {
+            context.router.push(
+              FindAccountRoute(args: FindAccountPageArgs.id()),
+            );
+          },
+          child: Text(
+            '아이디찾기',
+            style: context.textTheme.bodyMediumBold?.copyWith(
+              color: ColorName.text,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -46,14 +46,6 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 로그인 API 호출
   @override
-  FutureOr<ApiResponse<LoginResponseDto>> login({
-    required LoginRequestDto requestData,
-  }) async {
-    return await accountApi.login(requestData: requestData);
-  }
-
-  /// 로그인 API 호출
-  @override
   FutureOr<bool> emailLogin({required EmailLoginReqData dto}) async {
     final response = await accountApi.postEmailLogin(dto: dto);
 
