@@ -15,6 +15,8 @@ abstract class AccountRepository {
 
   final AccountApi accountApi;
 
+  FutureOr<bool> refreshToken();
+
   /// 로그인 API 호출
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,

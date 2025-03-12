@@ -11,6 +11,28 @@ class AccountApiImpl extends AccountApi {
 
   final DioNetwork network;
 
+  @override
+  FutureOr<RefreshResDto> refresh(String refreshToken) async {
+    return network.dio
+        .post(
+          AccountApiPathType.refresh.fullPath,
+          data: {'refreshToken': refreshToken},
+        )
+        .then(
+          (response) => RefreshResDto.fromJson(
+            response.data,
+            (json) => RefreshResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError(
+          (error) => RefreshResDto.fromJson(
+            error.response?.data,
+            (json) => RefreshResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<RefreshResData>());
+  }
+
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({

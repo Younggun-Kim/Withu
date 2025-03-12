@@ -8,6 +8,9 @@ abstract class LoginUseCase {
   LoginUseCase({required this.accountRepo});
   final AccountRepository accountRepo;
 
+  /// 리프테시
+  Future<bool> refresh();
+
   /// 로그인
   Future<LoginResultEntity> login({required LoginRequestEntity entity});
 

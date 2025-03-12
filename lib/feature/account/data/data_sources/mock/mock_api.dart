@@ -11,6 +11,23 @@ class AccountMockApi extends AccountApiImpl {
     dioAdapter = getIt();
   }
 
+  /// Refresh Token
+  @override
+  FutureOr<RefreshResDto> refresh(String refreshToken) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.refresh.fullPath,
+      data: {'refreshToken': refreshToken},
+      (server) => server.reply(
+        200,
+        RefreshResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.refresh(refreshToken);
+  }
+
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({

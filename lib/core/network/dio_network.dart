@@ -24,7 +24,7 @@ class DioNetwork {
                 final token = preference.getString(
                   AccountStorageKey.token.name,
                 );
-                options.headers['Authorization'] = token ?? 'bearer $token';
+                options.headers['Authorization'] = token ?? 'Bearer $token';
               }
 
               return handler.next(options);

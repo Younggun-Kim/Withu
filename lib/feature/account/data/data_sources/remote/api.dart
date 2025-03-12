@@ -4,6 +4,7 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 enum AccountApiPathType {
+  refresh('/auth/refresh'),
   changePw('/auth/recovery/enhanced-reset-password?userType=AUTO'),
   findId('/auth/recovery/find-account?userType=AUTO'),
   emailLogin('/auth/login'),
@@ -25,6 +26,9 @@ abstract class AccountApi {
 
   /// 로그인 주소
   late final loginPath = '$path/login';
+
+  /// 리프레시
+  FutureOr<RefreshResDto> refresh(String refreshToken);
 
   /// 로그인 API
   FutureOr<ApiResponse<LoginResponseDto>> login({

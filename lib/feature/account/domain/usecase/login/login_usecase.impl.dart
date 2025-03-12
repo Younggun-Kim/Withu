@@ -6,6 +6,12 @@ class LoginUseCaseImpl implements LoginUseCase {
   @override
   final AccountRepository accountRepo;
 
+  /// 토큰 리프레시
+  @override
+  Future<bool> refresh() async {
+    return await accountRepo.refreshToken();
+  }
+
   /// 로그인
   @override
   Future<LoginResultEntity> login({required LoginRequestEntity entity}) async {

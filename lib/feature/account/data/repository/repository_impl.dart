@@ -18,6 +18,25 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   final AccountApi accountApi;
 
+  /// 토큰 리프레시
+  @override
+  FutureOr<bool> refreshToken() async {
+    final refreshToken = await accountStorage.getRefreshToken();
+    logger.i(refreshToken);
+    if (refreshToken.isNotEmpty) {
+      final response = await accountApi.refresh(refreshToken);
+      if (response.hasTokens) {
+        accountStorage.setToken(token: response.data?.accessToken ?? '');
+        accountStorage.setRefreshToken(
+          token: response.data?.refreshToken ?? '',
+        );
+
+        return true;
+      }
+    }
+    return false;
+  }
+
   /// 로그인 API 호출
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({
@@ -92,9 +111,7 @@ class AccountRepositoryImpl implements AccountRepository {
     /// 로그인 성공
     if (isRegistered == true && token != null && response.hasToken) {
       accountStorage.setToken(token: token);
-      accountStorage.setRefreshToken(
-        token: response.data?.tokenPair?.refreshToken ?? '',
-      );
+      accountStorage.setRefreshToken(token: response.data?.refreshToken ?? '');
     }
 
     /// 회원가입인 경우 임시토큰 저장

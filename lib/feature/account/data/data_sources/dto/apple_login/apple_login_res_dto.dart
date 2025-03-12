@@ -42,6 +42,7 @@ extension AppleLoginResDtoMock on AppleLoginResDto {
         tempToken: '',
         token: 'accesstokenj-tetete',
         refreshToken: 'refreshtoken-tetete',
+        tokenPair: TokenListDtoMock.mock(),
         userId: '12312312312321',
         isRegistered: true,
         message: '로그인 성공',
