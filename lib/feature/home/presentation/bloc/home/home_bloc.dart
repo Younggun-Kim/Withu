@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/domain/usecase/login/login_usecase.dart';
+import 'package:withu/feature/home/domain/domain.dart';
 
 part 'home_event.dart';
 
@@ -25,5 +26,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.loginUseCase})
     : super(HomeState(status: BaseBlocStatus.initial())) {
     on<HomeLogoutPressed>(_onHomeLogoutPressed);
+    on<HomeBottomNaviPressed>(_onHomeBottomNaviPressed);
   }
 }

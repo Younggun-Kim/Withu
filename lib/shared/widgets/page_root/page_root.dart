@@ -3,7 +3,6 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class PageRoot extends StatelessWidget {
-
   const PageRoot({
     super.key,
     required this.child,
@@ -13,7 +12,9 @@ class PageRoot extends StatelessWidget {
     this.padding,
     this.safeAreaTop = true,
     this.safeAreaBottom = true,
+    this.bottomNavigationBar,
   });
+
   final Widget child;
 
   final bool isLoading;
@@ -28,6 +29,8 @@ class PageRoot extends StatelessWidget {
 
   final bool safeAreaBottom;
 
+  final Widget? bottomNavigationBar;
+
   @override
   Widget build(BuildContext context) {
     return KeyboardDismissOnTap(
@@ -37,6 +40,7 @@ class PageRoot extends StatelessWidget {
             appBar: appBar,
             floatingActionButton: fab,
             backgroundColor: ColorName.background,
+            bottomNavigationBar: bottomNavigationBar,
             body: SafeArea(
               top: safeAreaTop,
               bottom: safeAreaBottom,

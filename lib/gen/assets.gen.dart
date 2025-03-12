@@ -102,8 +102,47 @@ class $AssetsImagesGen {
   /// File path: assets/images/mars.svg
   SvgGenImage get mars => const SvgGenImage('assets/images/mars.svg');
 
+  /// File path: assets/images/menu.svg
+  SvgGenImage get menu => const SvgGenImage('assets/images/menu.svg');
+
+  /// File path: assets/images/nav_icon_calendar_off.svg
+  SvgGenImage get navIconCalendarOff =>
+      const SvgGenImage('assets/images/nav_icon_calendar_off.svg');
+
+  /// File path: assets/images/nav_icon_calendar_on.svg
+  SvgGenImage get navIconCalendarOn =>
+      const SvgGenImage('assets/images/nav_icon_calendar_on.svg');
+
+  /// File path: assets/images/nav_icon_job_off.svg
+  SvgGenImage get navIconJobOff =>
+      const SvgGenImage('assets/images/nav_icon_job_off.svg');
+
+  /// File path: assets/images/nav_icon_job_on.svg
+  SvgGenImage get navIconJobOn =>
+      const SvgGenImage('assets/images/nav_icon_job_on.svg');
+
+  /// File path: assets/images/nav_icon_profile_off.svg
+  SvgGenImage get navIconProfileOff =>
+      const SvgGenImage('assets/images/nav_icon_profile_off.svg');
+
+  /// File path: assets/images/nav_icon_profile_on.svg
+  SvgGenImage get navIconProfileOn =>
+      const SvgGenImage('assets/images/nav_icon_profile_on.svg');
+
+  /// File path: assets/images/nav_icon_search_off.svg
+  SvgGenImage get navIconSearchOff =>
+      const SvgGenImage('assets/images/nav_icon_search_off.svg');
+
+  /// File path: assets/images/nav_icon_search_on.svg
+  SvgGenImage get navIconSearchOn =>
+      const SvgGenImage('assets/images/nav_icon_search_on.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
+
+  /// File path: assets/images/user_default.svg
+  SvgGenImage get userDefault =>
+      const SvgGenImage('assets/images/user_default.svg');
 
   /// File path: assets/images/users-round.svg
   SvgGenImage get usersRound =>
@@ -138,7 +177,17 @@ class $AssetsImagesGen {
         logoPuzzle4Bg,
         logoPuzzleSad,
         mars,
+        menu,
+        navIconCalendarOff,
+        navIconCalendarOn,
+        navIconJobOff,
+        navIconJobOn,
+        navIconProfileOff,
+        navIconProfileOn,
+        navIconSearchOff,
+        navIconSearchOn,
         plus,
+        userDefault,
         usersRound,
         venus
       ];

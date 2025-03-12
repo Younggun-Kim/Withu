@@ -7,4 +7,11 @@ extension HomeBlocHandler on HomeBloc {
   ) async {
     await loginUseCase.logout();
   }
+
+  _onHomeBottomNaviPressed(
+    HomeBottomNaviPressed event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(state.copyWith(currentPage: event.subPage));
+  }
 }
