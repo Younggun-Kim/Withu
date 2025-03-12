@@ -7,3 +7,4 @@ export 'name/name_value.dart';
 export 'sns_login_res/sns_login_res_value.dart';
 export 'find_id_res/find_id_res_value.dart';
 export 'stored_sns_sign_up/stored_sns_sign_up_value.dart';
+export 'sns_sign_up_req/sns_sign_up_req_value.dart';

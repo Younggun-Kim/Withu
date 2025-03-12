@@ -42,4 +42,9 @@ class LoginUseCaseImpl implements LoginUseCase {
   void storeSnsSignUpData(LoginType type, String tempToken) {
     accountRepo.storeSnsSignUpData(type, tempToken);
   }
+
+  @override
+  void storeEmailSignUpData() {
+    accountRepo.storeEmailSignUpData();
+  }
 }

@@ -27,5 +27,5 @@ class ValidateBusinessResData with _$ValidateBusinessResData {
 
 extension ValidateBusinessResDtoEn on ValidateBusinessResDto {
   bool get canRegistration =>
-      data == null || data?.valid == 'YES' || data?.isRegistered == false;
+      data?.valid == 'YES' && data?.isRegistered == false;
 }

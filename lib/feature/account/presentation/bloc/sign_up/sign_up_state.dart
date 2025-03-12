@@ -39,6 +39,8 @@ class SignUpState extends BaseBlocState with _$SignUpState {
 }
 
 extension SignUpStateEx on SignUpState {
+  bool get isSnsSignUp => args?.signUpType.isSns == true;
+
   String get channelText {
     if (channel.isNone) {
       return '저희 앱을 어떻게 찾아주셨나요?';
@@ -67,6 +69,21 @@ extension SignUpStateEx on SignUpState {
       email: email.value,
       password: password.value,
       signUpMethod: SignUpMethodType.email,
+      businessNumber: args?.businessNum ?? '',
+      companyName: args?.companyName ?? '',
+      appAcquisitionChannel: channel,
+      locationInfoConsent: args?.isAgreeLocation ?? false,
+      marketingInfoConsent: args?.isAgreeMarketing ?? false,
+    );
+  }
+
+  SnsSignUpReqValue toSnsData() {
+    return SnsSignUpReqValue(
+      tempToken: args?.tempToken ?? '',
+      name: name.value,
+      birthDate: birthDate.formattedDate,
+      gender: gender,
+      phoneNo: phone.formatPhoneNumber(),
       businessNumber: args?.businessNum ?? '',
       companyName: args?.companyName ?? '',
       appAcquisitionChannel: channel,

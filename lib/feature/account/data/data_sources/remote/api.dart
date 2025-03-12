@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
+import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 enum AccountApiPathType {
   changePw('/auth/recovery/enhanced-reset-password?userType=AUTO'),
@@ -8,7 +9,8 @@ enum AccountApiPathType {
   emailLogin('/auth/login'),
   companySignUp('/company/auth/signup'),
   userSignUp('/staff/auth/signup'),
-  appleLogin('/auth/social/apple/verify');
+  appleLogin('/auth/social/apple/verify'),
+  snsSignUp('/auth/social/complete-signup');
 
   final String path;
 
@@ -48,4 +50,10 @@ abstract class AccountApi {
 
   /// 비밀번호 변경
   FutureOr<ChangePwResDto> postChangePw({required ChangePwReqDto dto});
+
+  /// SnS 회원가입
+  FutureOr<SnsSignUpResDto> postSnsSignUp({
+    required SnsSignUpReqDto dto,
+    required AccountType userType,
+  });
 }

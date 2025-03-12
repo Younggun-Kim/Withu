@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:withu/core/types/login_type.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/shared/dialogs/toast/toast.dart';
@@ -14,4 +15,8 @@ abstract class SignUpUseCase {
   FutureOr<CompanySignUpResEntity> signUpCompanyRequested(
     CompanySignUpEntity entity,
   );
+
+  Future<LoginType> getLoginType();
+
+  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, AccountType type);
 }

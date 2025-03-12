@@ -12,7 +12,7 @@ part 'base_response_dto.mock.dart';
 class BaseResponseDto<T> with _$BaseResponseDto<T> {
   factory BaseResponseDto({
     required bool success,
-    required String message,
+    @Default('') String message,
     T? data,
     @Default('') String errorCode,
   }) = _BaseResponseDto;

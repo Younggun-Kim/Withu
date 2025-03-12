@@ -19,4 +19,7 @@ abstract class LoginUseCase {
 
   /// Sns 가입 정보 저장
   void storeSnsSignUpData(LoginType type, String tempToken);
+
+  /// 이메일 가입 정보 저장
+  void storeEmailSignUpData();
 }

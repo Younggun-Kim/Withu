@@ -66,7 +66,6 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
     }
 
     final storedData = await useCase.getStoredSnsSignUpData();
-
     getItAppRouter.push(
       SignUpRoute(
         args: SignUpPageArgs.company(

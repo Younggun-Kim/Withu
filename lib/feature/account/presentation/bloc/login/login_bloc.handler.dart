@@ -78,10 +78,16 @@ extension LoginBlocHandler on LoginBloc {
       // TODO: Refresh 추가하기
       Toast.showWithNavigatorKey(text: '홈으로 이동할 예정입니다.');
     } else {
-      // 이걸 Storage를 이용해볼까
-      // signuptype, temp토큰 전달해야 함
       loginUseCase.storeSnsSignUpData(LoginType.apple, response.tempToken);
       getItAppRouter.push(TermRoute());
     }
+  }
+
+  void _onLoginEmailSignUpPressed(
+    LoginEmailSignUpPressed event,
+    Emitter<LoginState> emit,
+  ) async {
+    loginUseCase.storeEmailSignUpData();
+    getItAppRouter.push(TermRoute());
   }
 }

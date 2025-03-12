@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/feature/account/account.dart';
 
 part 'apple_login_res_dto.freezed.dart';
 
@@ -10,13 +11,14 @@ typedef AppleLoginResDto = BaseResponseDto<AppleLoginResData>;
 @freezed
 class AppleLoginResData with _$AppleLoginResData {
   factory AppleLoginResData({
-    required String token,
-    required String refreshToken,
-    required String userId,
+    @Default('') token,
+    @Default('') refreshToken,
+    TokenListDto? tokenPair,
+    @Default('') tempToken,
+    @Default('') userId,
+    @Default('') email,
     required bool isRegistered,
-    required String message,
-    @Default('') String tempToken,
-    @Default('') String email,
+    @Default('') message,
   }) = _AppleLoginResData;
 
   factory AppleLoginResData.fromJson(Map<String, dynamic> json) =>
@@ -26,7 +28,7 @@ class AppleLoginResData with _$AppleLoginResData {
 extension AppleLoginResDtoMock on AppleLoginResDto {
   bool get hasMessage => data?.message.isNotEmpty == true;
 
-  bool get hasToken => data?.token.isNotEmpty == true;
+  bool get hasToken => data?.token?.isNotEmpty == true;
 
   bool get isLoggedIn => data?.isRegistered == true && hasToken;
 
@@ -36,6 +38,7 @@ extension AppleLoginResDtoMock on AppleLoginResDto {
       message: '',
       errorCode: '',
       data: AppleLoginResData(
+        tempToken: '',
         token: 'accesstokenj-tetete',
         refreshToken: 'refreshtoken-tetete',
         userId: '12312312312321',
@@ -51,6 +54,7 @@ extension AppleLoginResDtoMock on AppleLoginResDto {
       message: '',
       errorCode: '',
       data: AppleLoginResData(
+        tempToken: 'test-token',
         token: '',
         refreshToken: '',
         userId: '',

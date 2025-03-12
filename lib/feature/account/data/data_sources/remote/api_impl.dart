@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/network/dto/base/fail_response_dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
+import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'api.dart';
 
 class AccountApiImpl extends AccountApi {
@@ -122,15 +123,11 @@ class AccountApiImpl extends AccountApi {
           ),
         )
         .catchError((error) {
-          if (error is DioException && error.response?.statusCode != 500) {
-            return AppleLoginResDto.fromJson(
-              error.response?.data,
-              (json) =>
-                  AppleLoginResData.fromJson(json as Map<String, dynamic>),
-            );
-          }
-
-          return AppleLoginResDtoMock.error();
+          logger.e(error);
+          return AppleLoginResDto.fromJson(
+            error.response?.data,
+            (json) => AppleLoginResData.fromJson(json as Map<String, dynamic>),
+          );
         })
         .catchError((_) => AppleLoginResDtoMock.error());
   }
@@ -179,5 +176,30 @@ class AccountApiImpl extends AccountApi {
           return BaseResponseDtoMock.error<bool>();
         })
         .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
+
+  @override
+  FutureOr<SnsSignUpResDto> postSnsSignUp({
+    required SnsSignUpReqDto dto,
+    required AccountType userType,
+  }) async {
+    return network.dio
+        .post(
+          '${AccountApiPathType.snsSignUp.fullPath}?userType=${userType.serverKey}',
+          data: dto.toJson(),
+        )
+        .then(
+          (response) => SnsSignUpResDto.fromJson(
+            response.data,
+            (json) => SnsSignUpResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((error) {
+          return SnsSignUpResDto.fromJson(
+            error.response?.data,
+            (json) => SnsSignUpResData.fromJson(json as Map<String, dynamic>),
+          );
+        })
+        .catchError((_) => BaseResponseDtoMock.error<SnsSignUpResData>());
   }
 }

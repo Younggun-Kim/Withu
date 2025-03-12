@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data.dart';
+import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
 import 'package:withu/feature/account/domain/entity/sns_login_res/sns_login_res_value.dart';
@@ -50,6 +51,12 @@ abstract class AccountRepository {
   /// SNS 회원가입 정보 저장
   void storeSnsSignUpData(LoginType type, String tempToken);
 
+  /// 이메일 회원가입 정보 저장
+  void storeEmailSignUpData();
+
   /// SNS 회원가입 정보 가져오기
   FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData();
+
+  /// SNS 회원가입 하기
+  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, AccountType userType);
 }

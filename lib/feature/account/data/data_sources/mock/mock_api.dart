@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 class AccountMockApi extends AccountApiImpl {
   late final DioAdapter dioAdapter;
@@ -97,7 +98,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        AppleLoginResDtoMock.success().toJson((data) => data.toJson()),
+        AppleLoginResDtoMock.failure().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );
@@ -137,5 +138,24 @@ class AccountMockApi extends AccountApiImpl {
     );
 
     return await super.postChangePw(dto: dto);
+  }
+
+  @override
+  FutureOr<SnsSignUpResDto> postSnsSignUp({
+    required SnsSignUpReqDto dto,
+    required AccountType userType,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      '${AccountApiPathType.snsSignUp.fullPath}?userType=${userType.serverKey}',
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        SnsSignUpResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postSnsSignUp(dto: dto, userType: userType);
   }
 }

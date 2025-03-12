@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/shared/dialogs/dialogs.dart';
 
@@ -77,14 +78,21 @@ class AccountRepositoryImpl implements AccountRepository {
   FutureOr<SnsLoginResValue> requestAppleLogin(AppleLoginReqDto dto) async {
     final response = await accountApi.postAppleLogin(dto: dto);
     final token = response.data?.token;
+    final tempToken = response.data?.tempToken;
     final isRegistered = response.data?.isRegistered;
 
     if (response.hasMessage) {
       Toast.showWithNavigatorKey(text: response.data!.message);
     }
 
+    /// 로그인 성공
     if (isRegistered == true && token != null && response.hasToken) {
       accountStorage.setToken(token: token);
+    }
+
+    /// 회원가입인 경우 임시토큰 저장
+    if (tempToken != null && isRegistered == false) {
+      accountStorage.setTempToken(tempToken);
     }
 
     return SnsLoginResValueParser.fromDto(response);
@@ -117,10 +125,35 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
+  void storeEmailSignUpData() {
+    accountStorage.setSignUpType(LoginType.email);
+    accountStorage.setTempToken('');
+  }
+
+  @override
   FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData() async {
     final tempToken = await accountStorage.getTempToken();
     final signUpType = await accountStorage.getSignUpType();
 
     return StoredSnsSignUpValue(type: signUpType, tempToken: tempToken);
+  }
+
+  @override
+  FutureOr<bool> postSnsSignUp(
+    SnsSignUpReqDto dto,
+    AccountType userType,
+  ) async {
+    final response = await accountApi.postSnsSignUp(
+      dto: dto,
+      userType: userType,
+    );
+
+    final isSuccessSignUp = response.isSuccessSignUp;
+
+    if (response.hasErrorMessage) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    return isSuccessSignUp;
   }
 }

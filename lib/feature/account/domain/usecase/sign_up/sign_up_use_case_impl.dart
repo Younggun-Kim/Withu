@@ -23,4 +23,14 @@ class SignUpUseCaseImpl implements SignUpUseCase {
 
     return response;
   }
+
+  @override
+  Future<LoginType> getLoginType() async {
+    return await accountRepo.accountStorage.getSignUpType();
+  }
+
+  @override
+  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, AccountType type) async {
+    return await accountRepo.postSnsSignUp(data.toDto(), type);
+  }
 }

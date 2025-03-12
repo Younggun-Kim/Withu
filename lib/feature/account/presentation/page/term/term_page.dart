@@ -2,12 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/domain/type/term_type.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_bloc.dart';
 import 'package:withu/feature/account/presentation/bloc/term/term_page_step_type.dart';
-import 'package:withu/feature/account/presentation/page/sign_up/sign_up.dart';
-import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -125,23 +122,7 @@ class _SecondStepNextBtn extends StatelessWidget {
           text: StringRes.next.tr,
           isEnabled: state.isEnabledSecondStep,
           onTap: () {
-            state.accountType.iSCompany
-                ? context.router.push(
-                  ValidateBusinessRoute(
-                    args: ValidateBusinessPageArgs(
-                      isAgreeLocation: state.locationTerm,
-                      isAgreeMarketing: state.marketingTerm,
-                    ),
-                  ),
-                )
-                : context.router.push(
-                  SignUpRoute(
-                    args: SignUpPageArgs.user(
-                      isAgreeLocation: state.locationTerm,
-                      isAgreeMarketing: state.marketingTerm,
-                    ),
-                  ),
-                );
+            context.read<TermBloc>().add(TermSecondNextPressed());
           },
         );
       },

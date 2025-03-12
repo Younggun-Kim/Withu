@@ -207,7 +207,7 @@ class _SignUpAndLoginBtn extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            context.router.push(TermRoute());
+            context.read<LoginBloc>().add(LoginEmailSignUpPressed());
           },
           child: Text(
             '회원가입',

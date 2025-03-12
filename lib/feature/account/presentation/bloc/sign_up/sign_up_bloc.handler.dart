@@ -96,13 +96,31 @@ extension SignUpBlocHandler on SignUpBloc {
   ) async {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final result = await signUpUseCase.signUpCompanyRequested(state.toEntity());
+    final accountType = state.args?.accountType;
 
-    emit(
-      state.copyWith(
-        status: BaseBlocStatus.fromSuccess(result.isSuccess),
-        message: result.message,
-      ),
-    );
+    if (accountType == null) {
+      Toast.showWithNavigatorKey(text: '가입하시는 회원 유형을 확인해주세요.');
+      return;
+    }
+
+    if (state.isSnsSignUp) {
+      final isSuccess = await signUpUseCase.snsSignUp(
+        state.toSnsData(),
+        accountType,
+      );
+
+      emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
+    } else {
+      final result = await signUpUseCase.signUpCompanyRequested(
+        state.toEntity(),
+      );
+
+      emit(
+        state.copyWith(
+          status: BaseBlocStatus.fromSuccess(result.isSuccess),
+          message: result.message,
+        ),
+      );
+    }
   }
 }

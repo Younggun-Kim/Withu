@@ -39,3 +39,6 @@ class LoginVisiblePasswordToggled extends LoginEvent {
 
 /// 애플 로그인 요청
 class LoginAppleRequested extends LoginEvent {}
+
+/// 이메일 회원가입 클릭
+class LoginEmailSignUpPressed extends LoginEvent {}

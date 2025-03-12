@@ -5,6 +5,7 @@ import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart';
 import 'package:withu/feature/common/domain/entity/phone/phone_value.dart';
+import 'package:withu/shared/dialogs/toast/toast.dart';
 
 part 'sign_up_event.dart';
 
