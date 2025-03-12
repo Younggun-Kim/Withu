@@ -3,13 +3,7 @@ import 'package:withu/core/utils/injections.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/feature/common/domain/usecase/validate_business_usecase.dart';
 
-void initCommonInjections() {
-  _initDataInjections();
-  _initDomainInjections();
-  _initPresentationInjections();
-}
-
-void _initDataInjections() {
+void initCommonDataInjections() {
   getIt.registerSingleton<CommonApi>(
     Environment.isRelease
         ? CommonApiImpl(network: getIt())
@@ -20,7 +14,7 @@ void _initDataInjections() {
   );
 }
 
-void _initDomainInjections() {
+void initDomainInjections() {
   getIt.registerSingleton<ValidateBusinessUseCase>(
     ValidateBusinessUseCaseImpl(commonRepo: getIt(), accountRepo: getIt()),
   );
@@ -29,7 +23,7 @@ void _initDomainInjections() {
   );
 }
 
-void _initPresentationInjections() {
+void initPresentationInjections() {
   getIt.registerFactory<ValidateBusinessBloc>(
     () => ValidateBusinessBloc(useCase: getIt()),
   );

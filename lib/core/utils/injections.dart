@@ -28,23 +28,27 @@ void initRouterInjections() {
 Future<void> initInjections() async {
   initRouterInjections();
   initNetworkInjections();
-  initAccountInjections();
   initSplashInjections();
   initJobPostingInjections();
-  initCommonInjections();
   await initDataDI();
   await initDomainDI();
   await initPresentationDI();
 }
 
 Future<void> initDataDI() async {
+  initAccountDataInjections();
+  initCommonDataInjections();
   initHomeDataDI();
 }
 
 Future<void> initDomainDI() async {
+  initAccountDomainInjections();
+  initDomainInjections();
   initHomeDomainDI();
 }
 
 Future<void> initPresentationDI() async {
+  initAccountPresentationInjections();
+  initPresentationInjections();
   initHomePresentationDI();
 }

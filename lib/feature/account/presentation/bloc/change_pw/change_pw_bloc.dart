@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/entity/change_pw/change_pw_value.dart';
-import 'package:withu/feature/account/presentation/change_pw/change_pw_page_args.dart';
+import 'package:withu/feature/account/presentation/page/change_pw/change_pw_page_args.dart';
 
 part 'change_pw_event.dart';
 

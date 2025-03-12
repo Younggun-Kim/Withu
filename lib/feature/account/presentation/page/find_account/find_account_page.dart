@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/presentation/bloc/find_account/find_account_bloc.dart';
-import 'package:withu/feature/account/presentation/change_pw/change_pw.dart';
+import 'package:withu/feature/account/presentation/page/change_pw/change_pw_page_args.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/shared/shared.dart';
 

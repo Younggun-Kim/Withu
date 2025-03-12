@@ -11,8 +11,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeBlocProvider(
-      create: (context) => getIt(),
+    return MultiBlocProvider(
+      providers: [
+        HomeBlocProvider(create: (context) => getIt()),
+        ProfileBlocProvider(create: (context) => getIt()),
+      ],
       child: HomeBlocBuilder(
         builder: (context, state) {
           return PageRoot(

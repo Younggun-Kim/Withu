@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/feature/home/presentation/bloc/profile/profile_bloc.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
 
@@ -8,17 +10,21 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          _CompanyProfile(),
-          const Spacer(),
-          _CompanyUnregistered(),
-          const Spacer(),
-        ],
-      ),
+    return ProfileBlocBuilder(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _CompanyProfile(),
+              const Spacer(),
+              _CompanyUnregistered(),
+              const Spacer(),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -59,7 +65,7 @@ class _CompanyUnregistered extends StatelessWidget {
             context: context,
             text: '정보 등록하기',
             onTap: () {
-              // TODO: 정보 등록 화면으로 이동
+              context.read<ProfileBloc>().add(ProfileRegistrationBtnPressed());
             },
           ),
         ),

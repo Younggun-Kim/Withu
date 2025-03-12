@@ -3,9 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/page/find_id_result/find_id_result_page_args.dart';
 import 'package:withu/feature/common/domain/entity/phone/phone_value.dart';
-
-import '../../find_id_result/find_id_result.dart';
 
 part 'find_account_event.dart';
 

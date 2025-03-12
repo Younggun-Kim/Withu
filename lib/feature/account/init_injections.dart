@@ -3,12 +3,6 @@ import 'package:withu/feature/account/account.dart';
 
 import 'presentation/bloc/change_pw/change_pw_bloc.dart';
 
-void initAccountInjections() {
-  initAccountDataInjections();
-  initAccountDomainInjections();
-  initAccountPresentationInjections();
-}
-
 void initAccountDataInjections() {
   getIt.registerSingleton<AccountApi>(
     Environment.isRelease
@@ -35,6 +29,9 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<ChangePwUseCase>(
     ChangePwUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerLazySingleton<ProfileRegistrationUseCase>(
+    () => ProfileRegistrationUseCaseImpl(accountRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
@@ -49,5 +46,8 @@ void initAccountPresentationInjections() {
   );
   getIt.registerFactory<ChangePwBloc>(
     () => ChangePwBloc(changePwUseCase: getIt()),
+  );
+  getIt.registerFactory<ProfileRegistrationBloc>(
+    () => ProfileRegistrationBloc(profileRegistrationUseCase: getIt()),
   );
 }
