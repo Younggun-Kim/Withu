@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/shared/dialogs/dialogs.dart';
 
 part 'login_event.dart';
 

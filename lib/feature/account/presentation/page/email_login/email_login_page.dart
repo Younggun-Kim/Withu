@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:withu/core/router/router.dart';
 import 'package:withu/core/utils/utils.dart';
 import 'package:withu/feature/account/presentation/bloc/email_login/email_login_bloc.dart';
 import 'package:withu/shared/shared.dart';
@@ -24,7 +25,7 @@ class _EmailLoginPageContent extends StatelessWidget {
     return EmailLoginBlocConsumer(
       listener: (context, state) {
         if (state.status.isSuccess) {
-          Toast.show(context: context, text: '홈으로 이동할 예정');
+          AppRouterEx.moveHome();
         }
       },
       builder: (context, state) {

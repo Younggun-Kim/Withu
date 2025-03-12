@@ -276,7 +276,7 @@ class _Login extends StatelessWidget {
             context: context,
             text: '지금 바로 시작',
             onTap: () {
-              Toast.show(context: context, text: '홈으로 이동할 예정입니다.');
+              AppRouterEx.moveHome();
             },
           ),
         ),

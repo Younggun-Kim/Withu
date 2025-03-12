@@ -75,8 +75,7 @@ extension LoginBlocHandler on LoginBloc {
 
   void moveAppleNextPage(SnsLoginResValue response) {
     if (response.isLoggedIn) {
-      // TODO: Refresh 추가하기
-      Toast.showWithNavigatorKey(text: '홈으로 이동할 예정입니다.');
+      AppRouterEx.moveHome();
     } else {
       loginUseCase.storeSnsSignUpData(LoginType.apple, response.tempToken);
       getItAppRouter.push(TermRoute());

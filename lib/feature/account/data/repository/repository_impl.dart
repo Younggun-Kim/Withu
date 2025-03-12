@@ -81,7 +81,7 @@ class AccountRepositoryImpl implements AccountRepository {
     final tempToken = response.data?.tempToken;
     final isRegistered = response.data?.isRegistered;
 
-    if (response.hasMessage) {
+    if (response.hasErrorMessage) {
       Toast.showWithNavigatorKey(text: response.data!.message);
     }
 
