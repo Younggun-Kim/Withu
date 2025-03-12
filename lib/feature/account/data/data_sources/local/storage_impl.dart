@@ -1,6 +1,13 @@
 part of 'storage.dart';
 
 class AccountStorageImpl implements AccountStorage {
+  /// reset
+  @override
+  Future reset() async {
+    final instance = await SharedPreferences.getInstance();
+    instance.clear();
+  }
+
   /// Token 불러오기
   @override
   Future<String> getToken() async {

@@ -12,6 +12,13 @@ class LoginUseCaseImpl implements LoginUseCase {
     return await accountRepo.refreshToken();
   }
 
+  /// 로그아웃
+  @override
+  Future<void> logout() async {
+    await accountRepo.logout();
+    getItAppRouter.replaceAll([LoginRoute2()]);
+  }
+
   /// 로그인
   @override
   Future<LoginResultEntity> login({required LoginRequestEntity entity}) async {

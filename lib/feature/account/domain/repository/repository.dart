@@ -15,7 +15,11 @@ abstract class AccountRepository {
 
   final AccountApi accountApi;
 
+  /// 토큰 리프레시
   FutureOr<bool> refreshToken();
+
+  /// 로그아웃
+  Future logout();
 
   /// 로그인 API 호출
   FutureOr<ApiResponse<LoginResponseDto>> login({

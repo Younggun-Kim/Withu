@@ -6,6 +6,9 @@ import 'storage_key.dart';
 part 'storage_impl.dart';
 
 abstract class AccountStorage {
+  /// reset
+  void reset();
+
   /// Token 불러오기
   Future<String> getToken();
 

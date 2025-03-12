@@ -22,7 +22,6 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   FutureOr<bool> refreshToken() async {
     final refreshToken = await accountStorage.getRefreshToken();
-    logger.i(refreshToken);
     if (refreshToken.isNotEmpty) {
       final response = await accountApi.refresh(refreshToken);
       if (response.hasTokens) {
@@ -35,6 +34,14 @@ class AccountRepositoryImpl implements AccountRepository {
       }
     }
     return false;
+  }
+
+  /// 로그아웃
+  @override
+  Future logout() async {
+    final refreshToken = await accountStorage.getRefreshToken();
+    await accountApi.refresh(refreshToken);
+    accountStorage.reset();
   }
 
   /// 로그인 API 호출

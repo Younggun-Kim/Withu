@@ -5,6 +5,7 @@ import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign
 
 enum AccountApiPathType {
   refresh('/auth/refresh'),
+  logout('/auth/logout'),
   changePw('/auth/recovery/enhanced-reset-password?userType=AUTO'),
   findId('/auth/recovery/find-account?userType=AUTO'),
   emailLogin('/auth/login'),
@@ -29,6 +30,9 @@ abstract class AccountApi {
 
   /// 리프레시
   FutureOr<RefreshResDto> refresh(String refreshToken);
+
+  /// 로그아웃
+  FutureOr<BaseResponseDto<bool>> logout(String refreshToken);
 
   /// 로그인 API
   FutureOr<ApiResponse<LoginResponseDto>> login({

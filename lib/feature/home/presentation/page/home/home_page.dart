@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/home/presentation/bloc/home/home_bloc.dart';
 import 'package:withu/shared/shared.dart';
@@ -12,11 +13,20 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return HomeBlocProvider(
       create: (context) => getIt(),
-      child: PageRoot(
-        isLoading: false,
-        child: Center(
-          child: Text('홈 화면', style: context.textTheme.headlineLarge),
-        ),
+      child: HomeBlocBuilder(
+        builder: (context, state) {
+          return PageRoot(
+            isLoading: false,
+            child: Center(
+              child: InkWell(
+                onTap: () {
+                  context.read<HomeBloc>().add(HomeLogoutPressed());
+                },
+                child: Text('로그아웃', style: context.textTheme.headlineLarge),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

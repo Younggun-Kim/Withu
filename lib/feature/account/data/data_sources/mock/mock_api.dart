@@ -28,6 +28,27 @@ class AccountMockApi extends AccountApiImpl {
     return await super.refresh(refreshToken);
   }
 
+  /// Logout
+  @override
+  FutureOr<BaseResponseDto<bool>> logout(String refreshToken) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.logout.fullPath,
+      data: {'refreshToken': refreshToken},
+      (server) => server.reply(
+        200,
+        BaseResponseDto<bool>(
+          data: true,
+          success: true,
+          message: '로그아웃 성공',
+        ).toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.logout(refreshToken);
+  }
+
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({

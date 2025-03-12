@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:withu/core/core.dart';
+import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/feature/account/account.dart';
 
 part 'login_usecase.impl.dart';
@@ -10,6 +11,9 @@ abstract class LoginUseCase {
 
   /// 리프테시
   Future<bool> refresh();
+
+  /// 로그아웃
+  Future<void> logout();
 
   /// 로그인
   Future<LoginResultEntity> login({required LoginRequestEntity entity});

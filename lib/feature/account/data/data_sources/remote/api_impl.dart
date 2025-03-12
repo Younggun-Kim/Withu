@@ -33,6 +33,29 @@ class AccountApiImpl extends AccountApi {
         .catchError((_) => BaseResponseDtoMock.error<RefreshResData>());
   }
 
+  /// 로그아웃
+  @override
+  FutureOr<BaseResponseDto<bool>> logout(String refreshToken) async {
+    return network.dio
+        .post(
+          AccountApiPathType.logout.fullPath,
+          data: {'refreshToken': refreshToken},
+        )
+        .then(
+          (response) => BaseResponseDto<bool>.fromJson(
+            response.data,
+            (json) => json as bool,
+          ),
+        )
+        .catchError(
+          (error) => BaseResponseDto<bool>.fromJson(
+            error.response?.data,
+            (json) => json as bool,
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
+
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({
