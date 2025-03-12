@@ -25,7 +25,12 @@ class SnsSignUpResData with _$SnsSignUpResData {
 
 extension SnsSignUpResDtoEx on SnsSignUpResDto {
   bool get isSuccessSignUp => success && data?.isRegistered == true;
+
   bool get hasErrorMessage => !success && message.isNotEmpty;
+
+  bool get hasToken => data?.token.isNotEmpty == true;
+
+  bool get hasRefreshToken => data?.refreshToken.isNotEmpty == true;
 }
 
 extension SnsSignUpResDtoMock on SnsSignUpResDto {

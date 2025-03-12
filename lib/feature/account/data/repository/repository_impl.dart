@@ -32,7 +32,10 @@ class AccountRepositoryImpl implements AccountRepository {
     final response = await accountApi.postEmailLogin(dto: dto);
 
     if (response.hasToken) {
-      accountStorage.setToken(token: response.data!.tokens.accessToken);
+      accountStorage.setToken(token: response.data?.tokens.accessToken ?? '');
+      accountStorage.setRefreshToken(
+        token: response.data?.tokens.refreshToken ?? '',
+      );
     } else {
       response.showErrorMessage();
     }
@@ -69,6 +72,7 @@ class AccountRepositoryImpl implements AccountRepository {
     final token = response.data?.token;
     if (token != null && token.isNotEmpty == true) {
       accountStorage.setToken(token: token);
+      accountStorage.setRefreshToken(token: response.data?.refreshToken ?? '');
     }
     return CompanySignUpResEntityParser.fromUserDto(response);
   }
@@ -88,6 +92,9 @@ class AccountRepositoryImpl implements AccountRepository {
     /// 로그인 성공
     if (isRegistered == true && token != null && response.hasToken) {
       accountStorage.setToken(token: token);
+      accountStorage.setRefreshToken(
+        token: response.data?.tokenPair?.refreshToken ?? '',
+      );
     }
 
     /// 회원가입인 경우 임시토큰 저장
@@ -152,6 +159,14 @@ class AccountRepositoryImpl implements AccountRepository {
 
     if (response.hasErrorMessage) {
       Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    if (response.hasToken) {
+      accountStorage.setToken(token: response.data!.token);
+    }
+
+    if (response.hasRefreshToken) {
+      accountStorage.setToken(token: response.data!.token);
     }
 
     return isSuccessSignUp;

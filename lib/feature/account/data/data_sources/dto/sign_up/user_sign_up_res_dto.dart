@@ -1,5 +1,7 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/network/dto/base/base_response_dto.dart';
+import 'package:withu/feature/account/account.dart';
 
 part 'user_sign_up_res_dto.freezed.dart';
 
@@ -11,8 +13,10 @@ typedef UserSignUpResDto = BaseResponseDto<UserSignUpResData>;
 class UserSignUpResData with _$UserSignUpResData {
   factory UserSignUpResData({
     required String token,
+    required String refreshToken,
     required String userId,
     required String message,
+    required TokenListDto tokenPair,
   }) = _UserSignUpResData;
 
   factory UserSignUpResData.fromJson(Map<String, dynamic> json) =>
@@ -51,13 +55,21 @@ extension UserSignUpResDtoMock on UserSignUpResDto {
 extension UserSignUpResDataMock on UserSignUpResData {
   static UserSignUpResData success() {
     return UserSignUpResData(
-      token: 'tetetet',
+      token: 'access-token',
+      refreshToken: 'refresh-token',
+      tokenPair: TokenListDtoMock.mock(),
       userId: '9c90d19b-a65c-490a-8e7c-a95d56aed143',
       message: '회원가입이 완료되었습니다',
     );
   }
 
   static UserSignUpResData failure() {
-    return UserSignUpResData(token: '', userId: '', message: '회원가입에 실패하였습니다.');
+    return UserSignUpResData(
+      token: '',
+      refreshToken: '',
+      userId: '',
+      tokenPair: TokenListDto(),
+      message: '회원가입에 실패하였습니다.',
+    );
   }
 }

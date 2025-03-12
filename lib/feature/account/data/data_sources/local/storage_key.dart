@@ -1,1 +1,1 @@
-enum AccountStorageKey { token, signUpType, termToken }
+enum AccountStorageKey { token, refreshToken, signUpType, termToken }

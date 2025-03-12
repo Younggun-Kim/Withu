@@ -17,6 +17,24 @@ class AccountStorageImpl implements AccountStorage {
     );
   }
 
+  /// Refresh Token 불러오기
+  @override
+  Future<String> getRefreshToken() {
+    return SharedPreferences.getInstance().then(
+      (preference) =>
+          preference.getString(AccountStorageKey.refreshToken.name) ?? '',
+    );
+  }
+
+  /// Refresh Token 저장
+  @override
+  void setRefreshToken({required String token}) {
+    SharedPreferences.getInstance().then(
+      (preference) =>
+          preference.setString(AccountStorageKey.refreshToken.name, token),
+    );
+  }
+
   @override
   Future<LoginType> getSignUpType() async {
     final signUpType = await SharedPreferences.getInstance().then(

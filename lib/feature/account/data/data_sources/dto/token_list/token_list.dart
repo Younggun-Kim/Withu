@@ -8,10 +8,10 @@ part 'token_list.g.dart';
 @freezed
 class TokenListDto with _$TokenListDto {
   factory TokenListDto({
-    required String accessToken,
-    required String refreshToken,
-    required int expiresIn,
-    required String tokenType,
+    @Default('') String accessToken,
+    @Default('') String refreshToken,
+    @Default(0) int expiresIn,
+    @Default('') String tokenType,
     AccountType? accountType,
   }) = _TokenListDto;
 
@@ -27,5 +27,9 @@ extension TokenListDtoMock on TokenListDto {
       tokenType: 'Bearer',
       expiresIn: 3600,
     );
+  }
+
+  static TokenListDto empty() {
+    return TokenListDto();
   }
 }

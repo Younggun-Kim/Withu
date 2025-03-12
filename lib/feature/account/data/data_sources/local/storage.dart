@@ -12,6 +12,12 @@ abstract class AccountStorage {
   /// Token 저장
   void setToken({required String token});
 
+  /// Refresh Token 불러오기
+  Future<String> getRefreshToken();
+
+  /// Refresh Token 저장
+  void setRefreshToken({required String token});
+
   Future<LoginType> getSignUpType();
 
   void setSignUpType(LoginType type);
