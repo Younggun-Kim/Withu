@@ -196,4 +196,42 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.postSnsSignUp(dto: dto, userType: userType);
   }
+
+  /// Staff 토큰 등록
+  @override
+  FutureOr<BaseResponseDto<bool>> postStaffTokenRegistration(
+    TokenRegistrationReqDto dto,
+  ) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.registerStaffToken.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        BaseResponseDtoMock.success(true).toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postStaffTokenRegistration(dto);
+  }
+
+  /// Company 토큰 등록
+  @override
+  FutureOr<BaseResponseDto<bool>> postCompanyTokenRegistration(
+    TokenRegistrationReqDto dto,
+  ) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.registerStaffToken.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        BaseResponseDtoMock.success(true).toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postCompanyTokenRegistration(dto);
+  }
 }

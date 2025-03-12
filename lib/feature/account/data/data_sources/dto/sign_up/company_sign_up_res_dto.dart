@@ -10,9 +10,10 @@ typedef CompanySignUpResDto = BaseResponseDto<CompanySignUpResData>;
 @freezed
 class CompanySignUpResData with _$CompanySignUpResData {
   factory CompanySignUpResData({
-    required String token,
-    required String userId,
-    required String message,
+    @Default('') String token,
+    @Default('') String refreshToken,
+    @Default('') String userId,
+    @Default('') String message,
   }) = _CompanySignUpResData;
 
   factory CompanySignUpResData.fromJson(Map<String, dynamic> json) =>
@@ -43,6 +44,7 @@ extension CompanySignUpResDataMock on CompanySignUpResData {
   static CompanySignUpResData success() {
     return CompanySignUpResData(
       token: 'tetetet',
+      refreshToken: 'refresh-token',
       userId: '9c90d19b-a65c-490a-8e7c-a95d56aed143',
       message: '회원가입이 완료되었습니다',
     );
@@ -51,6 +53,7 @@ extension CompanySignUpResDataMock on CompanySignUpResData {
   static CompanySignUpResData failure() {
     return CompanySignUpResData(
       token: '',
+      refreshToken: '',
       userId: '',
       message: '회원가입에 실패하였습니다.',
     );

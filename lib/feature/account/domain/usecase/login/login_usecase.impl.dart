@@ -19,13 +19,6 @@ class LoginUseCaseImpl implements LoginUseCase {
     getItAppRouter.replaceAll([LoginRoute()]);
   }
 
-  /// 세션 Id 저장
-  void storeToken({required String token}) {
-    if (token.isNotEmpty) {
-      accountRepo.storeToken(token: token);
-    }
-  }
-
   /// 로그인 여부
   @override
   Future<bool> checkLogin() async {

@@ -6,3 +6,4 @@ export 'find_id/find_id.dart';
 export 'change_pw/change_pw.dart';
 export 'token_list/token_list.dart';
 export 'refresh/refresh_res_dto.dart';
+export 'token_registration/token_registration.dart';

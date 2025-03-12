@@ -247,4 +247,50 @@ class AccountApiImpl extends AccountApi {
         })
         .catchError((_) => BaseResponseDtoMock.error<SnsSignUpResData>());
   }
+
+  /// Staff 토큰 등록
+  @override
+  FutureOr<BaseResponseDto<bool>> postStaffTokenRegistration(
+    TokenRegistrationReqDto dto,
+  ) async {
+    return network.dio
+        .post(
+          AccountApiPathType.registerStaffToken.fullPath,
+          data: dto.toJson(),
+        )
+        .then(
+          (response) =>
+              BaseResponseDto.fromJson(response.data, (json) => json as bool),
+        )
+        .catchError(
+          (error) => BaseResponseDto.fromJson(
+            error?.response.data,
+            (json) => json as bool,
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
+
+  /// Company 토큰 등록
+  @override
+  FutureOr<BaseResponseDto<bool>> postCompanyTokenRegistration(
+    TokenRegistrationReqDto dto,
+  ) async {
+    return network.dio
+        .post(
+          AccountApiPathType.registerCompanyToken.fullPath,
+          data: dto.toJson(),
+        )
+        .then(
+          (response) =>
+              BaseResponseDto.fromJson(response.data, (json) => json as bool),
+        )
+        .catchError(
+          (error) => BaseResponseDto.fromJson(
+            error?.response.data,
+            (json) => json as bool,
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
 }

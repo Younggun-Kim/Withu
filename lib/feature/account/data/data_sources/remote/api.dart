@@ -4,6 +4,8 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 enum AccountApiPathType {
+  registerStaffToken('/staff/device-tokens'),
+  registerCompanyToken('/company/device-tokens'),
   refresh('/auth/refresh'),
   logout('/auth/logout'),
   changePw('/auth/recovery/enhanced-reset-password?userType=AUTO'),
@@ -64,4 +66,14 @@ abstract class AccountApi {
     required SnsSignUpReqDto dto,
     required AccountType userType,
   });
+
+  /// Staff 토큰 등록
+  FutureOr<BaseResponseDto<bool>> postStaffTokenRegistration(
+    TokenRegistrationReqDto dto,
+  );
+
+  /// Company 토큰 등록
+  FutureOr<BaseResponseDto<bool>> postCompanyTokenRegistration(
+    TokenRegistrationReqDto dto,
+  );
 }
