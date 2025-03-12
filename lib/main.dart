@@ -11,7 +11,11 @@ void run({required EnvironmentType environment}) async {
 
   await EasyLocalization.ensureInitialized();
 
+  await DotEnvUtils.init();
+
   await FirebaseInit.init();
+
+  await AmplitudeUtils.init();
 
   // Init DI
   await initInjections();

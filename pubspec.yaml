@@ -84,6 +84,12 @@ dependencies:
   # lottie
   lottie: ^3.3.1
 
+  # Product analysis
+  amplitude_flutter: ^4.0.0
+
+  # Load Env
+  flutter_dotenv: ^5.2.1
+
 
 dev_dependencies:
   flutter_test:
@@ -118,6 +124,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - .env
     - assets/images/
     - assets/translations/
     - assets/lottie/
