@@ -330,6 +330,7 @@ class _LinkBtn extends StatelessWidget {
   final String url;
 
   const _LinkBtn({required this.url});
+
   @override
   Widget build(BuildContext context) {
     if (url.isEmpty) {
@@ -337,7 +338,7 @@ class _LinkBtn extends StatelessWidget {
     }
     return InkWell(
       onTap: () {
-        OutLink.openUrl(context, url);
+        LaunchUrlUtils.openOutLink(context, url);
       },
       child: Text('보기', style: context.textTheme.bodySmall?.setSecondary),
     );

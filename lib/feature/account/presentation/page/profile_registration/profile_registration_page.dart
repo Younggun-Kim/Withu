@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
@@ -375,35 +376,99 @@ class _PortfolioContent extends StatelessWidget {
       builder: (context, state) {
         return CustomScrollView(
           slivers: [
-            SliverFillRemaining(
-              child: SingleChildScrollView(
+            SliverToBoxAdapter(
+              child: Padding(
                 padding: CustomEdgeInsets.horizontalPadding(),
-                child: Column(
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        BaseButton.fitSecondary(
+                    BaseButton.fitSecondary(
+                      context: context,
+                      text: '사진 등록',
+                      onTap: () async {
+                        ImagePickerBottomSheet.show(
                           context: context,
-                          text: '사진 등록',
-                          onTap: () {
-                            // TODO: 사진 불러오기
+                          onTap: (XFile file) {
+                            context.read<ProfileRegistrationBloc>().add(
+                              ProfileRegistrationAddPhotoRequested(file: file),
+                            );
                           },
-                        ),
-                        const SizedBox(width: 11),
-                        Text(
-                          '10/10',
-                          style: context.textTheme.bodyMedium?.setBlack,
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(width: 11),
+                    Text(
+                      '${state.portfolioImages.length}/10',
+                      style: context.textTheme.bodyMedium?.setBlack,
+                    ),
                   ],
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 20)), // 간격 추가
+
+            SliverPadding(
+              padding: CustomEdgeInsets.horizontalPadding(),
+              sliver: SliverGrid.builder(
+                itemCount: state.portfolioImages.length,
+                itemBuilder: (context, index) {
+                  return _PortfolioImageItem(
+                    imageFile: state.portfolioImages[index],
+                  );
+                },
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 20.0,
+                  mainAxisSpacing: 20.0,
+                  childAspectRatio: 1.0,
                 ),
               ),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class _PortfolioImageItem extends StatelessWidget {
+  final ImageFileValue imageFile;
+
+  const _PortfolioImageItem({required this.imageFile});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        AspectRatio(
+          aspectRatio: 1,
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              color: ColorName.tertiary,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Image.file(imageFile.toFile(), fit: BoxFit.cover),
+          ),
+        ),
+        Positioned(
+          top: 4,
+          right: 4,
+          child: Container(
+            decoration: BoxDecoration(
+              color: ColorName.background,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: InkWell(
+              onTap: () {
+                context.read<ProfileRegistrationBloc>().add(
+                  ProfileRegistrationPhotoDeleted(file: imageFile),
+                );
+              },
+              child: Assets.images.close.svg(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

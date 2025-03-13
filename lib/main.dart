@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/core/utils/firebase/firebase_init.dart';
 
 void run({required EnvironmentType environment}) async {
   Environment.env = environment;

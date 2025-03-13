@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
@@ -34,5 +35,9 @@ class ProfileRegistrationBloc
       _onProfileRegistrationIntroductionInputted,
     );
     on<ProfileRegistrationFieldSelected>(_onProfileRegistrationFieldSelected);
+    on<ProfileRegistrationAddPhotoRequested>(
+      _onProfileRegistrationAddPhotoRequested,
+    );
+    on<ProfileRegistrationPhotoDeleted>(_onProfileRegistrationPhotoDeleted);
   }
 }

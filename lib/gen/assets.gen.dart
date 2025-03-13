@@ -57,6 +57,9 @@ class $AssetsImagesGen {
   SvgGenImage get clapperboard =>
       const SvgGenImage('assets/images/clapperboard.svg');
 
+  /// File path: assets/images/close.svg
+  SvgGenImage get close => const SvgGenImage('assets/images/close.svg');
+
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
 
@@ -174,6 +177,7 @@ class $AssetsImagesGen {
         chevronDown,
         chevronLeft,
         clapperboard,
+        close,
         eye,
         flower,
         googleLoginBtn,

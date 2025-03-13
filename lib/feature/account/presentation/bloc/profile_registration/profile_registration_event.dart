@@ -20,3 +20,17 @@ class ProfileRegistrationFieldSelected extends ProfileRegistrationEvent {
 
   ProfileRegistrationFieldSelected({required this.field});
 }
+
+/// 사진 추가 요청 이벤트
+class ProfileRegistrationAddPhotoRequested extends ProfileRegistrationEvent {
+  final ImageFileValue file;
+
+  ProfileRegistrationAddPhotoRequested({required this.file});
+}
+
+/// 사진 추가 요청 이벤트
+class ProfileRegistrationPhotoDeleted extends ProfileRegistrationEvent {
+  final ImageFileValue file;
+
+  ProfileRegistrationPhotoDeleted({required this.file});
+}

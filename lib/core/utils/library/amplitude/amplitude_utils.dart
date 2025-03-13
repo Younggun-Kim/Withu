@@ -1,6 +1,7 @@
 import 'package:amplitude_flutter/amplitude.dart';
 import 'package:amplitude_flutter/configuration.dart';
-import 'package:withu/core/core.dart';
+
+import '../dotenv/dot_env_utils.dart';
 
 class AmplitudeUtils {
   static Future<void> init() async {

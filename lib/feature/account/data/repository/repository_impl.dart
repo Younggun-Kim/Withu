@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:withu/core/core.dart';
-import 'package:withu/core/utils/firebase/fcm_utils.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';

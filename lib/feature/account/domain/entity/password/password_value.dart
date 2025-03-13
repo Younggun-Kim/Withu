@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:withu/core/utils/regex/regex.dart';
+import 'package:withu/core/utils/utils/regex/regex_util.dart';
 
 part 'password_value.freezed.dart';
 

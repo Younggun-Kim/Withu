@@ -27,4 +27,27 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
   ) {
     emit(state.copyWith(field: event.field));
   }
+
+  /// 사진 추가
+  void _onProfileRegistrationAddPhotoRequested(
+    ProfileRegistrationAddPhotoRequested event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    emit(
+      state.copyWith(portfolioImages: [...state.portfolioImages, event.file]),
+    );
+  }
+
+  /// 사진 삭제
+  void _onProfileRegistrationPhotoDeleted(
+    ProfileRegistrationPhotoDeleted event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    emit(
+      state.copyWith(
+        portfolioImages:
+            state.portfolioImages.where((file) => file != event.file).toList(),
+      ),
+    );
+  }
 }

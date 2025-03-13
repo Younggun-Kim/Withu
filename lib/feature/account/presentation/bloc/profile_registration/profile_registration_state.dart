@@ -11,6 +11,8 @@ class ProfileRegistrationState extends BaseBlocState
     @Default(IntroductionValue()) IntroductionValue introduction,
 
     @Default(FieldType.none) FieldType field,
+
+    @Default([]) List<ImageFileValue> portfolioImages,
   }) = _ProfileRegistrationState;
 }
 
@@ -22,7 +24,7 @@ extension ProfileRegistrationStateEx on ProfileRegistrationState {
       case ProfileRegistrationStep.field:
         return !field.isNone;
       case ProfileRegistrationStep.portfolio:
-        return false;
+        return portfolioImages.isNotEmpty;
       case ProfileRegistrationStep.career:
         return false;
       case ProfileRegistrationStep.area:

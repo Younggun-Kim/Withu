@@ -5,7 +5,6 @@ import 'package:withu/shared/shared.dart';
 
 /// 기본 바텀 시트
 class BaseBottomSheet extends StatelessWidget {
-
   const BaseBottomSheet({
     super.key,
     required this.padding,
@@ -26,7 +25,7 @@ class BaseBottomSheet extends StatelessWidget {
           Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: ColorName.primary,
+              color: Colors.transparent,
               borderRadius: BorderRadius.circular(10),
             ),
             child: child,

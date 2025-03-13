@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:withu/core/utils/logger/logger.dart';
-
-import '../local_push/local_push_utils.dart';
+import 'package:withu/core/utils/library/local_push/local_push_utils.dart';
+import 'package:withu/core/utils/library/logger/logger.dart';
 
 @pragma('vm:entry-point')
 Future<void> _fcmBackgroundHandler(RemoteMessage message) async {
