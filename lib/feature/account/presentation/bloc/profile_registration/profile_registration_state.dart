@@ -6,6 +6,8 @@ class ProfileRegistrationState extends BaseBlocState
   factory ProfileRegistrationState({
     required BaseBlocStatus status,
 
+    @Default(ProfileRegistrationStep.first) ProfileRegistrationStep currentStep,
+
     @Default('') String introduction,
   }) = _ProfileRegistrationState;
 }

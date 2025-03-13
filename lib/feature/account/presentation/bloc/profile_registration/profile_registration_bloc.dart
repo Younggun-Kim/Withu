@@ -24,5 +24,7 @@ class ProfileRegistrationBloc
   final ProfileRegistrationUseCase profileRegistrationUseCase;
 
   ProfileRegistrationBloc({required this.profileRegistrationUseCase})
-    : super(ProfileRegistrationState(status: BaseBlocStatus.initial()));
+    : super(ProfileRegistrationState(status: BaseBlocStatus.initial())) {
+    on<ProfileRegistrationStepForwarded>(_onProfileRegistrationStepForwarded);
+  }
 }
