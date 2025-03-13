@@ -24,7 +24,8 @@ class DioNetwork {
                 final token = preference.getString(
                   AccountStorageKey.token.name,
                 );
-                options.headers['Authorization'] = 'Bearer $token' ?? '';
+                options.headers['Authorization'] =
+                    token?.isNotEmpty == true ? 'Bearer $token' : '';
               }
 
               return handler.next(options);
