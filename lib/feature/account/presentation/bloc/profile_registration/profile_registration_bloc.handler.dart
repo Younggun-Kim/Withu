@@ -8,6 +8,7 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationStepForwarded event,
     ProfileRegistrationEmitter emit,
   ) {
-    emit(state.copyWith(currentStep: state.currentStep.getNextStep()));
+    final isCompany = true;
+    emit(state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)));
   }
 }

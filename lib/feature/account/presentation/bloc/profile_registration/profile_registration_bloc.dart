@@ -13,6 +13,9 @@ part 'profile_registration_bloc.handler.dart';
 
 typedef ProfileRegistrationBlocProvider = BlocProvider<ProfileRegistrationBloc>;
 
+typedef ProfileRegistrationBlocConsumer =
+    BlocConsumer<ProfileRegistrationBloc, ProfileRegistrationState>;
+
 typedef ProfileRegistrationBlocBuilder =
     BlocBuilder<ProfileRegistrationBloc, ProfileRegistrationState>;
 

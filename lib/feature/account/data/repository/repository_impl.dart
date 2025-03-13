@@ -34,6 +34,9 @@ class AccountRepositoryImpl implements AccountRepository {
         return true;
       }
     }
+
+    /// 리프레시 실패라면 저장된 토큰 삭제
+    accountStorage.reset();
     return false;
   }
 

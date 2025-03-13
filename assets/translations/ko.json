@@ -105,5 +105,19 @@
   "workerSignup": "근로자로 시작하기",
   "employerSignup": "고용주 시작하기",
   "next": "다음",
-  "confirm": "확인"
+  "confirm": "확인",
+  "skipping": "건너뛰기",
+  "selfIntroRegister": "자기 소개 등록하기",
+  "selfIntroHint": "자기를 나타낼 수 있는 소개를 입력해주세요! (50자 이내)",
+  "selfFieldSelect": "자기 분야 선택하기",
+  "selfFieldDescription": "선택한 분야에 맞춰 적합한 기능이 제공됩니다!",
+  "selfCareerInput": "자기 경력 입력하기",
+  "selfAchievementInfo": "자기 성과, 활동 이력 등을 등록해두면 신뢰도가 올라갑니다!",
+  "selfPortfolioAdd": "자기 포트폴리오 추가하기",
+  "selfPortfolioPhotoGuide": "사진으로 자신의 작업물을 간단히 소개할 수 있어요! (사진의 순서를 변경 할 수 있어요. 메인 사진을 골라주세요!)",
+  "selfInterestAreaAdd": "자기 관심지역 추가하기",
+  "selfInterestAreaInfo": "관심지역의 공고를 빠르게 찾을 수 있어요!",
+  "selfProfileRegister": "자기 프로필 등록하기",
+  "selfProfilePhotoUpload": "자신의 사진을 등록해주세요!"
+
 }

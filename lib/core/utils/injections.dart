@@ -25,7 +25,14 @@ void initRouterInjections() {
   getIt.registerSingleton<AppRouter>(AppRouter());
 }
 
+/// 로그인 후 UserType 주입
+void injectUserType(AccountType userType) {
+  getIt.registerSingleton<AccountType>(userType);
+}
+
 Future<void> initInjections() async {
+  injectUserType(AccountType.company);
+
   initRouterInjections();
   initNetworkInjections();
   initSplashInjections();

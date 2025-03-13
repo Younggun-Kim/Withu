@@ -82,7 +82,6 @@ enum StringRes {
   checkBeforeJoining,
   termsAgreementRequired,
   protectYourValuableInfo,
-
   selectRoleForCustomService,
   termsRequired,
   dataProtection,
@@ -90,6 +89,19 @@ enum StringRes {
   employerSignup,
   next,
   confirm,
+  skipping,
+  selfIntroRegister,
+  selfIntroHint,
+  selfFieldSelect,
+  selfFieldDescription,
+  selfCareerInput,
+  selfAchievementInfo,
+  selfPortfolioAdd,
+  selfPortfolioPhotoGuide,
+  selfInterestAreaAdd,
+  selfInterestAreaInfo,
+  selfProfileRegister,
+  selfProfilePhotoUpload,
 }
 
 extension StringResEx on StringRes {
