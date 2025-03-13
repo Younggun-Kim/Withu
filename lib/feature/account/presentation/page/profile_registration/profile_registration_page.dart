@@ -137,7 +137,7 @@ class _StepPageView extends StatefulWidget {
 
 class _StepPageViewState extends State<_StepPageView> {
   final Map<ProfileRegistrationStep, Widget> pageMap = {
-    ProfileRegistrationStep.introduction: Text('1'),
+    ProfileRegistrationStep.introduction: _IntroductionContent(),
     ProfileRegistrationStep.field: Text('2'),
     ProfileRegistrationStep.portfolio: Text('3'),
     ProfileRegistrationStep.career: Text('4'),
@@ -211,12 +211,69 @@ class _SkipBtn extends StatelessWidget {
 class _NextBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return EnabledBtn(
-      isEnabled: false,
-      text: StringRes.next.tr,
-      onTap: () {
-        context.read<ProfileRegistrationBloc>().add(
-          ProfileRegistrationStepForwarded(),
+    return ProfileRegistrationBlocBuilder(
+      builder: (context, state) {
+        return EnabledBtn(
+          isEnabled: state.isEnabledNextBtn(),
+          text: StringRes.next.tr,
+          onTap: () {
+            context.read<ProfileRegistrationBloc>().add(
+              ProfileRegistrationStepForwarded(),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+/// 자기소개 입력
+class _IntroductionContent extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _IntroductionContentContent();
+}
+
+class _IntroductionContentContent extends State<_IntroductionContent> {
+  late TextEditingController _controller;
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _focusNode.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfileRegistrationBlocConsumer(
+      listener: (context, state) {
+        if (state.introduction.value != _controller.text) {
+          _controller.text = state.introduction.value;
+        }
+      },
+      builder: (context, state) {
+        return Container(
+          alignment: Alignment.topCenter,
+          padding: CustomEdgeInsets.horizontalPadding(),
+          child: LinedTextFormField(
+            controller: _controller,
+            focusNode: _focusNode,
+            lineNum: 3,
+            hint: StringRes.selfIntroInputHint.tr,
+            onChanged: (String text) {
+              context.read<ProfileRegistrationBloc>().add(
+                ProfileRegistrationIntroductionInputted(value: text),
+              );
+            },
+          ),
         );
       },
     );

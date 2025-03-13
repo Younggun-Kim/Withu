@@ -4,32 +4,45 @@ import 'package:withu/gen/colors.gen.dart';
 
 /// UnderLine이 있는 텍스트 폼
 class LinedTextFormField extends StatelessWidget {
+  final TextEditingController? controller;
+
+  final FocusNode? focusNode;
+
+  final Widget? suffix;
+
+  final int lineNum;
+
+  final bool readOnly;
+
+  final String hint;
+
+  final Function(String text)? onChanged;
 
   const LinedTextFormField({
     super.key,
     this.controller,
-    this.readOnly = false,
+    this.focusNode,
     this.suffix,
+    this.lineNum = 2,
+    this.readOnly = false,
+    this.hint = '',
     this.onChanged,
   });
-  final TextEditingController? controller;
-
-  final bool readOnly;
-
-  final Widget? suffix;
-
-  final Function(String text)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: LinePainter(),
+      painter: LinePainter(lineNum),
       child: TextFormField(
         controller: controller,
-        style: context.textTheme.bodyMediumBold?.copyWith(height: 48 / 14),
+        focusNode: focusNode,
+        style: context.textTheme.bodySmall?.copyWith(
+          color: ColorName.text,
+          height: 48 / 14,
+        ),
         cursorHeight: 20,
-        minLines: 2,
-        maxLines: 2,
+        minLines: lineNum,
+        maxLines: lineNum,
         readOnly: readOnly,
         onChanged: onChanged,
         decoration: InputDecoration(
@@ -38,6 +51,11 @@ class LinedTextFormField extends StatelessWidget {
           border: InputBorder.none,
           suffix: suffix,
           floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintText: hint,
+          hintStyle: context.textTheme.bodySmall?.copyWith(
+            color: ColorName.secondary,
+            height: 48 / 14,
+          ),
         ),
       ),
     );
@@ -45,6 +63,10 @@ class LinedTextFormField extends StatelessWidget {
 }
 
 class LinePainter extends CustomPainter {
+  final int lineNum;
+
+  LinePainter(this.lineNum);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint =
@@ -53,18 +75,14 @@ class LinePainter extends CustomPainter {
           ..strokeWidth = 1;
 
     // 첫 번째 줄
-    canvas.drawLine(
-      Offset(0, size.height / 2),
-      Offset(size.width, size.height / 2),
-      paint,
-    );
 
-    // 두 번째 줄 (바닥)
-    canvas.drawLine(
-      Offset(0, size.height),
-      Offset(size.width, size.height),
-      paint,
-    );
+    for (var index in List.generate(lineNum, (index) => index)) {
+      canvas.drawLine(
+        Offset(0, size.height / lineNum * (index + 1)),
+        Offset(size.width, size.height / lineNum * (index + 1)),
+        paint,
+      );
+    }
   }
 
   @override

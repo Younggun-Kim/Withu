@@ -8,6 +8,25 @@ class ProfileRegistrationState extends BaseBlocState
 
     @Default(ProfileRegistrationStep.first) ProfileRegistrationStep currentStep,
 
-    @Default('') String introduction,
+    @Default(IntroductionValue()) IntroductionValue introduction,
   }) = _ProfileRegistrationState;
+}
+
+extension ProfileRegistrationStateEx on ProfileRegistrationState {
+  bool isEnabledNextBtn() {
+    switch (currentStep) {
+      case ProfileRegistrationStep.introduction:
+        return introduction.isValid();
+      case ProfileRegistrationStep.field:
+        return false;
+      case ProfileRegistrationStep.portfolio:
+        return false;
+      case ProfileRegistrationStep.career:
+        return false;
+      case ProfileRegistrationStep.area:
+        return false;
+      case ProfileRegistrationStep.profile:
+        return false;
+    }
+  }
 }

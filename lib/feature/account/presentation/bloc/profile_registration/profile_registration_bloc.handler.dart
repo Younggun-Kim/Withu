@@ -11,4 +11,12 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     final isCompany = true;
     emit(state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)));
   }
+
+  /// 자기소개 입력
+  void _onProfileRegistrationIntroductionInputted(
+    ProfileRegistrationIntroductionInputted event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    emit(state.copyWith(introduction: event.introduction));
+  }
 }

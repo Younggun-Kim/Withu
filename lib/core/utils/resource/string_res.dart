@@ -92,6 +92,7 @@ enum StringRes {
   skipping,
   selfIntroRegister,
   selfIntroHint,
+  selfIntroInputHint,
   selfFieldSelect,
   selfFieldDescription,
   selfCareerInput,
