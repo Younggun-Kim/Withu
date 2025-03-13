@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:withu/core/core.dart';
+import 'package:withu/core/utils/library/device_info/device_info_utils.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
-import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/shared/dialogs/dialogs.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
@@ -46,28 +46,16 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 이메일 - 회사 회원가입
   @override
-  FutureOr<CompanySignUpResEntity> requestCompanySignUp(
-    CompanySignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestCompanySignUp(
+    EmailSignUpReqDto dto,
   ) async {
-    final response = await accountApi.requestCompanySignUp(dto: dto);
-    final token = response.data?.token;
-    if (token != null && token.isNotEmpty == true) {
-      storeTokens(token, response.data?.refreshToken ?? '');
-    }
-    return CompanySignUpResEntityParser.fromDto(response);
+    return await accountApi.requestCompanySignUp(dto: dto);
   }
 
   /// 이메일 - 직원 회원가입
   @override
-  FutureOr<CompanySignUpResEntity> requestUserSignUp(
-    UserSignUpReqDto dto,
-  ) async {
-    final response = await accountApi.requestUserSignUp(dto: dto);
-    final token = response.data?.token;
-    if (token != null && token.isNotEmpty == true) {
-      storeTokens(token, response.data?.refreshToken ?? '');
-    }
-    return CompanySignUpResEntityParser.fromUserDto(response);
+  FutureOr<EmailSignUpResDto> requestUserSignUp(EmailSignUpReqDto dto) async {
+    return await accountApi.requestUserSignUp(dto: dto);
   }
 
   /// 애플 로그인 요청
@@ -118,6 +106,7 @@ class AccountRepositoryImpl implements AccountRepository {
     required UserType userType,
   }) async {
     final fcmToken = await FcmUtils.getFcmToken();
+    final deviceType = await DeviceInfoUtils.getDeviceName();
 
     if (fcmToken.isEmpty) {
       return FcmRegistrationResDtoMock.invalid();
@@ -125,11 +114,11 @@ class AccountRepositoryImpl implements AccountRepository {
 
     if (userType.iSCompany) {
       return await accountApi.postCompanyTokenRegistration(
-        TokenRegistrationReqDto(token: fcmToken),
+        TokenRegistrationReqDto(token: fcmToken, deviceType: deviceType),
       );
     } else {
       return await accountApi.postStaffTokenRegistration(
-        TokenRegistrationReqDto(token: fcmToken),
+        TokenRegistrationReqDto(token: fcmToken, deviceType: deviceType),
       );
     }
   }

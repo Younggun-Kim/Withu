@@ -23,8 +23,8 @@ class CompanySignUpEntity with _$CompanySignUpEntity {
 }
 
 extension CompanySignUpEntityParser on CompanySignUpEntity {
-  CompanySignUpReqDto toCompanyDto() {
-    return CompanySignUpReqDto(
+  EmailSignUpReqDto toReqDto() {
+    return EmailSignUpReqDto(
       name: name,
       birthDate: birthDate,
       gender: gender.serverKey,
@@ -34,21 +34,6 @@ extension CompanySignUpEntityParser on CompanySignUpEntity {
       signUpMethod: signUpMethod.serverKey,
       businessNumber: businessNumber,
       companyName: companyName,
-      appAcquisitionChannel: appAcquisitionChannel.serverKey,
-      locationInfoConsent: locationInfoConsent,
-      marketingInfoConsent: marketingInfoConsent,
-    );
-  }
-
-  UserSignUpReqDto toUserDto() {
-    return UserSignUpReqDto(
-      name: name,
-      birthDate: birthDate,
-      gender: gender.serverKey,
-      phoneNo: phoneNo,
-      email: email,
-      password: password,
-      signUpMethod: signUpMethod.serverKey,
       appAcquisitionChannel: appAcquisitionChannel.serverKey,
       locationInfoConsent: locationInfoConsent,
       marketingInfoConsent: marketingInfoConsent,

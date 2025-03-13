@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'company_sign_up_req_dto.freezed.dart';
+part 'email_sign_up_req_dto.freezed.dart';
 
-part 'company_sign_up_req_dto.g.dart';
+part 'email_sign_up_req_dto.g.dart';
 
 @freezed
-class CompanySignUpReqDto with _$CompanySignUpReqDto {
-  factory CompanySignUpReqDto({
+class EmailSignUpReqDto with _$EmailSignUpReqDto {
+  factory EmailSignUpReqDto({
     required String name,
     required String birthDate,
     required String gender,
@@ -15,12 +15,12 @@ class CompanySignUpReqDto with _$CompanySignUpReqDto {
     required String password,
     required String signUpMethod,
     required String businessNumber,
-    required String companyName,
-    required String appAcquisitionChannel,
+    @Default('') String companyName,
+    @Default('') String appAcquisitionChannel,
     required bool locationInfoConsent,
     required bool marketingInfoConsent,
-  }) = _CompanySignUpReqDto;
+  }) = _EmailSignUpReqDto;
 
-  factory CompanySignUpReqDto.fromJson(Map<String, dynamic> json) =>
-      _$CompanySignUpReqDtoFromJson(json);
+  factory EmailSignUpReqDto.fromJson(Map<String, dynamic> json) =>
+      _$EmailSignUpReqDtoFromJson(json);
 }

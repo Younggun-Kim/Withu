@@ -46,12 +46,14 @@ abstract class AccountApi {
   FutureOr<EmailLoginResDto> postEmailLogin({required EmailLoginReqData dto});
 
   /// 회사 회원가입 요청
-  FutureOr<CompanySignUpResDto> requestCompanySignUp({
-    required CompanySignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestCompanySignUp({
+    required EmailSignUpReqDto dto,
   });
 
   /// 근로자 회원가입 요청
-  FutureOr<UserSignUpResDto> requestUserSignUp({required UserSignUpReqDto dto});
+  FutureOr<EmailSignUpResDto> requestUserSignUp({
+    required EmailSignUpReqDto dto,
+  });
 
   /// 애플 로그인
   FutureOr<AppleLoginResDto> postAppleLogin({required AppleLoginReqDto dto});

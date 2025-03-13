@@ -10,21 +10,20 @@ class SignUpUseCaseImpl implements SignUpUseCase {
   SignUpUseCaseImpl({required this.accountRepo, required this.loginUseCase});
 
   @override
-  FutureOr<CompanySignUpResEntity> emailSignUp(
-    CompanySignUpEntity entity,
-  ) async {
-    late final CompanySignUpResEntity response;
+  FutureOr<bool> emailSignUp(CompanySignUpEntity entity) async {
+    late final EmailSignUpResDto response;
     if (entity.accountType.isStaff) {
-      response = await accountRepo.requestUserSignUp(entity.toUserDto());
+      response = await accountRepo.requestUserSignUp(entity.toReqDto());
     } else {
-      response = await accountRepo.requestCompanySignUp(entity.toCompanyDto());
+      response = await accountRepo.requestCompanySignUp(entity.toReqDto());
     }
 
+    final tokens = response.data?.tokenPair;
     if (!response.isSuccess) {
       Toast.showWithNavigatorKey(text: response.message);
     }
 
-    return response;
+    return loginUseCase.loginProcess(tokens: tokens);
   }
 
   @override

@@ -111,14 +111,9 @@ extension SignUpBlocHandler on SignUpBloc {
 
       emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
     } else {
-      final result = await signUpUseCase.emailSignUp(state.toEntity());
+      final isSuccess = await signUpUseCase.emailSignUp(state.toEntity());
 
-      emit(
-        state.copyWith(
-          status: BaseBlocStatus.fromSuccess(result.isSuccess),
-          message: result.message,
-        ),
-      );
+      emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
     }
   }
 }

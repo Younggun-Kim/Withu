@@ -103,55 +103,46 @@ class AccountApiImpl extends AccountApi {
 
   /// 회사 회원가입 요청
   @override
-  FutureOr<CompanySignUpResDto> requestCompanySignUp({
-    required CompanySignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestCompanySignUp({
+    required EmailSignUpReqDto dto,
   }) async {
     return network.dio
         .post(AccountApiPathType.companySignUp.fullPath, data: dto.toJson())
         .then(
-          (response) => CompanySignUpResDto.fromJson(
+          (response) => EmailSignUpResDto.fromJson(
             response.data,
-            (json) =>
-                CompanySignUpResData.fromJson(json as Map<String, dynamic>),
+            (json) => EmailSignUpResData.fromJson(json as Map<String, dynamic>),
           ),
         )
-        .catchError((error) {
-          if (error is DioException) {
-            return CompanySignUpResDto.fromJson(
-              error.response?.data,
-              (json) =>
-                  CompanySignUpResData.fromJson(json as Map<String, dynamic>),
-            );
-          }
-
-          return BaseResponseDtoMock.error() as CompanySignUpResDto;
-        });
+        .catchError(
+          (error) => EmailSignUpResDto.fromJson(
+            error.response?.data,
+            (json) => EmailSignUpResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<EmailSignUpResData>());
   }
 
   /// 근로자 회원가입 요청
   @override
-  FutureOr<UserSignUpResDto> requestUserSignUp({
-    required UserSignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestUserSignUp({
+    required EmailSignUpReqDto dto,
   }) async {
     return network.dio
         .post(AccountApiPathType.userSignUp.fullPath, data: dto.toJson())
         .then(
-          (response) => UserSignUpResDto.fromJson(
+          (response) => EmailSignUpResDto.fromJson(
             response.data,
-            (json) => UserSignUpResData.fromJson(json as Map<String, dynamic>),
+            (json) => EmailSignUpResData.fromJson(json as Map<String, dynamic>),
           ),
         )
-        .catchError((error) {
-          if (error is DioException && error.response?.statusCode != 500) {
-            return UserSignUpResDto.fromJson(
-              error.response?.data,
-              (json) =>
-                  UserSignUpResData.fromJson(json as Map<String, dynamic>),
-            );
-          }
-
-          return UserSignUpResDtoMock.error();
-        });
+        .catchError(
+          (error) => EmailSignUpResDto.fromJson(
+            error.response?.data,
+            (json) => EmailSignUpResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<EmailSignUpResData>());
   }
 
   /// 애플 로그인

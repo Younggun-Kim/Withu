@@ -17,14 +17,14 @@ extension CompanySignUpResEntityEx on CompanySignUpResEntity {
 }
 
 extension CompanySignUpResEntityParser on CompanySignUpResEntity {
-  static CompanySignUpResEntity fromDto(CompanySignUpResDto? dto) {
+  static CompanySignUpResEntity fromDto(EmailSignUpResDto? dto) {
     return CompanySignUpResEntity(
       token: dto?.data?.token ?? '',
       message: dto?.message ?? StringRes.serverError.tr,
     );
   }
 
-  static CompanySignUpResEntity fromUserDto(UserSignUpResDto? dto) {
+  static CompanySignUpResEntity fromUserDto(EmailSignUpResDto? dto) {
     return CompanySignUpResEntity(
       token: dto?.data?.token ?? '',
       message: dto?.message ?? StringRes.serverError.tr,

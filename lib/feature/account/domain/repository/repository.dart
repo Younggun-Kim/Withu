@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
-import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
 
 abstract class AccountRepository {
@@ -23,12 +22,10 @@ abstract class AccountRepository {
   FutureOr<EmailLoginResDto> emailLogin({required EmailLoginReqData dto});
 
   /// 회사 회원가입 요청
-  FutureOr<CompanySignUpResEntity> requestCompanySignUp(
-    CompanySignUpReqDto dto,
-  );
+  FutureOr<EmailSignUpResDto> requestCompanySignUp(EmailSignUpReqDto dto);
 
   /// 근로자 회원가입 요청
-  FutureOr<CompanySignUpResEntity> requestUserSignUp(UserSignUpReqDto dto);
+  FutureOr<EmailSignUpResDto> requestUserSignUp(EmailSignUpReqDto dto);
 
   /// 애플 로그인 요청
   FutureOr<AppleLoginResDto> requestAppleLogin(AppleLoginReqDto dto);

@@ -89,8 +89,8 @@ class AccountMockApi extends AccountApiImpl {
 
   /// 회원가입 API
   @override
-  FutureOr<CompanySignUpResDto> requestCompanySignUp({
-    required CompanySignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestCompanySignUp({
+    required EmailSignUpReqDto dto,
   }) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
@@ -98,7 +98,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        CompanySignUpResDtoMock.success().toJson((data) => data.toJson()),
+        EmailSignUpResDtoMock.successMock().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );
@@ -108,8 +108,8 @@ class AccountMockApi extends AccountApiImpl {
 
   /// 근로자 회원가입 API
   @override
-  FutureOr<UserSignUpResDto> requestUserSignUp({
-    required UserSignUpReqDto dto,
+  FutureOr<EmailSignUpResDto> requestUserSignUp({
+    required EmailSignUpReqDto dto,
   }) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
@@ -117,7 +117,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        UserSignUpResDtoMock.success().toJson((data) => data.toJson()),
+        EmailSignUpResDtoMock.successMock().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );
