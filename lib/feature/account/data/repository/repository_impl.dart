@@ -43,33 +43,19 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   Future logout() async {
     final refreshToken = await accountStorage.getRefreshToken();
-    await accountApi.refresh(refreshToken);
+    await accountApi.logout(refreshToken);
     accountStorage.reset();
   }
 
   /// 로그인 API 호출
   @override
-  FutureOr<bool> emailLogin({required EmailLoginReqData dto}) async {
-    final response = await accountApi.postEmailLogin(dto: dto);
-
-    if (response.hasToken) {
-      storeTokens(
-        response.data?.tokens.accessToken ?? '',
-        response.data?.tokens.refreshToken ?? '',
-      );
-    } else {
-      response.showErrorMessage();
-    }
-    return response.isSuccessLogin;
+  FutureOr<EmailLoginResDto> emailLogin({
+    required EmailLoginReqData dto,
+  }) async {
+    return await accountApi.postEmailLogin(dto: dto);
   }
 
-  /// Session Id Storage 에 조회
-  @override
-  Future<String> getToken() async {
-    return await accountStorage.getToken();
-  }
-
-  /// 회원가입
+  /// 이메일 - 회사 회원가입
   @override
   FutureOr<CompanySignUpResEntity> requestCompanySignUp(
     CompanySignUpReqDto dto,
@@ -82,7 +68,7 @@ class AccountRepositoryImpl implements AccountRepository {
     return CompanySignUpResEntityParser.fromDto(response);
   }
 
-  /// 회원가입
+  /// 이메일 - 직원 회원가입
   @override
   FutureOr<CompanySignUpResEntity> requestUserSignUp(
     UserSignUpReqDto dto,
@@ -120,6 +106,31 @@ class AccountRepositoryImpl implements AccountRepository {
     return SnsLoginResValueParser.fromDto(response);
   }
 
+  /// 이메일 회원 가입
+  @override
+  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType) async {
+    final response = await accountApi.postSnsSignUp(
+      dto: dto,
+      userType: userType,
+    );
+
+    final isSuccessSignUp = response.isSuccessSignUp;
+
+    if (response.hasErrorMessage) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    if (response.hasToken) {
+      storeTokens(
+        response.data?.token ?? '',
+        response.data?.refreshToken ?? '',
+      );
+    }
+
+    return isSuccessSignUp;
+  }
+
+  /// 아이디 찾기
   @override
   FutureOr<FindIdResValue> findId(String phone) async {
     final response = await accountApi.postFindId(
@@ -129,6 +140,7 @@ class AccountRepositoryImpl implements AccountRepository {
     return FindIdResValueParser.fromDto(response);
   }
 
+  /// 비밀번호 변경
   @override
   FutureOr<bool> changePw(ChangePwReqDto dto) async {
     final response = await accountApi.postChangePw(dto: dto);
@@ -161,63 +173,54 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType) async {
-    final response = await accountApi.postSnsSignUp(
-      dto: dto,
-      userType: userType,
-    );
-
-    final isSuccessSignUp = response.isSuccessSignUp;
-
-    if (response.hasErrorMessage) {
-      Toast.showWithNavigatorKey(text: response.message);
-    }
-
-    if (response.hasToken) {
-      storeTokens(
-        response.data?.token ?? '',
-        response.data?.refreshToken ?? '',
-      );
-    }
-
-    return isSuccessSignUp;
+  FutureOr<MyProfileResDto> getMyProfile() async {
+    return await accountApi.getMyProfile();
   }
 
   @override
-  FutureOr<MyProfileEntity> getMyProfile() async {
-    final response = await accountApi.getMyProfile();
-    final data = response.data;
-    if (!response.success || data == null) {
-      Toast.showWithNavigatorKey(text: response.message);
-      return MyProfileEntityParser.error();
+  FutureOr<FcmRegistrationResDto> postFcmTokenRegistration({
+    required UserType userType,
+  }) async {
+    final fcmToken = await FcmUtils.getFcmToken();
+
+    if (fcmToken.isEmpty) {
+      return FcmRegistrationResDtoMock.invalid();
     }
-    return MyProfileEntityParser.fromDto(data);
+
+    if (userType.iSCompany) {
+      return await accountApi.postCompanyTokenRegistration(
+        TokenRegistrationReqDto(token: fcmToken),
+      );
+    } else {
+      return await accountApi.postStaffTokenRegistration(
+        TokenRegistrationReqDto(token: fcmToken),
+      );
+    }
+  }
+
+  /// Storage 초기화
+  @override
+  void resetStoredData() {
+    accountStorage.reset();
+  }
+
+  /// Bearer 트큰 조회
+  @override
+  Future<String> getToken() async {
+    return await accountStorage.getToken();
+  }
+
+  /// Bearer 토큰 저장
+  @override
+  void setToken(TokenListDto dto) {
+    accountStorage.setToken(token: dto.accessToken);
+    accountStorage.setRefreshToken(token: dto.refreshToken);
   }
 }
 
 extension AccountRepositoryImplEx on AccountRepositoryImpl {
-  // TODO: Company or Staff에 따라 업로드 하는 API
-
   void storeTokens(String accessToken, String refreshToken) {
     accountStorage.setToken(token: accessToken);
     accountStorage.setRefreshToken(token: refreshToken);
-  }
-
-  Future<void> registerFcmToken(UserType userType) async {
-    final fcmToken = await FcmUtils.getFcmToken();
-
-    if (fcmToken.isEmpty) {
-      return;
-    }
-
-    if (userType.iSCompany) {
-      await accountApi.postCompanyTokenRegistration(
-        TokenRegistrationReqDto(token: fcmToken),
-      );
-    } else {
-      await accountApi.postStaffTokenRegistration(
-        TokenRegistrationReqDto(token: fcmToken),
-      );
-    }
   }
 }

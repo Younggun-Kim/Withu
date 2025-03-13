@@ -24,12 +24,20 @@ class EmailLoginUseCaseImpl implements EmailLoginUseCase {
     required EmailValue email,
     required PasswordValue password,
   }) async {
-    return accountRepo.emailLogin(
+    final response = await accountRepo.emailLogin(
       dto: EmailLoginReqData(
         email: email.value,
         password: password.value,
         userType: 'AUTO',
       ),
     );
+
+    final tokens = response.data?.tokens;
+    if (!response.success || tokens == null) {
+      return false;
+    }
+
+    accountRepo.setToken(tokens);
+    return false;
   }
 }

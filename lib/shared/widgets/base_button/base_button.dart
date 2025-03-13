@@ -60,10 +60,14 @@ class BaseButton extends StatelessWidget {
     required BuildContext context,
     required String text,
     required VoidCallback onTap,
+    Color textColor = ColorName.background,
   }) {
     return BaseButton(
       key: key,
-      text: Text(text, style: context.textTheme.bodySmallBold),
+      text: Text(
+        text,
+        style: context.textTheme.bodySmallBold?.copyWith(color: textColor),
+      ),
       backgroundColor: Colors.white,
       border: Border.all(color: ColorName.tertiary),
       onTap: onTap,

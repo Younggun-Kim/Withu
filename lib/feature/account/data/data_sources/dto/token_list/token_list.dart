@@ -19,6 +19,10 @@ class TokenListDto with _$TokenListDto {
       _$TokenListDtoFromJson(json);
 }
 
+extension TokenListDtoEx on TokenListDto {
+  bool get hasToken => accessToken.isNotEmpty && refreshToken.isNotEmpty;
+}
+
 extension TokenListDtoMock on TokenListDto {
   static TokenListDto mock() {
     return TokenListDto(

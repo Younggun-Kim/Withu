@@ -53,7 +53,7 @@ extension LoginBlocHandler on LoginBloc {
 
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final response = await loginUseCase.requestAppleLogin(identifyToken);
+    final response = await loginUseCase.requestSnsLogin(identifyToken);
 
     emit(
       state.copyWith(status: BaseBlocStatus.fromSuccess(response.isLoggedIn)),

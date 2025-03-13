@@ -39,7 +39,7 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<LoginBloc>(() => LoginBloc(loginUseCase: getIt()));
   getIt.registerFactory<SignUpBloc>(() => SignUpBloc(signUpUseCase: getIt()));
   getIt.registerFactory<EmailLoginBloc>(
-    () => EmailLoginBloc(emailLoginUseCase: getIt()),
+    () => EmailLoginBloc(loginUseCase: getIt()),
   );
   getIt.registerFactory<FindAccountBloc>(
     () => FindAccountBloc(findAccountUseCase: getIt()),

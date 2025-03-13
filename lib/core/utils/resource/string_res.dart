@@ -70,6 +70,7 @@ enum StringRes {
   pleaseEnterEmail,
   pleaseEnterPassword,
   login,
+  emailLogin,
   findIdPw,
   signUp,
   pleaseEnterValidEmail,

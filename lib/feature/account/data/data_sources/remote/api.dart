@@ -69,12 +69,12 @@ abstract class AccountApi {
   });
 
   /// Staff 토큰 등록
-  FutureOr<BaseResponseDto<bool>> postStaffTokenRegistration(
+  FutureOr<FcmRegistrationResDto> postStaffTokenRegistration(
     TokenRegistrationReqDto dto,
   );
 
   /// Company 토큰 등록
-  FutureOr<BaseResponseDto<bool>> postCompanyTokenRegistration(
+  FutureOr<FcmRegistrationResDto> postCompanyTokenRegistration(
     TokenRegistrationReqDto dto,
   );
 

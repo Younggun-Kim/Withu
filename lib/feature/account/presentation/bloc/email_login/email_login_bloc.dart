@@ -18,9 +18,9 @@ typedef EmailLoginBlocConsumer = BlocConsumer<EmailLoginBloc, EmailLoginState>;
 typedef EmailLoginBlocBuilder = BlocBuilder<EmailLoginBloc, EmailLoginState>;
 
 class EmailLoginBloc extends BaseBloc<EmailLoginEvent, EmailLoginState> {
-  final EmailLoginUseCase emailLoginUseCase;
+  final LoginUseCase loginUseCase;
 
-  EmailLoginBloc({required this.emailLoginUseCase})
+  EmailLoginBloc({required this.loginUseCase})
     : super(EmailLoginState(status: BaseBlocStatus.initial())) {
     on<EmailLoginEmailInputted>(_onEmailLoginEmailInputted);
     on<EmailLoginPasswordInputted>(_onEmailLoginPasswordInputted);

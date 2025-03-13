@@ -88,6 +88,7 @@
   "pleaseEnterEmail": "이메일을 입력해주세요.",
   "pleaseEnterPassword": "비밀번호를 입력해주세요.",
   "login": "로그인",
+  "emailLogin": "이메일 로그인",
   "findIdPw": "아이디/비밀번호 찾기",
   "signUp": "회원가입",
   "pleaseEnterValidEmail": "! 올바른 이메일을 입력해주세요.",

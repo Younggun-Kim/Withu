@@ -298,7 +298,7 @@ class AccountApiImpl extends AccountApi {
   @override
   FutureOr<MyProfileResDto> getMyProfile() async {
     return network.dio
-        .post(AccountApiPathType.getMyProfile.fullPath)
+        .get(AccountApiPathType.getMyProfile.fullPath)
         .then(
           (response) => MyProfileResDto.fromJson(
             response.data,

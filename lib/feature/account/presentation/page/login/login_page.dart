@@ -191,7 +191,8 @@ class _EmailBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseButton.basic(
       context: context,
-      text: '이메일 로그인',
+      text: StringRes.emailLogin.tr,
+      textColor: ColorName.text,
       onTap: () {
         context.router.push(EmailLoginRoute());
       },
