@@ -11,7 +11,7 @@ class TermState extends BaseBlocState with _$TermState {
 
     @Default(TermPageStepType.first) TermPageStepType step,
 
-    @Default(AccountType.none) AccountType accountType,
+    @Default(UserType.none) UserType accountType,
 
     @Default(false) bool serviceTerm,
 

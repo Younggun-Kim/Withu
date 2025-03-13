@@ -6,7 +6,7 @@ part 'company_sign_up_entity.freezed.dart';
 @freezed
 class CompanySignUpEntity with _$CompanySignUpEntity {
   factory CompanySignUpEntity({
-    required AccountType accountType,
+    required UserType accountType,
     required String name,
     required String birthDate,
     required GenderType gender,

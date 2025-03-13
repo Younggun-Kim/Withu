@@ -14,7 +14,7 @@ class RefreshResData with _$RefreshResData {
     @Default('') String refreshToken,
     @Default('') String tokenType,
     @Default(0) int expiresIn,
-    AccountType? accountType,
+    UserType? accountType,
   }) = _RefreshResData;
 
   factory RefreshResData.fromJson(Map<String, dynamic> json) =>

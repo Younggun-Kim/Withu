@@ -10,7 +10,7 @@ extension LoginResponseDtoMock on LoginResponseDto {
       name: '홍길동',
       sessionId: 'test-session-id',
       accountId: 1,
-      accountType: AccountType.company,
+      accountType: UserType.company,
     );
   }
 

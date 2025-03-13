@@ -17,7 +17,7 @@ class LoginResponseDto with _$LoginResponseDto {
     String? name,
     String? sessionId,
     int? accountId,
-    AccountType? accountType,
+    UserType? accountType,
   }) = _LoginResponseDto;
 
   factory LoginResponseDto.fromJson(Map<String, dynamic> json) =>

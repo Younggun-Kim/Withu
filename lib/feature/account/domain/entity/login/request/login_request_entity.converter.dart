@@ -6,7 +6,7 @@ extension LoginRequestEntityConverter on LoginRequestEntity {
     return LoginRequestDto(
       email: loginId,
       password: password,
-      accountType: AccountType.company.serverKey,
+      accountType: UserType.company.serverKey,
     );
   }
 }

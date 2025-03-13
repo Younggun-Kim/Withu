@@ -29,7 +29,7 @@ class LoginBtnPressed extends LoginEvent {
 /// 탭 클릭 이벤트
 class LoginTabPressed extends LoginEvent {
   LoginTabPressed({required this.type});
-  final AccountType type;
+  final UserType type;
 }
 
 /// 비밀번호 표시 토클 이벤트

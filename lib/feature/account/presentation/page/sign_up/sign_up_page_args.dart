@@ -1,9 +1,9 @@
 import 'package:withu/core/types/login_type.dart';
-import 'package:withu/feature/account/domain/type/account_type.dart';
+import 'package:withu/feature/account/domain/type/user_type.dart';
 
 class SignUpPageArgs {
   /// 계정 타입
-  final AccountType accountType;
+  final UserType accountType;
 
   /// 사업자등록 번호
   final String businessNum;
@@ -44,7 +44,7 @@ class SignUpPageArgs {
     String tempToken = '',
   }) {
     return SignUpPageArgs(
-      accountType: AccountType.user,
+      accountType: UserType.staff,
       businessNum: '',
       ceoName: '',
       companyName: '',
@@ -65,7 +65,7 @@ class SignUpPageArgs {
     String tempToken = '',
   }) {
     return SignUpPageArgs(
-      accountType: AccountType.company,
+      accountType: UserType.company,
       businessNum: businessNum,
       ceoName: ceoName,
       companyName: companyName,

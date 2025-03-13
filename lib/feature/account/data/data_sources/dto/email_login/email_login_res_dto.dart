@@ -14,7 +14,7 @@ class EmailLoginResData with _$EmailLoginResData {
     required TokenListDto tokens,
     required String userId,
     required String message,
-    AccountType? accountType,
+    UserType? accountType,
   }) = _EmailLoginResData;
 
   factory EmailLoginResData.fromJson(Map<String, dynamic> json) =>

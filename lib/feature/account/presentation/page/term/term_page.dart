@@ -141,10 +141,10 @@ class _FirstStepContents extends StatelessWidget {
         return Column(
           children: [
             SelectableIconBtn(
-              text: AccountType.company.toStartMsg,
+              text: UserType.company.toStartMsg,
               isSelected: state.accountType.iSCompany,
               icon:
-                  AccountType.company.toIcon?.svg(
+                  UserType.company.toIcon?.svg(
                     colorFilter: ColorFilter.mode(
                       state.accountType.iSCompany ? Colors.white : Colors.black,
                       BlendMode.srcIn,
@@ -153,25 +153,25 @@ class _FirstStepContents extends StatelessWidget {
                   const SizedBox(),
               onTap: () {
                 context.read<TermBloc>().add(
-                  TermAccountTypeSelected(value: AccountType.company),
+                  TermAccountTypeSelected(value: UserType.company),
                 );
               },
             ),
             const SizedBox(height: 25),
             SelectableIconBtn(
-              text: AccountType.user.toStartMsg,
-              isSelected: state.accountType.isUser,
+              text: UserType.staff.toStartMsg,
+              isSelected: state.accountType.isStaff,
               icon:
-                  AccountType.user.toIcon?.svg(
+                  UserType.staff.toIcon?.svg(
                     colorFilter: ColorFilter.mode(
-                      state.accountType.isUser ? Colors.white : Colors.black,
+                      state.accountType.isStaff ? Colors.white : Colors.black,
                       BlendMode.srcIn,
                     ),
                   ) ??
                   const SizedBox(),
               onTap: () {
                 context.read<TermBloc>().add(
-                  TermAccountTypeSelected(value: AccountType.user),
+                  TermAccountTypeSelected(value: UserType.staff),
                 );
               },
             ),

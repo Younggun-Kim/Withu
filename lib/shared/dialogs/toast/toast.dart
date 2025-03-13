@@ -18,6 +18,9 @@ class Toast {
   }
 
   static showWithNavigatorKey({required String text}) {
+    if (text.isEmpty) {
+      return;
+    }
     return toastification.showCustom(
       overlayState: getItAppRouter.navigatorKey.currentState?.overlay,
       autoCloseDuration: const Duration(seconds: 1),

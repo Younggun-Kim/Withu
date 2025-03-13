@@ -12,7 +12,7 @@ class TokenListDto with _$TokenListDto {
     @Default('') String refreshToken,
     @Default(0) int expiresIn,
     @Default('') String tokenType,
-    AccountType? accountType,
+    UserType? accountType,
   }) = _TokenListDto;
 
   factory TokenListDto.fromJson(Map<String, dynamic> json) =>

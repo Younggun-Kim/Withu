@@ -226,7 +226,7 @@ class AccountApiImpl extends AccountApi {
   @override
   FutureOr<SnsSignUpResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
-    required AccountType userType,
+    required UserType userType,
   }) async {
     return network.dio
         .post(
@@ -292,5 +292,25 @@ class AccountApiImpl extends AccountApi {
           ),
         )
         .catchError((_) => BaseResponseDtoMock.error<bool>());
+  }
+
+  /// 내 프로필 조회
+  @override
+  FutureOr<MyProfileResDto> getMyProfile() async {
+    return network.dio
+        .post(AccountApiPathType.getMyProfile.fullPath)
+        .then(
+          (response) => MyProfileResDto.fromJson(
+            response.data,
+            (json) => MyProfileResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError(
+          (error) => MyProfileResDto.fromJson(
+            error.response?.data,
+            (json) => MyProfileResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<MyProfileResData>());
   }
 }

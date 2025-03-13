@@ -26,12 +26,12 @@ void initRouterInjections() {
 }
 
 /// 로그인 후 UserType 주입
-void injectUserType(AccountType userType) {
-  getIt.registerSingleton<AccountType>(userType);
+void injectUserType(UserType userType) {
+  getIt.registerSingleton<UserType>(userType);
 }
 
 Future<void> initInjections() async {
-  injectUserType(AccountType.company);
+  injectUserType(UserType.company);
 
   initRouterInjections();
   initNetworkInjections();

@@ -61,7 +61,7 @@ extension SignUpStateEx on SignUpState {
 
   CompanySignUpEntity toEntity() {
     return CompanySignUpEntity(
-      accountType: args?.accountType ?? AccountType.none,
+      accountType: args?.accountType ?? UserType.none,
       name: name.value,
       birthDate: birthDate.formattedDate,
       gender: gender,

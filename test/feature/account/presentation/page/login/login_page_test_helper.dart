@@ -6,12 +6,12 @@ import 'package:withu/shared/shared.dart';
 class LoginPageTestHelper {
   /// Finder: 긱워커 찾기 탭
   static Finder companyTabFinder() {
-    return find.byKey(Key('base_tab_${AccountType.company.toString()}'));
+    return find.byKey(Key('base_tab_${UserType.company.toString()}'));
   }
 
   /// Finder: 새로운 일 찾기 탭
   static Finder userTabFinder() {
-    return find.byKey(Key('base_tab_${AccountType.user.toString()}'));
+    return find.byKey(Key('base_tab_${UserType.staff.toString()}'));
   }
 
   /// Finder: 아이디 TextField

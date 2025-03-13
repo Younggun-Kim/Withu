@@ -181,7 +181,7 @@ class AccountMockApi extends AccountApiImpl {
   @override
   FutureOr<SnsSignUpResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
-    required AccountType userType,
+    required UserType userType,
   }) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
@@ -233,5 +233,21 @@ class AccountMockApi extends AccountApiImpl {
     );
 
     return await super.postCompanyTokenRegistration(dto);
+  }
+
+  /// 내 프로필 조회
+  @override
+  FutureOr<MyProfileResDto> getMyProfile() async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      AccountApiPathType.getMyProfile.fullPath,
+      (server) => server.reply(
+        200,
+        MyProfileResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.getMyProfile();
   }
 }

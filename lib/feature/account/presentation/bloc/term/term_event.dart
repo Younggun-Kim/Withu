@@ -7,7 +7,7 @@ class TermMessageCleared extends TermEvent {}
 
 /// 계정 타입 선택
 class TermAccountTypeSelected extends TermEvent {
-  final AccountType value;
+  final UserType value;
 
   TermAccountTypeSelected({required this.value});
 }

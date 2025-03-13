@@ -11,7 +11,7 @@ class SignUpUseCaseImpl implements SignUpUseCase {
     CompanySignUpEntity entity,
   ) async {
     late final CompanySignUpResEntity response;
-    if (entity.accountType.isUser) {
+    if (entity.accountType.isStaff) {
       response = await accountRepo.requestUserSignUp(entity.toUserDto());
     } else {
       response = await accountRepo.requestCompanySignUp(entity.toCompanyDto());
@@ -30,7 +30,7 @@ class SignUpUseCaseImpl implements SignUpUseCase {
   }
 
   @override
-  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, AccountType type) async {
+  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, UserType type) async {
     return await accountRepo.postSnsSignUp(data.toDto(), type);
   }
 }

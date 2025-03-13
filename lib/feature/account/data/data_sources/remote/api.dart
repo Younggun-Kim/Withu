@@ -4,6 +4,7 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 enum AccountApiPathType {
+  getMyProfile('/auth/me/profile'),
   registerStaffToken('/staff/device-tokens'),
   registerCompanyToken('/company/device-tokens'),
   refresh('/auth/refresh'),
@@ -64,7 +65,7 @@ abstract class AccountApi {
   /// SnS 회원가입
   FutureOr<SnsSignUpResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
-    required AccountType userType,
+    required UserType userType,
   });
 
   /// Staff 토큰 등록
@@ -76,4 +77,7 @@ abstract class AccountApi {
   FutureOr<BaseResponseDto<bool>> postCompanyTokenRegistration(
     TokenRegistrationReqDto dto,
   );
+
+  /// 내 프로필 조회
+  FutureOr<MyProfileResDto> getMyProfile();
 }

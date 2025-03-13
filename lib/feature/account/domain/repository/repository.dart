@@ -5,6 +5,7 @@ import 'package:withu/feature/account/data/data.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
+import 'package:withu/feature/account/domain/entity/my_profile/my_profile_entity.dart';
 import 'package:withu/feature/account/domain/entity/sns_login_res/sns_login_res_value.dart';
 import 'package:withu/feature/account/domain/entity/stored_sns_sign_up/stored_sns_sign_up_value.dart';
 
@@ -56,5 +57,8 @@ abstract class AccountRepository {
   FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData();
 
   /// SNS 회원가입 하기
-  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, AccountType userType);
+  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType);
+
+  /// 내 정보 조회
+  FutureOr<MyProfileEntity> getMyProfile();
 }

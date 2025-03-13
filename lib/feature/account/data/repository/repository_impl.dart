@@ -161,10 +161,7 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  FutureOr<bool> postSnsSignUp(
-    SnsSignUpReqDto dto,
-    AccountType userType,
-  ) async {
+  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType) async {
     final response = await accountApi.postSnsSignUp(
       dto: dto,
       userType: userType,
@@ -185,6 +182,17 @@ class AccountRepositoryImpl implements AccountRepository {
 
     return isSuccessSignUp;
   }
+
+  @override
+  FutureOr<MyProfileEntity> getMyProfile() async {
+    final response = await accountApi.getMyProfile();
+    final data = response.data;
+    if (!response.success || data == null) {
+      Toast.showWithNavigatorKey(text: response.message);
+      return MyProfileEntityParser.error();
+    }
+    return MyProfileEntityParser.fromDto(data);
+  }
 }
 
 extension AccountRepositoryImplEx on AccountRepositoryImpl {
@@ -195,7 +203,7 @@ extension AccountRepositoryImplEx on AccountRepositoryImpl {
     accountStorage.setRefreshToken(token: refreshToken);
   }
 
-  Future<void> registerFcmToken(AccountType userType) async {
+  Future<void> registerFcmToken(UserType userType) async {
     final fcmToken = await FcmUtils.getFcmToken();
 
     if (fcmToken.isEmpty) {

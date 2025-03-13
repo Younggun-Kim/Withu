@@ -7,6 +7,7 @@ part 'login_usecase.impl.dart';
 
 abstract class LoginUseCase {
   LoginUseCase({required this.accountRepo});
+
   final AccountRepository accountRepo;
 
   /// 리프테시

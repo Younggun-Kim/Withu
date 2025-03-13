@@ -18,5 +18,5 @@ abstract class SignUpUseCase {
 
   Future<LoginType> getLoginType();
 
-  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, AccountType type);
+  FutureOr<bool> snsSignUp(SnsSignUpReqValue data, UserType type);
 }
