@@ -11,6 +11,7 @@ class CommonRepositoryImpl implements CommonRepository {
   Future<bool> checkBusinessNumDuplication(ValidateBusinessReqDto dto) async {
     final response = await commonApi.postValidateBusiness(dto);
 
+    // TODO:
     return response.canRegistration || true;
   }
 

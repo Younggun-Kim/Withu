@@ -4,10 +4,13 @@ class SignUpUseCaseImpl implements SignUpUseCase {
   @override
   final AccountRepository accountRepo;
 
-  SignUpUseCaseImpl({required this.accountRepo});
+  @override
+  final LoginUseCase loginUseCase;
+
+  SignUpUseCaseImpl({required this.accountRepo, required this.loginUseCase});
 
   @override
-  FutureOr<CompanySignUpResEntity> signUpCompanyRequested(
+  FutureOr<CompanySignUpResEntity> emailSignUp(
     CompanySignUpEntity entity,
   ) async {
     late final CompanySignUpResEntity response;
@@ -31,6 +34,14 @@ class SignUpUseCaseImpl implements SignUpUseCase {
 
   @override
   FutureOr<bool> snsSignUp(SnsSignUpReqValue data, UserType type) async {
-    return await accountRepo.postSnsSignUp(data.toDto(), type);
+    final response = await accountRepo.postSnsSignUp(data.toDto(), type);
+    final tokens = response.tokens;
+
+    if (response.hasErrorMessage) {
+      Toast.showWithNavigatorKey(text: response.message);
+      return false;
+    }
+
+    return loginUseCase.loginProcess(tokens: tokens);
   }
 }

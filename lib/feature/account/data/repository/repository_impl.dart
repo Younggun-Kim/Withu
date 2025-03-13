@@ -24,18 +24,7 @@ class AccountRepositoryImpl implements AccountRepository {
     final refreshToken = await accountStorage.getRefreshToken();
     if (refreshToken.isNotEmpty) {
       return await accountApi.refresh(refreshToken);
-      // if (response.hasTokens) {
-      //   storeTokens(
-      //     response.data?.accessToken ?? '',
-      //     response.data?.refreshToken ?? '',
-      //   );
-      //
-      //   return true;
-      // }
     }
-
-    /// 리프레시 실패라면 저장된 토큰 삭제
-    // accountStorage.reset();
     return RefreshResDtoMock.error();
   }
 
@@ -83,51 +72,18 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 애플 로그인 요청
   @override
-  FutureOr<SnsLoginResValue> requestAppleLogin(AppleLoginReqDto dto) async {
-    final response = await accountApi.postAppleLogin(dto: dto);
-    final token = response.data?.token;
-    final tempToken = response.data?.tempToken;
-    final isRegistered = response.data?.isRegistered;
-
-    if (response.hasErrorMessage) {
-      Toast.showWithNavigatorKey(text: response.data!.message);
-    }
-
-    /// 로그인 성공
-    if (isRegistered == true && token != null && response.hasToken) {
-      storeTokens(token, response.data?.refreshToken ?? '');
-    }
-
-    /// 회원가입인 경우 임시토큰 저장
-    if (tempToken != null && isRegistered == false) {
-      accountStorage.setTempToken(tempToken);
-    }
-
-    return SnsLoginResValueParser.fromDto(response);
+  FutureOr<AppleLoginResDto> requestAppleLogin(AppleLoginReqDto dto) async {
+    return await accountApi.postAppleLogin(dto: dto);
   }
 
-  /// 이메일 회원 가입
+  /// Sns 회원가입
   @override
-  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType) async {
-    final response = await accountApi.postSnsSignUp(
-      dto: dto,
-      userType: userType,
-    );
-
-    final isSuccessSignUp = response.isSuccessSignUp;
-
-    if (response.hasErrorMessage) {
-      Toast.showWithNavigatorKey(text: response.message);
-    }
-
-    if (response.hasToken) {
-      storeTokens(
-        response.data?.token ?? '',
-        response.data?.refreshToken ?? '',
-      );
-    }
-
-    return isSuccessSignUp;
+  FutureOr<SnsSignUpResDto> postSnsSignUp(
+    SnsSignUpReqDto dto,
+    UserType userType,
+  ) async {
+    // TODO:
+    return await accountApi.postSnsSignUp(dto: dto, userType: userType);
   }
 
   /// 아이디 찾기
@@ -150,12 +106,6 @@ class AccountRepositoryImpl implements AccountRepository {
     }
 
     return response.success;
-  }
-
-  @override
-  void storeSnsSignUpData(LoginType type, String tempToken) {
-    accountStorage.setSignUpType(type);
-    accountStorage.setTempToken(tempToken);
   }
 
   @override

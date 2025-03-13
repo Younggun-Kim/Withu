@@ -53,20 +53,17 @@ extension LoginBlocHandler on LoginBloc {
 
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final response = await loginUseCase.requestSnsLogin(identifyToken);
+    final isLoggedIn = await loginUseCase.requestSnsLogin(identifyToken);
 
-    emit(
-      state.copyWith(status: BaseBlocStatus.fromSuccess(response.isLoggedIn)),
-    );
+    emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isLoggedIn)));
 
-    moveAppleNextPage(response);
+    moveAppleNextPage(isLoggedIn);
   }
 
-  void moveAppleNextPage(SnsLoginResValue response) {
-    if (response.isLoggedIn) {
+  void moveAppleNextPage(bool isLoggedIn) {
+    if (isLoggedIn) {
       AppRouterEx.moveHome();
     } else {
-      loginUseCase.storeSnsSignUpData(LoginType.apple, response.tempToken);
       getItAppRouter.push(TermRoute());
     }
   }
@@ -75,9 +72,14 @@ extension LoginBlocHandler on LoginBloc {
     LoginEmailSignUpPressed event,
     Emitter<LoginState> emit,
   ) async {
-    // TODO:
-    // loginUseCase.storeEmailSignUpData();
-
+    getItGlobalBloc.add(
+      GlobalSignUpArgsStored(
+        args: SignUpArgsValue(
+          signUpMethod: SignUpMethodType.email,
+          tempToken: '',
+        ),
+      ),
+    );
     getItAppRouter.push(TermRoute());
   }
 }

@@ -50,7 +50,7 @@ extension SignUpStateEx on SignUpState {
 
   /// 버튼 Enabled 여부
   bool get isEnabledSubmitBtn {
-    logger.i('${args?.userType} ${args?.businessNum} ${args?.companyName}');
+    logger.i('${args?.signUpType} ${args?.businessNum} ${args?.companyName}');
     final isSns = args?.signUpType.isSns == true;
 
     final isSnsValid =

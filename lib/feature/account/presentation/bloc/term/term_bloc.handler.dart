@@ -35,14 +35,12 @@ extension TermBlocHandler on TermBloc {
   }
 
   void _moveUserNextPage() async {
-    // TODO;
-    final signUpMethod = SignUpMethodType.email;
-    final tempToken = '';
+    final signUpArgsValue = getItGlobalBloc.state.signUpArgs;
     getItAppRouter.push(
       SignUpRoute(
         args: SignUpPageArgs.user(
-          signUpType: signUpMethod,
-          tempToken: tempToken,
+          signUpType: signUpArgsValue.signUpMethod,
+          tempToken: signUpArgsValue.tempToken,
           isAgreeLocation: state.locationTerm,
           isAgreeMarketing: state.marketingTerm,
         ),

@@ -13,10 +13,11 @@ class LoginUseCaseImpl implements LoginUseCase {
     final tokens = response.toTokens();
 
     if (!tokens.hasToken) {
+      accountRepo.resetStoredData();
       return false;
     }
 
-    return loginProcess(signUpMethod: SignUpMethodType.none, tokens: tokens);
+    return loginProcess(tokens: tokens);
   }
 
   /// 로그아웃
@@ -45,31 +46,39 @@ class LoginUseCaseImpl implements LoginUseCase {
       return false;
     }
 
-    return loginProcess(
-      signUpMethod: SignUpMethodType.email,
-      tokens: response.data?.tokens,
-    );
+    return loginProcess(tokens: response.data?.tokens);
   }
 
   /// 애플 로그인 요청
   @override
-  FutureOr<SnsLoginResValue> requestSnsLogin(String token) async {
-    return await accountRepo.requestAppleLogin(
+  FutureOr<bool> requestSnsLogin(String token) async {
+    final response = await accountRepo.requestAppleLogin(
       AppleLoginReqDto(idToken: token, firstName: '', lastName: ''),
     );
-  }
+    final tokens = response.data?.tokenPair;
+    bool isLoggedIn = false;
+    if (tokens != null && tokens.hasToken) {
+      isLoggedIn = await loginProcess(tokens: tokens);
+    }
 
-  @override
-  void storeSnsSignUpData(LoginType type, String tempToken) {
-    accountRepo.storeSnsSignUpData(type, tempToken);
+    if (!isLoggedIn) {
+      /// 회원가입 전달할 값 저장
+      getItGlobalBloc.add(
+        GlobalSignUpArgsStored(
+          args: SignUpArgsValue(
+            signUpMethod: SignUpMethodType.apple,
+            tempToken: response.data?.tempToken,
+          ),
+        ),
+      );
+    }
+
+    return isLoggedIn;
   }
 }
 
 extension LoginUseCaseEx on LoginUseCase {
-  FutureOr<bool> loginProcess({
-    required SignUpMethodType signUpMethod,
-    required TokenListDto? tokens,
-  }) async {
+  FutureOr<bool> loginProcess({required TokenListDto? tokens}) async {
     if (tokens == null || tokens.hasToken == false) {
       accountRepo.resetStoredData();
       return false;

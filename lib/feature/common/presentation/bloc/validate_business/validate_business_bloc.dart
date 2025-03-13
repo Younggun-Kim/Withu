@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/core/router/router.gr.dart';
-import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/feature/common/domain/usecase/validate_business_usecase.dart';

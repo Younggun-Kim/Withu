@@ -11,12 +11,15 @@ part 'global_bloc_handler.dart';
 
 part 'global_bloc.freezed.dart';
 
-class GlobalBloc extends BaseBloc<GlobalEvent, GlobalState> {
-  final LoginUseCase loginUseCase;
+typedef GlobalBlocProvider = BlocProvider<GlobalBloc>;
 
-  GlobalBloc({required this.loginUseCase})
-    : super(GlobalState(status: BaseBlocStatus.initial())) {
-    on<SignUpArgsStored>(_onSignUpArgsStored);
-    on<SignUpArgsDeleted>(_onSignUpArgsDeleted);
+typedef GlobalBlocBuilder = BlocBuilder<GlobalBloc, GlobalState>;
+
+typedef GlobalBlocListener = BlocListener<GlobalBloc, GlobalState>;
+
+class GlobalBloc extends BaseBloc<GlobalEvent, GlobalState> {
+  GlobalBloc() : super(GlobalState(status: BaseBlocStatus.initial())) {
+    on<GlobalSignUpArgsStored>(_onGlobalSignUpArgsStored);
+    on<GlobalSignUpArgsDeleted>(_onGlobalSignUpArgsDeleted);
   }
 }

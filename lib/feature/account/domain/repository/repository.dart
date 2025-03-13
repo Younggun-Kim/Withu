@@ -5,7 +5,6 @@ import 'package:withu/feature/account/data/data.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/feature/account/domain/entity/company_sign_up/company_sign_up_res_entity.dart';
 import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
-import 'package:withu/feature/account/domain/entity/sns_login_res/sns_login_res_value.dart';
 
 abstract class AccountRepository {
   AccountRepository({required this.accountApi, required this.accountStorage});
@@ -32,7 +31,7 @@ abstract class AccountRepository {
   FutureOr<CompanySignUpResEntity> requestUserSignUp(UserSignUpReqDto dto);
 
   /// 애플 로그인 요청
-  FutureOr<SnsLoginResValue> requestAppleLogin(AppleLoginReqDto dto);
+  FutureOr<AppleLoginResDto> requestAppleLogin(AppleLoginReqDto dto);
 
   /// 아이디 찾기 요청
   FutureOr<FindIdResValue> findId(String phone);
@@ -42,7 +41,10 @@ abstract class AccountRepository {
   FutureOr<bool> changePw(ChangePwReqDto dto);
 
   /// SNS 회원가입 하기
-  FutureOr<bool> postSnsSignUp(SnsSignUpReqDto dto, UserType userType);
+  FutureOr<SnsSignUpResDto> postSnsSignUp(
+    SnsSignUpReqDto dto,
+    UserType userType,
+  );
 
   /// 내 정보 조회
   FutureOr<MyProfileResDto> getMyProfile();
@@ -54,9 +56,6 @@ abstract class AccountRepository {
 
   /// Storage 관련
   void resetStoredData();
-
-  /// SNS 회원가입 정보 저장
-  void storeSnsSignUpData(LoginType type, String tempToken);
 
   /// Session Id Storage 에 조회
   Future<String> getToken();

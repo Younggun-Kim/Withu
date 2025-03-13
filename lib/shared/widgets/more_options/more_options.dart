@@ -3,9 +3,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 /// 더보기 팝업 메뉴
-// TODO: Icon 변경하기
 class MoreOptions<T extends L10nKeyProvider> extends StatelessWidget {
-
   const MoreOptions({super.key, required this.items, required this.onSelected});
   final List<T> items;
 

@@ -6,7 +6,6 @@ import 'package:withu/feature/home/init_injectinos.dart';
 import 'package:withu/feature/job_posting/init_injections.dart';
 import 'package:withu/feature/splash/splash.dart';
 
-
 void initNetworkInjections() {
   getIt.registerSingleton<DioNetwork>(DioNetwork());
 
@@ -28,9 +27,10 @@ void injectUserType(UserType userType) {
 
 Future<void> initInjections() async {
   injectUserType(UserType.company);
-
   initRouterInjections();
   initNetworkInjections();
+  getIt.registerLazySingleton<GlobalBloc>(() => GlobalBloc());
+
   initSplashInjections();
   initJobPostingInjections();
   await initDataDI();

@@ -11,12 +11,17 @@ typedef SnsSignUpResDto = BaseResponseDto<SnsSignUpResData>;
 @freezed
 class SnsSignUpResData with _$SnsSignUpResData {
   factory SnsSignUpResData({
-    required String token,
-    required String refreshToken,
-    required TokenListDto tokenPair,
-    required String userId,
-    required bool isRegistered,
-    required String message,
+    @Default('') String accessToken,
+    @Default('') String refreshToken,
+    @Default('') String tokenType,
+    @Default(0) int expiresIn,
+    @Default('') String userId,
+    @Default('') String email,
+    @Default(UserType.none) UserType userType,
+    @Default(false) bool isRegistered,
+    @Default('') String tempToken,
+    @Default(false) success,
+    @Default('') String message,
   }) = _SnsSignUpResData;
 
   factory SnsSignUpResData.fromJson(Map<String, dynamic> json) =>
@@ -28,9 +33,16 @@ extension SnsSignUpResDtoEx on SnsSignUpResDto {
 
   bool get hasErrorMessage => !success && message.isNotEmpty;
 
-  bool get hasToken => data?.token.isNotEmpty == true;
+  bool get hasToken => data?.accessToken.isNotEmpty == true;
 
   bool get hasRefreshToken => data?.refreshToken.isNotEmpty == true;
+
+  TokenListDto get tokens => TokenListDto(
+    accessToken: data?.accessToken ?? '',
+    refreshToken: data?.refreshToken ?? '',
+    expiresIn: data?.expiresIn ?? 0,
+    tokenType: data?.tokenType ?? '',
+  );
 }
 
 extension SnsSignUpResDtoMock on SnsSignUpResDto {
@@ -56,20 +68,21 @@ extension SnsSignUpResDtoMock on SnsSignUpResDto {
 extension SnsSignUpResDataMock on SnsSignUpResData {
   static SnsSignUpResData success() {
     return SnsSignUpResData(
-      token: 'tetetet',
+      accessToken: 'tetetet',
       refreshToken: 'tetet',
-      tokenPair: TokenListDtoMock.mock(),
+      expiresIn: 3600,
+      tokenType: 'Bearer',
       userId: '9c90d19b-a65c-490a-8e7c-a95d56aed143',
       message: '회원가입이 완료되었습니다',
       isRegistered: true,
+      success: true,
     );
   }
 
   static SnsSignUpResData failure() {
     return SnsSignUpResData(
-      token: '',
+      accessToken: '',
       refreshToken: '',
-      tokenPair: TokenListDtoMock.mock(),
       userId: '',
       message: '회원가입에 실패하였습니다.',
       isRegistered: false,

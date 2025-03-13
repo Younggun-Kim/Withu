@@ -2,6 +2,10 @@ part of 'global_bloc.dart';
 
 sealed class GlobalEvent extends BaseBlocEvent {}
 
-class SignUpArgsStored extends GlobalEvent {}
+class GlobalSignUpArgsStored extends GlobalEvent {
+  final SignUpArgsValue args;
 
-class SignUpArgsDeleted extends GlobalEvent {}
+  GlobalSignUpArgsStored({required this.args});
+}
+
+class GlobalSignUpArgsDeleted extends GlobalEvent {}

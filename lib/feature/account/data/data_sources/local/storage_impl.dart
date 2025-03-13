@@ -61,19 +61,4 @@ class AccountStorageImpl implements AccountStorage {
       ),
     );
   }
-
-  @override
-  Future<String> getTempToken() async {
-    return SharedPreferences.getInstance().then(
-      (preference) => preference.getString(AccountStorageKey.token.name) ?? '',
-    );
-  }
-
-  @override
-  void setTempToken(String tempToken) {
-    SharedPreferences.getInstance().then(
-      (preference) =>
-          preference.setString(AccountStorageKey.token.name, tempToken),
-    );
-  }
 }

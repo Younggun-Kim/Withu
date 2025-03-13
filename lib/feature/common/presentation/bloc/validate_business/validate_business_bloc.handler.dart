@@ -65,9 +65,7 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
       return;
     }
 
-    // TODO
-    final signUpType = SignUpMethodType.email;
-    final tempToken = '';
+    final signUpArgsValue = getItGlobalBloc.state.signUpArgs;
     getItAppRouter.push(
       SignUpRoute(
         args: SignUpPageArgs.company(
@@ -76,8 +74,8 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
           companyName: state.companyName.value,
           isAgreeLocation: state.args?.isAgreeLocation ?? false,
           isAgreeMarketing: state.args?.isAgreeMarketing ?? false,
-          signUpType: signUpType,
-          tempToken: tempToken,
+          signUpType: signUpArgsValue.signUpMethod,
+          tempToken: signUpArgsValue.tempToken,
         ),
       ),
     );

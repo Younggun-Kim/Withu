@@ -24,8 +24,4 @@ abstract class AccountStorage {
   Future<LoginType> getSignUpType();
 
   void setSignUpType(LoginType type);
-
-  Future<String> getTempToken();
-
-  void setTempToken(String tempToken);
 }

@@ -7,6 +7,6 @@ part 'sign_up_args_value.freezed.dart';
 class SignUpArgsValue with _$SignUpArgsValue {
   const factory SignUpArgsValue({
     @Default(SignUpMethodType.email) SignUpMethodType signUpMethod,
-    @Default('') String name,
+    @Default('') String tempToken,
   }) = _SignUpArgsValue;
 }

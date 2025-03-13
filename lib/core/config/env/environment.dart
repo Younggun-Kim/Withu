@@ -9,6 +9,6 @@ class Environment {
   /// Prod 환경 여부
   static bool get isProd => env == EnvironmentType.prod;
 
-  // static bool get isRelease => kDebugMode;
-  static bool get isRelease => kReleaseMode;
+  static bool get isRelease => kDebugMode;
+  // static bool get isRelease => kReleaseMode;
 }

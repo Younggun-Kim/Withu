@@ -18,7 +18,7 @@ void initAccountDataInjections() {
 void initAccountDomainInjections() {
   getIt.registerSingleton<LoginUseCase>(LoginUseCaseImpl(accountRepo: getIt()));
   getIt.registerSingleton<SignUpUseCase>(
-    SignUpUseCaseImpl(accountRepo: getIt()),
+    SignUpUseCaseImpl(accountRepo: getIt(), loginUseCase: getIt()),
   );
   getIt.registerSingleton<EmailLoginUseCase>(
     EmailLoginUseCaseImpl(accountRepo: getIt()),
