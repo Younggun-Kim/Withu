@@ -12,6 +12,15 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     emit(state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)));
   }
 
+  /// 다음 스탭으로 이동
+  void _onProfileRegistrationStepBackward(
+    ProfileRegistrationStepBackward event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    final isCompany = true;
+    emit(state.copyWith(currentStep: state.currentStep.getPrevStep(isCompany)));
+  }
+
   /// 자기소개 입력
   void _onProfileRegistrationIntroductionInputted(
     ProfileRegistrationIntroductionInputted event,

@@ -5,6 +5,9 @@ abstract class ProfileRegistrationEvent extends BaseBlocEvent {}
 /// 다음 스탭으로 이동
 class ProfileRegistrationStepForwarded extends ProfileRegistrationEvent {}
 
+/// 이전 스탭으로 이동
+class ProfileRegistrationStepBackward extends ProfileRegistrationEvent {}
+
 /// 자기 소개 입력
 class ProfileRegistrationIntroductionInputted extends ProfileRegistrationEvent {
   final String value;

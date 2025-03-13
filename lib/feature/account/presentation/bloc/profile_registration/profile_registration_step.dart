@@ -30,6 +30,10 @@ enum ProfileRegistrationStep {
 }
 
 extension ProfileRegistrationStepEx on ProfileRegistrationStep {
+  bool get isFirst => this == ProfileRegistrationStep.first;
+
+  bool get isLast => this == ProfileRegistrationStep.profile;
+
   ProfileRegistrationStep getNextStep(bool isCompany) {
     final values = ProfileRegistrationStep.getValuesWith(isCompany);
     final lastIndex = values.length - 1;
@@ -37,6 +41,15 @@ extension ProfileRegistrationStepEx on ProfileRegistrationStep {
     final nextIndex = currentIndex + 1;
 
     return values[min(nextIndex, lastIndex)];
+  }
+
+  ProfileRegistrationStep getPrevStep(bool isCompany) {
+    final values = ProfileRegistrationStep.getValuesWith(isCompany);
+    final firstIndex = 0;
+    final currentIndex = values.indexOf(this);
+    final prevIndex = currentIndex - 1;
+
+    return values[max(prevIndex, firstIndex)];
   }
 
   String toTitle() {

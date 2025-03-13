@@ -31,6 +31,7 @@ class ProfileRegistrationBloc
   ProfileRegistrationBloc({required this.profileRegistrationUseCase})
     : super(ProfileRegistrationState(status: BaseBlocStatus.initial())) {
     on<ProfileRegistrationStepForwarded>(_onProfileRegistrationStepForwarded);
+    on<ProfileRegistrationStepBackward>(_onProfileRegistrationStepBackward);
     on<ProfileRegistrationIntroductionInputted>(
       _onProfileRegistrationIntroductionInputted,
     );

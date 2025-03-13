@@ -89,6 +89,7 @@ enum StringRes {
   workerSignup,
   employerSignup,
   next,
+  prev,
   confirm,
   skipping,
   selfIntroRegister,

@@ -53,8 +53,25 @@ class ProfileRegistrationPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: CustomEdgeInsets.horizontalPadding(),
-                  child: _NextBtn(),
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
+                    children: [
+                      Visibility(
+                        visible: !state.currentStep.isFirst,
+                        child: Expanded(
+                          flex: 1, // 이전 버튼의 크기 설정
+                          child: _PrevBtn(),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
+                        child: _NextBtn(),
+                      ),
+                    ],
+                  ),
                 ),
+
                 const SizedBox(height: 55),
               ],
             ),
@@ -206,6 +223,28 @@ class _SkipBtn extends StatelessWidget {
           style: context.textTheme.bodyMedium?.setBlack,
         ),
       ),
+    );
+  }
+}
+
+class _PrevBtn extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileRegistrationBlocBuilder(
+      builder: (context, state) {
+        return Container(
+          margin: EdgeInsets.only(right: 10),
+          child: BaseButton.basic(
+            context: context,
+            text: StringRes.prev.tr,
+            onTap: () {
+              context.read<ProfileRegistrationBloc>().add(
+                ProfileRegistrationStepBackward(),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
