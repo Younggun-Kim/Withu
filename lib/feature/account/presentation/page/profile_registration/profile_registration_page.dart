@@ -140,7 +140,7 @@ class _StepPageViewState extends State<_StepPageView> {
   final Map<ProfileRegistrationStep, Widget> pageMap = {
     ProfileRegistrationStep.introduction: _IntroductionContent(),
     ProfileRegistrationStep.field: _FieldContent(),
-    ProfileRegistrationStep.portfolio: Text('3'),
+    ProfileRegistrationStep.portfolio: _PortfolioContent(),
     ProfileRegistrationStep.career: Text('4'),
     ProfileRegistrationStep.area: Text('5'),
     ProfileRegistrationStep.profile: Text('6'),
@@ -363,6 +363,47 @@ class _FieldItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// 포트폴리오 추가하기
+class _PortfolioContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileRegistrationBlocBuilder(
+      builder: (context, state) {
+        return CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              child: SingleChildScrollView(
+                padding: CustomEdgeInsets.horizontalPadding(),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        BaseButton.fitSecondary(
+                          context: context,
+                          text: '사진 등록',
+                          onTap: () {
+                            // TODO: 사진 불러오기
+                          },
+                        ),
+                        const SizedBox(width: 11),
+                        Text(
+                          '10/10',
+                          style: context.textTheme.bodyMedium?.setBlack,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
