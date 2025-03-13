@@ -16,9 +16,11 @@ class LinedTextFormField extends StatelessWidget {
 
   final String hint;
 
+  int? maxLength;
+
   final Function(String text)? onChanged;
 
-  const LinedTextFormField({
+  LinedTextFormField({
     super.key,
     this.controller,
     this.focusNode,
@@ -27,6 +29,7 @@ class LinedTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.hint = '',
     this.onChanged,
+    this.maxLength,
   });
 
   @override
@@ -43,6 +46,7 @@ class LinedTextFormField extends StatelessWidget {
         cursorHeight: 20,
         minLines: lineNum,
         maxLines: lineNum,
+        maxLength: maxLength,
         readOnly: readOnly,
         onChanged: onChanged,
         decoration: InputDecoration(

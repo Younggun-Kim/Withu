@@ -3,7 +3,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:withu/core/core.dart';
 
-
 void run({required EnvironmentType environment}) async {
   Environment.env = environment;
 
@@ -30,7 +29,14 @@ void run({required EnvironmentType environment}) async {
       path: 'assets/translations',
       child: GlobalBlocProvider(
         create: (context) => GlobalBloc(),
-        child: App(),
+        child: GlobalBlocConsumer(
+          listener: (context, state) {
+            logger.i(state.profileInfo);
+          },
+          builder: (context, state) {
+            return App();
+          },
+        ),
       ),
     ),
   );

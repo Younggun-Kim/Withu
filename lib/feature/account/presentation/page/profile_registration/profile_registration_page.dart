@@ -161,7 +161,7 @@ class _StepPageViewState extends State<_StepPageView> {
     ProfileRegistrationStep.portfolio: _PortfolioContent(),
     ProfileRegistrationStep.career: Text('4'),
     ProfileRegistrationStep.area: Text('5'),
-    ProfileRegistrationStep.profile: Text('6'),
+    ProfileRegistrationStep.profile: _ProfileContent(),
   };
 
   late PageController _pageController;
@@ -237,6 +237,7 @@ class _PrevBtn extends StatelessWidget {
           child: BaseButton.basic(
             context: context,
             text: StringRes.prev.tr,
+            textColor: ColorName.text,
             onTap: () {
               context.read<ProfileRegistrationBloc>().add(
                 ProfileRegistrationStepBackward(),
@@ -508,6 +509,67 @@ class _PortfolioImageItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// 프로필
+class _ProfileContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileRegistrationBlocBuilder(
+      builder: (context, state) {
+        return Center(
+          child: InkWell(
+            splashColor: Colors.transparent,
+            onTap: () {
+              ImagePickerBottomSheet.show(
+                context: context,
+                onTap: (XFile image) {
+                  context.read<ProfileRegistrationBloc>().add(
+                    ProfileRegistrationProfilePhotoPressed(image: image),
+                  );
+                },
+              );
+            },
+            child: Stack(
+              children: [
+                Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200),
+                  ),
+                  child: Image.file(
+                    state.profileImage!.toFile(),
+                    width: 170,
+                    height: 170,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Assets.images.userDefault.svg(
+                        width: 170,
+                        height: 170,
+                      );
+                    },
+                  ),
+                ),
+                Positioned(
+                  bottom: 6,
+                  right: 6,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: context.boxShadowTheme.md,
+                    ),
+                    padding: EdgeInsets.all(6),
+                    child: Assets.images.pencil.svg(fit: BoxFit.contain),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

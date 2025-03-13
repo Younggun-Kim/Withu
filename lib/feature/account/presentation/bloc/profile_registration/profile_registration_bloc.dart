@@ -40,5 +40,8 @@ class ProfileRegistrationBloc
       _onProfileRegistrationAddPhotoRequested,
     );
     on<ProfileRegistrationPhotoDeleted>(_onProfileRegistrationPhotoDeleted);
+    on<ProfileRegistrationProfilePhotoPressed>(
+      _onProfileRegistrationProfilePhotoPressed,
+    );
   }
 }

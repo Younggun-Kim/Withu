@@ -37,3 +37,10 @@ class ProfileRegistrationPhotoDeleted extends ProfileRegistrationEvent {
 
   ProfileRegistrationPhotoDeleted({required this.file});
 }
+
+/// 프로필 사진 클릭 이벤트
+class ProfileRegistrationProfilePhotoPressed extends ProfileRegistrationEvent {
+  final ImageFileValue image;
+
+  ProfileRegistrationProfilePhotoPressed({required this.image});
+}

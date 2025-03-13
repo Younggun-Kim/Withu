@@ -13,6 +13,7 @@ class ProfileRegistrationState extends BaseBlocState
     @Default(FieldType.none) FieldType field,
 
     @Default([]) List<ImageFileValue> portfolioImages,
+    ImageFileValue? profileImage,
   }) = _ProfileRegistrationState;
 }
 
@@ -30,7 +31,7 @@ extension ProfileRegistrationStateEx on ProfileRegistrationState {
       case ProfileRegistrationStep.area:
         return false;
       case ProfileRegistrationStep.profile:
-        return false;
+        return true;
     }
   }
 }

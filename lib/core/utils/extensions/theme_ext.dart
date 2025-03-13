@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:withu/core/core.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 extension BulidContextTextThemeExt on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
+
+  BoxShadowTheme get boxShadowTheme => Theme.of(this).boxShadowTheme;
 }
 
 extension TextThemeEx on TextTheme {
@@ -14,6 +17,10 @@ extension TextThemeEx on TextTheme {
 
   TextStyle? get bodySmallBold =>
       bodySmall?.copyWith(fontWeight: FontWeight.w600);
+}
+
+extension ThemeDataEx on ThemeData {
+  BoxShadowTheme get boxShadowTheme => BoxShadowTheme();
 }
 
 extension TextStyleEx on TextStyle {

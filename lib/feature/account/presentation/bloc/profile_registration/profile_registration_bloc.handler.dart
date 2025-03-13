@@ -59,4 +59,12 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
       ),
     );
   }
+
+  /// 프로필 사진 클릭
+  void _onProfileRegistrationProfilePhotoPressed(
+    ProfileRegistrationProfilePhotoPressed event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    emit(state.copyWith(profileImage: event.image));
+  }
 }

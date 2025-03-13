@@ -1,6 +1,6 @@
 export 'injections.dart';
 export 'extensions/extensions.dart';
-export 'theme/custom_theme.dart';
+export 'theme/theme.dart';
 export 'resource/resource.dart';
 export 'mixins/mixins.dart';
 export 'bloc/bloc.dart';

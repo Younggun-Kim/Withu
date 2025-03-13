@@ -147,6 +147,9 @@ class $AssetsImagesGen {
   SvgGenImage get navIconSearchOn =>
       const SvgGenImage('assets/images/nav_icon_search_on.svg');
 
+  /// File path: assets/images/pencil.svg
+  SvgGenImage get pencil => const SvgGenImage('assets/images/pencil.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
@@ -202,6 +205,7 @@ class $AssetsImagesGen {
         navIconProfileOn,
         navIconSearchOff,
         navIconSearchOn,
+        pencil,
         plus,
         userDefault,
         usersRound,

@@ -13,7 +13,7 @@ part 'global_bloc.freezed.dart';
 
 typedef GlobalBlocProvider = BlocProvider<GlobalBloc>;
 
-typedef GlobalBlocBuilder = BlocBuilder<GlobalBloc, GlobalState>;
+typedef GlobalBlocConsumer = BlocConsumer<GlobalBloc, GlobalState>;
 
 typedef GlobalBlocListener = BlocListener<GlobalBloc, GlobalState>;
 
