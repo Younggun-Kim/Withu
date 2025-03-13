@@ -96,7 +96,7 @@ extension SignUpBlocHandler on SignUpBloc {
   ) async {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final accountType = state.args?.accountType;
+    final accountType = state.args?.userType;
 
     if (accountType == null) {
       Toast.showWithNavigatorKey(text: '가입하시는 회원 유형을 확인해주세요.');

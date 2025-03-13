@@ -1,9 +1,8 @@
-import 'package:withu/core/types/login_type.dart';
-import 'package:withu/feature/account/domain/type/user_type.dart';
+import 'package:withu/feature/account/account.dart';
 
 class SignUpPageArgs {
   /// 계정 타입
-  final UserType accountType;
+  final UserType userType;
 
   /// 사업자등록 번호
   final String businessNum;
@@ -21,30 +20,30 @@ class SignUpPageArgs {
   final bool isAgreeMarketing;
 
   /// 회원가입 종류
-  final LoginType signUpType;
+  final SignUpMethodType signUpType;
 
   /// SnS 회원가입 임시 토큰
   final String tempToken;
 
   SignUpPageArgs({
-    required this.accountType,
+    required this.userType,
     required this.businessNum,
     required this.ceoName,
     required this.companyName,
     required this.isAgreeLocation,
     required this.isAgreeMarketing,
-    this.signUpType = LoginType.email,
+    this.signUpType = SignUpMethodType.email,
     this.tempToken = '',
   });
 
   factory SignUpPageArgs.user({
     required bool isAgreeLocation,
     required bool isAgreeMarketing,
-    LoginType signUpType = LoginType.email,
+    SignUpMethodType signUpType = SignUpMethodType.email,
     String tempToken = '',
   }) {
     return SignUpPageArgs(
-      accountType: UserType.staff,
+      userType: UserType.staff,
       businessNum: '',
       ceoName: '',
       companyName: '',
@@ -61,11 +60,11 @@ class SignUpPageArgs {
     required String companyName,
     required bool isAgreeLocation,
     required bool isAgreeMarketing,
-    LoginType signUpType = LoginType.email,
+    SignUpMethodType signUpType = SignUpMethodType.email,
     String tempToken = '',
   }) {
     return SignUpPageArgs(
-      accountType: UserType.company,
+      userType: UserType.company,
       businessNum: businessNum,
       ceoName: ceoName,
       companyName: companyName,

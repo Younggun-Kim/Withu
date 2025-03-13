@@ -6,3 +6,4 @@ export 'logger/logger.dart';
 export 'sns/sns.dart';
 export 'launch_url/launch_url_utils.dart';
 export 'image_picker/image_picker.dart';
+export 'get_it/get_it_utils.dart';

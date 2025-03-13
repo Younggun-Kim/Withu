@@ -13,4 +13,8 @@ enum SignUpMethodType {
   const SignUpMethodType({required this.serverKey});
 
   bool get isNone => this == none;
+
+  bool get isEmail => this == email;
+
+  bool get isSns => this == google || this == apple;
 }

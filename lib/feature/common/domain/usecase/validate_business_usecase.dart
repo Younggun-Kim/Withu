@@ -13,9 +13,6 @@ abstract class ValidateBusinessUseCase {
 
   /// 중복확인
   Future<bool> checkDuplication(ValidateBusinessEntity entity);
-
-  /// 저장된 Sns 회원가입 정보 가져오기
-  Future<StoredSnsSignUpValue> getStoredSnsSignUpData();
 }
 
 class ValidateBusinessUseCaseImpl implements ValidateBusinessUseCase {
@@ -33,10 +30,5 @@ class ValidateBusinessUseCaseImpl implements ValidateBusinessUseCase {
   @override
   Future<bool> checkDuplication(ValidateBusinessEntity entity) async {
     return await commonRepo.checkBusinessNumDuplication(entity.toDto());
-  }
-
-  @override
-  Future<StoredSnsSignUpValue> getStoredSnsSignUpData() async {
-    return await accountRepo.getStoredSnsSignUpData();
   }
 }

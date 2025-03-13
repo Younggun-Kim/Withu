@@ -1,5 +1,5 @@
 import 'package:withu/core/config/env/environment.dart';
-import 'package:withu/core/utils/injections.dart';
+import 'package:withu/core/utils/library/get_it/get_it_utils.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/feature/common/domain/usecase/validate_business_usecase.dart';
 

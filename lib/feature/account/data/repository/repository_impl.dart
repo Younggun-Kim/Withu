@@ -159,20 +159,6 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  void storeEmailSignUpData() {
-    accountStorage.setSignUpType(LoginType.email);
-    accountStorage.setTempToken('');
-  }
-
-  @override
-  FutureOr<StoredSnsSignUpValue> getStoredSnsSignUpData() async {
-    final tempToken = await accountStorage.getTempToken();
-    final signUpType = await accountStorage.getSignUpType();
-
-    return StoredSnsSignUpValue(type: signUpType, tempToken: tempToken);
-  }
-
-  @override
   FutureOr<MyProfileResDto> getMyProfile() async {
     return await accountApi.getMyProfile();
   }

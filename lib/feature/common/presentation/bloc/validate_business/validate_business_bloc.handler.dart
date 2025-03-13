@@ -65,7 +65,9 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
       return;
     }
 
-    final storedData = await useCase.getStoredSnsSignUpData();
+    // TODO
+    final signUpType = SignUpMethodType.email;
+    final tempToken = '';
     getItAppRouter.push(
       SignUpRoute(
         args: SignUpPageArgs.company(
@@ -74,8 +76,8 @@ extension ValidateBusinessBlocHandler on ValidateBusinessBloc {
           companyName: state.companyName.value,
           isAgreeLocation: state.args?.isAgreeLocation ?? false,
           isAgreeMarketing: state.args?.isAgreeMarketing ?? false,
-          signUpType: storedData.type,
-          tempToken: storedData.tempToken,
+          signUpType: signUpType,
+          tempToken: tempToken,
         ),
       ),
     );

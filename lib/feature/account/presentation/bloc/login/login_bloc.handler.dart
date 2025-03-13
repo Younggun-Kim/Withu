@@ -75,7 +75,9 @@ extension LoginBlocHandler on LoginBloc {
     LoginEmailSignUpPressed event,
     Emitter<LoginState> emit,
   ) async {
-    loginUseCase.storeEmailSignUpData();
+    // TODO:
+    // loginUseCase.storeEmailSignUpData();
+
     getItAppRouter.push(TermRoute());
   }
 }

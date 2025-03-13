@@ -211,7 +211,7 @@ class _SignUpAndLoginBtn extends StatelessWidget {
             context.read<LoginBloc>().add(LoginEmailSignUpPressed());
           },
           child: Text(
-            '회원가입',
+            StringRes.signUp.tr,
             style: context.textTheme.bodyMediumBold?.copyWith(
               color: ColorName.text,
             ),
@@ -225,7 +225,7 @@ class _SignUpAndLoginBtn extends StatelessWidget {
             );
           },
           child: Text(
-            '아이디찾기',
+            StringRes.findId.tr,
             style: context.textTheme.bodyMediumBold?.copyWith(
               color: ColorName.text,
             ),

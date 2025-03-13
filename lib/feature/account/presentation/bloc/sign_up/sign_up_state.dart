@@ -50,18 +50,26 @@ extension SignUpStateEx on SignUpState {
 
   /// 버튼 Enabled 여부
   bool get isEnabledSubmitBtn {
-    return name.isValid() &&
+    logger.i('${args?.userType} ${args?.businessNum} ${args?.companyName}');
+    final isSns = args?.signUpType.isSns == true;
+
+    final isSnsValid =
+        name.isValid() &&
         birthDate.isValid() &&
         !gender.isNone &&
         phone.isValid() &&
-        isPhoneVerify &&
-        email.isValid() &&
-        password.isValid();
+        isPhoneVerify;
+
+    if (isSns) {
+      return isSnsValid;
+    }
+
+    return isSnsValid && email.isValid() && password.isValid();
   }
 
   CompanySignUpEntity toEntity() {
     return CompanySignUpEntity(
-      accountType: args?.accountType ?? UserType.none,
+      accountType: args?.userType ?? UserType.none,
       name: name.value,
       birthDate: birthDate.formattedDate,
       gender: gender,

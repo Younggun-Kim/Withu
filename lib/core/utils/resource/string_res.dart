@@ -106,6 +106,7 @@ enum StringRes {
   selfInterestAreaInfo,
   selfProfileRegister,
   selfProfilePhotoUpload,
+  findId,
 }
 
 extension StringResEx on StringRes {

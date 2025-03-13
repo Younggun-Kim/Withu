@@ -88,17 +88,33 @@ class _SignUpPageContent extends StatelessWidget {
                   _FieldName.gender(),
                   _GenderBtnRow(),
                   const SizedBox(height: 20),
-                  _FieldName.email(),
-                  _EmailInput(),
-                  const SizedBox(height: 20),
+                  Visibility(
+                    visible: state.args?.signUpType.isEmail == true,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _FieldName.email(),
+                        _EmailInput(),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+
                   _FieldName.phone(),
                   PhoneAuthWidget(),
                   const SizedBox(height: 20),
-                  _FieldName.password(),
-                  _PasswordInput(),
-                  _PasswordDescription1(),
-                  _PasswordDescription2(),
-                  const SizedBox(height: 20),
+                  Visibility(
+                    visible: state.args?.signUpType.isEmail == true,
+                    child: Column(
+                      children: [
+                        _FieldName.password(),
+                        _PasswordInput(),
+                        _PasswordDescription1(),
+                        _PasswordDescription2(),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
                   _FieldName.channel(),
                   const SizedBox(height: 11),
                   _ChannelBtn(),

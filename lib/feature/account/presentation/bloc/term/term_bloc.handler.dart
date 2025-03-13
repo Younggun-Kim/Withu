@@ -35,14 +35,16 @@ extension TermBlocHandler on TermBloc {
   }
 
   void _moveUserNextPage() async {
-    final storedData = await accountRepo.getStoredSnsSignUpData();
+    // TODO;
+    final signUpMethod = SignUpMethodType.email;
+    final tempToken = '';
     getItAppRouter.push(
       SignUpRoute(
         args: SignUpPageArgs.user(
+          signUpType: signUpMethod,
+          tempToken: tempToken,
           isAgreeLocation: state.locationTerm,
           isAgreeMarketing: state.marketingTerm,
-          signUpType: storedData.type,
-          tempToken: storedData.tempToken,
         ),
       ),
     );
