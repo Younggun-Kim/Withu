@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
+import 'package:withu/feature/account/account.dart';
 
 part 'refresh_res_dto.freezed.dart';
 
@@ -25,6 +26,15 @@ extension RefreshResDtoEx on RefreshResDto {
   bool get hasTokens =>
       data?.accessToken.isNotEmpty == true &&
       data?.refreshToken.isNotEmpty == true;
+
+  TokenListDto toTokens() {
+    return TokenListDto(
+      accessToken: data?.accessToken ?? '',
+      refreshToken: data?.refreshToken ?? '',
+      expiresIn: 3600,
+      tokenType: 'Bearer',
+    );
+  }
 }
 
 extension RefreshResDtoMock on RefreshResDto {

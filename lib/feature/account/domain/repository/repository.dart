@@ -19,7 +19,7 @@ abstract class AccountRepository {
   Future logout();
 
   /// 토큰 리프레시
-  FutureOr<bool> refreshToken();
+  FutureOr<RefreshResDto> refreshToken();
 
   /// 이메일 로그인 토큰 요청
   FutureOr<EmailLoginResDto> emailLogin({required EmailLoginReqData dto});

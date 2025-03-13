@@ -20,23 +20,23 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 토큰 리프레시
   @override
-  FutureOr<bool> refreshToken() async {
+  FutureOr<RefreshResDto> refreshToken() async {
     final refreshToken = await accountStorage.getRefreshToken();
     if (refreshToken.isNotEmpty) {
-      final response = await accountApi.refresh(refreshToken);
-      if (response.hasTokens) {
-        storeTokens(
-          response.data?.accessToken ?? '',
-          response.data?.refreshToken ?? '',
-        );
-
-        return true;
-      }
+      return await accountApi.refresh(refreshToken);
+      // if (response.hasTokens) {
+      //   storeTokens(
+      //     response.data?.accessToken ?? '',
+      //     response.data?.refreshToken ?? '',
+      //   );
+      //
+      //   return true;
+      // }
     }
 
     /// 리프레시 실패라면 저장된 토큰 삭제
-    accountStorage.reset();
-    return false;
+    // accountStorage.reset();
+    return RefreshResDtoMock.error();
   }
 
   /// 로그아웃

@@ -9,7 +9,14 @@ class LoginUseCaseImpl implements LoginUseCase {
   /// 토큰 리프레시
   @override
   Future<bool> refresh() async {
-    return await accountRepo.refreshToken();
+    final response = await accountRepo.refreshToken();
+    final tokens = response.toTokens();
+
+    if (!tokens.hasToken) {
+      return false;
+    }
+
+    return loginProcess(signUpMethod: SignUpMethodType.none, tokens: tokens);
   }
 
   /// 로그아웃
