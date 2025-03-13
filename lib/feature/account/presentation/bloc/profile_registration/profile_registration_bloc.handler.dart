@@ -19,4 +19,12 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
   ) {
     emit(state.copyWith(introduction: event.introduction));
   }
+
+  /// 필드 선택
+  void _onProfileRegistrationFieldSelected(
+    ProfileRegistrationFieldSelected event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    emit(state.copyWith(field: event.field));
+  }
 }

@@ -13,3 +13,10 @@ class ProfileRegistrationIntroductionInputted extends ProfileRegistrationEvent {
 
   IntroductionValue get introduction => IntroductionValue(value);
 }
+
+/// 필드 선택
+class ProfileRegistrationFieldSelected extends ProfileRegistrationEvent {
+  final FieldType field;
+
+  ProfileRegistrationFieldSelected({required this.field});
+}

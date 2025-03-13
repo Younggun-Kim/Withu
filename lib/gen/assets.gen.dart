@@ -53,8 +53,15 @@ class $AssetsImagesGen {
   SvgGenImage get chevronLeft =>
       const SvgGenImage('assets/images/chevron-left.svg');
 
+  /// File path: assets/images/clapperboard.svg
+  SvgGenImage get clapperboard =>
+      const SvgGenImage('assets/images/clapperboard.svg');
+
   /// File path: assets/images/eye.svg
   SvgGenImage get eye => const SvgGenImage('assets/images/eye.svg');
+
+  /// File path: assets/images/flower.svg
+  SvgGenImage get flower => const SvgGenImage('assets/images/flower.svg');
 
   /// File path: assets/images/google_login_btn.svg
   SvgGenImage get googleLoginBtn =>
@@ -148,6 +155,9 @@ class $AssetsImagesGen {
   SvgGenImage get usersRound =>
       const SvgGenImage('assets/images/users-round.svg');
 
+  /// File path: assets/images/utensils.svg
+  SvgGenImage get utensils => const SvgGenImage('assets/images/utensils.svg');
+
   /// File path: assets/images/venus.svg
   SvgGenImage get venus => const SvgGenImage('assets/images/venus.svg');
 
@@ -163,7 +173,9 @@ class $AssetsImagesGen {
         checkBoxOn,
         chevronDown,
         chevronLeft,
+        clapperboard,
         eye,
+        flower,
         googleLoginBtn,
         guide1,
         guide2,
@@ -189,6 +201,7 @@ class $AssetsImagesGen {
         plus,
         userDefault,
         usersRound,
+        utensils,
         venus
       ];
 }

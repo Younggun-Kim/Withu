@@ -9,6 +9,8 @@ class ProfileRegistrationState extends BaseBlocState
     @Default(ProfileRegistrationStep.first) ProfileRegistrationStep currentStep,
 
     @Default(IntroductionValue()) IntroductionValue introduction,
+
+    @Default(FieldType.none) FieldType field,
   }) = _ProfileRegistrationState;
 }
 
@@ -18,7 +20,7 @@ extension ProfileRegistrationStateEx on ProfileRegistrationState {
       case ProfileRegistrationStep.introduction:
         return introduction.isValid();
       case ProfileRegistrationStep.field:
-        return false;
+        return !field.isNone;
       case ProfileRegistrationStep.portfolio:
         return false;
       case ProfileRegistrationStep.career:

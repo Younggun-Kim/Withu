@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/domain/type/field_type.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -138,7 +139,7 @@ class _StepPageView extends StatefulWidget {
 class _StepPageViewState extends State<_StepPageView> {
   final Map<ProfileRegistrationStep, Widget> pageMap = {
     ProfileRegistrationStep.introduction: _IntroductionContent(),
-    ProfileRegistrationStep.field: Text('2'),
+    ProfileRegistrationStep.field: _FieldContent(),
     ProfileRegistrationStep.portfolio: Text('3'),
     ProfileRegistrationStep.career: Text('4'),
     ProfileRegistrationStep.area: Text('5'),
@@ -276,6 +277,92 @@ class _IntroductionContentContent extends State<_IntroductionContent> {
           ),
         );
       },
+    );
+  }
+}
+
+/// 전문 분야
+class _FieldContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileRegistrationBlocBuilder(
+      builder: (context, state) {
+        return Container(
+          margin: EdgeInsets.only(top: 27),
+          padding: CustomEdgeInsets.horizontalPadding(),
+          child: Column(
+            children:
+                FieldType.valuesWithoutNone
+                    .map(
+                      (field) => _FieldItem(
+                        field: field,
+                        isSelected: state.field == field,
+                        onTap: () {
+                          context.read<ProfileRegistrationBloc>().add(
+                            ProfileRegistrationFieldSelected(field: field),
+                          );
+                        },
+                      ),
+                    )
+                    .toList(),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _FieldItem extends StatelessWidget {
+  final FieldType field;
+
+  final bool isSelected;
+
+  final Function() onTap;
+
+  const _FieldItem({
+    required this.field,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bgColor = isSelected ? ColorName.secondary : Colors.white;
+    final textColor = isSelected ? Colors.white : ColorName.text;
+
+    return InkWell(
+      onTap: onTap,
+      splashColor: Colors.transparent,
+      child: Container(
+        height: 50,
+        margin: EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: ColorName.tertiary),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            field.toAsset()?.svg(
+                  colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
+                ) ??
+                SizedBox(),
+            const SizedBox(width: 10),
+            SizedBox(
+              width: 113,
+              child: Text(
+                field.toString(),
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyMediumBold?.copyWith(
+                  color: textColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

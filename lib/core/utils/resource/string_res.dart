@@ -9,6 +9,7 @@ enum StringRes {
   catering,
   foodStyling,
   florist,
+  flower,
   numberOfRecruits,
   enterTitle,
   workDetail,
