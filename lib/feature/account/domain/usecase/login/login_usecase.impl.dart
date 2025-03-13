@@ -46,12 +46,12 @@ class LoginUseCaseImpl implements LoginUseCase {
       return false;
     }
 
-    return loginProcess(tokens: response.data?.tokens);
+    return loginProcess(tokens: response.tokens);
   }
 
   /// 애플 로그인 요청
   @override
-  FutureOr<bool> requestSnsLogin(String token) async {
+  FutureOr<SnsLoginResValue> requestSnsLogin(String token) async {
     final response = await accountRepo.requestAppleLogin(
       AppleLoginReqDto(idToken: token, firstName: '', lastName: ''),
     );
@@ -61,19 +61,16 @@ class LoginUseCaseImpl implements LoginUseCase {
       isLoggedIn = await loginProcess(tokens: tokens);
     }
 
-    if (!isLoggedIn) {
-      /// 회원가입 전달할 값 저장
-      getItGlobalBloc.add(
-        GlobalSignUpArgsStored(
-          args: SignUpArgsValue(
-            signUpMethod: SignUpMethodType.apple,
-            tempToken: response.data?.tempToken,
-          ),
-        ),
-      );
-    }
+    return SnsLoginResValue(
+      isLoggedIn: isLoggedIn,
+      tempToken: response.data?.tempToken ?? '',
+    );
+  }
 
-    return isLoggedIn;
+  /// FCM 등록
+  @override
+  Future<FcmRegistrationResDto> registerFcmToken(UserType userType) async {
+    return await accountRepo.postFcmTokenRegistration(userType: userType);
   }
 }
 
@@ -96,7 +93,7 @@ extension LoginUseCaseEx on LoginUseCase {
     }
 
     /// 3. FCM 등록
-    await accountRepo.postFcmTokenRegistration(userType: userType);
+    await registerFcmToken(userType);
 
     /// 4. 홈으로 이동
     return true;

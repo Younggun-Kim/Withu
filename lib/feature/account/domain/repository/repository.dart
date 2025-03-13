@@ -19,7 +19,7 @@ abstract class AccountRepository {
   FutureOr<RefreshResDto> refreshToken();
 
   /// 이메일 로그인 토큰 요청
-  FutureOr<EmailLoginResDto> emailLogin({required EmailLoginReqData dto});
+  FutureOr<LoginResDto> emailLogin({required EmailLoginReqData dto});
 
   /// 회사 회원가입 요청
   FutureOr<EmailSignUpResDto> requestCompanySignUp(EmailSignUpReqDto dto);
@@ -38,10 +38,7 @@ abstract class AccountRepository {
   FutureOr<bool> changePw(ChangePwReqDto dto);
 
   /// SNS 회원가입 하기
-  FutureOr<SnsSignUpResDto> postSnsSignUp(
-    SnsSignUpReqDto dto,
-    UserType userType,
-  );
+  FutureOr<LoginResDto> postSnsSignUp(SnsSignUpReqDto dto, UserType userType);
 
   /// 내 정보 조회
   FutureOr<MyProfileResDto> getMyProfile();

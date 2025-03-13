@@ -74,30 +74,23 @@ class AccountApiImpl extends AccountApi {
 
   /// 이메일 로그인 API
   @override
-  FutureOr<EmailLoginResDto> postEmailLogin({
-    required EmailLoginReqData dto,
-  }) async {
+  FutureOr<LoginResDto> postEmailLogin({required EmailLoginReqData dto}) async {
     return network.dio
         .post(AccountApiPathType.emailLogin.fullPath, data: dto.toJson())
         .then(
-          (response) => EmailLoginResDto.fromJson(
+          (response) => LoginResDto.fromJson(
             response.data,
-            (json) => EmailLoginResData.fromJson(json as Map<String, dynamic>),
+            (json) => LoginResData.fromJson(json as Map<String, dynamic>),
           ),
         )
-        .catchError((error) {
-          if (error is DioException) {
-            return EmailLoginResDto.fromJson(
-              error.response?.data,
-              (json) =>
-                  EmailLoginResData.fromJson(json as Map<String, dynamic>),
-            );
-          }
-
-          return EmailLoginResDtoMock.error();
-        })
+        .catchError(
+          (error) => LoginResDto.fromJson(
+            error.response?.data,
+            (json) => LoginResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
         .catchError((_) {
-          return EmailLoginResDtoMock.error();
+          return BaseResponseDtoMock.error<LoginResData>();
         });
   }
 
@@ -215,7 +208,7 @@ class AccountApiImpl extends AccountApi {
   }
 
   @override
-  FutureOr<SnsSignUpResDto> postSnsSignUp({
+  FutureOr<LoginResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
     required UserType userType,
   }) async {
@@ -225,18 +218,18 @@ class AccountApiImpl extends AccountApi {
           data: dto.toJson(),
         )
         .then(
-          (response) => SnsSignUpResDto.fromJson(
+          (response) => LoginResDto.fromJson(
             response.data,
-            (json) => SnsSignUpResData.fromJson(json as Map<String, dynamic>),
+            (json) => LoginResData.fromJson(json as Map<String, dynamic>),
           ),
         )
         .catchError((error) {
-          return SnsSignUpResDto.fromJson(
+          return LoginResDto.fromJson(
             error.response?.data,
-            (json) => SnsSignUpResData.fromJson(json as Map<String, dynamic>),
+            (json) => LoginResData.fromJson(json as Map<String, dynamic>),
           );
         })
-        .catchError((_) => BaseResponseDtoMock.error<SnsSignUpResData>());
+        .catchError((_) => BaseResponseDtoMock.error<LoginResData>());
   }
 
   /// Staff 토큰 등록

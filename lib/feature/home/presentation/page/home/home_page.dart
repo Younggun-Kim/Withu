@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        HomeBlocProvider(create: (context) => getIt()),
+        HomeBlocProvider(create: (context) => getIt()..add(HomeInitialized())),
         ProfileBlocProvider(create: (context) => getIt()),
       ],
       child: HomeBlocBuilder(

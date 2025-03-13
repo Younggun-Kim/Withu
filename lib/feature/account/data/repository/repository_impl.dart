@@ -38,9 +38,7 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 로그인 API 호출
   @override
-  FutureOr<EmailLoginResDto> emailLogin({
-    required EmailLoginReqData dto,
-  }) async {
+  FutureOr<LoginResDto> emailLogin({required EmailLoginReqData dto}) async {
     return await accountApi.postEmailLogin(dto: dto);
   }
 
@@ -66,11 +64,10 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// Sns 회원가입
   @override
-  FutureOr<SnsSignUpResDto> postSnsSignUp(
+  FutureOr<LoginResDto> postSnsSignUp(
     SnsSignUpReqDto dto,
     UserType userType,
   ) async {
-    // TODO:
     return await accountApi.postSnsSignUp(dto: dto, userType: userType);
   }
 

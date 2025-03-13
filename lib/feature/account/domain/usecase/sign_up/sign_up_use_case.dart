@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:withu/core/types/login_type.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 import 'package:withu/shared/dialogs/toast/toast.dart';
 
 part 'sign_up_use_case_impl.dart';

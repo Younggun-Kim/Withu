@@ -9,7 +9,9 @@ void initHomeDomainDI() {
 }
 
 void initHomePresentationDI() {
-  getIt.registerFactory<HomeBloc>(() => HomeBloc(loginUseCase: getIt()));
+  getIt.registerFactory<HomeBloc>(
+    () => HomeBloc(loginUseCase: getIt(), getUserProfileUseCase: getIt()),
+  );
   getIt.registerFactory<ProfileBloc>(
     () => ProfileBloc(profileUseCase: getIt()),
   );

@@ -107,7 +107,7 @@ class _PageIndicator extends StatelessWidget {
     return ProfileRegistrationBlocBuilder(
       builder: (context, state) {
         final pages = ProfileRegistrationStep.getValuesWith(
-          getIt<UserType>().iSCompany,
+          getItGlobalBloc.state.isCompanyUser,
         );
         return Row(
           children: List.generate(
@@ -202,7 +202,7 @@ class _StepPageViewState extends State<_StepPageView> {
 
   List<Widget> _getPages() {
     return ProfileRegistrationStep.getValuesWith(
-      getIt<UserType>().iSCompany,
+      getItGlobalBloc.state.isCompanyUser,
     ).map((type) => pageMap[type]).whereType<Widget>().toList();
   }
 }

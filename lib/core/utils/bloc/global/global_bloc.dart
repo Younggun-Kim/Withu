@@ -20,6 +20,6 @@ typedef GlobalBlocListener = BlocListener<GlobalBloc, GlobalState>;
 class GlobalBloc extends BaseBloc<GlobalEvent, GlobalState> {
   GlobalBloc() : super(GlobalState(status: BaseBlocStatus.initial())) {
     on<GlobalSignUpArgsStored>(_onGlobalSignUpArgsStored);
-    on<GlobalSignUpArgsDeleted>(_onGlobalSignUpArgsDeleted);
+    on<GlobalUserInfoStored>(_onGlobalUserInfoStored);
   }
 }

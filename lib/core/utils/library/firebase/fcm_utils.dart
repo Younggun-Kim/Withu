@@ -51,9 +51,14 @@ class FcmUtils {
   }
 
   static void listenTokenRefresh() {
-    FirebaseMessaging.instance.onTokenRefresh.listen((String newToken) {
+    FirebaseMessaging.instance.onTokenRefresh.listen((String newToken) async {
       // TODO: 로그인 여부 체크하고, User 정보에 따라 토큰 저장하는 API 가 필요
       logger.i("FCM Token Updated: $newToken");
+      // final useType = getItGlobalBloc.state.
+      // if (getIt.isRegistered<LoginUseCase>() && ) {
+      //   final useCase = getIt<LoginUseCase>();
+      //   await useCase.registerFcmToken(userType)
+      // }
     });
   }
 

@@ -1,6 +1,5 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-
 import 'presentation/bloc/change_pw/change_pw_bloc.dart';
 
 void initAccountDataInjections() {
@@ -20,9 +19,6 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<SignUpUseCase>(
     SignUpUseCaseImpl(accountRepo: getIt(), loginUseCase: getIt()),
   );
-  getIt.registerSingleton<EmailLoginUseCase>(
-    EmailLoginUseCaseImpl(accountRepo: getIt()),
-  );
   getIt.registerSingleton<FindAccountUseCase>(
     FindAccountUseCaseImpl(accountRepo: getIt()),
   );
@@ -31,6 +27,9 @@ void initAccountDomainInjections() {
   );
   getIt.registerLazySingleton<ProfileRegistrationUseCase>(
     () => ProfileRegistrationUseCaseImpl(accountRepo: getIt()),
+  );
+  getIt.registerLazySingleton<GetUserProfileUseCase>(
+    () => GetUserProfileUseCaseImpl(repo: getIt()),
   );
 }
 

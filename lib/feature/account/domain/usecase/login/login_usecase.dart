@@ -23,5 +23,8 @@ abstract class LoginUseCase {
   });
 
   /// 애플 로그인 요청
-  FutureOr<bool> requestSnsLogin(String token);
+  FutureOr<SnsLoginResValue> requestSnsLogin(String token);
+
+  /// FCM 등록
+  Future<FcmRegistrationResDto> registerFcmToken(UserType userType);
 }

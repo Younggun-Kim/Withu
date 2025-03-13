@@ -53,17 +53,28 @@ extension LoginBlocHandler on LoginBloc {
 
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final isLoggedIn = await loginUseCase.requestSnsLogin(identifyToken);
+    final response = await loginUseCase.requestSnsLogin(identifyToken);
 
-    emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isLoggedIn)));
+    emit(
+      state.copyWith(status: BaseBlocStatus.fromSuccess(response.isLoggedIn)),
+    );
 
-    moveAppleNextPage(isLoggedIn);
+    moveAppleNextPage(response);
   }
 
-  void moveAppleNextPage(bool isLoggedIn) {
-    if (isLoggedIn) {
+  void moveAppleNextPage(SnsLoginResValue value) {
+    if (value.isLoggedIn) {
       AppRouterEx.moveHome();
     } else {
+      /// 회원가입 전달할 값 저장
+      getItGlobalBloc.add(
+        GlobalSignUpArgsStored(
+          args: SignUpArgsValue(
+            signUpMethod: SignUpMethodType.apple,
+            tempToken: value.tempToken,
+          ),
+        ),
+      );
       getItAppRouter.push(TermRoute());
     }
   }

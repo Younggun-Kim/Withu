@@ -20,13 +20,7 @@ void initRouterInjections() {
   getIt.registerSingleton<AppRouter>(AppRouter());
 }
 
-/// 로그인 후 UserType 주입
-void injectUserType(UserType userType) {
-  getIt.registerSingleton<UserType>(userType);
-}
-
 Future<void> initInjections() async {
-  injectUserType(UserType.company);
   initRouterInjections();
   initNetworkInjections();
   getIt.registerLazySingleton<GlobalBloc>(() => GlobalBloc());

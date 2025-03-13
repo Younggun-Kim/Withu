@@ -11,11 +11,8 @@ extension GlobalBlocHandler on GlobalBloc {
     emit(state.copyWith(signUpArgs: event.args));
   }
 
-  /// 회원가입에 전달한 Args 삭제
-  void _onGlobalSignUpArgsDeleted(
-    GlobalSignUpArgsDeleted event,
-    GlobalEmitter emit,
-  ) {
-    emit(state.copyWith(signUpArgs: SignUpArgsValue()));
+  /// UserType 저장
+  void _onGlobalUserInfoStored(GlobalUserInfoStored event, GlobalEmitter emit) {
+    emit(state.copyWith(profileInfo: event.profileInfo));
   }
 }

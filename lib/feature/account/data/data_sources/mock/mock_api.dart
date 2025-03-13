@@ -70,16 +70,14 @@ class AccountMockApi extends AccountApiImpl {
 
   /// 이메일 로그인 API
   @override
-  FutureOr<EmailLoginResDto> postEmailLogin({
-    required EmailLoginReqData dto,
-  }) async {
+  FutureOr<LoginResDto> postEmailLogin({required EmailLoginReqData dto}) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
       AccountApiPathType.emailLogin.fullPath,
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        EmailLoginResDtoMock.success().toJson((data) => data.toJson()),
+        LoginResDtoMock.success().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );
@@ -179,7 +177,7 @@ class AccountMockApi extends AccountApiImpl {
   }
 
   @override
-  FutureOr<SnsSignUpResDto> postSnsSignUp({
+  FutureOr<LoginResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
     required UserType userType,
   }) async {
@@ -189,7 +187,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        SnsSignUpResDtoMock.success().toJson((data) => data.toJson()),
+        LoginResDtoMock.success().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );

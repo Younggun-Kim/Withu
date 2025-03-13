@@ -5,7 +5,7 @@ import 'package:withu/gen/assets.gen.dart';
 /// 계정 타입
 @JsonEnum(valueField: 'serverKey')
 enum UserType {
-  none(serverKey: ''),
+  none(serverKey: 'AUTO'),
 
   /// 고용주
   company(serverKey: 'COMPANY'),

@@ -43,7 +43,7 @@ abstract class AccountApi {
   });
 
   /// 로그인 API
-  FutureOr<EmailLoginResDto> postEmailLogin({required EmailLoginReqData dto});
+  FutureOr<LoginResDto> postEmailLogin({required EmailLoginReqData dto});
 
   /// 회사 회원가입 요청
   FutureOr<EmailSignUpResDto> requestCompanySignUp({
@@ -65,7 +65,7 @@ abstract class AccountApi {
   FutureOr<ChangePwResDto> postChangePw({required ChangePwReqDto dto});
 
   /// SnS 회원가입
-  FutureOr<SnsSignUpResDto> postSnsSignUp({
+  FutureOr<LoginResDto> postSnsSignUp({
     required SnsSignUpReqDto dto,
     required UserType userType,
   });
