@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:withu/core/core.dart';
 
 part 'career_date_value.freezed.dart';
@@ -10,5 +11,9 @@ class CareerDateValue with _$CareerDateValue {
 
   const CareerDateValue._();
 
-  bool isValid() => RegExUtil.birthDatePattern.hasMatch(value);
+  bool isValid() => RegExUtil.ymdSlashPattern.hasMatch(value);
+
+  DateTime getDate() {
+    return DateFormat('yyyy/MM/dd').parse(value);
+  }
 }

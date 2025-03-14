@@ -122,13 +122,24 @@ class _NameInputState extends State<_NameInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomBorderInput.basic(
-      context: context,
-      controller: _controller,
-      focusNode: _focusNode,
-      hintText: StringRes.inputCareerName.tr,
-      textInputAction: TextInputAction.next,
-      onChanged: (String text) {},
+    return ProfileAddBlocListener(
+      listener: (context, state) {
+        if (state.careerFormData.name != _controller.text) {
+          _controller.text = state.careerFormData.name.value;
+        }
+      },
+      child: BottomBorderInput.basic(
+        context: context,
+        controller: _controller,
+        focusNode: _focusNode,
+        hintText: StringRes.inputCareerName.tr,
+        textInputAction: TextInputAction.next,
+        onChanged: (String text) {
+          context.read<ProfileAddBloc>().add(
+            ProfileAddFormNameInputted(value: text),
+          );
+        },
+      ),
     );
   }
 }
@@ -173,13 +184,24 @@ class _ContentInputState extends State<_ContentInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomBorderInput.basic(
-      context: context,
-      controller: _controller,
-      focusNode: _focusNode,
-      hintText: StringRes.inputMax20Chars.tr,
-      textInputAction: TextInputAction.next,
-      onChanged: (String text) {},
+    return ProfileAddBlocListener(
+      listener: (context, state) {
+        if (state.careerFormData.content.value != _controller.text) {
+          _controller.text = state.careerFormData.content.value;
+        }
+      },
+      child: BottomBorderInput.basic(
+        context: context,
+        controller: _controller,
+        focusNode: _focusNode,
+        hintText: StringRes.inputMax20Chars.tr,
+        textInputAction: TextInputAction.next,
+        onChanged: (String text) {
+          context.read<ProfileAddBloc>().add(
+            ProfileAddFormContentInputted(value: text),
+          );
+        },
+      ),
     );
   }
 }
@@ -224,13 +246,24 @@ class _CompanyNameInputState extends State<_CompanyNameInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomBorderInput.basic(
-      context: context,
-      controller: _controller,
-      focusNode: _focusNode,
-      hintText: StringRes.inputCompanyName.tr,
-      textInputAction: TextInputAction.next,
-      onChanged: (String text) {},
+    return ProfileAddBlocListener(
+      listener: (context, state) {
+        if (state.careerFormData.companyName.value != _controller.text) {
+          _controller.text = state.careerFormData.companyName.value;
+        }
+      },
+      child: BottomBorderInput.basic(
+        context: context,
+        controller: _controller,
+        focusNode: _focusNode,
+        hintText: StringRes.inputCompanyName.tr,
+        textInputAction: TextInputAction.next,
+        onChanged: (String text) {
+          context.read<ProfileAddBloc>().add(
+            ProfileAddFormCompanyInputted(value: text),
+          );
+        },
+      ),
     );
   }
 }
@@ -251,12 +284,26 @@ class _CompanyNameRow extends StatelessWidget {
 class _StartDateRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: _CareerFormFieldName.startDate()),
-        const SizedBox(width: 8),
-        Flexible(flex: 5, child: _DatePicker()),
-      ],
+    return ProfileAddBlocBuilder(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(child: _CareerFormFieldName.startDate()),
+            const SizedBox(width: 8),
+            Flexible(
+              flex: 5,
+              child: _DatePicker(
+                date: state.careerFormData.startDate.value,
+                onChanged: (DateTime newDate) {
+                  context.read<ProfileAddBloc>().add(
+                    ProfileAddFormStartDateChanged(value: newDate),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -264,28 +311,54 @@ class _StartDateRow extends StatelessWidget {
 class _EndDateRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: _CareerFormFieldName.endDate()),
-        const SizedBox(width: 8),
-        Flexible(flex: 5, child: _DatePicker()),
-      ],
+    return ProfileAddBlocBuilder(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(child: _CareerFormFieldName.endDate()),
+            const SizedBox(width: 8),
+            Flexible(
+              flex: 5,
+              child: _DatePicker(
+                date: state.careerFormData.endDate.value,
+                onChanged: (DateTime newDate) {
+                  context.read<ProfileAddBloc>().add(
+                    ProfileAddFormEndDateChanged(value: newDate),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
 
 class _DatePicker extends StatelessWidget {
+  final String date;
+
+  final Function(DateTime) onChanged;
+
+  const _DatePicker({required this.date, required this.onChanged});
+
   @override
   Widget build(BuildContext context) {
+    final bool dateIsEmpty = date.isEmpty;
+    final text = dateIsEmpty ? 'YYYY/MM/DD' : date;
+    final textColor = dateIsEmpty ? ColorName.secondary : ColorName.text;
     return InkWell(
-      onTap: () {
-        showDatePicker(
+      onTap: () async {
+        final newDate = await showDatePicker(
           context: context,
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           firstDate: DateTime(1960),
           lastDate: DateTime(20500),
           currentDate: DateTime.now(),
         );
+        if (newDate != null) {
+          onChanged(newDate);
+        }
       },
       child: Container(
         width: double.infinity,
@@ -297,7 +370,12 @@ class _DatePicker extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(child: Text('12312321')),
+            Expanded(
+              child: Text(
+                text,
+                style: context.textTheme.bodySmall?.copyWith(color: textColor),
+              ),
+            ),
             const SizedBox(width: 20),
             Assets.images.calendar.svg(),
           ],

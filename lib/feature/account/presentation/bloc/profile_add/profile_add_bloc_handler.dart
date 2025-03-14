@@ -136,4 +136,95 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
   ) {
     emit(state.copyWith(careerFormData: event.entity, hasNewCareer: true));
   }
+
+  /// 경력 이름 입력
+  void _onProfileAddFormNameInputted(
+    ProfileAddFormNameInputted event,
+    ProfileAddEmitter emit,
+  ) {
+    final newFormData = state.careerFormData.copyWith(name: event.name);
+    emit(
+      state.copyWith(
+        careerFormData: newFormData,
+        careers: _getCareersWithCareerForm(newFormData),
+      ),
+    );
+  }
+
+  void _onProfileAddFormContentInputted(
+    ProfileAddFormContentInputted event,
+    ProfileAddEmitter emit,
+  ) {
+    final newFormData = state.careerFormData.copyWith(content: event.content);
+
+    emit(
+      state.copyWith(
+        careerFormData: newFormData,
+        careers: _getCareersWithCareerForm(newFormData),
+      ),
+    );
+  }
+
+  void _onProfileAddFormCompanyInputted(
+    ProfileAddFormCompanyInputted event,
+    ProfileAddEmitter emit,
+  ) {
+    final newFormData = state.careerFormData.copyWith(
+      companyName: event.company,
+    );
+    emit(
+      state.copyWith(
+        careerFormData: newFormData,
+        careers: _getCareersWithCareerForm(newFormData),
+      ),
+    );
+  }
+
+  void _onProfileAddFormStartDateChanged(
+    ProfileAddFormStartDateChanged event,
+    ProfileAddEmitter emit,
+  ) {
+    CareerEntity newFormData = state.careerFormData.copyWith(
+      startDate: event.date,
+    );
+
+    if (newFormData.isAfter() || newFormData.isEmptyEndDate) {
+      newFormData = newFormData.copyWith(endDate: event.date);
+    }
+
+    emit(
+      state.copyWith(
+        careerFormData: newFormData,
+        careers: _getCareersWithCareerForm(newFormData),
+      ),
+    );
+  }
+
+  void _onProfileAddFormEndDateChanged(
+    ProfileAddFormEndDateChanged event,
+    ProfileAddEmitter emit,
+  ) {
+    CareerEntity newFormData = state.careerFormData.copyWith(
+      endDate: event.date,
+    );
+
+    if (newFormData.isBefore()) {
+      newFormData = newFormData.copyWith(startDate: event.date);
+    }
+    emit(
+      state.copyWith(
+        careerFormData: newFormData,
+        careers: _getCareersWithCareerForm(newFormData),
+      ),
+    );
+  }
+
+  /// CareerForm이 반영된 Careers 얻기
+  List<CareerEntity> _getCareersWithCareerForm(CareerEntity newCareer) {
+    return [...state.careers]
+        .map(
+          (oldCareer) => oldCareer.id == newCareer.id ? newCareer : oldCareer,
+        )
+        .toList();
+  }
 }

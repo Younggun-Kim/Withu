@@ -4,8 +4,8 @@ import 'package:withu/core/utils/resource/string_res.dart';
 enum ProfileAddStep {
   introduction(isOnlyStaff: false),
   field(isOnlyStaff: false),
-  portfolio(isOnlyStaff: false),
   career(isOnlyStaff: true),
+  portfolio(isOnlyStaff: false),
   area(isOnlyStaff: true),
   profile(isOnlyStaff: false);
 

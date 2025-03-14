@@ -48,7 +48,7 @@ extension ProfileAddStateEx on ProfileAddState {
       case ProfileAddStep.portfolio:
         return portfolioImages.isNotEmpty;
       case ProfileAddStep.career:
-        return false;
+        return careers.isNotEmpty;
       case ProfileAddStep.area:
         return false;
       case ProfileAddStep.profile:

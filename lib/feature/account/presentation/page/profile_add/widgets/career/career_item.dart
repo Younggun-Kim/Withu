@@ -9,7 +9,8 @@ class _CareerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String name = entity.name.isValid() ? entity.name.value : '경력 이름';
+    final String name =
+        entity.name.value.isNotEmpty ? entity.name.value : '경력 이름';
 
     final String content =
         entity.content.isValid() ? entity.content.value : '경력 내용을 입력해주세요.';
@@ -18,7 +19,7 @@ class _CareerItem extends StatelessWidget {
         entity.startDate.isValid() ? entity.period : 'YYYY/MM/DD-YYYY/MM/DD';
 
     final String company =
-        entity.companyName.isValid() ? entity.companyName.value : '회사명.';
+        entity.companyName.isValid() ? entity.companyName.value : '회사명';
 
     return InkWell(
       splashColor: Colors.transparent,
@@ -35,7 +36,7 @@ class _CareerItem extends StatelessWidget {
                   child: Text(
                     name,
                     style: context.textTheme.bodyMedium?.copyWith(
-                      color: getTextColor(entity.name.isValid()),
+                      color: getTextColor(entity.name.value.isNotEmpty),
                     ),
                   ),
                 ),
@@ -53,7 +54,7 @@ class _CareerItem extends StatelessWidget {
             Text(
               content,
               style: context.textTheme.bodySmall?.copyWith(
-                color: getTextColor(entity.name.isValid()),
+                color: getTextColor(entity.content.isValid()),
               ),
             ),
             Row(
@@ -61,14 +62,14 @@ class _CareerItem extends StatelessWidget {
                 Text(
                   period,
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: getSecondaryTextColor(entity.name.isValid()),
+                    color: getSecondaryTextColor(entity.startDate.isValid()),
                   ),
                 ),
                 Spacer(),
                 Text(
                   company,
                   style: context.textTheme.bodySmall?.copyWith(
-                    color: getSecondaryTextColor(entity.name.isValid()),
+                    color: getSecondaryTextColor(entity.companyName.isValid()),
                   ),
                 ),
               ],

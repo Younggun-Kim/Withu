@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
+import 'package:withu/feature/common/common.dart';
 
 part 'profile_add_event.dart';
 
@@ -38,5 +39,10 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
     on<ProfileAddCareerReordered>(_onProfileAddCareerReordered);
     on<ProfileAddCareerFormClosed>(_onProfileAddCareerFormClosed);
     on<ProfileAddCareerSelected>(_onProfileAddCareerSelected);
+    on<ProfileAddFormNameInputted>(_onProfileAddFormNameInputted);
+    on<ProfileAddFormContentInputted>(_onProfileAddFormContentInputted);
+    on<ProfileAddFormCompanyInputted>(_onProfileAddFormCompanyInputted);
+    on<ProfileAddFormStartDateChanged>(_onProfileAddFormStartDateChanged);
+    on<ProfileAddFormEndDateChanged>(_onProfileAddFormEndDateChanged);
   }
 }

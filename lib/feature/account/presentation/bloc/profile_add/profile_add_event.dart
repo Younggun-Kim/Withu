@@ -81,3 +81,39 @@ class ProfileAddFormNameInputted extends ProfileAddEvent {
 
   NameValue get name => NameValue(value);
 }
+
+/// 경력 내용 입력
+class ProfileAddFormContentInputted extends ProfileAddEvent {
+  final String value;
+
+  ProfileAddFormContentInputted({required this.value});
+
+  CareerContentValue get content => CareerContentValue(value);
+}
+
+/// 경력 회사 이름 입력
+class ProfileAddFormCompanyInputted extends ProfileAddEvent {
+  final String value;
+
+  ProfileAddFormCompanyInputted({required this.value});
+
+  CompanyNameValue get company => CompanyNameValue(value);
+}
+
+/// 경력 시작날짜 입력
+class ProfileAddFormStartDateChanged extends ProfileAddEvent {
+  final DateTime value;
+
+  ProfileAddFormStartDateChanged({required this.value});
+
+  CareerDateValue get date => CareerDateValue(value.format('yyyy/MM/dd'));
+}
+
+/// 경력 종료날짜 입력
+class ProfileAddFormEndDateChanged extends ProfileAddEvent {
+  final DateTime value;
+
+  ProfileAddFormEndDateChanged({required this.value});
+
+  CareerDateValue get date => CareerDateValue(value.format('yyyy/MM/dd'));
+}
