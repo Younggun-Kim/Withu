@@ -117,6 +117,7 @@ enum StringRes {
   inputCompanyName,
   yyyyMMddSlash,
   addCareer,
+  selectHopeArea,
 }
 
 extension StringResEx on StringRes {

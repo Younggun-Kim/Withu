@@ -227,4 +227,33 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
         )
         .toList();
   }
+
+  /// 지역 추가
+  void _onProfileAddAreaAppend(
+    ProfileAddAreaAppend event,
+    ProfileAddEmitter emit,
+  ) {
+    if (state.isAreaFull) {
+      return;
+    }
+    if (state.areas.contains(event.area)) {
+      Toast.showWithNavigatorKey(text: '이미 등록된 지역입니다.');
+      return;
+    }
+    emit(state.copyWith(areas: [...state.areas, event.area]));
+  }
+
+  /// 지역 삭제
+  void _onProfileAddAreaDeleted(
+    ProfileAddAreaDeleted event,
+    ProfileAddEmitter emit,
+  ) {
+    if (state.areas.isEmpty || !state.areas.contains(event.area)) {
+      return;
+    }
+
+    AreaEntities newAreas = [...state.areas];
+    newAreas.removeWhere((area) => area.cd == event.area.cd);
+    emit(state.copyWith(areas: newAreas));
+  }
 }

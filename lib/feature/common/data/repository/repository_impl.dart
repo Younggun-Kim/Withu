@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:withu/feature/common/common.dart';
+import 'package:withu/feature/common/data/data_source/dto/area/area_res_dto.dart';
 
 class CommonRepositoryImpl implements CommonRepository {
   @override
@@ -37,5 +38,23 @@ class CommonRepositoryImpl implements CommonRepository {
       dto: VerifyAuthCodeReqDto(sessionId: sessionId, code: authCode),
     );
     return response.data?.success == true;
+  }
+
+  /// 시/도 조회
+  @override
+  FutureOr<AreaResDto> getSido() async {
+    return await commonApi.getSigo();
+  }
+
+  /// 시/군/구 조회
+  @override
+  FutureOr<AreaResDto> getSgg(String sidoCode) async {
+    return await commonApi.getSgg(sidoCode);
+  }
+
+  /// 읍/면/동 조회
+  @override
+  FutureOr<AreaResDto> getEmd(String sggCode) async {
+    return await commonApi.getEmd(sggCode);
   }
 }

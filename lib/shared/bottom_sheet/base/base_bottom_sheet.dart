@@ -40,7 +40,9 @@ class BaseBottomSheet extends StatelessWidget {
             ),
             backgroundColor: ColorName.tertiary,
             onTap: () {
-              Navigator.pop(context);
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
             },
           ),
         ],

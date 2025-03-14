@@ -5,6 +5,8 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
 import 'package:withu/feature/common/common.dart';
+import 'package:withu/feature/common/domain/entity/area/area_entities.dart';
+import 'package:withu/shared/dialogs/dialogs.dart';
 
 part 'profile_add_event.dart';
 
@@ -44,5 +46,7 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
     on<ProfileAddFormCompanyInputted>(_onProfileAddFormCompanyInputted);
     on<ProfileAddFormStartDateChanged>(_onProfileAddFormStartDateChanged);
     on<ProfileAddFormEndDateChanged>(_onProfileAddFormEndDateChanged);
+    on<ProfileAddAreaAppend>(_onProfileAddAreaAppend);
+    on<ProfileAddAreaDeleted>(_onProfileAddAreaDeleted);
   }
 }

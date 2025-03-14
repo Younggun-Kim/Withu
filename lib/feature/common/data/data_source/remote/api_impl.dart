@@ -79,4 +79,82 @@ class CommonApiImpl implements CommonApi {
           return VerifyAuthCodeResDtoMock.failure();
         });
   }
+
+  /// 시/도 조회
+  @override
+  FutureOr<AreaResDto> getSigo() async {
+    return network.dio
+        .get(CommonApiPathType.sido.fullPath)
+        .then(
+          (response) => AreaResDto.fromJson(
+            response.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError(
+          (error) => AreaResDto.fromJson(
+            error.response?.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<List<AreaResData>>());
+  }
+
+  /// 시/군/구 조회
+  @override
+  FutureOr<AreaResDto> getSgg(String sidoCode) async {
+    return network.dio
+        .get('${CommonApiPathType.sgg.fullPath}?sidoCode=$sidoCode')
+        .then(
+          (response) => AreaResDto.fromJson(
+            response.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError(
+          (error) => AreaResDto.fromJson(
+            error.response?.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<List<AreaResData>>());
+  }
+
+  /// 읍/면/동 조회
+  @override
+  FutureOr<AreaResDto> getEmd(String sggCode) async {
+    return network.dio
+        .get('${CommonApiPathType.emd.fullPath}?sggCode=$sggCode')
+        .then(
+          (response) => AreaResDto.fromJson(
+            response.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError(
+          (error) => AreaResDto.fromJson(
+            error.response?.data,
+            (json) =>
+                (json as List<dynamic>) // `data`는 List 형태로 변환
+                    .map((e) => AreaResData.fromJson(e as Map<String, dynamic>))
+                    .toList(),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<List<AreaResData>>());
+  }
 }

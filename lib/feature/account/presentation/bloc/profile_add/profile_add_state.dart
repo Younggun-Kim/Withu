@@ -25,6 +25,8 @@ class ProfileAddState extends BaseBlocState with _$ProfileAddState {
     /// 새 경력 입력 여부
     @Default(CareerEntity()) CareerEntity careerFormData,
 
+    @Default([]) AreaEntities areas,
+
     /// 프로필 이미지
     ImageFileValue? profileImage,
   }) = _ProfileAddState;
@@ -37,7 +39,7 @@ extension ProfileAddStateEx on ProfileAddState {
 
   bool get isPortfolioFull => portfolioImages.length >= maxImageCount;
 
-  bool get isAreaFull => portfolioImages.length >= maxAreaCount;
+  bool get isAreaFull => areas.length >= maxAreaCount;
 
   int get careerFormDataIndex {
     return careers.reversed.toList().indexOf(careerFormData) + 1;
@@ -54,7 +56,7 @@ extension ProfileAddStateEx on ProfileAddState {
       case ProfileAddStep.career:
         return careers.isNotEmpty;
       case ProfileAddStep.area:
-        return false;
+        return areas.isNotEmpty;
       case ProfileAddStep.profile:
         return true;
     }

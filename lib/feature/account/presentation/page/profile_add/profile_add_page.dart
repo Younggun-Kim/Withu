@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/presentation/page/profile_add/widgets/widgets.dart';
+import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
@@ -13,52 +14,70 @@ class ProfileAddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileAddBlocProvider(
-      create: (context) => getIt(),
-      child: ProfileAddBlocBuilder(
-        builder: (context, state) {
-          return PageRoot(
-            isLoading: state.status.isLoading,
-            appBar: CustomAppBar.back(
-              context: context,
-              trailing: [_PageIndicator(), const SizedBox(width: 25)],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: _StepPageView()),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: CustomEdgeInsets.horizontalPadding(),
-                  child: _SkipBtn(),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: CustomEdgeInsets.horizontalPadding(),
-                  child: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
-                    children: [
-                      Visibility(
-                        visible: !state.currentStep.isFirst,
-                        child: Expanded(
-                          flex: 1, // 이전 버튼의 크기 설정
-                          child: _PrevBtn(),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
-                        child: _NextBtn(),
-                      ),
-                    ],
+    return MultiBlocProvider(
+      providers: [
+        AreaBlocProvider(
+          create: (context) => getIt<AreaBloc>()..add(AreaInitialized()),
+        ),
+        ProfileAddBlocProvider(create: (context) => getIt()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          AreaBlocListener(
+            listener: (context, state) {
+              if (state.submitArea != null) {
+                context.read<ProfileAddBloc>().add(
+                  ProfileAddAreaAppend(area: state.submitArea!),
+                );
+              }
+            },
+          ),
+        ],
+        child: ProfileAddBlocBuilder(
+          builder: (context, state) {
+            return PageRoot(
+              isLoading: state.status.isLoading,
+              appBar: CustomAppBar.back(
+                context: context,
+                trailing: [_PageIndicator(), const SizedBox(width: 25)],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: _StepPageView()),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: CustomEdgeInsets.horizontalPadding(),
+                    child: _SkipBtn(),
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: CustomEdgeInsets.horizontalPadding(),
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
+                      children: [
+                        Visibility(
+                          visible: !state.currentStep.isFirst,
+                          child: Expanded(
+                            flex: 1, // 이전 버튼의 크기 설정
+                            child: _PrevBtn(),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
+                          child: _NextBtn(),
+                        ),
+                      ],
+                    ),
+                  ),
 
-                const SizedBox(height: 55),
-              ],
-            ),
-          );
-        },
+                  const SizedBox(height: 55),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -132,7 +132,7 @@ class BaseButton extends StatelessWidget {
       borderRadius: 50,
       text: Text(
         text,
-        style: context.textTheme.bodySmall?.copyWith(color: textColor),
+        style: context.textTheme.bodySmallBold?.copyWith(color: textColor),
       ),
       padding: EdgeInsets.symmetric(vertical: 5.5, horizontal: 13),
       backgroundColor: backgroundColor,

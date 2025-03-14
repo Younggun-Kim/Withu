@@ -16,53 +16,55 @@ class ProfileAddProfile extends StatelessWidget {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
         return ProfileAddLayout(
-          fillRemainingChild: Center(
-            child: InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {
-                ImagePickerBottomSheet.show(
-                  context: context,
-                  onTap: (ImageFileValue image) {
-                    context.read<ProfileAddBloc>().add(
-                      ProfileAddProfilePhotoPressed(image: image),
-                    );
-                  },
-                );
-              },
-              child: Stack(
-                children: [
-                  Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(200),
-                    ),
-                    child: Image.file(
-                      state.profileImage?.toFile() ?? File(''),
-                      width: 170,
-                      height: 170,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Assets.images.userDefault.svg(
-                          width: 170,
-                          height: 170,
-                        );
-                      },
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 6,
-                    right: 6,
-                    child: Container(
+          fillRemainingChild: SliverFillRemaining(
+            child: Center(
+              child: InkWell(
+                splashColor: Colors.transparent,
+                onTap: () {
+                  ImagePickerBottomSheet.show(
+                    context: context,
+                    onTap: (ImageFileValue image) {
+                      context.read<ProfileAddBloc>().add(
+                        ProfileAddProfilePhotoPressed(image: image),
+                      );
+                    },
+                  );
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: context.boxShadowTheme.md,
+                        borderRadius: BorderRadius.circular(200),
                       ),
-                      padding: EdgeInsets.all(6),
-                      child: Assets.images.pencil.svg(fit: BoxFit.contain),
+                      child: Image.file(
+                        state.profileImage?.toFile() ?? File(''),
+                        width: 170,
+                        height: 170,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Assets.images.userDefault.svg(
+                            width: 170,
+                            height: 170,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      bottom: 6,
+                      right: 6,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: context.boxShadowTheme.md,
+                        ),
+                        padding: EdgeInsets.all(6),
+                        child: Assets.images.pencil.svg(fit: BoxFit.contain),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

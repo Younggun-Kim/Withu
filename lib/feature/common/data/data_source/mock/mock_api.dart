@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:withu/core/utils/library/get_it/get_it_utils.dart';
 import 'package:withu/feature/common/common.dart';
+import 'package:withu/feature/common/data/data_source/dto/area/area_res_dto.dart';
 
 class CommonMockApi extends CommonApiImpl {
   CommonMockApi({required super.network}) {
@@ -66,5 +67,61 @@ class CommonMockApi extends CommonApiImpl {
     );
 
     return await super.verifyAuthCode(dto: dto);
+  }
+
+  /// 시/도 조회
+  @override
+  FutureOr<AreaResDto> getSigo() async {
+    /// Mock 응답 등록
+    dioAdapter.onGet(
+      CommonApiPathType.verifyAuthCode.fullPath,
+      (server) => server.reply(
+        200,
+        AreaResDtoMock.sgg().toJson(
+          (data) => data.map((e) => e.toJson()).toList(),
+        ),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.getSigo();
+  }
+
+  /// 시/군/구 조회
+  @override
+  FutureOr<AreaResDto> getSgg(String sidoCode) async {
+    /// Mock 응답 등록
+    dioAdapter.onGet(
+      CommonApiPathType.verifyAuthCode.fullPath,
+      data: {'sidoCode': sidoCode},
+      (server) => server.reply(
+        200,
+        AreaResDtoMock.sgg().toJson(
+          (data) => data.map((e) => e.toJson()).toList(),
+        ),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.getSgg(sidoCode);
+  }
+
+  /// 읍/면/동 조회
+  @override
+  FutureOr<AreaResDto> getEmd(String sggCode) async {
+    /// Mock 응답 등록
+    dioAdapter.onGet(
+      CommonApiPathType.verifyAuthCode.fullPath,
+      data: {'sggCode': sggCode},
+      (server) => server.reply(
+        200,
+        AreaResDtoMock.sgg().toJson(
+          (data) => data.map((e) => e.toJson()).toList(),
+        ),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.getEmd(sggCode);
   }
 }

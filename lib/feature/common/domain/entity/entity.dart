@@ -1,3 +1,4 @@
+export 'area/area_entity.dart';
 export 'business_num/business_num_value.dart';
 export 'ceo_name/ceo_name_value.dart';
 export 'company_name/company_name_value.dart';

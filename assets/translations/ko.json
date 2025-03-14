@@ -132,5 +132,6 @@
   "inputMax20Chars": "내용을 20자 이내로 입력해주세요.",
   "inputCompanyName": "회사이름을 입력해주세요.",
   "yyyyMMddSlash": "YYYY / MM / DD",
-  "addCareer": "경력 추가"
+  "addCareer": "경력 추가",
+  "selectHopeArea": "희망지역 선택"
 }
