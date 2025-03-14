@@ -43,5 +43,8 @@ class ProfileRegistrationBloc
     on<ProfileRegistrationProfilePhotoPressed>(
       _onProfileRegistrationProfilePhotoPressed,
     );
+    on<ProfileRegistrationAddCareerPressed>(
+      _onProfileRegistrationAddCareerPressed,
+    );
   }
 }

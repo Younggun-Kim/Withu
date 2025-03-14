@@ -15,5 +15,5 @@ class GlobalState extends BaseBlocState with _$GlobalState {
 }
 
 extension GlobalStateEx on GlobalState {
-  bool get isCompanyUser => profileInfo?.userType.iSCompany == true;
+  bool get isCompanyUser => profileInfo?.userType.iSCompany == false;
 }

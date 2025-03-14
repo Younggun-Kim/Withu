@@ -13,7 +13,11 @@ class ProfileRegistrationState extends BaseBlocState
     @Default(FieldType.none) FieldType field,
 
     @Default([]) List<ImageFileValue> portfolioImages,
+
     ImageFileValue? profileImage,
+
+    /// 새 경력 입력 여부
+    @Default(false) bool hasNewCareer,
   }) = _ProfileRegistrationState;
 }
 

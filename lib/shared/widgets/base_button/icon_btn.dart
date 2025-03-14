@@ -23,6 +23,7 @@ class IconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       key: key,
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         height: 50,

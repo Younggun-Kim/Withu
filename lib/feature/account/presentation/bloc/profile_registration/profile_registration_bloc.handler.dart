@@ -8,7 +8,7 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationStepForwarded event,
     ProfileRegistrationEmitter emit,
   ) {
-    final isCompany = true;
+    final isCompany = getItGlobalBloc.state.isCompanyUser;
     emit(state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)));
   }
 
@@ -17,7 +17,7 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationStepBackward event,
     ProfileRegistrationEmitter emit,
   ) {
-    final isCompany = true;
+    final isCompany = getItGlobalBloc.state.isCompanyUser;
     emit(state.copyWith(currentStep: state.currentStep.getPrevStep(isCompany)));
   }
 
@@ -66,5 +66,14 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationEmitter emit,
   ) {
     emit(state.copyWith(profileImage: event.image));
+  }
+
+  /// 경력 추가하기 클릭
+  void _onProfileRegistrationAddCareerPressed(
+    ProfileRegistrationAddCareerPressed event,
+    ProfileRegistrationEmitter emit,
+  ) {
+    logger.i('new hasNewCareer: ${!state.hasNewCareer}');
+    emit(state.copyWith(hasNewCareer: !state.hasNewCareer));
   }
 }

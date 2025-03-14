@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
+import 'package:withu/feature/account/presentation/page/profile_registration/widgets/profile_registration_career.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
@@ -159,7 +162,7 @@ class _StepPageViewState extends State<_StepPageView> {
     ProfileRegistrationStep.introduction: _IntroductionContent(),
     ProfileRegistrationStep.field: _FieldContent(),
     ProfileRegistrationStep.portfolio: _PortfolioContent(),
-    ProfileRegistrationStep.career: Text('4'),
+    ProfileRegistrationStep.career: ProfileRegistrationCareer(),
     ProfileRegistrationStep.area: Text('5'),
     ProfileRegistrationStep.profile: _ProfileContent(),
   };
@@ -540,7 +543,7 @@ class _ProfileContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(200),
                   ),
                   child: Image.file(
-                    state.profileImage!.toFile(),
+                    state.profileImage?.toFile() ?? File(''),
                     width: 170,
                     height: 170,
                     fit: BoxFit.cover,

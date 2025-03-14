@@ -44,3 +44,6 @@ class ProfileRegistrationProfilePhotoPressed extends ProfileRegistrationEvent {
 
   ProfileRegistrationProfilePhotoPressed({required this.image});
 }
+
+/// 경력 추가 클릭 이벤트
+class ProfileRegistrationAddCareerPressed extends ProfileRegistrationEvent {}

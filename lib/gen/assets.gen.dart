@@ -34,6 +34,9 @@ class $AssetsImagesGen {
   SvgGenImage get building2 =>
       const SvgGenImage('assets/images/building-2.svg');
 
+  /// File path: assets/images/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/images/calendar.svg');
+
   /// File path: assets/images/check.svg
   SvgGenImage get check => const SvgGenImage('assets/images/check.svg');
 
@@ -150,6 +153,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/pencil.svg
   SvgGenImage get pencil => const SvgGenImage('assets/images/pencil.svg');
 
+  /// File path: assets/images/plus-sm.svg
+  SvgGenImage get plusSm => const SvgGenImage('assets/images/plus-sm.svg');
+
   /// File path: assets/images/plus.svg
   SvgGenImage get plus => const SvgGenImage('assets/images/plus.svg');
 
@@ -174,6 +180,7 @@ class $AssetsImagesGen {
         appIcon,
         appleLoginBtn,
         building2,
+        calendar,
         check,
         checkBoxOff,
         checkBoxOn,
@@ -206,6 +213,7 @@ class $AssetsImagesGen {
         navIconSearchOff,
         navIconSearchOn,
         pencil,
+        plusSm,
         plus,
         userDefault,
         usersRound,

@@ -107,6 +107,16 @@ enum StringRes {
   selfProfileRegister,
   selfProfilePhotoUpload,
   findId,
+  name,
+  content,
+  companyName,
+  startDate,
+  endDate,
+  inputCareerName,
+  inputMax20Chars,
+  inputCompanyName,
+  yyyyMMddSlash,
+  addCareer,
 }
 
 extension StringResEx on StringRes {

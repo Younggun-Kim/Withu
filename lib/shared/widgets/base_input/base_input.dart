@@ -27,6 +27,8 @@ class BaseInput extends StatelessWidget {
     this.obscureText = false,
     this.errorText = '',
     this.errorVisible = false,
+    this.border,
+    this.borderRadius = 10,
   });
 
   /// 이메일 형식 입력
@@ -123,6 +125,10 @@ class BaseInput extends StatelessWidget {
 
   final bool errorVisible;
 
+  final double borderRadius;
+
+  final Border? border;
+
   @override
   Widget build(BuildContext context) {
     final defaultHintStyle = context.textTheme.bodyLarge?.copyWith(
@@ -139,8 +145,8 @@ class BaseInput extends StatelessWidget {
           padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: ColorName.tertiary),
-            borderRadius: BorderRadius.circular(10),
+            border: border ?? Border.all(color: ColorName.tertiary),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: Row(
             children: [
