@@ -34,7 +34,14 @@ class _CareerItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 20),
-              InkWell(onTap: () {}, child: Assets.images.close.svg()),
+              InkWell(
+                onTap: () {
+                  context.read<ProfileRegistrationBloc>().add(
+                    ProfileRegistrationCareerDeleted(entity: entity),
+                  );
+                },
+                child: Assets.images.close.svg(),
+              ),
             ],
           ),
           Text(

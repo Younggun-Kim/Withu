@@ -78,12 +78,38 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationEmitter emit,
   ) async {
     final tempId = await nanoid();
-    logger.i(state.careers);
     emit(
       state.copyWith(
         hasNewCareer: true,
-        careers: [...state.careers, CareerEntity(id: tempId)],
+        careers: [CareerEntity(id: tempId), ...state.careers],
       ),
     );
+  }
+
+  /// 경력 삭제
+  void _onProfileRegistrationCareerDeleted(
+    ProfileRegistrationCareerDeleted event,
+    ProfileRegistrationEmitter emit,
+  ) async {
+    final newCareers =
+        state.careers.where((entity) => entity.id != event.entity.id).toList();
+    emit(state.copyWith(careers: newCareers));
+  }
+
+  /// 경력 순서 변경
+  void _onProfileRegistrationCareerReordered(
+    ProfileRegistrationCareerReordered event,
+    ProfileRegistrationEmitter emit,
+  ) async {
+    final oldIndex = event.oldIndex;
+    final newIndex = event.newIndex;
+    final newCareers = [...state.careers];
+    final reorderedCareer = newCareers.removeAt(oldIndex);
+    newCareers.insert(
+      newIndex > oldIndex ? newIndex - 1 : newIndex,
+      reorderedCareer,
+    );
+
+    emit(state.copyWith(careers: newCareers));
   }
 }

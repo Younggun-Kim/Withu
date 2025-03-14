@@ -47,5 +47,9 @@ class ProfileRegistrationBloc
     on<ProfileRegistrationAddCareerPressed>(
       _onProfileRegistrationAddCareerPressed,
     );
+    on<ProfileRegistrationCareerDeleted>(_onProfileRegistrationCareerDeleted);
+    on<ProfileRegistrationCareerReordered>(
+      _onProfileRegistrationCareerReordered,
+    );
   }
 }

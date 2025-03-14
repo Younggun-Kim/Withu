@@ -67,7 +67,12 @@ class _ProfileRegistrationCareerState extends State<ProfileRegistrationCareer> {
             },
             itemCount: state.careers.length,
             onReorder: (int oldIndex, int newIndex) {
-              logger.i('$oldIndex - $newIndex');
+              context.read<ProfileRegistrationBloc>().add(
+                ProfileRegistrationCareerReordered(
+                  oldIndex: oldIndex,
+                  newIndex: newIndex,
+                ),
+              );
             },
           ),
         );

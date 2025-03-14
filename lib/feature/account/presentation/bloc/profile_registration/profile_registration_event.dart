@@ -47,3 +47,21 @@ class ProfileRegistrationProfilePhotoPressed extends ProfileRegistrationEvent {
 
 /// 경력 추가 클릭 이벤트
 class ProfileRegistrationAddCareerPressed extends ProfileRegistrationEvent {}
+
+/// 경력 삭제
+class ProfileRegistrationCareerDeleted extends ProfileRegistrationEvent {
+  final CareerEntity entity;
+
+  ProfileRegistrationCareerDeleted({required this.entity});
+}
+
+/// 경력 순서 변경
+class ProfileRegistrationCareerReordered extends ProfileRegistrationEvent {
+  final int oldIndex;
+  final int newIndex;
+
+  ProfileRegistrationCareerReordered({
+    required this.oldIndex,
+    required this.newIndex,
+  });
+}
