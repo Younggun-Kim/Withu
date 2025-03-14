@@ -16,11 +16,11 @@ class LinedTextFormField extends StatelessWidget {
 
   final String hint;
 
-  int? maxLength;
+  final int? maxLength;
 
   final Function(String text)? onChanged;
 
-  LinedTextFormField({
+  const LinedTextFormField({
     super.key,
     this.controller,
     this.focusNode,
