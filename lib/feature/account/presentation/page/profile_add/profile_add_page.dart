@@ -131,8 +131,8 @@ class _StepPageViewState extends State<_StepPageView> {
   final Map<ProfileAddStep, Widget> pageMap = {
     ProfileAddStep.introduction: ProfileAddIntroduction(),
     ProfileAddStep.field: ProfileAddField(),
-    ProfileAddStep.portfolio: ProfileAddPortfolio(),
     ProfileAddStep.career: ProfileAddCareer(),
+    ProfileAddStep.portfolio: ProfileAddPortfolio(),
     ProfileAddStep.area: ProfileAddArea(),
     ProfileAddStep.profile: ProfileAddProfile(),
   };
