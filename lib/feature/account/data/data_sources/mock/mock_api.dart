@@ -237,7 +237,7 @@ class AccountMockApi extends AccountApiImpl {
   @override
   FutureOr<MyProfileResDto> getMyProfile() async {
     /// Mock 응답 등록
-    dioAdapter.onPost(
+    dioAdapter.onGet(
       AccountApiPathType.getMyProfile.fullPath,
       (server) => server.reply(
         200,

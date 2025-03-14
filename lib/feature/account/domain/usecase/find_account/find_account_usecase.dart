@@ -10,7 +10,4 @@ abstract class FindAccountUseCase {
 
   /// 아이디찾기
   FutureOr<FindIdResValue> findId(String phone);
-
-  /// 비밀번호 찾기
-  FutureOr<bool> findPw({required LoginRequestEntity entity});
 }

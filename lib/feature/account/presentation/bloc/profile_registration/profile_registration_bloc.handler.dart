@@ -42,6 +42,10 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
     ProfileRegistrationAddPhotoRequested event,
     ProfileRegistrationEmitter emit,
   ) {
+    if (state.isPortfolioFull) {
+      return;
+    }
+
     emit(
       state.copyWith(portfolioImages: [...state.portfolioImages, event.file]),
     );

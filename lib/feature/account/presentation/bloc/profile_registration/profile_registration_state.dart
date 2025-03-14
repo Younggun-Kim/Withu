@@ -22,6 +22,10 @@ class ProfileRegistrationState extends BaseBlocState
 }
 
 extension ProfileRegistrationStateEx on ProfileRegistrationState {
+  int get maxImageCount => 10;
+
+  bool get isPortfolioFull => portfolioImages.length >= maxImageCount;
+
   bool isEnabledNextBtn() {
     switch (currentStep) {
       case ProfileRegistrationStep.introduction:
