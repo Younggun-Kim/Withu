@@ -1,22 +1,21 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_registration/profile_registration_bloc.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/layout/profile_registration_layout.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/bottom_sheet/image_picker/image_picker_bottom_sheet.dart';
+import '../widgets.dart';
 
 /// 프로필
-class ProfileRegistrationProfile extends StatelessWidget {
-  const ProfileRegistrationProfile({super.key});
+class ProfileAddProfile extends StatelessWidget {
+  const ProfileAddProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
-        return ProfileRegistrationLayout(
+        return ProfileAddLayout(
           fillRemainingChild: Center(
             child: InkWell(
               splashColor: Colors.transparent,
@@ -24,8 +23,8 @@ class ProfileRegistrationProfile extends StatelessWidget {
                 ImagePickerBottomSheet.show(
                   context: context,
                   onTap: (ImageFileValue image) {
-                    context.read<ProfileRegistrationBloc>().add(
-                      ProfileRegistrationProfilePhotoPressed(image: image),
+                    context.read<ProfileAddBloc>().add(
+                      ProfileAddProfilePhotoPressed(image: image),
                     );
                   },
                 );

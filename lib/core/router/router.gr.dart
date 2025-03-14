@@ -29,7 +29,7 @@ import 'package:withu/feature/account/presentation/page/guide/guide_page.dart'
     as _i5;
 import 'package:withu/feature/account/presentation/page/login/login_page.dart'
     as _i11;
-import 'package:withu/feature/account/presentation/page/profile_registration/profile_registration_page.dart'
+import 'package:withu/feature/account/presentation/page/profile_add/profile_add_page.dart'
     as _i12;
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page.dart'
     as _i13;
@@ -429,20 +429,20 @@ class LoginRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.ProfileRegistrationPage]
-class ProfileRegistrationRoute extends _i18.PageRouteInfo<void> {
-  const ProfileRegistrationRoute({List<_i18.PageRouteInfo>? children})
+/// [_i12.ProfileAddPage]
+class ProfileAddRoute extends _i18.PageRouteInfo<void> {
+  const ProfileAddRoute({List<_i18.PageRouteInfo>? children})
       : super(
-          ProfileRegistrationRoute.name,
+          ProfileAddRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ProfileRegistrationRoute';
+  static const String name = 'ProfileAddRoute';
 
   static _i18.PageInfo page = _i18.PageInfo(
     name,
     builder: (data) {
-      return const _i12.ProfileRegistrationPage();
+      return const _i12.ProfileAddPage();
     },
   );
 }

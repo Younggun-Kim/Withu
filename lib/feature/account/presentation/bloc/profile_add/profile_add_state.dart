@@ -1,12 +1,11 @@
-part of 'profile_registration_bloc.dart';
+part of 'profile_add_bloc.dart';
 
 @freezed
-class ProfileRegistrationState extends BaseBlocState
-    with _$ProfileRegistrationState {
-  factory ProfileRegistrationState({
+class ProfileAddState extends BaseBlocState with _$ProfileAddState {
+  factory ProfileAddState({
     required BaseBlocStatus status,
 
-    @Default(ProfileRegistrationStep.first) ProfileRegistrationStep currentStep,
+    @Default(ProfileAddStep.first) ProfileAddStep currentStep,
 
     /// 자기소개
     @Default(IntroductionValue()) IntroductionValue introduction,
@@ -23,29 +22,36 @@ class ProfileRegistrationState extends BaseBlocState
     /// 새 경력 입력 여부
     @Default(false) bool hasNewCareer,
 
+    /// 새 경력 입력 여부
+    @Default(CareerEntity()) CareerEntity careerFormData,
+
     /// 프로필 이미지
     ImageFileValue? profileImage,
-  }) = _ProfileRegistrationState;
+  }) = _ProfileAddState;
 }
 
-extension ProfileRegistrationStateEx on ProfileRegistrationState {
+extension ProfileAddStateEx on ProfileAddState {
   int get maxImageCount => 10;
 
   bool get isPortfolioFull => portfolioImages.length >= maxImageCount;
 
+  int get careerFormDataIndex {
+    return careers.reversed.toList().indexOf(careerFormData) + 1;
+  }
+
   bool isEnabledNextBtn() {
     switch (currentStep) {
-      case ProfileRegistrationStep.introduction:
+      case ProfileAddStep.introduction:
         return introduction.isValid();
-      case ProfileRegistrationStep.field:
+      case ProfileAddStep.field:
         return !field.isNone;
-      case ProfileRegistrationStep.portfolio:
+      case ProfileAddStep.portfolio:
         return portfolioImages.isNotEmpty;
-      case ProfileRegistrationStep.career:
+      case ProfileAddStep.career:
         return false;
-      case ProfileRegistrationStep.area:
+      case ProfileAddStep.area:
         return false;
-      case ProfileRegistrationStep.profile:
+      case ProfileAddStep.profile:
         return true;
     }
   }

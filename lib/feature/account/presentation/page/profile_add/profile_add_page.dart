@@ -1,22 +1,21 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/widgets.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/widgets.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
 @RoutePage()
-class ProfileRegistrationPage extends StatelessWidget {
-  const ProfileRegistrationPage({super.key});
+class ProfileAddPage extends StatelessWidget {
+  const ProfileAddPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocProvider(
+    return ProfileAddBlocProvider(
       create: (context) => getIt(),
-      child: ProfileRegistrationBlocBuilder(
+      child: ProfileAddBlocBuilder(
         builder: (context, state) {
           return PageRoot(
             isLoading: state.status.isLoading,
@@ -87,9 +86,9 @@ class _IndicatorItem extends StatelessWidget {
 class _PageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
-        final pages = ProfileRegistrationStep.getValuesWith(
+        final pages = ProfileAddStep.getValuesWith(
           getItGlobalBloc.state.isCompanyUser,
         );
         return Row(
@@ -110,13 +109,13 @@ class _StepPageView extends StatefulWidget {
 }
 
 class _StepPageViewState extends State<_StepPageView> {
-  final Map<ProfileRegistrationStep, Widget> pageMap = {
-    ProfileRegistrationStep.introduction: ProfileRegistrationIntroduction(),
-    ProfileRegistrationStep.field: ProfileRegistrationField(),
-    ProfileRegistrationStep.portfolio: ProfileRegistrationPortfolio(),
-    ProfileRegistrationStep.career: ProfileRegistrationCareer(),
-    ProfileRegistrationStep.area: Text('5'),
-    ProfileRegistrationStep.profile: ProfileRegistrationProfile(),
+  final Map<ProfileAddStep, Widget> pageMap = {
+    ProfileAddStep.introduction: ProfileAddIntroduction(),
+    ProfileAddStep.field: ProfileAddField(),
+    ProfileAddStep.portfolio: ProfileAddPortfolio(),
+    ProfileAddStep.career: ProfileAddCareer(),
+    ProfileAddStep.area: Text('5'),
+    ProfileAddStep.profile: ProfileAddProfile(),
   };
 
   late PageController _pageController;
@@ -135,7 +134,7 @@ class _StepPageViewState extends State<_StepPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocConsumer(
+    return ProfileAddBlocConsumer(
       listener: (context, state) {
         if (state.currentStep.index != _pageController.page?.toInt()) {
           _pageController.animateToPage(
@@ -156,7 +155,7 @@ class _StepPageViewState extends State<_StepPageView> {
   }
 
   List<Widget> _getPages() {
-    return ProfileRegistrationStep.getValuesWith(
+    return ProfileAddStep.getValuesWith(
       getItGlobalBloc.state.isCompanyUser,
     ).map((type) => pageMap[type]).whereType<Widget>().toList();
   }
@@ -169,9 +168,7 @@ class _SkipBtn extends StatelessWidget {
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {
-          context.read<ProfileRegistrationBloc>().add(
-            ProfileRegistrationStepForwarded(),
-          );
+          context.read<ProfileAddBloc>().add(ProfileAddStepForwarded());
         },
         child: Text(
           StringRes.skipping.tr,
@@ -185,7 +182,7 @@ class _SkipBtn extends StatelessWidget {
 class _PrevBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Container(
           margin: EdgeInsets.only(right: 10),
@@ -194,9 +191,7 @@ class _PrevBtn extends StatelessWidget {
             text: StringRes.prev.tr,
             textColor: ColorName.text,
             onTap: () {
-              context.read<ProfileRegistrationBloc>().add(
-                ProfileRegistrationStepBackward(),
-              );
+              context.read<ProfileAddBloc>().add(ProfileAddStepBackward());
             },
           ),
         );
@@ -208,15 +203,13 @@ class _PrevBtn extends StatelessWidget {
 class _NextBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return EnabledBtn(
           isEnabled: state.isEnabledNextBtn(),
           text: StringRes.next.tr,
           onTap: () {
-            context.read<ProfileRegistrationBloc>().add(
-              ProfileRegistrationStepForwarded(),
-            );
+            context.read<ProfileAddBloc>().add(ProfileAddStepForwarded());
           },
         );
       },

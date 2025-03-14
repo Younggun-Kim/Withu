@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/layout/profile_registration_layout.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/widgets/base_button/icon_btn.dart';
 
-import 'career_form_widget.dart';
+import '../widgets.dart';
 
 part 'career_item.dart';
 
-class ProfileRegistrationCareer extends StatefulWidget {
-  const ProfileRegistrationCareer({super.key});
+class ProfileAddCareer extends StatefulWidget {
+  const ProfileAddCareer({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProfileRegistrationCareerState();
+  State<StatefulWidget> createState() => _ProfileAddCareerState();
 }
 
-class _ProfileRegistrationCareerState extends State<ProfileRegistrationCareer> {
+class _ProfileAddCareerState extends State<ProfileAddCareer> {
   late ValueKey<SliverReorderableListState> listStateKey;
 
   @override
@@ -34,9 +33,9 @@ class _ProfileRegistrationCareerState extends State<ProfileRegistrationCareer> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
-        return ProfileRegistrationLayout(
+        return ProfileAddLayout(
           sliverWidget: Column(
             children: [
               AnimatedSize(
@@ -61,14 +60,21 @@ class _ProfileRegistrationCareerState extends State<ProfileRegistrationCareer> {
                 child: ReorderableDelayedDragStartListener(
                   index: index,
                   enabled: true,
-                  child: _CareerItem(entity: entity),
+                  child: _CareerItem(
+                    entity: entity,
+                    onTap: () {
+                      context.read<ProfileAddBloc>().add(
+                        ProfileAddCareerSelected(entity: entity),
+                      );
+                    },
+                  ),
                 ),
               );
             },
             itemCount: state.careers.length,
             onReorder: (int oldIndex, int newIndex) {
-              context.read<ProfileRegistrationBloc>().add(
-                ProfileRegistrationCareerReordered(
+              context.read<ProfileAddBloc>().add(
+                ProfileAddCareerReordered(
                   oldIndex: oldIndex,
                   newIndex: newIndex,
                 ),
@@ -93,9 +99,7 @@ class _CareerAddBtn extends StatelessWidget {
         colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
       ),
       onTap: () {
-        context.read<ProfileRegistrationBloc>().add(
-          ProfileRegistrationAddCareerPressed(),
-        );
+        context.read<ProfileAddBloc>().add(ProfileAddCareerAppended());
       },
     );
   }

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_registration/profile_registration_bloc.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/layout/profile_registration_layout.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
 import 'package:withu/gen/colors.gen.dart';
+import '../widgets.dart';
 
-class ProfileRegistrationField extends StatelessWidget {
-  const ProfileRegistrationField({super.key});
+class ProfileAddField extends StatelessWidget {
+  const ProfileAddField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationLayout(
+    return ProfileAddLayout(
       fillRemainingChild: SliverFillRemaining(child: _FieldContent()),
     );
   }
@@ -21,7 +21,7 @@ class ProfileRegistrationField extends StatelessWidget {
 class _FieldContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Container(
           margin: EdgeInsets.only(top: 27),
@@ -33,8 +33,8 @@ class _FieldContent extends StatelessWidget {
                         field: field,
                         isSelected: state.field == field,
                         onTap: () {
-                          context.read<ProfileRegistrationBloc>().add(
-                            ProfileRegistrationFieldSelected(field: field),
+                          context.read<ProfileAddBloc>().add(
+                            ProfileAddFieldSelected(field: field),
                           );
                         },
                       ),

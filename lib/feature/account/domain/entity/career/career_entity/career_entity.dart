@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
 
@@ -8,7 +9,7 @@ part 'career_entity.freezed.dart';
 @freezed
 class CareerEntity with _$CareerEntity {
   const factory CareerEntity({
-    required String id,
+    @Default('') String id,
     @Default(NameValue()) NameValue name,
     @Default(CareerContentValue()) CareerContentValue content,
     @Default(CompanyNameValue()) CompanyNameValue companyName,
@@ -17,6 +18,8 @@ class CareerEntity with _$CareerEntity {
   }) = _CareerEntity;
 
   const CareerEntity._();
+
+  factory CareerEntity.temp() => CareerEntity(id: nanoid());
 
   bool isValid() =>
       id.isNotEmpty &&

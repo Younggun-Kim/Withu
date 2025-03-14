@@ -1,8 +1,7 @@
 import 'dart:math';
-
 import 'package:withu/core/utils/resource/string_res.dart';
 
-enum ProfileRegistrationStep {
+enum ProfileAddStep {
   introduction(isOnlyStaff: false),
   field(isOnlyStaff: false),
   portfolio(isOnlyStaff: false),
@@ -12,30 +11,30 @@ enum ProfileRegistrationStep {
 
   final bool isOnlyStaff;
 
-  const ProfileRegistrationStep({required this.isOnlyStaff});
+  const ProfileAddStep({required this.isOnlyStaff});
 
-  static const ProfileRegistrationStep first = introduction;
+  static const ProfileAddStep first = introduction;
 
-  static List<ProfileRegistrationStep> getValuesWith(bool isCompany) {
+  static List<ProfileAddStep> getValuesWith(bool isCompany) {
     if (isCompany) {
-      return ProfileRegistrationStep.getCompanySteps();
+      return ProfileAddStep.getCompanySteps();
     } else {
-      return ProfileRegistrationStep.values;
+      return ProfileAddStep.values;
     }
   }
 
-  static List<ProfileRegistrationStep> getCompanySteps() {
+  static List<ProfileAddStep> getCompanySteps() {
     return values.where((type) => !type.isOnlyStaff).toList();
   }
 }
 
-extension ProfileRegistrationStepEx on ProfileRegistrationStep {
-  bool get isFirst => this == ProfileRegistrationStep.first;
+extension ProfileRegistrationStepEx on ProfileAddStep {
+  bool get isFirst => this == ProfileAddStep.first;
 
-  bool get isLast => this == ProfileRegistrationStep.profile;
+  bool get isLast => this == ProfileAddStep.profile;
 
-  ProfileRegistrationStep getNextStep(bool isCompany) {
-    final values = ProfileRegistrationStep.getValuesWith(isCompany);
+  ProfileAddStep getNextStep(bool isCompany) {
+    final values = ProfileAddStep.getValuesWith(isCompany);
     final lastIndex = values.length - 1;
     final currentIndex = values.indexOf(this);
     final nextIndex = currentIndex + 1;
@@ -43,8 +42,8 @@ extension ProfileRegistrationStepEx on ProfileRegistrationStep {
     return values[min(nextIndex, lastIndex)];
   }
 
-  ProfileRegistrationStep getPrevStep(bool isCompany) {
-    final values = ProfileRegistrationStep.getValuesWith(isCompany);
+  ProfileAddStep getPrevStep(bool isCompany) {
+    final values = ProfileAddStep.getValuesWith(isCompany);
     final firstIndex = 0;
     final currentIndex = values.indexOf(this);
     final prevIndex = currentIndex - 1;
@@ -54,34 +53,34 @@ extension ProfileRegistrationStepEx on ProfileRegistrationStep {
 
   String toTitle() {
     switch (this) {
-      case ProfileRegistrationStep.introduction:
+      case ProfileAddStep.introduction:
         return StringRes.selfIntroRegister.tr;
-      case ProfileRegistrationStep.field:
+      case ProfileAddStep.field:
         return StringRes.selfFieldSelect.tr;
-      case ProfileRegistrationStep.career:
+      case ProfileAddStep.career:
         return StringRes.selfCareerInput.tr;
-      case ProfileRegistrationStep.portfolio:
+      case ProfileAddStep.portfolio:
         return StringRes.selfPortfolioAdd.tr;
-      case ProfileRegistrationStep.area:
+      case ProfileAddStep.area:
         return StringRes.selfInterestAreaAdd.tr;
-      case ProfileRegistrationStep.profile:
+      case ProfileAddStep.profile:
         return StringRes.selfProfileRegister.tr;
     }
   }
 
   String toDescription() {
     switch (this) {
-      case ProfileRegistrationStep.introduction:
+      case ProfileAddStep.introduction:
         return StringRes.selfIntroHint.tr;
-      case ProfileRegistrationStep.field:
+      case ProfileAddStep.field:
         return StringRes.selfFieldDescription.tr;
-      case ProfileRegistrationStep.career:
+      case ProfileAddStep.career:
         return StringRes.selfAchievementInfo.tr;
-      case ProfileRegistrationStep.portfolio:
+      case ProfileAddStep.portfolio:
         return StringRes.selfPortfolioPhotoGuide.tr;
-      case ProfileRegistrationStep.area:
+      case ProfileAddStep.area:
         return StringRes.selfInterestAreaInfo.tr;
-      case ProfileRegistrationStep.profile:
+      case ProfileAddStep.profile:
         return StringRes.selfProfilePhotoUpload.tr;
     }
   }

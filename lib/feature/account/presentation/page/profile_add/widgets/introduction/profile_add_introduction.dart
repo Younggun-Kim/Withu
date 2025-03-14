@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/utils/resource/string_res.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_registration/profile_registration_bloc.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/layout/profile_registration_layout.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout.dart';
 import 'package:withu/shared/widgets/lined_text_form/lined_text_form.dart';
 
+import '../widgets.dart';
+
 /// 자기소개 입력
-class ProfileRegistrationIntroduction extends StatefulWidget {
-  const ProfileRegistrationIntroduction({super.key});
+class ProfileAddIntroduction extends StatefulWidget {
+  const ProfileAddIntroduction({super.key});
 
   @override
   State<StatefulWidget> createState() => _IntroductionState();
 }
 
-class _IntroductionState extends State<ProfileRegistrationIntroduction> {
+class _IntroductionState extends State<ProfileAddIntroduction> {
   late TextEditingController _controller;
   late FocusNode _focusNode;
 
@@ -33,13 +35,13 @@ class _IntroductionState extends State<ProfileRegistrationIntroduction> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocListener(
+    return ProfileAddBlocListener(
       listener: (context, state) {
         if (state.introduction.value != _controller.text) {
           _controller.text = state.introduction.value;
         }
       },
-      child: ProfileRegistrationLayout(
+      child: ProfileAddLayout(
         fillRemainingChild: SliverFillRemaining(
           child: Container(
             alignment: Alignment.topCenter,
@@ -49,8 +51,8 @@ class _IntroductionState extends State<ProfileRegistrationIntroduction> {
               lineNum: 3,
               hint: StringRes.selfIntroInputHint.tr,
               onChanged: (String text) {
-                context.read<ProfileRegistrationBloc>().add(
-                  ProfileRegistrationIntroductionInputted(value: text),
+                context.read<ProfileAddBloc>().add(
+                  ProfileAddIntroductionInputted(value: text),
                 );
               },
             ),

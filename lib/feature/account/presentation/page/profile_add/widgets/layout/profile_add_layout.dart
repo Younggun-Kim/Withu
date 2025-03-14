@@ -3,12 +3,12 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/gen/assets.gen.dart';
 
-class ProfileRegistrationLayout extends StatelessWidget {
+class ProfileAddLayout extends StatelessWidget {
   final Widget? sliverWidget;
 
   final Widget fillRemainingChild;
 
-  const ProfileRegistrationLayout({
+  const ProfileAddLayout({
     super.key,
     required this.fillRemainingChild,
     this.sliverWidget,
@@ -51,7 +51,7 @@ class ProfileRegistrationLayout extends StatelessWidget {
 class _Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Text(
           state.currentStep.toTitle(),
@@ -65,7 +65,7 @@ class _Title extends StatelessWidget {
 class _Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Text(
           state.currentStep.toDescription(),

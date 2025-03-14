@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/utils/extensions/theme_ext.dart';
 import 'package:withu/core/utils/resource/string_res.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_registration/profile_registration_bloc.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/widgets/base_input/bottom_border_input.dart';
@@ -11,7 +12,7 @@ class CareerFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Container(
           width: double.infinity,
@@ -25,7 +26,27 @@ class CareerFormWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('경력 1', style: context.textTheme.bodyLarge?.setBlack),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '경력 ${state.careerFormDataIndex}',
+                    style: context.textTheme.bodyLarge?.setBlack,
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {
+                      context.read<ProfileAddBloc>().add(
+                        ProfileAddCareerFormClosed(),
+                      );
+                    },
+                    child: Text(
+                      '접기',
+                      style: context.textTheme.bodySmall?.setBlack,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 15),
               _NameRow(),
               const SizedBox(height: 5),

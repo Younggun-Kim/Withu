@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/presentation/page/profile_registration/widgets/layout/profile_registration_layout.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/bottom_sheet/image_picker/image_picker_bottom_sheet.dart';
 import 'package:withu/shared/dialogs/dialogs.dart';
 import 'package:withu/shared/widgets/base_button/base_button.dart';
+import '../widgets.dart';
 
-class ProfileRegistrationPortfolio extends StatelessWidget {
-  const ProfileRegistrationPortfolio({super.key});
+class ProfileAddPortfolio extends StatelessWidget {
+  const ProfileAddPortfolio({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationLayout(
+    return ProfileAddLayout(
       sliverWidget: _ImageAddBtnSliver(),
       fillRemainingChild: SliverFillRemaining(child: _PortfolioContent()),
     );
@@ -24,7 +24,7 @@ class ProfileRegistrationPortfolio extends StatelessWidget {
 class _ImageAddBtnSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -44,8 +44,8 @@ class _ImageAddBtnSliver extends StatelessWidget {
                   ImagePickerBottomSheet.show(
                     context: context,
                     onTap: (ImageFileValue file) {
-                      context.read<ProfileRegistrationBloc>().add(
-                        ProfileRegistrationAddPhotoRequested(file: file),
+                      context.read<ProfileAddBloc>().add(
+                        ProfileAddPhotoAddRequested(file: file),
                       );
                     },
                   );
@@ -68,7 +68,7 @@ class _ImageAddBtnSliver extends StatelessWidget {
 class _PortfolioContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationBlocBuilder(
+    return ProfileAddBlocBuilder(
       builder: (context, state) {
         return GridView.builder(
           itemCount: state.portfolioImages.length,
@@ -117,8 +117,8 @@ class _PortfolioImageItem extends StatelessWidget {
             ),
             child: InkWell(
               onTap: () {
-                context.read<ProfileRegistrationBloc>().add(
-                  ProfileRegistrationPhotoDeleted(file: imageFile),
+                context.read<ProfileAddBloc>().add(
+                  ProfileAddPhotoDeleted(file: imageFile),
                 );
               },
               child: Assets.images.close.svg(),

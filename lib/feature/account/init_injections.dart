@@ -25,8 +25,8 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<ChangePwUseCase>(
     ChangePwUseCaseImpl(accountRepo: getIt()),
   );
-  getIt.registerLazySingleton<ProfileRegistrationUseCase>(
-    () => ProfileRegistrationUseCaseImpl(accountRepo: getIt()),
+  getIt.registerLazySingleton<ProfileAddUseCase>(
+    () => ProfileAddUseCaseImpl(accountRepo: getIt()),
   );
   getIt.registerLazySingleton<GetUserProfileUseCase>(
     () => GetUserProfileUseCaseImpl(repo: getIt()),
@@ -46,7 +46,7 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<ChangePwBloc>(
     () => ChangePwBloc(changePwUseCase: getIt()),
   );
-  getIt.registerFactory<ProfileRegistrationBloc>(
-    () => ProfileRegistrationBloc(profileRegistrationUseCase: getIt()),
+  getIt.registerFactory<ProfileAddBloc>(
+    () => ProfileAddBloc(profileAddUseCase: getIt()),
   );
 }

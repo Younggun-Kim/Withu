@@ -6,6 +6,6 @@ extension ProfileBlocHandler on ProfileBloc {
     ProfileRegistrationBtnPressed event,
     Emitter<ProfileState> emit,
   ) {
-    getItAppRouter.push(ProfileRegistrationRoute());
+    getItAppRouter.push(ProfileAddRoute());
   }
 }
