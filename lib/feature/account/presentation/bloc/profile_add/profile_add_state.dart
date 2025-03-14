@@ -33,7 +33,11 @@ class ProfileAddState extends BaseBlocState with _$ProfileAddState {
 extension ProfileAddStateEx on ProfileAddState {
   int get maxImageCount => 10;
 
+  int get maxAreaCount => 5;
+
   bool get isPortfolioFull => portfolioImages.length >= maxImageCount;
+
+  bool get isAreaFull => portfolioImages.length >= maxAreaCount;
 
   int get careerFormDataIndex {
     return careers.reversed.toList().indexOf(careerFormData) + 1;

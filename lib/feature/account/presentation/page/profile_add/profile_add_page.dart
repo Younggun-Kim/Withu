@@ -114,7 +114,7 @@ class _StepPageViewState extends State<_StepPageView> {
     ProfileAddStep.field: ProfileAddField(),
     ProfileAddStep.portfolio: ProfileAddPortfolio(),
     ProfileAddStep.career: ProfileAddCareer(),
-    ProfileAddStep.area: Text('5'),
+    ProfileAddStep.area: ProfileAddArea(),
     ProfileAddStep.profile: ProfileAddProfile(),
   };
 

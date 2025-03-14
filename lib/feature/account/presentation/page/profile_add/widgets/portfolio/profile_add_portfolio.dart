@@ -53,7 +53,7 @@ class _ImageAddBtnSliver extends StatelessWidget {
               ),
               const SizedBox(width: 11),
               Text(
-                '${state.portfolioImages.length}/10',
+                '${state.portfolioImages.length}/${state.maxImageCount}',
                 style: context.textTheme.bodyMedium?.setBlack,
               ),
             ],
