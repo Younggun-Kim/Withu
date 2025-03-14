@@ -11,7 +11,9 @@ class ProfileRegistrationField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileRegistrationLayout(fillRemainingChild: _FieldContent());
+    return ProfileRegistrationLayout(
+      fillRemainingChild: SliverFillRemaining(child: _FieldContent()),
+    );
   }
 }
 

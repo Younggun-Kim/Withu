@@ -40,18 +40,20 @@ class _IntroductionState extends State<ProfileRegistrationIntroduction> {
         }
       },
       child: ProfileRegistrationLayout(
-        fillRemainingChild: Container(
-          alignment: Alignment.topCenter,
-          child: LinedTextFormField(
-            controller: _controller,
-            focusNode: _focusNode,
-            lineNum: 3,
-            hint: StringRes.selfIntroInputHint.tr,
-            onChanged: (String text) {
-              context.read<ProfileRegistrationBloc>().add(
-                ProfileRegistrationIntroductionInputted(value: text),
-              );
-            },
+        fillRemainingChild: SliverFillRemaining(
+          child: Container(
+            alignment: Alignment.topCenter,
+            child: LinedTextFormField(
+              controller: _controller,
+              focusNode: _focusNode,
+              lineNum: 3,
+              hint: StringRes.selfIntroInputHint.tr,
+              onChanged: (String text) {
+                context.read<ProfileRegistrationBloc>().add(
+                  ProfileRegistrationIntroductionInputted(value: text),
+                );
+              },
+            ),
           ),
         ),
       ),

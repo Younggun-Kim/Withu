@@ -16,11 +16,11 @@ class ProfileRegistrationLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: CustomEdgeInsets.horizontalPadding(),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: CustomEdgeInsets.horizontalPadding(),
+          sliver: SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -34,10 +34,16 @@ class ProfileRegistrationLayout extends StatelessWidget {
               ],
             ),
           ),
-          SliverToBoxAdapter(child: sliverWidget ?? SizedBox.shrink()),
-          SliverFillRemaining(child: fillRemainingChild),
-        ],
-      ),
+        ),
+        SliverPadding(
+          padding: CustomEdgeInsets.horizontalPadding(),
+          sliver: SliverToBoxAdapter(child: sliverWidget ?? SizedBox.shrink()),
+        ),
+        SliverPadding(
+          padding: CustomEdgeInsets.horizontalPadding(),
+          sliver: fillRemainingChild,
+        ),
+      ],
     );
   }
 }

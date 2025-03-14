@@ -76,8 +76,14 @@ extension ProfileRegistrationBlocHandler on ProfileRegistrationBloc {
   void _onProfileRegistrationAddCareerPressed(
     ProfileRegistrationAddCareerPressed event,
     ProfileRegistrationEmitter emit,
-  ) {
-    logger.i('new hasNewCareer: ${!state.hasNewCareer}');
-    emit(state.copyWith(hasNewCareer: !state.hasNewCareer));
+  ) async {
+    final tempId = await nanoid();
+    logger.i(state.careers);
+    emit(
+      state.copyWith(
+        hasNewCareer: true,
+        careers: [...state.careers, CareerEntity(id: tempId)],
+      ),
+    );
   }
 }

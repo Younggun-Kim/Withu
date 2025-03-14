@@ -16,7 +16,7 @@ class ProfileRegistrationPortfolio extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileRegistrationLayout(
       sliverWidget: _ImageAddBtnSliver(),
-      fillRemainingChild: _PortfolioContent(),
+      fillRemainingChild: SliverFillRemaining(child: _PortfolioContent()),
     );
   }
 }

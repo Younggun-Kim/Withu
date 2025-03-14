@@ -8,16 +8,23 @@ class ProfileRegistrationState extends BaseBlocState
 
     @Default(ProfileRegistrationStep.first) ProfileRegistrationStep currentStep,
 
+    /// 자기소개
     @Default(IntroductionValue()) IntroductionValue introduction,
 
+    /// 전문분야
     @Default(FieldType.none) FieldType field,
 
+    /// 포트폴리오 이미지 목록
     @Default([]) List<ImageFileValue> portfolioImages,
 
-    ImageFileValue? profileImage,
+    /// 경력 목록
+    @Default([]) List<CareerEntity> careers,
 
     /// 새 경력 입력 여부
     @Default(false) bool hasNewCareer,
+
+    /// 프로필 이미지
+    ImageFileValue? profileImage,
   }) = _ProfileRegistrationState;
 }
 
