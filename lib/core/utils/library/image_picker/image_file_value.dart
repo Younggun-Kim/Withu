@@ -25,3 +25,13 @@ extension ImageFileEx on ImageFileValue {
     return File(file?.path ?? '');
   }
 }
+
+extension ImageFileValueListEx on List<ImageFileValue> {
+  List<ImageFileValue> getOnlyHasFile() {
+    return where((image) => image.hasFile).toList();
+  }
+
+  List<XFile> toFile() {
+    return map((image) => image.file).whereType<XFile>().toList();
+  }
+}

@@ -61,7 +61,7 @@ class CommonRepositoryImpl implements CommonRepository {
 
   /// 단일 이미지 업로드
   @override
-  FutureOr<SingleImageResDto> uploadPProfile(XFile image) async {
+  FutureOr<SingleImageResDto> uploadProfile(XFile image) async {
     return await commonApi.postSingleImageUpload(
       SingleImageReqDto(image: image, type: ServerImageType.profile),
     );
@@ -69,7 +69,9 @@ class CommonRepositoryImpl implements CommonRepository {
 
   /// 여러 이미지 업로드
   @override
-  FutureOr<MultiImageResDto> uploadImages(MultiImageReqDto dto) async {
-    return await commonApi.postMultiImageUpload(dto);
+  FutureOr<MultiImageResDto> uploadPortfolio(List<XFile> images) async {
+    return await commonApi.postMultiImageUpload(
+      MultiImageReqDto(images: images, type: ServerImageType.portfolio),
+    );
   }
 }

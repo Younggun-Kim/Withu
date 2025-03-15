@@ -88,7 +88,7 @@ class _FieldItem extends StatelessWidget {
             SizedBox(
               width: 113,
               child: Text(
-                field.toString(),
+                field.toKor(),
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMediumBold?.copyWith(
                   color: textColor,

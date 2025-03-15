@@ -20,11 +20,21 @@ class ProfileUpdateValue with _$ProfileUpdateValue {
   const ProfileUpdateValue._();
 }
 
+extension ProfileUpdateValueEx on ProfileUpdateValue {
+  ProfileDto? getProfileDto() {
+    if (introduction.isEmpty && field.isNone) {
+      return null;
+    }
+
+    return ProfileDto(introduction: introduction, field: field);
+  }
+}
+
 extension ProfileUpdateValueParser on ProfileUpdateValue {
   // TODO: 지역 파싱하기
   ProfileUpdateReqDto toDto() {
     return ProfileUpdateReqDto(
-      profile: ProfileDto(introduction: introduction, field: field),
+      profile: getProfileDto(),
       profileImageUrl: profileImageUrl,
       portfolioImageUrls: portfolioImageUrls,
       careers: careers.toDto(),

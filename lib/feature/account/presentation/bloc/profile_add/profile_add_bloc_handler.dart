@@ -12,13 +12,17 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     final currentStep = state.currentStep;
 
     if (currentStep.isLast) {
+      if (state.field.isNone) {
+        Toast.showWithNavigatorKey(text: '분야를 선택해주세요.');
+        return;
+      }
       emit(state.copyWith(status: BaseBlocStatus.loading()));
 
       /// 1. 프로필 이미지 저장.
-      final profileImageUrls = '';
+      final profileImageUrls = await getProfileImageUrl();
 
       /// 2. 포트폴리오 이미지 저장.
-      final List<String> portfolioImageUrls = [];
+      final List<String> portfolioImageUrls = await getPortfolioImageUrls();
 
       /// 3. API 호출하기
       final response = await profileAddUseCase.exec(
@@ -247,15 +251,6 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     );
   }
 
-  /// CareerForm이 반영된 Careers 얻기
-  List<CareerEntity> _getCareersWithCareerForm(CareerEntity newCareer) {
-    return [...state.careers]
-        .map(
-          (oldCareer) => oldCareer.id == newCareer.id ? newCareer : oldCareer,
-        )
-        .toList();
-  }
-
   /// 지역 추가
   void _onProfileAddAreaAppend(
     ProfileAddAreaAppend event,
@@ -283,5 +278,49 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     AreaEntities newAreas = [...state.areas];
     newAreas.removeWhere((area) => area.cd == event.area.cd);
     emit(state.copyWith(areas: newAreas));
+  }
+}
+
+extension ProfileAddBlocHandlerEx on ProfileAddBloc {
+  FutureOr<String> getProfileImageUrl() async {
+    final profileImage = state.profileImage;
+    final file = profileImage?.file;
+
+    if (profileImage == null) return '';
+
+    if (state.hasProfileUrl) return profileImage.url;
+
+    if (file == null) return '';
+
+    return await uploadImageUseCase.uploadProfile(file);
+  }
+
+  FutureOr<List<String>> getPortfolioImageUrls() async {
+    final portfolioImages = [...state.portfolioImages];
+
+    if (portfolioImages.isEmpty) return [];
+
+    final hasFileImages = portfolioImages.getOnlyHasFile();
+    final files = hasFileImages.toFile();
+    final uploadedUrls = await uploadImageUseCase.uploadPortfolio(files);
+
+    return portfolioImages
+        .map((image) {
+          if (image.hasFile && uploadedUrls.isNotEmpty) {
+            return image.copyWith(url: uploadedUrls.removeAt(0));
+          }
+          return image;
+        })
+        .map((image) => image.url)
+        .toList();
+  }
+
+  /// CareerForm이 반영된 Careers 얻기
+  List<CareerEntity> _getCareersWithCareerForm(CareerEntity newCareer) {
+    return [...state.careers]
+        .map(
+          (oldCareer) => oldCareer.id == newCareer.id ? newCareer : oldCareer,
+        )
+        .toList();
   }
 }

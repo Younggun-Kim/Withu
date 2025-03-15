@@ -45,6 +45,8 @@ extension ProfileAddStateEx on ProfileAddState {
     return careers.reversed.toList().indexOf(careerFormData) + 1;
   }
 
+  bool get hasProfileUrl => profileImage?.hasUrl == true;
+
   bool isEnabledNextBtn() {
     switch (currentStep) {
       case ProfileAddStep.introduction:

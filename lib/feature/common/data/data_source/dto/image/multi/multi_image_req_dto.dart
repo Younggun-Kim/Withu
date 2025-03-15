@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:withu/core/utils/library/image_picker/xfile_ex.dart';
 
 import '../server_image_type.dart';
 
@@ -24,6 +25,7 @@ extension MultiImageReqDtoEx on MultiImageReqDto {
         (file) async => await MultipartFile.fromFile(
           file.path,
           filename: file.path.split('/').last,
+          contentType: file.getMime(),
         ),
       ),
     );
@@ -31,7 +33,7 @@ extension MultiImageReqDtoEx on MultiImageReqDto {
 
   FutureOr<FormData> toFormData() async {
     return FormData.fromMap({
-      'image': await getMultipartFiles(),
+      'images': await getMultipartFiles(),
       'type': type.serverKey,
     });
   }

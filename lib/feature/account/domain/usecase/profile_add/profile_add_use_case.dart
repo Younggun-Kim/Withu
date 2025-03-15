@@ -34,6 +34,7 @@ class ProfileAddUseCaseImpl implements ProfileAddUseCase {
 
     if (!response.success) {
       Toast.showWithNavigatorKey(text: response.message);
+      return false;
     }
 
     /// TODO:  프로필 정보 저장하는 코드가 필요할 듯

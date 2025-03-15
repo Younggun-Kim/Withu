@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
@@ -26,8 +28,10 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
   final UploadImageUseCase uploadImageUseCase;
   final ProfileAddUseCase profileAddUseCase;
 
-  ProfileAddBloc({required this.uploadImageUseCase, required this.profileAddUseCase})
-    : super(ProfileAddState(status: BaseBlocStatus.initial())) {
+  ProfileAddBloc({
+    required this.uploadImageUseCase,
+    required this.profileAddUseCase,
+  }) : super(ProfileAddState(status: BaseBlocStatus.initial())) {
     on<ProfileAddStepForwarded>(_onProfileAddStepForwarded);
     on<ProfileAddStepBackward>(_onProfileAddStepBackward);
     on<ProfileAddIntroductionInputted>(_onProfileAddIntroductionInputted);

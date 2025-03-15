@@ -11,7 +11,7 @@ part 'profile_update_req_dto.g.dart';
 @Freezed()
 class ProfileUpdateReqDto with _$ProfileUpdateReqDto {
   factory ProfileUpdateReqDto({
-    @Default(ProfileDto()) ProfileDto profile,
+    ProfileDto? profile,
     @Default('') String profileImageUrl,
     @Default([]) List<String> portfolioImageUrls,
     @Default([]) CareerListDto careers,

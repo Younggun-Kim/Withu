@@ -9,7 +9,9 @@ abstract class UploadImageUseCase {
 
   UploadImageUseCase({required this.commonRepo});
 
-  FutureOr<String> uploadSingle(XFile image);
+  FutureOr<String> uploadProfile(XFile image);
+
+  FutureOr<List<String>> uploadPortfolio(List<XFile> image);
 }
 
 class UploadImageUseCaseImpl implements UploadImageUseCase {
@@ -19,11 +21,20 @@ class UploadImageUseCaseImpl implements UploadImageUseCase {
   UploadImageUseCaseImpl({required this.commonRepo});
 
   @override
-  FutureOr<String> uploadSingle(XFile image) async {
-    final response = await commonRepo.uploadPProfile(image);
+  FutureOr<String> uploadProfile(XFile image) async {
+    final response = await commonRepo.uploadProfile(image);
     if (!response.success) {
       Toast.showWithNavigatorKey(text: response.message);
     }
     return response.data ?? '';
+  }
+
+  @override
+  FutureOr<List<String>> uploadPortfolio(List<XFile> images) async {
+    final response = await commonRepo.uploadPortfolio(images);
+    if (!response.success) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+    return response.data ?? [];
   }
 }

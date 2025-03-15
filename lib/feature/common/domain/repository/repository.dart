@@ -35,8 +35,8 @@ abstract class CommonRepository {
   FutureOr<AreaResDto> getEmd(String sggCode);
 
   /// 단일 이미지 업로드
-  FutureOr<SingleImageResDto> uploadPProfile(XFile image);
+  FutureOr<SingleImageResDto> uploadProfile(XFile image);
 
   /// 여러 이미지 업로드
-  FutureOr<MultiImageResDto> uploadImages(MultiImageReqDto dto);
+  FutureOr<MultiImageResDto> uploadPortfolio(List<XFile> images);
 }

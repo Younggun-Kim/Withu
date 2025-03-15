@@ -169,10 +169,13 @@ class CommonApiImpl implements CommonApi {
   FutureOr<SingleImageResDto> postSingleImageUpload(
     SingleImageReqDto dto,
   ) async {
+    final formData = await dto.toFormData();
+    logger.w(formData);
     return network.dio
         .post(
-          CommonApiPathType.uploadSingleImage.fullPath,
-          data: dto.toFormData(),
+          CommonApiPathType.uploadSingleImage.path,
+          data: formData,
+          options: Options(contentType: Headers.multipartFormDataContentType),
         )
         .then(
           (response) => SingleImageResDto.fromJson(
@@ -194,21 +197,22 @@ class CommonApiImpl implements CommonApi {
   FutureOr<MultiImageResDto> postMultiImageUpload(MultiImageReqDto dto) async {
     return network.dio
         .post(
-          CommonApiPathType.uploadMultiImage.fullPath,
-          data: dto.toFormData(),
+          CommonApiPathType.uploadMultiImage.path,
+          data: await dto.toFormData(),
         )
         .then(
           (response) => MultiImageResDto.fromJson(
             response.data,
-            (json) => json as List<String>,
+            (json) => (json as List<dynamic>).map((e) => e as String).toList(),
           ),
         )
-        .catchError(
-          (error) => MultiImageResDto.fromJson(
+        .catchError((error) {
+          logger.e(error);
+          return MultiImageResDto.fromJson(
             error?.response?.data,
-            (json) => json as List<String>,
-          ),
-        )
+            (json) => (json as List<dynamic>).map((e) => e as String).toList(),
+          );
+        })
         .catchError((_) => BaseResponseDtoMock.error<List<String>>());
   }
 }
