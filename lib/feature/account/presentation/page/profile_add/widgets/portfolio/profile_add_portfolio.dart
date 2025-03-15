@@ -43,9 +43,9 @@ class _ImageAddBtnSliver extends StatelessWidget {
                   }
                   ImagePickerBottomSheet.show(
                     context: context,
-                    onTap: (ImageFileValue file) {
+                    onTap: (ImageFileValue image) {
                       context.read<ProfileAddBloc>().add(
-                        ProfileAddPhotoAddRequested(file: file),
+                        ProfileAddPhotoAddRequested(image: image),
                       );
                     },
                   );

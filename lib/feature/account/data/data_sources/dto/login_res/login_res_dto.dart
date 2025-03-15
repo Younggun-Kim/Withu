@@ -8,7 +8,7 @@ part 'login_res_dto.g.dart';
 
 typedef LoginResDto = BaseResponseDto<LoginResData>;
 
-@freezed
+@Freezed()
 class LoginResData with _$LoginResData {
   factory LoginResData({
     @Default('') String accessToken,

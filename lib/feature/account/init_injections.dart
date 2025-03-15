@@ -1,5 +1,6 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import '../common/domain/usecase/upload_image/upload_image_use_case.dart';
 import 'presentation/bloc/change_pw/change_pw_bloc.dart';
 
 void initAccountDataInjections() {
@@ -31,6 +32,9 @@ void initAccountDomainInjections() {
   getIt.registerLazySingleton<GetUserProfileUseCase>(
     () => GetUserProfileUseCaseImpl(repo: getIt()),
   );
+  getIt.registerLazySingleton<UploadImageUseCase>(
+    () => UploadImageUseCaseImpl(commonRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
@@ -47,6 +51,7 @@ void initAccountPresentationInjections() {
     () => ChangePwBloc(changePwUseCase: getIt()),
   );
   getIt.registerFactory<ProfileAddBloc>(
-    () => ProfileAddBloc(profileAddUseCase: getIt()),
+    () =>
+        ProfileAddBloc(uploadImageUseCase: getIt(), profileAddUseCase: getIt()),
   );
 }

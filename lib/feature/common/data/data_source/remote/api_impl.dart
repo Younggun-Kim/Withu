@@ -163,4 +163,52 @@ class CommonApiImpl implements CommonApi {
         )
         .catchError((_) => BaseResponseDtoMock.error<List<AreaResData>>());
   }
+
+  /// 단일 이미지 업로드
+  @override
+  FutureOr<SingleImageResDto> postSingleImageUpload(
+    SingleImageReqDto dto,
+  ) async {
+    return network.dio
+        .post(
+          CommonApiPathType.uploadSingleImage.fullPath,
+          data: dto.toFormData(),
+        )
+        .then(
+          (response) => SingleImageResDto.fromJson(
+            response.data,
+            (json) => json as String,
+          ),
+        )
+        .catchError(
+          (error) => SingleImageResDto.fromJson(
+            error?.response?.data,
+            (json) => json as String,
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<String>());
+  }
+
+  /// 여러 이미지 업로드
+  @override
+  FutureOr<MultiImageResDto> postMultiImageUpload(MultiImageReqDto dto) async {
+    return network.dio
+        .post(
+          CommonApiPathType.uploadMultiImage.fullPath,
+          data: dto.toFormData(),
+        )
+        .then(
+          (response) => MultiImageResDto.fromJson(
+            response.data,
+            (json) => json as List<String>,
+          ),
+        )
+        .catchError(
+          (error) => MultiImageResDto.fromJson(
+            error?.response?.data,
+            (json) => json as List<String>,
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<List<String>>());
+  }
 }

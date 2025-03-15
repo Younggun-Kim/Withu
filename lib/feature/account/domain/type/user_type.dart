@@ -1,19 +1,21 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/utils/resource/string_res.dart';
 import 'package:withu/gen/assets.gen.dart';
 
 /// 계정 타입
+@JsonEnum(valueField: 'serverKey')
 enum UserType {
-  none(serverKey: 'AUTO'),
+  none('AUTO'),
 
   /// 고용주
-  company(serverKey: 'COMPANY'),
+  company('COMPANY'),
 
   /// 근로자
-  staff(serverKey: 'STAFF');
+  staff('STAFF');
 
   final String serverKey;
 
-  const UserType({required this.serverKey});
+  const UserType(this.serverKey);
 
   static List<UserType> get valuesWithoutNone =>
       values.where((type) => !type.isNone).toList();

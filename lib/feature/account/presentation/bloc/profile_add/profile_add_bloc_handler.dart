@@ -75,7 +75,7 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     }
 
     emit(
-      state.copyWith(portfolioImages: [...state.portfolioImages, event.file]),
+      state.copyWith(portfolioImages: [...state.portfolioImages, event.image]),
     );
   }
 

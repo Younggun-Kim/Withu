@@ -1,9 +1,10 @@
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
-import 'package:collection/collection.dart';
 
 import '../../../../../../core/utils/library/logger/logger.dart';
 

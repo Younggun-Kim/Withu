@@ -26,9 +26,9 @@ class ProfileAddFieldSelected extends ProfileAddEvent {
 
 /// 사진 추가 요청 이벤트
 class ProfileAddPhotoAddRequested extends ProfileAddEvent {
-  final ImageFileValue file;
+  final ImageFileValue image;
 
-  ProfileAddPhotoAddRequested({required this.file});
+  ProfileAddPhotoAddRequested({required this.image});
 }
 
 /// 사진 추가 요청 이벤트

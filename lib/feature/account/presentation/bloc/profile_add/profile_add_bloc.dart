@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
@@ -24,9 +23,10 @@ typedef ProfileAddBlocBuilder = BlocBuilder<ProfileAddBloc, ProfileAddState>;
 typedef ProfileAddBlocListener = BlocListener<ProfileAddBloc, ProfileAddState>;
 
 class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
+  final UploadImageUseCase uploadImageUseCase;
   final ProfileAddUseCase profileAddUseCase;
 
-  ProfileAddBloc({required this.profileAddUseCase})
+  ProfileAddBloc({required this.uploadImageUseCase, required this.profileAddUseCase})
     : super(ProfileAddState(status: BaseBlocStatus.initial())) {
     on<ProfileAddStepForwarded>(_onProfileAddStepForwarded);
     on<ProfileAddStepBackward>(_onProfileAddStepBackward);

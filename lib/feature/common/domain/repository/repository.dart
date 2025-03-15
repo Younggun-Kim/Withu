@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:withu/feature/common/data/data_source/dto/area/area_res_dto.dart';
 import 'package:withu/feature/common/data/data_source/remote/api.dart';
 import 'package:withu/feature/common/data/data_source/dto/dto.dart';
@@ -32,4 +33,10 @@ abstract class CommonRepository {
 
   /// 읍/면/동 조회
   FutureOr<AreaResDto> getEmd(String sggCode);
+
+  /// 단일 이미지 업로드
+  FutureOr<SingleImageResDto> uploadPProfile(XFile image);
+
+  /// 여러 이미지 업로드
+  FutureOr<MultiImageResDto> uploadImages(MultiImageReqDto dto);
 }

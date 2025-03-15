@@ -77,19 +77,19 @@ class AccountApiImpl extends AccountApi {
   FutureOr<LoginResDto> postEmailLogin({required EmailLoginReqData dto}) async {
     return network.dio
         .post(AccountApiPathType.emailLogin.fullPath, data: dto.toJson())
-        .then(
-          (response) => LoginResDto.fromJson(
+        .then((response) {
+          return LoginResDto.fromJson(
             response.data,
             (json) => LoginResData.fromJson(json as Map<String, dynamic>),
-          ),
-        )
-        .catchError(
-          (error) => LoginResDto.fromJson(
+          );
+        })
+        .catchError((error) {
+          return LoginResDto.fromJson(
             error.response?.data,
             (json) => LoginResData.fromJson(json as Map<String, dynamic>),
-          ),
-        )
-        .catchError((_) {
+          );
+        })
+        .catchError((e) {
           return BaseResponseDtoMock.error<LoginResData>();
         });
   }

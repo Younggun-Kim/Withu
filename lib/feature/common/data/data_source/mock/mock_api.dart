@@ -124,4 +124,40 @@ class CommonMockApi extends CommonApiImpl {
 
     return await super.getEmd(sggCode);
   }
+
+  /// 단일 이미지 업로드
+  @override
+  FutureOr<SingleImageResDto> postSingleImageUpload(
+    SingleImageReqDto dto,
+  ) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      CommonApiPathType.uploadSingleImage.fullPath,
+      data: dto.toFormData(),
+      (server) => server.reply(
+        200,
+        SingleImageResDtoMock.empty().toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postSingleImageUpload(dto);
+  }
+
+  /// 여러 이미지 업로드
+  @override
+  FutureOr<MultiImageResDto> postMultiImageUpload(MultiImageReqDto dto) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      CommonApiPathType.uploadMultiImage.fullPath,
+      data: dto.toFormData(),
+      (server) => server.reply(
+        200,
+        MultiImageResDtoMock.empty().toJson((data) => data),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.postMultiImageUpload(dto);
+  }
 }

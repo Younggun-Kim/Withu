@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:image_picker/image_picker.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/feature/common/data/data_source/dto/area/area_res_dto.dart';
 
@@ -56,5 +57,19 @@ class CommonRepositoryImpl implements CommonRepository {
   @override
   FutureOr<AreaResDto> getEmd(String sggCode) async {
     return await commonApi.getEmd(sggCode);
+  }
+
+  /// 단일 이미지 업로드
+  @override
+  FutureOr<SingleImageResDto> uploadPProfile(XFile image) async {
+    return await commonApi.postSingleImageUpload(
+      SingleImageReqDto(image: image, type: ServerImageType.profile),
+    );
+  }
+
+  /// 여러 이미지 업로드
+  @override
+  FutureOr<MultiImageResDto> uploadImages(MultiImageReqDto dto) async {
+    return await commonApi.postMultiImageUpload(dto);
   }
 }

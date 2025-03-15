@@ -1,11 +1,27 @@
 import 'dart:io';
-
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 
-typedef ImageFileValue = XFile;
+part 'image_file_value.freezed.dart';
+
+@freezed
+class ImageFileValue with _$ImageFileValue {
+  const ImageFileValue._();
+
+  const factory ImageFileValue({@Default('') String url, XFile? file}) =
+      _ImageFileValue;
+}
 
 extension ImageFileEx on ImageFileValue {
+  bool get hasUrl => url.isNotEmpty;
+
+  bool get hasFile => file != null;
+
+  XFile getFile() {
+    return file ?? XFile('');
+  }
+
   File toFile() {
-    return File(path);
+    return File(file?.path ?? '');
   }
 }

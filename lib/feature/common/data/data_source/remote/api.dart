@@ -9,6 +9,8 @@ import 'package:withu/feature/common/data/data_source/dto/area/area.dart';
 part 'api_impl.dart';
 
 enum CommonApiPathType {
+  uploadMultiImage('/images/upload/multiple'),
+  uploadSingleImage('/images/upload'),
   sido('/sido'),
   sgg('/sgg'),
   emd('/emd'),
@@ -47,4 +49,10 @@ abstract class CommonApi {
 
   /// 읍/면/동 조회
   FutureOr<AreaResDto> getEmd(String sggCode);
+
+  /// 단일 이미지 업로드
+  FutureOr<SingleImageResDto> postSingleImageUpload(SingleImageReqDto dto);
+
+  /// 여러 이미지 업로드
+  FutureOr<MultiImageResDto> postMultiImageUpload(MultiImageReqDto dto);
 }
