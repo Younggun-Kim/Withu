@@ -6,7 +6,7 @@ extension HomeBlocHandler on HomeBloc {
     HomeInitialized event,
     Emitter<HomeState> emit,
   ) async {
-    final profileInfo = await getUserProfileUseCase.exec();
+    final profileInfo = await getUserInfoUseCase.exec();
     getItGlobalBloc.add(GlobalUserInfoStored(profileInfo: profileInfo));
   }
 

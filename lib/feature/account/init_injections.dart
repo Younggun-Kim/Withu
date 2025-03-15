@@ -29,11 +29,14 @@ void initAccountDomainInjections() {
   getIt.registerLazySingleton<ProfileAddUseCase>(
     () => ProfileAddUseCaseImpl(accountRepo: getIt()),
   );
-  getIt.registerLazySingleton<GetUserProfileUseCase>(
+  getIt.registerLazySingleton<GetUserInfoUseCase>(
     () => GetUserProfileUseCaseImpl(repo: getIt()),
   );
   getIt.registerLazySingleton<UploadImageUseCase>(
     () => UploadImageUseCaseImpl(commonRepo: getIt()),
+  );
+  getIt.registerLazySingleton<GetProfileUseCase>(
+    () => GetProfileUseCaseImpl(accountRepo: getIt()),
   );
 }
 

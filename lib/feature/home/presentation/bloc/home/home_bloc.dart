@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/domain/usecase/get_user_profile/get_user_profile_use_case.dart';
+import 'package:withu/feature/account/domain/usecase/get_user_info/get_user_info_use_case.dart';
 import 'package:withu/feature/account/domain/usecase/login/login_usecase.dart';
 import 'package:withu/feature/home/domain/domain.dart';
 
@@ -23,9 +23,9 @@ typedef HomeBlocListener = BlocListener<HomeBloc, HomeState>;
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final LoginUseCase loginUseCase;
-  final GetUserProfileUseCase getUserProfileUseCase;
+  final GetUserInfoUseCase getUserInfoUseCase;
 
-  HomeBloc({required this.loginUseCase, required this.getUserProfileUseCase})
+  HomeBloc({required this.loginUseCase, required this.getUserInfoUseCase})
     : super(HomeState(status: BaseBlocStatus.initial())) {
     on<HomeInitialized>(_onHomeInitialized);
     on<HomeLogoutPressed>(_onHomeLogoutPressed);

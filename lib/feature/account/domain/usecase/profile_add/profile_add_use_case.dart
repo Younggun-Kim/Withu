@@ -32,10 +32,7 @@ class ProfileAddUseCaseImpl implements ProfileAddUseCase {
       dto: data.toDto(),
     );
 
-    if (!response.success) {
-      Toast.showWithNavigatorKey(text: response.message);
-      return false;
-    }
+    Toast.showWithNavigatorKey(text: response.message);
 
     /// TODO:  프로필 정보 저장하는 코드가 필요할 듯
     return response.success;

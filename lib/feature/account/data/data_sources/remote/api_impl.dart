@@ -280,7 +280,7 @@ class AccountApiImpl extends AccountApi {
 
   /// 내 프로필 조회
   @override
-  FutureOr<MyProfileResDto> getMyProfile() async {
+  FutureOr<MyProfileResDto> getUserInfo() async {
     return network.dio
         .get(AccountApiPathType.getMyProfile.fullPath)
         .then(
@@ -310,6 +310,32 @@ class AccountApiImpl extends AccountApi {
             : AccountApiPathType.updateStaffProfile;
     return network.dio
         .post(url.fullPath, data: dto.toJson())
+        .then(
+          (response) => ProfileDetailResDto.fromJson(
+            response.data,
+            (json) =>
+                ProfileDetailResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError(
+          (error) => ProfileDetailResDto.fromJson(
+            error.response?.data,
+            (json) =>
+                ProfileDetailResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<ProfileDetailResData>());
+  }
+
+  /// 프로필 홈 정보 얻기
+  @override
+  FutureOr<ProfileDetailResDto> getProfile(bool isCompany) async {
+    final url =
+        isCompany
+            ? AccountApiPathType.getCompanyProfile
+            : AccountApiPathType.getStaffProfile;
+    return network.dio
+        .get(url.fullPath)
         .then(
           (response) => ProfileDetailResDto.fromJson(
             response.data,

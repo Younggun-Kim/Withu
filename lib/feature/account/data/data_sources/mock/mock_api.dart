@@ -235,7 +235,7 @@ class AccountMockApi extends AccountApiImpl {
 
   /// 내 프로필 조회
   @override
-  FutureOr<MyProfileResDto> getMyProfile() async {
+  FutureOr<MyProfileResDto> getUserInfo() async {
     /// Mock 응답 등록
     dioAdapter.onGet(
       AccountApiPathType.getMyProfile.fullPath,
@@ -246,7 +246,7 @@ class AccountMockApi extends AccountApiImpl {
       ),
     );
 
-    return await super.getMyProfile();
+    return await super.getUserInfo();
   }
 
   /// 프로필 업데이트
@@ -272,5 +272,26 @@ class AccountMockApi extends AccountApiImpl {
     );
 
     return await super.updateProfile(isCompany: isCompany, dto: dto);
+  }
+
+  /// 프로필 홈 정보 얻기
+  @override
+  FutureOr<ProfileDetailResDto> getProfile(bool isCompany) async {
+    final url =
+        isCompany
+            ? AccountApiPathType.getCompanyProfile
+            : AccountApiPathType.getStaffProfile;
+
+    /// Mock 응답 등록
+    dioAdapter.onGet(
+      url.fullPath,
+      (server) => server.reply(
+        200,
+        ProfileDetailResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.getProfile(isCompany);
   }
 }

@@ -4,15 +4,15 @@ import 'package:withu/feature/account/account.dart';
 import 'package:withu/shared/dialogs/toast/toast.dart';
 
 /// 회원 정보 조회
-abstract class GetUserProfileUseCase {
+abstract class GetUserInfoUseCase {
   final AccountRepository repo;
 
-  GetUserProfileUseCase({required this.repo});
+  GetUserInfoUseCase({required this.repo});
 
   FutureOr<MyProfileEntity> exec();
 }
 
-class GetUserProfileUseCaseImpl implements GetUserProfileUseCase {
+class GetUserProfileUseCaseImpl implements GetUserInfoUseCase {
   @override
   final AccountRepository repo;
 
@@ -20,7 +20,7 @@ class GetUserProfileUseCaseImpl implements GetUserProfileUseCase {
 
   @override
   FutureOr<MyProfileEntity> exec() async {
-    final response = await repo.getMyProfile();
+    final response = await repo.getUserInfo();
     final data = response.data;
     if (data == null || !response.success) {
       Toast.showWithNavigatorKey(text: response.message);

@@ -41,7 +41,7 @@ abstract class AccountRepository {
   FutureOr<LoginResDto> postSnsSignUp(SnsSignUpReqDto dto, UserType userType);
 
   /// 내 정보 조회
-  FutureOr<MyProfileResDto> getMyProfile();
+  FutureOr<MyProfileResDto> getUserInfo();
 
   /// FCM 토큰 등록
   FutureOr<FcmRegistrationResDto> postFcmTokenRegistration({
@@ -53,6 +53,9 @@ abstract class AccountRepository {
     required bool isCompany,
     required ProfileUpdateReqDto dto,
   });
+
+  /// Profile 정보 얻기
+  FutureOr<ProfileDetailResDto> getProfile(bool isCompany);
 
   /// Storage 관련
   void resetStoredData();

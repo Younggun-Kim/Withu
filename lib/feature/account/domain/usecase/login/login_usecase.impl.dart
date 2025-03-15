@@ -100,7 +100,7 @@ extension LoginUseCaseEx on LoginUseCase {
   }
 
   Future<UserType> getUserType() async {
-    final myProfileDto = await accountRepo.getMyProfile();
+    final myProfileDto = await accountRepo.getUserInfo();
     final myProfileData = myProfileDto.data;
 
     if (!myProfileDto.success || myProfileData == null) {

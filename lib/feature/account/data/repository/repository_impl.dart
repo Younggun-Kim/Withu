@@ -94,8 +94,8 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  FutureOr<MyProfileResDto> getMyProfile() async {
-    return await accountApi.getMyProfile();
+  FutureOr<MyProfileResDto> getUserInfo() async {
+    return await accountApi.getUserInfo();
   }
 
   @override
@@ -127,6 +127,12 @@ class AccountRepositoryImpl implements AccountRepository {
     required ProfileUpdateReqDto dto,
   }) async {
     return await accountApi.updateProfile(isCompany: isCompany, dto: dto);
+  }
+
+  /// Profile 정보 얻기
+  @override
+  FutureOr<ProfileDetailResDto> getProfile(bool isCompany) async {
+    return await accountApi.getProfile(isCompany);
   }
 
   /// Storage 초기화

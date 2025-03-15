@@ -10,21 +10,30 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileBlocBuilder(
-      builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _CompanyProfile(),
-              const Spacer(),
-              _CompanyUnregistered(),
-              const Spacer(),
-            ],
-          ),
-        );
+    return GlobalBlocListener(
+      bloc: getItGlobalBloc,
+      listener: (context, state) {
+        logger.i(state.profileInfo);
+        if (state.profileInfo?.userType != null) {
+          context.read<ProfileBloc>().add(ProfileInitialized());
+        }
       },
+      child: ProfileBlocBuilder(
+        builder: (context, state) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 28, horizontal: 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _CompanyProfile(),
+                const Spacer(),
+                _CompanyUnregistered(),
+                const Spacer(),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -19,6 +19,10 @@ class ProfileDetailEntity with _$ProfileDetailEntity {
   const ProfileDetailEntity._();
 }
 
+extension ProfileDetailEntityEx on ProfileDetailEntity {
+  bool get isEmpty => id.isEmpty;
+}
+
 extension ProfileDetailEntityParser on ProfileDetailEntity {
   // TODO 지역 파싱 추가
   static ProfileDetailEntity fromDto(ProfileDetailResData dto) {
@@ -31,5 +35,9 @@ extension ProfileDetailEntityParser on ProfileDetailEntity {
       areas:
           dto.preferredLocations.map((location) => location.district).toList(),
     );
+  }
+
+  static ProfileDetailEntity empty() {
+    return ProfileDetailEntity();
   }
 }
