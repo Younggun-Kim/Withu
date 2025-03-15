@@ -108,7 +108,15 @@ class _CompanyProfile extends StatelessWidget {
             const SizedBox(width: 7),
             FieldTag(field: state.profile.field),
             const Spacer(),
-            InkWell(onTap: () {}, radius: 30, child: Assets.images.menu.svg()),
+            InkWell(
+              onTap: () {
+                context.read<ProfileBloc>().add(
+                  ProfileRegistrationBtnPressed(),
+                );
+              },
+              radius: 30,
+              child: Assets.images.menu.svg(),
+            ),
           ],
         );
       },
@@ -313,7 +321,6 @@ class _CareerContentState extends State<_CareerContent> {
   void initState() {
     super.initState();
     _pageController.addListener(() {
-      logger.i(_pageController.hasClients);
       if (_pageController.hasClients) {
         setState(() {
           _currentPage = _pageController.page?.toInt() ?? 0;

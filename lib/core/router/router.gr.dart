@@ -31,13 +31,15 @@ import 'package:withu/feature/account/presentation/page/login/login_page.dart'
     as _i11;
 import 'package:withu/feature/account/presentation/page/profile_add/profile_add_page.dart'
     as _i12;
+import 'package:withu/feature/account/presentation/page/profile_add/profile_add_page_args.dart'
+    as _i24;
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page.dart'
     as _i13;
 import 'package:withu/feature/account/presentation/page/sign_up/sign_up_page_args.dart'
-    as _i24;
+    as _i25;
 import 'package:withu/feature/account/presentation/page/term/term_page.dart'
     as _i16;
-import 'package:withu/feature/common/common.dart' as _i25;
+import 'package:withu/feature/common/common.dart' as _i26;
 import 'package:withu/feature/common/presentation/page/validate_business/validate_business_page.dart'
     as _i17;
 import 'package:withu/feature/home/presentation/page/home/home_page.dart'
@@ -430,10 +432,17 @@ class LoginRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.ProfileAddPage]
-class ProfileAddRoute extends _i18.PageRouteInfo<void> {
-  const ProfileAddRoute({List<_i18.PageRouteInfo>? children})
-      : super(
+class ProfileAddRoute extends _i18.PageRouteInfo<ProfileAddRouteArgs> {
+  ProfileAddRoute({
+    _i21.Key? key,
+    required _i24.ProfileAddPageArgs args,
+    List<_i18.PageRouteInfo>? children,
+  }) : super(
           ProfileAddRoute.name,
+          args: ProfileAddRouteArgs(
+            key: key,
+            args: args,
+          ),
           initialChildren: children,
         );
 
@@ -442,9 +451,29 @@ class ProfileAddRoute extends _i18.PageRouteInfo<void> {
   static _i18.PageInfo page = _i18.PageInfo(
     name,
     builder: (data) {
-      return const _i12.ProfileAddPage();
+      final args = data.argsAs<ProfileAddRouteArgs>();
+      return _i12.ProfileAddPage(
+        key: args.key,
+        args: args.args,
+      );
     },
   );
+}
+
+class ProfileAddRouteArgs {
+  const ProfileAddRouteArgs({
+    this.key,
+    required this.args,
+  });
+
+  final _i21.Key? key;
+
+  final _i24.ProfileAddPageArgs args;
+
+  @override
+  String toString() {
+    return 'ProfileAddRouteArgs{key: $key, args: $args}';
+  }
 }
 
 /// generated route for
@@ -452,7 +481,7 @@ class ProfileAddRoute extends _i18.PageRouteInfo<void> {
 class SignUpRoute extends _i18.PageRouteInfo<SignUpRouteArgs> {
   SignUpRoute({
     _i21.Key? key,
-    required _i24.SignUpPageArgs args,
+    required _i25.SignUpPageArgs args,
     List<_i18.PageRouteInfo>? children,
   }) : super(
           SignUpRoute.name,
@@ -485,7 +514,7 @@ class SignUpRouteArgs {
 
   final _i21.Key? key;
 
-  final _i24.SignUpPageArgs args;
+  final _i25.SignUpPageArgs args;
 
   @override
   String toString() {
@@ -556,7 +585,7 @@ class ValidateBusinessRoute
     extends _i18.PageRouteInfo<ValidateBusinessRouteArgs> {
   ValidateBusinessRoute({
     _i21.Key? key,
-    required _i25.ValidateBusinessPageArgs args,
+    required _i26.ValidateBusinessPageArgs args,
     List<_i18.PageRouteInfo>? children,
   }) : super(
           ValidateBusinessRoute.name,
@@ -589,7 +618,7 @@ class ValidateBusinessRouteArgs {
 
   final _i21.Key? key;
 
-  final _i25.ValidateBusinessPageArgs args;
+  final _i26.ValidateBusinessPageArgs args;
 
   @override
   String toString() {

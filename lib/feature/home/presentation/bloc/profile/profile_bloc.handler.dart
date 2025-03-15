@@ -18,6 +18,8 @@ extension ProfileBlocHandler on ProfileBloc {
     ProfileRegistrationBtnPressed event,
     ProfileEmitter emit,
   ) {
-    getItAppRouter.push(ProfileAddRoute());
+    getItAppRouter.push(
+      ProfileAddRoute(args: ProfileAddPageArgs(entity: state.profile)),
+    );
   }
 }

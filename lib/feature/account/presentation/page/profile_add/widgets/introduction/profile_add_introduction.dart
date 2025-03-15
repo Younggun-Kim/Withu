@@ -24,6 +24,9 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
     super.initState();
     _controller = TextEditingController();
     _focusNode = FocusNode();
+
+    /// 포커싱이 없으면 초기화 상태에서 값이 사라짐
+    _focusNode.requestFocus();
   }
 
   @override

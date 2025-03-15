@@ -1,6 +1,6 @@
 part of 'area_bloc.dart';
 
-enum AreaSelectStep { sido, sgg, emd }
+enum AreaSelectStep { sido, sgg }
 
 @freezed
 class AreaState extends BaseBlocState with _$AreaState {

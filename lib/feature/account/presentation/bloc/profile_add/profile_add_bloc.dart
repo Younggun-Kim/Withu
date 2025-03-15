@@ -32,6 +32,7 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
     required this.uploadImageUseCase,
     required this.profileAddUseCase,
   }) : super(ProfileAddState(status: BaseBlocStatus.initial())) {
+    on<ProfileAddInitialized>(_onProfileAddInitialized);
     on<ProfileAddStepForwarded>(_onProfileAddStepForwarded);
     on<ProfileAddStepBackward>(_onProfileAddStepBackward);
     on<ProfileAddIntroductionInputted>(_onProfileAddIntroductionInputted);

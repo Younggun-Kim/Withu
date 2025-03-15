@@ -104,7 +104,10 @@ class _PortfolioImageItem extends StatelessWidget {
               color: ColorName.tertiary,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.file(imageFile.toFile(), fit: BoxFit.cover),
+            child:
+                imageFile.hasUrl
+                    ? Image.network(imageFile.url, fit: BoxFit.cover)
+                    : Image.file(imageFile.toFile(), fit: BoxFit.cover),
           ),
         ),
         Positioned(

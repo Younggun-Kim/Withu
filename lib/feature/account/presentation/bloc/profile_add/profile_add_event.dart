@@ -2,6 +2,13 @@ part of 'profile_add_bloc.dart';
 
 abstract class ProfileAddEvent extends BaseBlocEvent {}
 
+/// 초기화
+class ProfileAddInitialized extends ProfileAddEvent {
+  final ProfileDetailEntity entity;
+
+  ProfileAddInitialized({required this.entity});
+}
+
 /// 다음 스탭으로 이동
 class ProfileAddStepForwarded extends ProfileAddEvent {}
 

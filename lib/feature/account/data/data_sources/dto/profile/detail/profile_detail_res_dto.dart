@@ -33,17 +33,16 @@ extension ProfileDetailResDtoMock on ProfileDetailResDto {
       errorCode: '',
       data: ProfileDetailResData(
         id: 'temp-profile-id',
-        introduction:
-            '저희는 시각적 감각과 식문화를 결합해, 다양한 브랜드의 메뉴 촬영 및 푸드 스타일링을 전문으로 하고 있습니다.',
+        introduction: '저희는 시각적 감각과 식문화를 결합해, 다양한 브랜드의 .',
         field: FieldType.foodStyling,
         profileImageUrl:
             'https://withu.uploader.s3.ap-northeast-2.amazonaws.com/profiles/123e4567-e89b-12d3-a456-426614174000/image.jpg',
-        portfolioImages: [],
-        // portfolioImages: PortfolioImageListDtoMock.mock(),
-        careers: [],
-        // careers: CareerListDtoMock.mock(),
-        preferredLocations: [],
-        // preferredLocations: PreferredLocationListDtoMock.mock(),
+        // portfolioImages: [],
+        portfolioImages: PortfolioImageListDtoMock.mock(),
+        // careers: [],
+        careers: CareerListDtoMock.mock(),
+        // preferredLocations: [],
+        preferredLocations: PreferredLocationListDtoMock.mock(),
       ),
     );
   }

@@ -37,18 +37,7 @@ class ProfileAddProfile extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(200),
                       ),
-                      child: Image.file(
-                        state.profileImage?.toFile() ?? File(''),
-                        width: 170,
-                        height: 170,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Assets.images.userDefault.svg(
-                            width: 170,
-                            height: 170,
-                          );
-                        },
-                      ),
+                      child: _ProfileImage(image: state.profileImage),
                     ),
                     Positioned(
                       bottom: 6,
@@ -69,6 +58,36 @@ class ProfileAddProfile extends StatelessWidget {
             ),
           ),
         );
+      },
+    );
+  }
+}
+
+class _ProfileImage extends StatelessWidget {
+  final ImageFileValue? image;
+
+  const _ProfileImage({required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    if (image?.hasUrl == true) {
+      return Image.network(
+        image?.url ?? '',
+        width: 170,
+        height: 170,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Assets.images.userDefault.svg(width: 170, height: 170);
+        },
+      );
+    }
+    return Image.file(
+      image?.toFile() ?? File(''),
+      width: 170,
+      height: 170,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Assets.images.userDefault.svg(width: 170, height: 170);
       },
     );
   }

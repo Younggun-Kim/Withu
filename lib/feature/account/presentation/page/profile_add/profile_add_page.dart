@@ -8,9 +8,13 @@ import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
 
+import 'profile_add_page_args.dart';
+
 @RoutePage()
 class ProfileAddPage extends StatelessWidget {
-  const ProfileAddPage({super.key});
+  final ProfileAddPageArgs args;
+
+  const ProfileAddPage({super.key, required this.args});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,11 @@ class ProfileAddPage extends StatelessWidget {
         AreaBlocProvider(
           create: (context) => getIt<AreaBloc>()..add(AreaInitialized()),
         ),
-        ProfileAddBlocProvider(create: (context) => getIt()),
+        ProfileAddBlocProvider(
+          create:
+              (context) =>
+                  getIt()..add(ProfileAddInitialized(entity: args.entity)),
+        ),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -41,40 +49,7 @@ class ProfileAddPage extends StatelessWidget {
                 context: context,
                 trailing: [_PageIndicator(), const SizedBox(width: 25)],
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: _StepPageView()),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: CustomEdgeInsets.horizontalPadding(),
-                    child: _SkipBtn(),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: CustomEdgeInsets.horizontalPadding(),
-                    child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
-                      children: [
-                        Visibility(
-                          visible: !state.currentStep.isFirst,
-                          child: Expanded(
-                            flex: 1, // 이전 버튼의 크기 설정
-                            child: _PrevBtn(),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
-                          child: _NextBtn(),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 55),
-                ],
-              ),
+              child: _StepPageView(),
             );
           },
         ),
@@ -181,61 +156,5 @@ class _StepPageViewState extends State<_StepPageView> {
     return ProfileAddStep.getValuesWith(
       getItGlobalBloc.state.isCompanyUser,
     ).map((type) => pageMap[type]).whereType<Widget>().toList();
-  }
-}
-
-class _SkipBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: InkWell(
-        onTap: () {
-          context.read<ProfileAddBloc>().add(ProfileAddStepForwarded());
-        },
-        child: Text(
-          StringRes.skipping.tr,
-          style: context.textTheme.bodyMedium?.setBlack,
-        ),
-      ),
-    );
-  }
-}
-
-class _PrevBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProfileAddBlocBuilder(
-      builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.only(right: 10),
-          child: BaseButton.basic(
-            context: context,
-            text: StringRes.prev.tr,
-            textColor: ColorName.text,
-            onTap: () {
-              context.read<ProfileAddBloc>().add(ProfileAddStepBackward());
-            },
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _NextBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProfileAddBlocBuilder(
-      builder: (context, state) {
-        return EnabledBtn(
-          isEnabled: state.isEnabledNextBtn(),
-          text: StringRes.next.tr,
-          onTap: () {
-            context.read<ProfileAddBloc>().add(ProfileAddStepForwarded());
-          },
-        );
-      },
-    );
   }
 }

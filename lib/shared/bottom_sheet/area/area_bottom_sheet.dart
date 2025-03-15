@@ -29,7 +29,7 @@ class AreaBottomSheet extends StatelessWidget {
                 const SizedBox(height: 16),
                 IndexedStack(
                   index: state.step.index,
-                  children: [_Sido(), _Sgg(), _Emd()],
+                  children: [_Sido(), _Sgg()],
                 ),
                 const SizedBox(height: 50),
               ],
@@ -117,26 +117,52 @@ class _Sgg extends StatelessWidget {
   Widget build(BuildContext context) {
     return AreaBlocBuilder(
       builder: (context, state) {
-        return Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children:
-              state.sgg
-                  .map(
-                    (sgg) => IntrinsicWidth(
-                      child: _AreaItem(
-                        key: Key(sgg.cd),
-                        text: sgg.addrName,
-                        isSelected: sgg.cd == state.selectedSgg?.cd,
-                        onTap: () {
-                          context.read<AreaBloc>().add(
-                            AreaSggSelected(sgg: sgg),
-                          );
-                        },
-                      ),
-                    ),
-                  )
-                  .toList(),
+        return Column(
+          children: [
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children:
+                  state.sgg
+                      .map(
+                        (sgg) => IntrinsicWidth(
+                          child: _AreaItem(
+                            key: Key(sgg.cd),
+                            text: sgg.addrName,
+                            isSelected: sgg.cd == state.selectedSgg?.cd,
+                            onTap: () {
+                              context.read<AreaBloc>().add(
+                                AreaSggSelected(sgg: sgg),
+                              );
+                            },
+                          ),
+                        ),
+                      )
+                      .toList(),
+            ),
+            const SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                context.read<AreaBloc>().add(AreaSubmitted());
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: Container(
+                width: 130,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: ColorName.secondary,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  StringRes.next.tr,
+                  style: context.textTheme.bodyLargeBold?.setWhite,
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

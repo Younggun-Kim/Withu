@@ -33,12 +33,12 @@ extension AreaBlocHandler on AreaBloc {
 
   void _onAreaSggSelected(AreaSggSelected event, AreaEmitter emit) async {
     emit(state.copyWith(selectedSgg: event.sgg));
-    final emds = await areaUseCase.getEmd(event.sgg);
+    // final emds = await areaUseCase.getEmd(event.sgg);
     emit(
       state.copyWith(
         selectedSgg: event.sgg,
-        step: AreaSelectStep.emd,
-        emd: emds,
+        // step: AreaSelectStep.emd,
+        // emd: emds,
       ),
     );
   }

@@ -3,6 +3,26 @@ part of 'profile_add_bloc.dart';
 typedef ProfileAddEmitter = Emitter<ProfileAddState>;
 
 extension ProfileAddBlocHandler on ProfileAddBloc {
+  /// 초기화
+  void _onProfileAddInitialized(
+    ProfileAddInitialized event,
+    ProfileAddEmitter emit,
+  ) {
+    final entity = event.entity;
+    emit(
+      state.copyWith(
+        introduction: entity.introduction,
+        field: entity.field,
+        portfolioImages: entity.portfolioImageUrls,
+        careers: entity.careers,
+        hasNewCareer: false,
+        careerFormData: CareerEntity(),
+        areas: entity.areas,
+        profileImage: entity.profileImageUrl,
+      ),
+    );
+  }
+
   /// 다음 스탭으로 이동
   void _onProfileAddStepForwarded(
     ProfileAddStepForwarded event,
@@ -58,6 +78,7 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     ProfileAddIntroductionInputted event,
     ProfileAddEmitter emit,
   ) {
+    logger.i('ProfileAddIntroductionInputted');
     emit(state.copyWith(introduction: event.introduction));
   }
 
