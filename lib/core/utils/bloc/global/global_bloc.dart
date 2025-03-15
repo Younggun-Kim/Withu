@@ -17,6 +17,8 @@ typedef GlobalBlocConsumer = BlocConsumer<GlobalBloc, GlobalState>;
 
 typedef GlobalBlocListener = BlocListener<GlobalBloc, GlobalState>;
 
+typedef GlobalBlocBuilder = BlocBuilder<GlobalBloc, GlobalState>;
+
 class GlobalBloc extends BaseBloc<GlobalEvent, GlobalState> {
   GlobalBloc() : super(GlobalState(status: BaseBlocStatus.initial())) {
     on<GlobalSignUpArgsStored>(_onGlobalSignUpArgsStored);

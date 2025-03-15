@@ -11,3 +11,4 @@ export 'lined_text_form/lined_text_form.dart';
 export 'more_options/more_options.dart';
 export 'base_button/base_button_export.dart';
 export 'bottom_navi_bar/custom_bottom_navi_bar.dart';
+export 'field_tag/field_tag.dart';

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ void run({required EnvironmentType environment}) async {
   // Init DI
   await initInjections();
 
+  /// 서버 인증서(CA) 가 공인된 인증서가 아닌 이슈 해결
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('ko')],
@@ -59,5 +63,15 @@ class App extends StatelessWidget {
             () => [FirebaseAnalyticsObserver(analytics: analytics)],
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    // '?'를 추가해서 null safety 확보
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

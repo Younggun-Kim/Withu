@@ -127,6 +127,14 @@ enum StringRes {
   yyyyMMddSlash,
   addCareer,
   selectHopeArea,
+  infoRegistration,
+  companyHasNoInfoTitle,
+  companyHasNoInfoDescription,
+  staffHasNoInfoTitle,
+  staffHasNoInfoDescription,
+  preferredLocation,
+  majorCareer,
+  portfolio,
 }
 
 extension StringResEx on StringRes {

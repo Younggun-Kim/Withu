@@ -141,5 +141,13 @@
   "inputCompanyName": "회사이름을 입력해주세요.",
   "yyyyMMddSlash": "YYYY / MM / DD",
   "addCareer": "경력 추가",
-  "selectHopeArea": "희망지역 선택"
+  "selectHopeArea": "희망지역 선택",
+  "infoRegistration": "정보 등록하기",
+  "companyHasNoInfoTitle": "아직 회사 정보가 없어요!",
+  "companyHasNoInfoDescription":  "공고 등록, 스탭 관리 등 다양한 기능을\n 더욱 편리하게 이용하실 수 있어요.",
+  "staffHasNoInfoTitle": "아직 스탭 정보가 없어요!",
+  "staffHasNoInfoDescription":  "공고 지원 등 다양한 기능을 \n더욱 편리하게 이용하실 수 있어요.",
+  "preferredLocation": "관심 지역",
+  "majorCareer": "주요 경력",
+  "portfolio":  "포트폴리오"
 }

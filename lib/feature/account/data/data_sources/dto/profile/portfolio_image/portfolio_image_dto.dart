@@ -23,8 +23,37 @@ extension PortfolioImageListDtoMock on PortfolioImageListDto {
     return [
       PortfolioImageDto(
         id: "323e4567-e89b-12d3-a456-426614174002",
-        imageUrl:
-            "<https://withu.uploader.s3.ap-northeast-2.amazonaws.com/portfolio/123e4567-e89b-12d3-a456-426614174000/image_1.jpg>",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174003",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174004",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174005",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174005",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174005",
+        imageUrl: "https://picsum.photos/300/300",
+        orderIndex: 0,
+      ),
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174005",
+        imageUrl: "https://picsum.photos/300/300",
         orderIndex: 0,
       ),
     ];
