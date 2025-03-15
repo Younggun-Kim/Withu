@@ -3,10 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../../../core/utils/library/logger/logger.dart';
 
 part 'career_entity.freezed.dart';
+
+part 'career_entity_parser.dart';
+
+typedef CareerEntities = List<CareerEntity>;
 
 /// 경력 Entity
 @freezed

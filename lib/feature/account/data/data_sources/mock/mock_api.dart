@@ -248,4 +248,29 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.getMyProfile();
   }
+
+  /// 프로필 업데이트
+  @override
+  FutureOr<ProfileDetailResDto> updateProfile({
+    required bool isCompany,
+    required ProfileUpdateReqDto dto,
+  }) async {
+    final url =
+        isCompany
+            ? AccountApiPathType.updateCompanyProfile
+            : AccountApiPathType.updateStaffProfile;
+
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      url.fullPath,
+      data: dto.toJson(),
+      (server) => server.reply(
+        200,
+        ProfileDetailResDtoMock.success().toJson((data) => data.toJson()),
+        delay: const Duration(seconds: 1),
+      ),
+    );
+
+    return await super.updateProfile(isCompany: isCompany, dto: dto);
+  }
 }

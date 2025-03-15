@@ -1,9 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/utils/resource/string_res.dart';
 import 'package:withu/gen/assets.gen.dart';
 
 /// 계정 타입
-@JsonEnum(valueField: 'serverKey')
 enum UserType {
   none(serverKey: 'AUTO'),
 

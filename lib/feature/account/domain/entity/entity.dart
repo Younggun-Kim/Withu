@@ -12,3 +12,4 @@ export 'introduction/introduction_value.dart';
 export 'my_profile/my_profile_entity.dart';
 export 'sign_up_args/sign_up_args_value.dart';
 export 'career/career.dart';
+export 'profile/profile.dart';

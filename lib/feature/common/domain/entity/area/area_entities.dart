@@ -1,4 +1,4 @@
-import 'area_entity.dart';
+part of 'area_entity.dart';
 
 typedef AreaEntities = List<AreaEntity>;
 

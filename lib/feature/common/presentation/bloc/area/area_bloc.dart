@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/common/domain/entity/area/area_entities.dart';
 import 'package:withu/feature/common/domain/entity/area/area_entity.dart';
 import 'package:withu/feature/common/domain/usecase/area/area_use_case.dart';
 

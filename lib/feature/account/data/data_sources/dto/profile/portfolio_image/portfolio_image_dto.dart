@@ -4,7 +4,7 @@ part 'portfolio_image_dto.freezed.dart';
 
 part 'portfolio_image_dto.g.dart';
 
-typedef PortfolioImageDtoListDto = List<PortfolioImageDto>;
+typedef PortfolioImageListDto = List<PortfolioImageDto>;
 
 @freezed
 class PortfolioImageDto with _$PortfolioImageDto {
@@ -16,4 +16,17 @@ class PortfolioImageDto with _$PortfolioImageDto {
 
   factory PortfolioImageDto.fromJson(Map<String, dynamic> json) =>
       _$PortfolioImageDtoFromJson(json);
+}
+
+extension PortfolioImageListDtoMock on PortfolioImageListDto {
+  static PortfolioImageListDto mock() {
+    return [
+      PortfolioImageDto(
+        id: "323e4567-e89b-12d3-a456-426614174002",
+        imageUrl:
+            "<https://withu.uploader.s3.ap-northeast-2.amazonaws.com/portfolio/123e4567-e89b-12d3-a456-426614174000/image_1.jpg>",
+        orderIndex: 0,
+      ),
+    ];
+  }
 }

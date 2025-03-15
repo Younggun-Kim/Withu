@@ -297,4 +297,33 @@ class AccountApiImpl extends AccountApi {
         )
         .catchError((_) => BaseResponseDtoMock.error<MyProfileResData>());
   }
+
+  /// 프로필 업데이트
+  @override
+  FutureOr<ProfileDetailResDto> updateProfile({
+    required bool isCompany,
+    required ProfileUpdateReqDto dto,
+  }) async {
+    final url =
+        isCompany
+            ? AccountApiPathType.updateCompanyProfile
+            : AccountApiPathType.updateStaffProfile;
+    return network.dio
+        .post(url.fullPath, data: dto.toJson())
+        .then(
+          (response) => ProfileDetailResDto.fromJson(
+            response.data,
+            (json) =>
+                ProfileDetailResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError(
+          (error) => ProfileDetailResDto.fromJson(
+            error.response?.data,
+            (json) =>
+                ProfileDetailResData.fromJson(json as Map<String, dynamic>),
+          ),
+        )
+        .catchError((_) => BaseResponseDtoMock.error<ProfileDetailResData>());
+  }
 }

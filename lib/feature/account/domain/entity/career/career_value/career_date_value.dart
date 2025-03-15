@@ -16,4 +16,8 @@ class CareerDateValue with _$CareerDateValue {
   DateTime getDate() {
     return DateFormat('yyyy/MM/dd').parse(value);
   }
+
+  String getDashed() {
+    return value.replaceAll('/', '-');
+  }
 }

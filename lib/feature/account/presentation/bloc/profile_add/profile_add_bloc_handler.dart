@@ -7,9 +7,37 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
   void _onProfileAddStepForwarded(
     ProfileAddStepForwarded event,
     ProfileAddEmitter emit,
-  ) {
+  ) async {
     final isCompany = getItGlobalBloc.state.isCompanyUser;
-    emit(state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)));
+    final currentStep = state.currentStep;
+
+    if (currentStep.isLast) {
+      emit(state.copyWith(status: BaseBlocStatus.loading()));
+
+      /// 1. 프로필 이미지 저장.
+      final profileImageUrls = '';
+
+      /// 2. 포트폴리오 이미지 저장.
+      final List<String> portfolioImageUrls = [];
+
+      /// 3. API 호출하기
+      final response = await profileAddUseCase.exec(
+        isCompany: isCompany,
+        data: state.toUpdateValue(
+          profileImageUrl: profileImageUrls,
+          portfolioImageUrls: portfolioImageUrls,
+        ),
+      );
+
+      emit(state.copyWith(status: BaseBlocStatus.fromSuccess(response)));
+      if (response) {
+        getItAppRouter.maybePop();
+      }
+    } else {
+      emit(
+        state.copyWith(currentStep: state.currentStep.getNextStep(isCompany)),
+      );
+    }
   }
 
   /// 다음 스탭으로 이동

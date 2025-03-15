@@ -120,6 +120,15 @@ class AccountRepositoryImpl implements AccountRepository {
     }
   }
 
+  /// Profile 등록/수정
+  @override
+  FutureOr<ProfileDetailResDto> postProfileUpdate({
+    required bool isCompany,
+    required ProfileUpdateReqDto dto,
+  }) async {
+    return await accountApi.updateProfile(isCompany: isCompany, dto: dto);
+  }
+
   /// Storage 초기화
   @override
   void resetStoredData() {

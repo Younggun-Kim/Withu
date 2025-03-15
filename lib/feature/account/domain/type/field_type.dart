@@ -3,35 +3,20 @@ import 'package:withu/core/utils/resource/string_res.dart';
 import 'package:withu/gen/assets.gen.dart';
 
 /// 계정 타입
-@JsonEnum(valueField: 'serverKey')
 enum FieldType {
-  none(serverKey: ''),
-  foodStyling(serverKey: 'FOOD_STYLING'),
-  florist(serverKey: 'FLORIST'),
-  photography(serverKey: 'PHOTOGRAPHY');
-
-  final String serverKey;
-
-  const FieldType({required this.serverKey});
+  @JsonValue('')
+  none,
+  @JsonValue('FOOD_STYLING')
+  foodStyling,
+  @JsonValue('FLOWER')
+  florist,
+  @JsonValue('PHOTOGRAPHY')
+  photography;
 
   static List<FieldType> get valuesWithoutNone =>
       values.where((type) => !type.isNone).toList();
 
   bool get isNone => this == none;
-
-  @override
-  String toString() {
-    switch (this) {
-      case FieldType.foodStyling:
-        return StringRes.foodStyling.tr;
-      case FieldType.florist:
-        return StringRes.flower.tr;
-      case FieldType.photography:
-        return StringRes.photography.tr;
-      default:
-        return '';
-    }
-  }
 }
 
 extension FieldTypeEx on FieldType {
@@ -45,6 +30,19 @@ extension FieldTypeEx on FieldType {
         return Assets.images.clapperboard;
       default:
         return null;
+    }
+  }
+
+  String toKor() {
+    switch (this) {
+      case FieldType.foodStyling:
+        return StringRes.foodStyling.tr;
+      case FieldType.florist:
+        return StringRes.flower.tr;
+      case FieldType.photography:
+        return StringRes.photography.tr;
+      default:
+        return '';
     }
   }
 }

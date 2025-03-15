@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/feature/common/data/data_source/dto/area/area_res_dto.dart';
 
+part 'area_entities.dart';
 part 'area_entity.freezed.dart';
 
 @freezed

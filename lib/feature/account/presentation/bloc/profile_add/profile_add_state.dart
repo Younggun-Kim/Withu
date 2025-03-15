@@ -61,4 +61,19 @@ extension ProfileAddStateEx on ProfileAddState {
         return true;
     }
   }
+
+  /// 이미지는 API를 통해 서버에 등록한 URL을 넣어주기
+  ProfileUpdateValue toUpdateValue({
+    required String profileImageUrl,
+    required List<String> portfolioImageUrls,
+  }) {
+    return ProfileUpdateValue(
+      introduction: introduction.value,
+      field: field,
+      profileImageUrl: profileImageUrl,
+      portfolioImageUrls: portfolioImageUrls,
+      careers: careers,
+      areas: areas,
+    );
+  }
 }

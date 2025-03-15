@@ -48,6 +48,12 @@ abstract class AccountRepository {
     required UserType userType,
   });
 
+  /// Profile 등록/수정
+  FutureOr<ProfileDetailResDto> postProfileUpdate({
+    required bool isCompany,
+    required ProfileUpdateReqDto dto,
+  });
+
   /// Storage 관련
   void resetStoredData();
 

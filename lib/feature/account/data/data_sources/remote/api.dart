@@ -4,6 +4,8 @@ import 'package:withu/feature/account/data/data_sources/dto/dto.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
 
 enum AccountApiPathType {
+  updateCompanyProfile('/company/profile'),
+  updateStaffProfile('/staff/profile'),
   getMyProfile('/auth/me/profile'),
   registerStaffToken('/staff/device-tokens'),
   registerCompanyToken('/company/device-tokens'),
@@ -82,4 +84,10 @@ abstract class AccountApi {
 
   /// 내 프로필 조회
   FutureOr<MyProfileResDto> getMyProfile();
+
+  /// 프로필 업데이트
+  FutureOr<ProfileDetailResDto> updateProfile({
+    required bool isCompany,
+    required ProfileUpdateReqDto dto,
+  });
 }

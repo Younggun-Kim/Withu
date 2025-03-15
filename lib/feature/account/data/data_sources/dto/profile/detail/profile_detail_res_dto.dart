@@ -16,12 +16,30 @@ class ProfileDetailResData with _$ProfileDetailResData {
     @Default('') String introduction,
     @Default(FieldType.none) FieldType field,
     @Default('') String profileImageUrl,
-    @Default([]) List<String> portfolioImages,
+    @Default([]) PortfolioImageListDto portfolioImages,
     @Default([]) CareerListDto careers,
+    @Default([]) PreferredLocationListDto preferredLocations,
   }) = _ProfileDetailResData;
 
   factory ProfileDetailResData.fromJson(Map<String, dynamic> json) =>
       _$ProfileDetailResDataFromJson(json);
 }
 
-extension ProfileDetailResDtoMock on ProfileDetailResDto {}
+extension ProfileDetailResDtoMock on ProfileDetailResDto {
+  static ProfileDetailResDto success() {
+    return ProfileDetailResDto(
+      success: true,
+      message: '프로필 조회 성공',
+      errorCode: '',
+      data: ProfileDetailResData(
+        id: 'temp-profile-id',
+        introduction: '자기소개입니다.',
+        field: FieldType.foodStyling,
+        profileImageUrl:
+            'https://withu.uploader.s3.ap-northeast-2.amazonaws.com/profiles/123e4567-e89b-12d3-a456-426614174000/image.jpg',
+        portfolioImages: PortfolioImageListDtoMock.mock(),
+        careers: CareerListDtoMock.mock(),
+      ),
+    );
+  }
+}
