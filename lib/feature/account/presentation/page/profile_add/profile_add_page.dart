@@ -155,9 +155,13 @@ class _StepPageViewState extends State<_StepPageView> {
   Widget build(BuildContext context) {
     return ProfileAddBlocConsumer(
       listener: (context, state) {
-        if (state.currentStep.index != _pageController.page?.toInt()) {
+        final isCompany = getItGlobalBloc.state.isCompanyUser;
+        final nextPage = state.currentStep.getIndexWith(isCompany);
+        final currentPage = _pageController.page?.toInt();
+
+        if (nextPage != currentPage) {
           _pageController.animateToPage(
-            state.currentStep.index,
+            nextPage,
             duration: Duration(milliseconds: 300),
             curve: Curves.easeIn,
           );

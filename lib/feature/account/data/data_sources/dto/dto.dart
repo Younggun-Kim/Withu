@@ -10,3 +10,4 @@ export 'token_registration/token_registration.dart';
 export 'my_profile/my_profile.dart';
 export 'fcm_registration/fcm_registration_res_dto.dart';
 export 'login_res/login_res_dto.dart';
+export 'profile/profile.dart';

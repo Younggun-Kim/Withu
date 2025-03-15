@@ -77,7 +77,7 @@ class CommonMockApi extends CommonApiImpl {
       CommonApiPathType.sido.fullPath,
       (server) => server.reply(
         200,
-        AreaResDtoMock.sgg().toJson(
+        AreaResDtoMock.sido().toJson(
           (data) => data.map((e) => e.toJson()).toList(),
         ),
         delay: const Duration(seconds: 1),
@@ -92,8 +92,8 @@ class CommonMockApi extends CommonApiImpl {
   FutureOr<AreaResDto> getSgg(String sidoCode) async {
     /// Mock 응답 등록
     dioAdapter.onGet(
-      '${CommonApiPathType.sgg.fullPath}?sidoCode=$sidoCode',
-      data: {'sidoCode': sidoCode},
+      CommonApiPathType.sgg.fullPath,
+      queryParameters: {"sidoCode": sidoCode},
       (server) => server.reply(
         200,
         AreaResDtoMock.sgg().toJson(
@@ -111,11 +111,11 @@ class CommonMockApi extends CommonApiImpl {
   FutureOr<AreaResDto> getEmd(String sggCode) async {
     /// Mock 응답 등록
     dioAdapter.onGet(
-      '${CommonApiPathType.emd.fullPath}?sggCode=$sggCode',
-      data: {'sggCode': sggCode},
+      CommonApiPathType.emd.fullPath,
+      queryParameters: {'sggCode': sggCode},
       (server) => server.reply(
         200,
-        AreaResDtoMock.sgg().toJson(
+        AreaResDtoMock.emd().toJson(
           (data) => data.map((e) => e.toJson()).toList(),
         ),
         delay: const Duration(seconds: 1),

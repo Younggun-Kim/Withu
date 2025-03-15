@@ -110,7 +110,10 @@ class CommonApiImpl implements CommonApi {
   @override
   FutureOr<AreaResDto> getSgg(String sidoCode) async {
     return network.dio
-        .get('${CommonApiPathType.sgg.fullPath}?sidoCode=$sidoCode')
+        .get(
+          CommonApiPathType.sgg.fullPath,
+          queryParameters: {"sidoCode": sidoCode},
+        )
         .then(
           (response) => AreaResDto.fromJson(
             response.data,
@@ -136,7 +139,10 @@ class CommonApiImpl implements CommonApi {
   @override
   FutureOr<AreaResDto> getEmd(String sggCode) async {
     return network.dio
-        .get('${CommonApiPathType.emd.fullPath}?sggCode=$sggCode')
+        .get(
+          CommonApiPathType.emd.fullPath,
+          queryParameters: {'sggCode': sggCode},
+        )
         .then(
           (response) => AreaResDto.fromJson(
             response.data,

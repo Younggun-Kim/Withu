@@ -53,8 +53,9 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
+        final isCompany = getItGlobalBloc.state.isCompanyUser;
         return Text(
-          state.currentStep.toTitle(),
+          state.currentStep.toTitle(isCompany),
           style: context.textTheme.headlineMedium?.setBlack,
         );
       },
@@ -67,8 +68,9 @@ class _Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
+        final isCompany = getItGlobalBloc.state.isCompanyUser;
         return Text(
-          state.currentStep.toDescription(),
+          state.currentStep.toDescription(isCompany),
           style: context.textTheme.bodyMedium?.setBlack,
         );
       },

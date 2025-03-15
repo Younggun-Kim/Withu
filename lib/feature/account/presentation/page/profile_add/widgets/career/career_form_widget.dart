@@ -124,7 +124,7 @@ class _NameInputState extends State<_NameInput> {
   Widget build(BuildContext context) {
     return ProfileAddBlocListener(
       listener: (context, state) {
-        if (state.careerFormData.name != _controller.text) {
+        if (state.careerFormData.name.value != _controller.text) {
           _controller.text = state.careerFormData.name.value;
         }
       },

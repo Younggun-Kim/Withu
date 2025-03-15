@@ -33,6 +33,11 @@ extension ProfileRegistrationStepEx on ProfileAddStep {
 
   bool get isLast => this == ProfileAddStep.profile;
 
+  /// UserType에 따른 현재 인덱스 얻기
+  int getIndexWith(bool isCompany) {
+    return ProfileAddStep.getValuesWith(isCompany).indexOf(this);
+  }
+
   ProfileAddStep getNextStep(bool isCompany) {
     final values = ProfileAddStep.getValuesWith(isCompany);
     final lastIndex = values.length - 1;
@@ -51,37 +56,53 @@ extension ProfileRegistrationStepEx on ProfileAddStep {
     return values[max(prevIndex, firstIndex)];
   }
 
-  String toTitle() {
+  String toTitle(bool isCompany) {
     switch (this) {
       case ProfileAddStep.introduction:
-        return StringRes.selfIntroRegister.tr;
+        return isCompany
+            ? StringRes.companyIntroRegister.tr
+            : StringRes.selfIntroRegister.tr;
       case ProfileAddStep.field:
-        return StringRes.selfFieldSelect.tr;
+        return isCompany
+            ? StringRes.companyFieldSelect.tr
+            : StringRes.selfFieldSelect.tr;
       case ProfileAddStep.career:
-        return StringRes.selfCareerInput.tr;
+        return isCompany ? '' : StringRes.selfCareerInput.tr;
       case ProfileAddStep.portfolio:
-        return StringRes.selfPortfolioAdd.tr;
+        return isCompany
+            ? StringRes.companyPortfolioAdd.tr
+            : StringRes.selfPortfolioAdd.tr;
       case ProfileAddStep.area:
-        return StringRes.selfInterestAreaAdd.tr;
+        return isCompany ? "" : StringRes.selfInterestAreaAdd.tr;
       case ProfileAddStep.profile:
-        return StringRes.selfProfileRegister.tr;
+        return isCompany
+            ? StringRes.companyProfileRegister.tr
+            : StringRes.selfProfileRegister.tr;
     }
   }
 
-  String toDescription() {
+  String toDescription(bool isCompany) {
     switch (this) {
       case ProfileAddStep.introduction:
-        return StringRes.selfIntroHint.tr;
+        return isCompany
+            ? StringRes.companyIntroHint.tr
+            : StringRes.selfIntroHint.tr;
       case ProfileAddStep.field:
-        return StringRes.selfFieldDescription.tr;
+        return isCompany
+            ? StringRes.companyFieldDescription.tr
+            : StringRes.selfFieldDescription.tr;
       case ProfileAddStep.career:
-        return StringRes.selfAchievementInfo.tr;
+        return isCompany ? '' : StringRes.selfAchievementInfo.tr;
       case ProfileAddStep.portfolio:
-        return StringRes.selfPortfolioPhotoGuide.tr;
+        return isCompany
+            ? StringRes.companyPortfolioPhotoGuide.tr
+            : StringRes.selfPortfolioPhotoGuide.tr;
       case ProfileAddStep.area:
-        return StringRes.selfInterestAreaInfo.tr;
+        return isCompany ? '' : StringRes.selfInterestAreaInfo.tr;
       case ProfileAddStep.profile:
-        return StringRes.selfProfilePhotoUpload.tr;
+        return isCompany
+            ? StringRes.companyProfilePhotoUpload.tr
+            : StringRes.selfProfilePhotoUpload.tr;
     }
   }
 }
