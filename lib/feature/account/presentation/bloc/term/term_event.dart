@@ -12,6 +12,9 @@ class TermAccountTypeSelected extends TermEvent {
   TermAccountTypeSelected({required this.value});
 }
 
+/// 화면 단계 뒤로가기
+class TermStepBackPressed extends TermEvent {}
+
 /// 화면 첫 번째 스텝 다음 버튼 클릭
 class TermFirstNextPressed extends TermEvent {}
 

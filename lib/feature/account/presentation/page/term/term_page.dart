@@ -30,7 +30,12 @@ class _TermPageContent extends StatelessWidget {
         return PageRoot(
           isLoading: state.status.isLoading,
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 36),
-          appBar: CustomAppBar.back(context: context),
+          appBar: CustomAppBar.customActionBack(
+            context: context,
+            onPressed: () {
+              context.read<TermBloc>().add(TermStepBackPressed());
+            },
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

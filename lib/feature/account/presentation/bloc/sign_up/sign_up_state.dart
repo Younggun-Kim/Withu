@@ -27,8 +27,14 @@ class SignUpState extends BaseBlocState with _$SignUpState {
     /// 이메일
     @Default(EmailValue()) EmailValue email,
 
+    /// 이메일 에러 노출 여부
+    @Default(VisibleType.none) VisibleType emailErrorVisible,
+
     /// 비밀번호
     @Default(PasswordValue()) PasswordValue password,
+
+    /// 비밀번호 에러 노출 여부
+    @Default(VisibleType.none) VisibleType passwordErrorVisible,
 
     /// 채널
     @Default(ChannelType.none) ChannelType channel,
@@ -50,12 +56,11 @@ extension SignUpStateEx on SignUpState {
 
   /// 버튼 Enabled 여부
   bool get isEnabledSubmitBtn {
-    logger.i('${args?.signUpType} ${args?.businessNum} ${args?.companyName}');
     final isSns = args?.signUpType.isSns == true;
 
     final isSnsValid =
         name.isValid() &&
-        birthDate.isValid() &&
+        birthDate.isValidSlash() &&
         !gender.isNone &&
         phone.isValid() &&
         isPhoneVerify;

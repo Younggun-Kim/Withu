@@ -8,7 +8,7 @@ import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/shared.dart';
-import 'package:withu/shared/widgets/multi_input/ymd_input.dart';
+import 'package:withu/shared/widgets/base_input/slash_date_input.dart';
 
 import 'sign_up_page_args.dart';
 
@@ -95,6 +95,7 @@ class _SignUpPageContent extends StatelessWidget {
                       children: [
                         _FieldName.email(),
                         _EmailInput(),
+                        _EmailErrorDescription(),
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -106,6 +107,7 @@ class _SignUpPageContent extends StatelessWidget {
                   Visibility(
                     visible: state.args?.signUpType.isEmail == true,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _FieldName.password(),
                         _PasswordInput(),
@@ -200,12 +202,32 @@ class _NameInputState extends State<_NameInput> {
   }
 }
 
-class _BirthDateInput extends StatelessWidget {
+class _BirthDateInput extends StatefulWidget {
   const _BirthDateInput();
 
   @override
+  State<StatefulWidget> createState() => _BirthDateInputState();
+}
+
+class _BirthDateInputState extends State<_BirthDateInput> {
+  final _controller = TextEditingController();
+  final _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return YmdInput(
+    return SlashDateInput(
+      controller: _controller,
+      focusNode: _focusNode,
       onChanged: (String text) {
         context.read<SignUpBloc>().add(
           SignUpBirthDateInputted(value: BirthDateValue(text)),
@@ -319,6 +341,32 @@ class _EmailInputState extends State<_EmailInput> {
   }
 }
 
+class _EmailErrorDescription extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SignUpBlocBuilder(
+      builder: (context, state) {
+        if (state.emailErrorVisible.isVisible == false) {
+          return const SizedBox();
+        }
+        return Container(
+          margin: const EdgeInsets.only(top: 7),
+          padding: EdgeInsets.symmetric(horizontal: 3),
+          child: Row(
+            children: [
+              const SizedBox(width: 10),
+              Text(
+                '올바른 이메일을 입력해주세요.',
+                style: context.textTheme.bodySmall?.setPoint,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _PasswordInput extends StatefulWidget {
   const _PasswordInput();
 
@@ -366,7 +414,7 @@ class _PasswordDescription1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SignUpBlocBuilder(
       builder: (context, state) {
-        if (state.password.isValid()) {
+        if (state.passwordErrorVisible.isVisible == false) {
           return const SizedBox();
         }
         return Container(
@@ -393,7 +441,7 @@ class _PasswordDescription2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SignUpBlocBuilder(
       builder: (context, state) {
-        if (state.password.isValid()) {
+        if (state.passwordErrorVisible.isVisible == false) {
           return const SizedBox();
         }
         return Container(

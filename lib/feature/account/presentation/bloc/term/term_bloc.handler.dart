@@ -9,6 +9,17 @@ extension TermBlocHandler on TermBloc {
     emit(state.copyWith(accountType: event.value));
   }
 
+  void _onTermStepBackPressed(
+    TermStepBackPressed event,
+    Emitter<TermState> emit,
+  ) {
+    if (!state.step.isFirst) {
+      emit(state.copyWith(step: TermPageStepType.first));
+    } else {
+      getItAppRouter.maybePop();
+    }
+  }
+
   void _onTermFirstNextPressed(
     TermFirstNextPressed event,
     Emitter<TermState> emit,

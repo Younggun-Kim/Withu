@@ -27,6 +27,21 @@ class CustomAppBar extends AppBar {
       trailing: trailing,
     );
   }
+
+  /// 뒤로가기.
+  factory CustomAppBar.customActionBack({
+    required BuildContext context,
+    required VoidCallback onPressed,
+    List<Widget>? trailing,
+  }) {
+    return CustomAppBar(
+      backButton: IconButton(
+        icon: Assets.images.chevronLeft.svg(),
+        onPressed: onPressed,
+      ),
+      trailing: trailing,
+    );
+  }
   final Widget? backButton;
 
   final List<Widget>? trailing;

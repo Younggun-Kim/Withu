@@ -62,7 +62,12 @@ extension SignUpBlocHandler on SignUpBloc {
     SignUpEmailInputted event,
     Emitter<SignUpState> emit,
   ) {
-    emit(state.copyWith(email: event.value));
+    emit(
+      state.copyWith(
+        email: event.value,
+        emailErrorVisible: VisibleTypeEx.fromBool(!event.value.isValid()),
+      ),
+    );
   }
 
   /// 비밀번호 입력
@@ -70,7 +75,12 @@ extension SignUpBlocHandler on SignUpBloc {
     SignUpPasswordInputted event,
     Emitter<SignUpState> emit,
   ) {
-    emit(state.copyWith(password: event.password));
+    emit(
+      state.copyWith(
+        password: event.password,
+        passwordErrorVisible: VisibleTypeEx.fromBool(!event.password.isValid()),
+      ),
+    );
   }
 
   /// 채널 선택
@@ -103,17 +113,12 @@ extension SignUpBlocHandler on SignUpBloc {
       return;
     }
 
+    bool isSuccess = false;
     if (state.isSnsSignUp) {
-      final isSuccess = await signUpUseCase.snsSignUp(
-        state.toSnsData(),
-        userType,
-      );
-
-      emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
+      isSuccess = await signUpUseCase.snsSignUp(state.toSnsData(), userType);
     } else {
-      final isSuccess = await signUpUseCase.emailSignUp(state.toEntity());
-
-      emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
+      isSuccess = await signUpUseCase.emailSignUp(state.toEntity());
     }
+    emit(state.copyWith(status: BaseBlocStatus.fromSuccess(isSuccess)));
   }
 }

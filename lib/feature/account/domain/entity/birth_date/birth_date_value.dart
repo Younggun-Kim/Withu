@@ -10,8 +10,9 @@ class BirthDateValue with _$BirthDateValue {
   const BirthDateValue._();
 
   bool isValid() => RegExUtil.birthDatePattern.hasMatch(value);
+  bool isValidSlash() => RegExUtil.ymdSlashPattern.hasMatch(value);
 
   String get formattedDate {
-    return value.ymdToYmdSlash();
+    return value.replaceAll('/', '-');
   }
 }

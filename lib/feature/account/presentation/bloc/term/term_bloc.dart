@@ -25,6 +25,7 @@ class TermBloc extends BaseBloc<TermEvent, TermState> {
   TermBloc({required this.accountRepo})
     : super(TermState(status: BaseBlocStatus.initial())) {
     on<TermAccountTypeSelected>(_onTermAccountTypeSelected);
+    on<TermStepBackPressed>(_onTermStepBackPressed);
     on<TermFirstNextPressed>(_onTermFirstNextPressed);
     on<TermSecondNextPressed>(_onTermSecondNextPressed);
     on<TermAllAgreementTapped>(_onTermAllAgreementTapped);

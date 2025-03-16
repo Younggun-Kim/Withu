@@ -184,7 +184,7 @@ class _VerifyResultWrapper extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(top: 7),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: _VerifyResultText(),
     );
   }

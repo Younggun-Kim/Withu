@@ -12,7 +12,7 @@ part 'sign_up_state.dart';
 
 part 'sign_up_bloc.freezed.dart';
 
-part 'sign_up_bloc.handler.dart';
+part 'sign_up_bloc_handler.dart';
 
 typedef SignUpBlocProvider = BlocProvider<SignUpBloc>;
 

@@ -6,6 +6,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
+import 'package:withu/shared/widgets/base_input/slash_date_input.dart';
 
 @RoutePage()
 class ValidateBusinessPage extends StatelessWidget {
@@ -32,12 +33,13 @@ class _ValidateBusinessPageContent extends StatelessWidget {
         return PageRoot(
           isLoading: state.status.isLoading,
           appBar: CustomAppBar.back(context: context),
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 36),
+          padding: CustomEdgeInsets.horizontalPadding(),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 24),
                 Assets.images.logoPuzzle2.svg(),
                 const SizedBox(height: 10),
                 _Title(),
@@ -290,51 +292,18 @@ class OpenDateInputState extends State<OpenDateInput> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_formatBusinessNumber);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_formatBusinessNumber);
-    _controller.dispose();
-    _focusNode.dispose();
     super.dispose();
-  }
-
-  void _formatBusinessNumber() {
-    String text = _controller.text.replaceAll(RegExp(r'\D'), ''); // 숫자만 남김
-    String formattedText = _applyFormat(text);
-
-    if (_controller.text != formattedText) {
-      _controller.value = TextEditingValue(
-        text: formattedText,
-        selection: TextSelection.collapsed(offset: formattedText.length),
-      );
-    }
-  }
-
-  /// 숫자 문자열에 슬래쉬 추가
-  String _applyFormat(String digits) {
-    if (digits.isEmpty) return '';
-
-    StringBuffer buffer = StringBuffer();
-    for (int i = 0; i < digits.length; i++) {
-      if (i == 4 || i == 6) buffer.write('/');
-      buffer.write(digits[i]);
-    }
-
-    return buffer.toString();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseInput(
+    return SlashDateInput(
       controller: _controller,
       focusNode: _focusNode,
-      hintText: 'YYYY / MM / DD',
-      maxLength: 8,
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       onChanged: (String text) {
         context.read<ValidateBusinessBloc>().add(
           ValidateBusinessOpenDateNameInputted(value: OpenDateValue(text)),
