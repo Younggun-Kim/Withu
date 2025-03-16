@@ -215,6 +215,24 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     );
   }
 
+  /// 경력 폼 등록
+  void _onProfileAddFormRegistered(
+    ProfileAddFormRegistered event,
+    ProfileAddEmitter emit,
+  ) {
+    final formEntity = state.careerFormEntity;
+    emit(
+      state.copyWith(
+        careerFormName: NameValue(),
+        careerFormContent: CareerContentValue(),
+        careerFormCompany: CompanyNameValue(),
+        careerFormStartDate: CareerDateValue(),
+        careerFormEndDate: CareerDateValue(),
+        careers: [...state.careers, formEntity],
+      ),
+    );
+  }
+
   /// 지역 추가
   void _onProfileAddAreaAppend(
     ProfileAddAreaAppend event,

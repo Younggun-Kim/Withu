@@ -6,8 +6,6 @@ import 'package:nanoid/nanoid.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
 
-import '../../../../../../core/utils/library/logger/logger.dart';
-
 part 'career_entity.freezed.dart';
 
 part 'career_entity_parser.dart';
@@ -32,7 +30,8 @@ class CareerEntity with _$CareerEntity, EquatableMixin {
   factory CareerEntity.temp() => CareerEntity(id: nanoid());
 
   factory CareerEntity.deepCopy(CareerEntity other) {
-    return CareerEntity(
+    final temp = CareerEntity.temp();
+    return temp.copyWith(
       name: other.name,
       content: other.content,
       companyName: other.companyName,
@@ -41,13 +40,14 @@ class CareerEntity with _$CareerEntity, EquatableMixin {
     );
   }
 
-  bool isValid() =>
-      id.isNotEmpty &&
-      name.isValid() &&
-      content.isValid() &&
-      companyName.isValid() &&
-      startDate.isValid() &&
-      endDate.isValid();
+  bool isValid() {
+    return id.isNotEmpty &&
+        name.isValid() &&
+        content.isValid() &&
+        companyName.isValid() &&
+        startDate.isValid() &&
+        endDate.isValid();
+  }
 
   @override
   List<Object?> get props => [id];
@@ -62,7 +62,6 @@ extension CareerEntityEx on CareerEntity {
     try {
       return startDate.getDate().isAfter(endDate.getDate());
     } catch (e) {
-      logger.e(e);
       return false;
     }
   }
@@ -71,7 +70,6 @@ extension CareerEntityEx on CareerEntity {
     try {
       return endDate.getDate().isBefore(startDate.getDate());
     } catch (e) {
-      logger.e(e);
       return false;
     }
   }

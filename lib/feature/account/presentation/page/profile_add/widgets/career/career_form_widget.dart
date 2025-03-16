@@ -42,8 +42,12 @@ class CareerFormWidget extends StatelessWidget {
                 child: IntrinsicWidth(
                   child: EnabledFitBtn(
                     text: StringRes.doRegistration.tr,
-                    isEnabled: false,
-                    onTap: () {},
+                    isEnabled: state.isValidCareerForm,
+                    onTap: () {
+                      context.read<ProfileAddBloc>().add(
+                        ProfileAddFormRegistered(),
+                      );
+                    },
                   ),
                 ),
               ),

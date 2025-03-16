@@ -47,6 +47,7 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
     on<ProfileAddFormCompanyInputted>(_onProfileAddFormCompanyInputted);
     on<ProfileAddFormStartDateChanged>(_onProfileAddFormStartDateChanged);
     on<ProfileAddFormEndDateChanged>(_onProfileAddFormEndDateChanged);
+    on<ProfileAddFormRegistered>(_onProfileAddFormRegistered);
     on<ProfileAddAreaAppend>(_onProfileAddAreaAppend);
     on<ProfileAddAreaDeleted>(_onProfileAddAreaDeleted);
   }

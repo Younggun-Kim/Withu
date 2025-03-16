@@ -52,13 +52,18 @@ extension ProfileAddStateEx on ProfileAddState {
 
   bool get hasProfileUrl => profileImage?.hasUrl == true;
 
-  CareerEntity get careerFormEntity => CareerEntity(
-    name: careerFormName,
-    content: careerFormContent,
-    companyName: careerFormCompany,
-    startDate: careerFormStartDate,
-    endDate: careerFormEndDate,
-  );
+  bool get isValidCareerForm => careerFormEntity.isValid();
+
+  CareerEntity get careerFormEntity {
+    final temp = CareerEntity.temp();
+    return temp.copyWith(
+      name: careerFormName,
+      content: careerFormContent,
+      companyName: careerFormCompany,
+      startDate: careerFormStartDate,
+      endDate: careerFormEndDate,
+    );
+  }
 
   bool isEnabledNextBtn() {
     switch (currentStep) {

@@ -119,6 +119,9 @@ class ProfileAddFormEndDateChanged extends ProfileAddEvent {
   CareerDateValue get date => CareerDateValue(value.format('yyyy-MM-dd'));
 }
 
+/// 경력 등록하기
+class ProfileAddFormRegistered extends ProfileAddEvent {}
+
 /// 지역 추가
 class ProfileAddAreaAppend extends ProfileAddEvent {
   final AreaEntity area;
