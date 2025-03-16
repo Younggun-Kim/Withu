@@ -15,8 +15,6 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
         field: entity.field,
         portfolioImages: entity.portfolioImageUrls,
         careers: entity.careers,
-        hasNewCareer: false,
-        careerFormData: CareerEntity(),
         areas: entity.areas,
         profileImage: entity.profileImageUrl,
       ),
@@ -69,8 +67,14 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     ProfileAddStepBackward event,
     ProfileAddEmitter emit,
   ) {
-    final isCompany = getItGlobalBloc.state.isCompanyUser;
-    emit(state.copyWith(currentStep: state.currentStep.getPrevStep(isCompany)));
+    if (state.currentStep.isFirst) {
+      getItAppRouter.maybePop();
+    } else {
+      final isCompany = getItGlobalBloc.state.isCompanyUser;
+      emit(
+        state.copyWith(currentStep: state.currentStep.getPrevStep(isCompany)),
+      );
+    }
   }
 
   /// 자기소개 입력
@@ -124,21 +128,6 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     emit(state.copyWith(profileImage: event.image));
   }
 
-  /// 경력 추가하기 클릭
-  void _onProfileAddAddCareerPressed(
-    ProfileAddCareerAppended event,
-    ProfileAddEmitter emit,
-  ) async {
-    final newCareer = CareerEntity.temp();
-    emit(
-      state.copyWith(
-        hasNewCareer: true,
-        careers: [newCareer, ...state.careers],
-        careerFormData: newCareer,
-      ),
-    );
-  }
-
   /// 경력 삭제
   void _onProfileAddCareerDeleted(
     ProfileAddCareerDeleted event,
@@ -146,14 +135,7 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
   ) async {
     final newCareers =
         state.careers.where((entity) => entity.id != event.entity.id).toList();
-    final isEqualFormData = state.careerFormData == event.entity;
-    emit(
-      state.copyWith(
-        careers: newCareers,
-        hasNewCareer: isEqualFormData ? false : state.hasNewCareer,
-        careerFormData: isEqualFormData ? CareerEntity() : state.careerFormData,
-      ),
-    );
+    emit(state.copyWith(careers: newCareers));
   }
 
   /// 경력 순서 변경
@@ -173,84 +155,44 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     emit(state.copyWith(careers: newCareers));
   }
 
-  /// 경력 입력 폼 접기
-  void _onProfileAddCareerFormClosed(
-    ProfileAddCareerFormClosed event,
-    ProfileAddEmitter emit,
-  ) {
-    emit(state.copyWith(hasNewCareer: false, careerFormData: CareerEntity()));
-  }
-
-  /// 경력 선택
-  void _onProfileAddCareerSelected(
-    ProfileAddCareerSelected event,
-    ProfileAddEmitter emit,
-  ) {
-    emit(state.copyWith(careerFormData: event.entity, hasNewCareer: true));
-  }
-
   /// 경력 이름 입력
   void _onProfileAddFormNameInputted(
     ProfileAddFormNameInputted event,
     ProfileAddEmitter emit,
   ) {
-    final newFormData = state.careerFormData.copyWith(name: event.name);
-    emit(
-      state.copyWith(
-        careerFormData: newFormData,
-        careers: _getCareersWithCareerForm(newFormData),
-      ),
-    );
-    logger.i(
-      _getCareersWithCareerForm(newFormData).toDto().map((a) => a.toJson()),
-    );
+    emit(state.copyWith(careerFormName: event.name));
   }
 
+  /// 경력 콘텐츠 입력
   void _onProfileAddFormContentInputted(
     ProfileAddFormContentInputted event,
     ProfileAddEmitter emit,
   ) {
-    final newFormData = state.careerFormData.copyWith(content: event.content);
-
-    emit(
-      state.copyWith(
-        careerFormData: newFormData,
-        careers: _getCareersWithCareerForm(newFormData),
-      ),
-    );
+    emit(state.copyWith(careerFormContent: event.content));
   }
 
   void _onProfileAddFormCompanyInputted(
     ProfileAddFormCompanyInputted event,
     ProfileAddEmitter emit,
   ) {
-    final newFormData = state.careerFormData.copyWith(
-      companyName: event.company,
-    );
-    emit(
-      state.copyWith(
-        careerFormData: newFormData,
-        careers: _getCareersWithCareerForm(newFormData),
-      ),
-    );
+    emit(state.copyWith(careerFormCompany: event.company));
   }
 
   void _onProfileAddFormStartDateChanged(
     ProfileAddFormStartDateChanged event,
     ProfileAddEmitter emit,
   ) {
-    CareerEntity newFormData = state.careerFormData.copyWith(
-      startDate: event.date,
-    );
+    String endDate = state.careerFormEndDate.value;
 
-    if (newFormData.isAfter() || newFormData.isEmptyEndDate) {
-      newFormData = newFormData.copyWith(endDate: event.date);
+    final entity = state.careerFormEntity.copyWith(startDate: event.date);
+    if (entity.isAfter() || entity.isEmptyEndDate) {
+      endDate = event.date.value;
     }
 
     emit(
       state.copyWith(
-        careerFormData: newFormData,
-        careers: _getCareersWithCareerForm(newFormData),
+        careerFormStartDate: event.date,
+        careerFormEndDate: CareerDateValue(endDate),
       ),
     );
   }
@@ -259,17 +201,16 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     ProfileAddFormEndDateChanged event,
     ProfileAddEmitter emit,
   ) {
-    CareerEntity newFormData = state.careerFormData.copyWith(
-      endDate: event.date,
-    );
+    String startDate = state.careerFormStartDate.value;
 
-    if (newFormData.isBefore()) {
-      newFormData = newFormData.copyWith(startDate: event.date);
+    final entity = state.careerFormEntity.copyWith(endDate: event.date);
+    if (entity.isBefore()) {
+      startDate = event.date.value;
     }
     emit(
       state.copyWith(
-        careerFormData: newFormData,
-        careers: _getCareersWithCareerForm(newFormData),
+        careerFormStartDate: CareerDateValue(startDate),
+        careerFormEndDate: event.date,
       ),
     );
   }
@@ -335,15 +276,6 @@ extension ProfileAddBlocHandlerEx on ProfileAddBloc {
           return image;
         })
         .map((image) => image.url)
-        .toList();
-  }
-
-  /// CareerForm이 반영된 Careers 얻기
-  List<CareerEntity> _getCareersWithCareerForm(CareerEntity newCareer) {
-    return [...state.careers]
-        .map(
-          (oldCareer) => oldCareer.id == newCareer.id ? newCareer : oldCareer,
-        )
         .toList();
   }
 }

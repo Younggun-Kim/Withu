@@ -155,4 +155,19 @@ class BaseButton extends StatelessWidget {
       border: Border.all(color: ColorName.secondary),
     );
   }
+
+  factory BaseButton.fitTertiary({
+    required BuildContext context,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return BaseButton.fit(
+      context: context,
+      text: text,
+      onTap: onTap,
+      textColor: ColorName.secondary,
+      backgroundColor: ColorName.tertiary,
+      border: Border.all(color: ColorName.tertiary),
+    );
+  }
 }

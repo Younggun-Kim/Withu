@@ -44,6 +44,7 @@ enum StringRes {
   numberOfPeopleUnit,
   wonUnit,
   registration,
+  doRegistration,
   serverError,
   travelTimeGuideDescription,
   breakTimeGuideDescription,

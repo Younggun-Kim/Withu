@@ -45,9 +45,16 @@ class ProfileAddPage extends StatelessWidget {
           builder: (context, state) {
             return PageRoot(
               isLoading: state.status.isLoading,
-              appBar: CustomAppBar.back(
+              appBar: CustomAppBar.customActionBack(
                 context: context,
                 trailing: [_PageIndicator(), const SizedBox(width: 25)],
+                onPressed: () {
+                  if (FocusScope.of(context).isFirstFocus) {
+                    FocusScope.of(context).unfocus();
+                    return;
+                  }
+                  context.read<ProfileAddBloc>().add(ProfileAddStepBackward());
+                },
               ),
               child: _StepPageView(),
             );

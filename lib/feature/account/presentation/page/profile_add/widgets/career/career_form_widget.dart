@@ -5,7 +5,7 @@ import 'package:withu/core/utils/resource/string_res.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
-import 'package:withu/shared/widgets/base_input/bottom_border_input.dart';
+import 'package:withu/shared/shared.dart';
 
 class CareerFormWidget extends StatelessWidget {
   const CareerFormWidget({super.key});
@@ -26,27 +26,7 @@ class CareerFormWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '경력 ${state.careerFormDataIndex}',
-                    style: context.textTheme.bodyLarge?.setBlack,
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      context.read<ProfileAddBloc>().add(
-                        ProfileAddCareerFormClosed(),
-                      );
-                    },
-                    child: Text(
-                      '접기',
-                      style: context.textTheme.bodySmall?.setBlack,
-                    ),
-                  ),
-                ],
-              ),
+              Text('경력 추가', style: context.textTheme.bodyLargeBold?.setBlack),
               const SizedBox(height: 15),
               _NameRow(),
               const SizedBox(height: 5),
@@ -57,6 +37,16 @@ class CareerFormWidget extends StatelessWidget {
               _StartDateRow(),
               const SizedBox(height: 5),
               _EndDateRow(),
+              const SizedBox(height: 15),
+              Center(
+                child: IntrinsicWidth(
+                  child: EnabledFitBtn(
+                    text: StringRes.doRegistration.tr,
+                    isEnabled: false,
+                    onTap: () {},
+                  ),
+                ),
+              ),
             ],
           ),
         );
@@ -129,8 +119,8 @@ class _NameInputState extends State<_NameInput>
     super.build(context);
     return ProfileAddBlocListener(
       listener: (context, state) {
-        if (state.careerFormData.name.value != _controller.text) {
-          _controller.text = state.careerFormData.name.value;
+        if (state.careerFormName.value != _controller.text) {
+          _controller.text = state.careerFormName.value;
         }
       },
       child: BottomBorderInput.basic(
@@ -191,8 +181,8 @@ class _ContentInputState extends State<_ContentInput> {
   Widget build(BuildContext context) {
     return ProfileAddBlocListener(
       listener: (context, state) {
-        if (state.careerFormData.content.value != _controller.text) {
-          _controller.text = state.careerFormData.content.value;
+        if (state.careerFormContent.value != _controller.text) {
+          _controller.text = state.careerFormContent.value;
         }
       },
       child: BottomBorderInput.basic(
@@ -253,8 +243,8 @@ class _CompanyNameInputState extends State<_CompanyNameInput> {
   Widget build(BuildContext context) {
     return ProfileAddBlocListener(
       listener: (context, state) {
-        if (state.careerFormData.companyName.value != _controller.text) {
-          _controller.text = state.careerFormData.companyName.value;
+        if (state.careerFormCompany.value != _controller.text) {
+          _controller.text = state.careerFormCompany.value;
         }
       },
       child: BottomBorderInput.basic(
@@ -298,7 +288,7 @@ class _StartDateRow extends StatelessWidget {
             Flexible(
               flex: 5,
               child: _DatePicker(
-                date: state.careerFormData.startDate.value,
+                date: state.careerFormStartDate.value,
                 onChanged: (DateTime newDate) {
                   context.read<ProfileAddBloc>().add(
                     ProfileAddFormStartDateChanged(value: newDate),
@@ -325,7 +315,7 @@ class _EndDateRow extends StatelessWidget {
             Flexible(
               flex: 5,
               child: _DatePicker(
-                date: state.careerFormData.endDate.value,
+                date: state.careerFormEndDate.value,
                 onChanged: (DateTime newDate) {
                   context.read<ProfileAddBloc>().add(
                     ProfileAddFormEndDateChanged(value: newDate),

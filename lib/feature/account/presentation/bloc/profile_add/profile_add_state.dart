@@ -19,11 +19,20 @@ class ProfileAddState extends BaseBlocState with _$ProfileAddState {
     /// 경력 목록
     @Default([]) List<CareerEntity> careers,
 
-    /// 새 경력 입력 여부
-    @Default(false) bool hasNewCareer,
+    /// 경력 폼 이름
+    @Default(NameValue()) NameValue careerFormName,
 
-    /// 새 경력 입력 여부
-    @Default(CareerEntity()) CareerEntity careerFormData,
+    /// 경력 폼 내용
+    @Default(CareerContentValue()) CareerContentValue careerFormContent,
+
+    /// 경력 폼 회사 이름
+    @Default(CompanyNameValue()) CompanyNameValue careerFormCompany,
+
+    /// 경력 폼 시작 날짜
+    @Default(CareerDateValue()) CareerDateValue careerFormStartDate,
+
+    /// 경력 폼 종료 날짜
+    @Default(CareerDateValue()) CareerDateValue careerFormEndDate,
 
     @Default([]) AreaEntities areas,
 
@@ -41,11 +50,15 @@ extension ProfileAddStateEx on ProfileAddState {
 
   bool get isAreaFull => areas.length >= maxAreaCount;
 
-  int get careerFormDataIndex {
-    return careers.reversed.toList().indexOf(careerFormData) + 1;
-  }
-
   bool get hasProfileUrl => profileImage?.hasUrl == true;
+
+  CareerEntity get careerFormEntity => CareerEntity(
+    name: careerFormName,
+    content: careerFormContent,
+    companyName: careerFormCompany,
+    startDate: careerFormStartDate,
+    endDate: careerFormEndDate,
+  );
 
   bool isEnabledNextBtn() {
     switch (currentStep) {

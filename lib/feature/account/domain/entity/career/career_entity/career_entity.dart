@@ -31,6 +31,16 @@ class CareerEntity with _$CareerEntity, EquatableMixin {
 
   factory CareerEntity.temp() => CareerEntity(id: nanoid());
 
+  factory CareerEntity.deepCopy(CareerEntity other) {
+    return CareerEntity(
+      name: other.name,
+      content: other.content,
+      companyName: other.companyName,
+      startDate: other.startDate,
+      endDate: other.endDate,
+    );
+  }
+
   bool isValid() =>
       id.isNotEmpty &&
       name.isValid() &&

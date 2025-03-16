@@ -40,11 +40,8 @@ class ProfileAddBloc extends Bloc<ProfileAddEvent, ProfileAddState> {
     on<ProfileAddPhotoAddRequested>(_onProfileAddAddPhotoRequested);
     on<ProfileAddPhotoDeleted>(_onProfileAddPhotoDeleted);
     on<ProfileAddProfilePhotoPressed>(_onProfileAddProfilePhotoPressed);
-    on<ProfileAddCareerAppended>(_onProfileAddAddCareerPressed);
     on<ProfileAddCareerDeleted>(_onProfileAddCareerDeleted);
     on<ProfileAddCareerReordered>(_onProfileAddCareerReordered);
-    on<ProfileAddCareerFormClosed>(_onProfileAddCareerFormClosed);
-    on<ProfileAddCareerSelected>(_onProfileAddCareerSelected);
     on<ProfileAddFormNameInputted>(_onProfileAddFormNameInputted);
     on<ProfileAddFormContentInputted>(_onProfileAddFormContentInputted);
     on<ProfileAddFormCompanyInputted>(_onProfileAddFormCompanyInputted);

@@ -4,7 +4,6 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
-import 'package:withu/shared/widgets/base_button/icon_btn.dart';
 
 import '../widgets.dart';
 
@@ -37,18 +36,7 @@ class _ProfileAddCareerState extends State<ProfileAddCareer> {
       builder: (context, state) {
         return ProfileAddLayout(
           sliverWidget: Column(
-            children: [
-              AnimatedSize(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child:
-                    state.hasNewCareer
-                        ? CareerFormWidget()
-                        : const SizedBox(width: double.infinity, height: 0),
-              ),
-              _CareerAddBtn(),
-              const SizedBox(height: 28),
-            ],
+            children: [CareerFormWidget(), const SizedBox(height: 28)],
           ),
           fillRemainingChild: SliverReorderableList(
             key: listStateKey,
@@ -63,9 +51,10 @@ class _ProfileAddCareerState extends State<ProfileAddCareer> {
                   child: _CareerItem(
                     entity: entity,
                     onTap: () {
-                      context.read<ProfileAddBloc>().add(
-                        ProfileAddCareerSelected(entity: entity),
-                      );
+                      // TODO:  수정 버튼 클릭
+                      // context.read<ProfileAddBloc>().add(
+                      //   ProfileAddCareerSelected(entity: entity),
+                      // );
                     },
                   ),
                 ),
@@ -82,24 +71,6 @@ class _ProfileAddCareerState extends State<ProfileAddCareer> {
             },
           ),
         );
-      },
-    );
-  }
-}
-
-class _CareerAddBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return IconBtn(
-      text: StringRes.addCareer.tr,
-      backgroundColor: ColorName.background,
-      icon: Assets.images.plusSm.svg(
-        width: 24,
-        height: 24,
-        colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
-      ),
-      onTap: () {
-        context.read<ProfileAddBloc>().add(ProfileAddCareerAppended());
       },
     );
   }

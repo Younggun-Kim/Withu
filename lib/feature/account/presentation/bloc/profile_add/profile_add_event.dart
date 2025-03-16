@@ -52,9 +52,6 @@ class ProfileAddProfilePhotoPressed extends ProfileAddEvent {
   ProfileAddProfilePhotoPressed({required this.image});
 }
 
-/// 경력 추가 클릭 이벤트
-class ProfileAddCareerAppended extends ProfileAddEvent {}
-
 /// 경력 삭제
 class ProfileAddCareerDeleted extends ProfileAddEvent {
   final CareerEntity entity;
@@ -69,9 +66,6 @@ class ProfileAddCareerReordered extends ProfileAddEvent {
 
   ProfileAddCareerReordered({required this.oldIndex, required this.newIndex});
 }
-
-/// 경력 입력 폼 접기
-class ProfileAddCareerFormClosed extends ProfileAddEvent {}
 
 /// 경력 선택
 class ProfileAddCareerSelected extends ProfileAddEvent {
