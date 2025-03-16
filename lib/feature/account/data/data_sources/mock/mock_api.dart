@@ -168,7 +168,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        ChangePwResDtoMock.failure().toJson((data) => data),
+        ChangePwResDtoMock.success().toJson((data) => data),
         delay: const Duration(seconds: 1),
       ),
     );

@@ -62,18 +62,16 @@ extension FindAccountBlocHandler on FindAccountBloc {
 
     emit(state.copyWith(status: BaseBlocStatus.fromSuccess(response.success)));
 
-    if (response.success) {
-      /// 아이디 찾기 결과 화면 이동
-      getItAppRouter.push(
-        FindIdResultRoute(
-          args: FindIdResultPageArgs(
-            isFound: response.success,
-            name: state.name.value,
-            email: response.email,
-            signUpMethod: response.signUpMethod,
-          ),
+    /// 아이디 찾기 결과 화면 이동
+    getItAppRouter.push(
+      FindIdResultRoute(
+        args: FindIdResultPageArgs(
+          isFound: response.success,
+          name: state.name.value,
+          email: response.email,
+          signUpMethod: response.signUpMethod,
         ),
-      );
-    }
+      ),
+    );
   }
 }
