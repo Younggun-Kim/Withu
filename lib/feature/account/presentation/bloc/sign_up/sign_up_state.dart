@@ -63,7 +63,8 @@ extension SignUpStateEx on SignUpState {
         birthDate.isValidSlash() &&
         !gender.isNone &&
         phone.isValid() &&
-        isPhoneVerify;
+        isPhoneVerify &&
+        !channel.isNone;
 
     if (isSns) {
       return isSnsValid;
