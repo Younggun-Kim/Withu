@@ -78,12 +78,11 @@ class LinePainter extends CustomPainter {
           ..color = ColorName.tertiary
           ..strokeWidth = 1;
 
-    // 첫 번째 줄
-
+    // 줄 그리기
     for (var index in List.generate(lineNum, (index) => index)) {
       canvas.drawLine(
-        Offset(0, size.height / lineNum * (index + 1)),
-        Offset(size.width, size.height / lineNum * (index + 1)),
+        Offset(0, 42 * (index + 1)),
+        Offset(size.width, 42 * (index + 1)),
         paint,
       );
     }

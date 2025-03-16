@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:withu/core/utils/resource/string_res.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
-import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout.dart';
+import 'package:withu/core/core.dart';
+import 'package:withu/feature/account/account.dart';
 import 'package:withu/shared/widgets/lined_text_form/lined_text_form.dart';
 
-import '../widgets.dart';
+import '../layout/profile_add_layout2.dart';
 
 /// 자기소개 입력
 class ProfileAddIntroduction extends StatefulWidget {
@@ -44,8 +43,8 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
           _controller.text = state.introduction.value;
         }
       },
-      child: ProfileAddLayout(
-        fillRemainingChild: SliverFillRemaining(
+      child: ProfileAddLayout2(
+        fillRemainingChild: Expanded(
           child: Container(
             alignment: Alignment.topCenter,
             child: LinedTextFormField(
@@ -62,6 +61,36 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileAddBlocBuilder(
+      builder: (context, state) {
+        final isCompany = getItGlobalBloc.state.isCompanyUser;
+        return Text(
+          state.currentStep.toTitle(isCompany),
+          style: context.textTheme.headlineMedium?.setBlack,
+        );
+      },
+    );
+  }
+}
+
+class _Description extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProfileAddBlocBuilder(
+      builder: (context, state) {
+        final isCompany = getItGlobalBloc.state.isCompanyUser;
+        return Text(
+          state.currentStep.toDescription(isCompany),
+          style: context.textTheme.bodyMedium?.setBlack,
+        );
+      },
     );
   }
 }
