@@ -151,7 +151,7 @@ class AccountMockApi extends AccountApiImpl {
       data: dto.toJson(),
       (server) => server.reply(
         200,
-        AppleLoginResDtoMock.success().toJson((data) => data.toJson()),
+        FindIdResDtoMock.successEmail().toJson((data) => data.toJson()),
         delay: const Duration(seconds: 1),
       ),
     );

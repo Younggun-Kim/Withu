@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/domain/type/sign_up_method_type.dart';
 
 part 'find_id_res_dto.freezed.dart';
 

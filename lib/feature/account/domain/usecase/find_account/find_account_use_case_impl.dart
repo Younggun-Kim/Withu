@@ -1,4 +1,4 @@
-part of 'find_account_usecase.dart';
+part of 'find_account_use_case.dart';
 
 class FindAccountUseCaseImpl implements FindAccountUseCase {
   @override
@@ -8,6 +8,12 @@ class FindAccountUseCaseImpl implements FindAccountUseCase {
 
   @override
   FutureOr<FindIdResValue> findId(String phone) async {
-    return await accountRepo.findId(phone);
+    final response = await accountRepo.findId(phone);
+
+    if (!response.success) {
+      Toast.showWithNavigatorKey(text: response.message);
+    }
+
+    return FindIdResValueParser.fromDto(response.data);
   }
 }

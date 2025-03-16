@@ -217,7 +217,7 @@ class _SignUpAndLoginBtn extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 40),
+        const SizedBox(width: 10),
         TextButton(
           onPressed: () {
             context.router.push(
@@ -226,6 +226,20 @@ class _SignUpAndLoginBtn extends StatelessWidget {
           },
           child: Text(
             StringRes.findId.tr,
+            style: context.textTheme.bodyMediumBold?.copyWith(
+              color: ColorName.text,
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        TextButton(
+          onPressed: () {
+            context.router.push(
+              FindAccountRoute(args: FindAccountPageArgs.password()),
+            );
+          },
+          child: Text(
+            StringRes.findPw.tr,
             style: context.textTheme.bodyMediumBold?.copyWith(
               color: ColorName.text,
             ),

@@ -73,12 +73,8 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 아이디 찾기
   @override
-  FutureOr<FindIdResValue> findId(String phone) async {
-    final response = await accountApi.postFindId(
-      dto: FindIdReqDto(phone: phone),
-    );
-
-    return FindIdResValueParser.fromDto(response);
+  FutureOr<FindIdResDto> findId(String phone) async {
+    return await accountApi.postFindId(dto: FindIdReqDto(phoneNo: phone));
   }
 
   /// 비밀번호 변경

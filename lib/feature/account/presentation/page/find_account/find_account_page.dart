@@ -84,8 +84,6 @@ class _FindAccountPageContent extends StatelessWidget {
                       _FieldName.phone(),
                       PhoneAuthWidget(),
                       const Spacer(),
-                      _MoveFindPwBtn(),
-                      _MoveFindIdBtn(),
                       _FindIdBtn(),
                       _FindPwBtn(),
                       const SizedBox(height: 55),
@@ -205,62 +203,6 @@ class _EmailInputState extends State<_EmailInput> {
   }
 }
 
-class _MoveFindPwBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FindAccountBlocBuilder(
-      builder: (context, state) {
-        if (state.pageType.isPw) {
-          return const SizedBox();
-        }
-        return Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(bottom: 20),
-          child: InkWell(
-            onTap: () {
-              context.read<FindAccountBloc>().add(
-                FindAccountPageTypeChanged(type: FindAccountPageType.password),
-              );
-            },
-            child: Text(
-              '비밀번호 찾기',
-              style: context.textTheme.bodyMedium?.setBlack,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _MoveFindIdBtn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FindAccountBlocBuilder(
-      builder: (context, state) {
-        if (state.pageType.isId) {
-          return const SizedBox();
-        }
-        return Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(bottom: 20),
-          child: InkWell(
-            onTap: () {
-              context.read<FindAccountBloc>().add(
-                FindAccountPageTypeChanged(type: FindAccountPageType.id),
-              );
-            },
-            child: Text(
-              '아이디 찾기',
-              style: context.textTheme.bodyMedium?.setBlack,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
 class _FindIdBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -270,9 +212,10 @@ class _FindIdBtn extends StatelessWidget {
           return const SizedBox();
         }
         return EnabledBtn(
-          text: '아이디 찾기',
+          text: StringRes.findIdSpace.tr,
           isEnabled: state.isEnabledFindId,
           onTap: () {
+            context.keyboardUnfocus();
             context.read<FindAccountBloc>().add(FindAccountFindIdPressed());
           },
         );
@@ -290,9 +233,10 @@ class _FindPwBtn extends StatelessWidget {
           return const SizedBox();
         }
         return EnabledBtn(
-          text: '비밀번호 찾기',
+          text: StringRes.findPwSpace.tr,
           isEnabled: state.isEnabledFindId,
           onTap: () {
+            context.keyboardUnfocus();
             context.router.push(
               ChangePwRoute(
                 args: ChangePwPageArgs(

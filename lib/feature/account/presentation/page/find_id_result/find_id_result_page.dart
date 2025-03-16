@@ -5,8 +5,8 @@ import 'package:withu/core/router/router.gr.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/shared.dart';
 
-import '../find_account/find_account_page_args.dart';
 import 'find_id_result_page_args.dart';
+import '../find_account/find_account_page_args.dart';
 
 @RoutePage()
 class FindIdResultPage extends StatelessWidget {
@@ -29,6 +29,19 @@ class _FindSuccess extends StatelessWidget {
   final FindIdResultPageArgs args;
 
   const _FindSuccess({required this.args});
+
+  @override
+  Widget build(BuildContext context) {
+    return args.signUpMethod.isEmail
+        ? _FindSuccessEmail(args: args)
+        : _FindSuccessSns(args: args);
+  }
+}
+
+class _FindSuccessEmail extends StatelessWidget {
+  final FindIdResultPageArgs args;
+
+  const _FindSuccessEmail({required this.args});
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +76,52 @@ class _FindSuccess extends StatelessWidget {
         BaseButton.enabled(
           context: context,
           text: '로그인',
+          onTap: () {
+            context.router.popUntilRoot();
+          },
+        ),
+        const SizedBox(height: 55),
+      ],
+    );
+  }
+}
+
+class _FindSuccessSns extends StatelessWidget {
+  final FindIdResultPageArgs args;
+
+  const _FindSuccessSns({required this.args});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Flexible(flex: 1, child: Container(height: double.infinity)),
+        Assets.images.logoPuzzle.svg(width: 121),
+        const SizedBox(height: 100),
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: '${args.name} 님은',
+                style: context.textTheme.headlineSmall?.setBlack,
+              ),
+              WidgetSpan(child: SizedBox(width: 8)),
+              TextSpan(text: 'SNS 계정', style: context.textTheme.headlineLarge),
+              WidgetSpan(child: SizedBox(width: 8)),
+              TextSpan(
+                text: '으로',
+                style: context.textTheme.headlineSmall?.setBlack,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text('가입한 계정입니다.', style: context.textTheme.headlineSmall?.setBlack),
+        Flexible(flex: 2, child: Container(height: double.infinity)),
+        const SizedBox(height: 20),
+        BaseButton.enabled(
+          context: context,
+          text: '간편 로그인',
           onTap: () {
             context.router.popUntilRoot();
           },

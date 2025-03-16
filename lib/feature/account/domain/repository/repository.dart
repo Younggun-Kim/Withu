@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/data/data.dart';
 import 'package:withu/feature/account/data/data_sources/dto/sns_sign_up/sns_sign_up.dart';
-import 'package:withu/feature/account/domain/entity/find_id_res/find_id_res_value.dart';
 
 abstract class AccountRepository {
   AccountRepository({required this.accountApi, required this.accountStorage});
@@ -31,7 +30,7 @@ abstract class AccountRepository {
   FutureOr<AppleLoginResDto> requestAppleLogin(AppleLoginReqDto dto);
 
   /// 아이디 찾기 요청
-  FutureOr<FindIdResValue> findId(String phone);
+  FutureOr<FindIdResDto> findId(String phone);
 
   /// 비밀번호 변경 요청
   /// return - (bool) 변경 성공 여부

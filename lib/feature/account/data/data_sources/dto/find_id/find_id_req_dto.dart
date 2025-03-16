@@ -7,7 +7,7 @@ part 'find_id_req_dto.g.dart';
 @freezed
 class FindIdReqDto with _$FindIdReqDto {
   factory FindIdReqDto({
-    required String phone,
+    required String phoneNo,
     @Default(true) bool success,
     @Default('') String message,
   }) = _FindIdReqDto;
