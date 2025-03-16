@@ -78,7 +78,6 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     ProfileAddIntroductionInputted event,
     ProfileAddEmitter emit,
   ) {
-    logger.i('ProfileAddIntroductionInputted');
     emit(state.copyWith(introduction: event.introduction));
   }
 
@@ -202,6 +201,9 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
         careers: _getCareersWithCareerForm(newFormData),
       ),
     );
+    logger.i(
+      _getCareersWithCareerForm(newFormData).toDto().map((a) => a.toJson()),
+    );
   }
 
   void _onProfileAddFormContentInputted(
@@ -297,7 +299,7 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     }
 
     AreaEntities newAreas = [...state.areas];
-    newAreas.removeWhere((area) => area.cd == event.area.cd);
+    newAreas.removeWhere((area) => area.fullAddr == event.area.fullAddr);
     emit(state.copyWith(areas: newAreas));
   }
 }

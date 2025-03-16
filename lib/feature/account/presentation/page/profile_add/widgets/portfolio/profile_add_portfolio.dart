@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout2.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout3.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/bottom_sheet/image_picker/image_picker_bottom_sheet.dart';
@@ -14,7 +14,7 @@ class ProfileAddPortfolio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileAddLayout2(
+    return ProfileAddLayout3(
       currentStep: ProfileAddStep.portfolio,
       headerWidget: _ImageAddBtnSliver(),
       fillRemainingChild: _PortfolioContent(),

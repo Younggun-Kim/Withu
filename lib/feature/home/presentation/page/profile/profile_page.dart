@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
       child: ProfileBlocBuilder(
         builder: (context, state) {
           return Padding(
-            padding: CustomEdgeInsets.horizontalPadding(),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 35),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(child: _CompanyProfile()),

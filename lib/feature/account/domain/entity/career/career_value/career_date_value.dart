@@ -11,10 +11,10 @@ class CareerDateValue with _$CareerDateValue {
 
   const CareerDateValue._();
 
-  bool isValid() => RegExUtil.ymdSlashPattern.hasMatch(value);
+  bool isValid() => RegExUtil.ymdDashPattern.hasMatch(value);
 
   DateTime getDate() {
-    return DateFormat('yyyy/MM/dd').parse(value);
+    return DateFormat('yyyy-MM-dd').parse(value);
   }
 
   String getDashed() {

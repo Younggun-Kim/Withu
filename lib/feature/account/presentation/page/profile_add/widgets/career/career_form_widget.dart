@@ -102,7 +102,8 @@ class _NameInput extends StatefulWidget {
   State<StatefulWidget> createState() => _NameInputState();
 }
 
-class _NameInputState extends State<_NameInput> {
+class _NameInputState extends State<_NameInput>
+    with AutomaticKeepAliveClientMixin {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -121,7 +122,11 @@ class _NameInputState extends State<_NameInput> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ProfileAddBlocListener(
       listener: (context, state) {
         if (state.careerFormData.name.value != _controller.text) {

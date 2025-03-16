@@ -4,7 +4,7 @@ import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_step.dart';
-import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout2.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout3.dart';
 import 'package:withu/gen/colors.gen.dart';
 
 class ProfileAddField extends StatelessWidget {
@@ -12,7 +12,7 @@ class ProfileAddField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileAddLayout2(
+    return ProfileAddLayout3(
       currentStep: ProfileAddStep.field,
       fillRemainingChild: _FieldContent(),
     );

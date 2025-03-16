@@ -117,7 +117,9 @@ class _Sgg extends StatelessWidget {
   Widget build(BuildContext context) {
     return AreaBlocBuilder(
       builder: (context, state) {
+        final bool isEnabled = state.selectedSgg != null;
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Wrap(
               spacing: 16,
@@ -141,24 +143,29 @@ class _Sgg extends StatelessWidget {
                       .toList(),
             ),
             const SizedBox(height: 20),
-            InkWell(
-              onTap: () {
-                context.read<AreaBloc>().add(AreaSubmitted());
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-              child: Container(
-                width: 130,
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: ColorName.secondary,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  StringRes.next.tr,
-                  style: context.textTheme.bodyLargeBold?.setWhite,
+            Center(
+              child: InkWell(
+                onTap: () {
+                  if (!isEnabled) {
+                    return;
+                  }
+                  context.read<AreaBloc>().add(AreaSubmitted());
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Container(
+                  width: 130,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: isEnabled ? ColorName.secondary : ColorName.tertiary,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    StringRes.next.tr,
+                    style: context.textTheme.bodyLargeBold?.setWhite,
+                  ),
                 ),
               ),
             ),

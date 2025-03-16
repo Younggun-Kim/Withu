@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
-import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
-import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout.dart';
+import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout3.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
@@ -17,15 +17,14 @@ class ProfileAddArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
-        return ProfileAddLayout(
-          sliverWidget: _AreaAdd(),
-          fillRemainingChild: SliverFillRemaining(
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              children:
-                  state.areas.map((area) => _AreaWrapItem(area: area)).toList(),
-            ),
+        return ProfileAddLayout3(
+          currentStep: ProfileAddStep.area,
+          headerWidget: _AreaAdd(),
+          fillRemainingChild: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children:
+                state.areas.map((area) => _AreaWrapItem(area: area)).toList(),
           ),
         );
       },

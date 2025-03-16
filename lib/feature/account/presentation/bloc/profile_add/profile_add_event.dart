@@ -113,7 +113,7 @@ class ProfileAddFormStartDateChanged extends ProfileAddEvent {
 
   ProfileAddFormStartDateChanged({required this.value});
 
-  CareerDateValue get date => CareerDateValue(value.format('yyyy/MM/dd'));
+  CareerDateValue get date => CareerDateValue(value.format('yyyy-MM-dd'));
 }
 
 /// 경력 종료날짜 입력
@@ -122,7 +122,7 @@ class ProfileAddFormEndDateChanged extends ProfileAddEvent {
 
   ProfileAddFormEndDateChanged({required this.value});
 
-  CareerDateValue get date => CareerDateValue(value.format('yyyy/MM/dd'));
+  CareerDateValue get date => CareerDateValue(value.format('yyyy-MM-dd'));
 }
 
 /// 지역 추가

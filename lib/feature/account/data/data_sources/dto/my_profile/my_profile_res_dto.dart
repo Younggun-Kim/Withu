@@ -51,7 +51,7 @@ extension MyProfileResDtoMock on MyProfileResDto {
         businessNumber: '',
         companyName: '',
         profileStatus: ProfileStatusType.incomplete,
-        userType: UserType.company,
+        userType: UserType.staff,
       ),
       message: ' 프로필 조회에 성공했습니다',
     );

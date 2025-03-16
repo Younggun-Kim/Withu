@@ -28,7 +28,8 @@ extension AreaBlocHandler on AreaBloc {
   void _onAreaSidoSelected(AreaSidoSelected event, AreaEmitter emit) async {
     emit(state.copyWith(selectedSido: event.sido));
     final sggs = await areaUseCase.getSgg(event.sido);
-    emit(state.copyWith(step: AreaSelectStep.sgg, sgg: sggs));
+    final allArea = event.sido.copyWith(addrName: '${event.sido.addrName} 전체');
+    emit(state.copyWith(step: AreaSelectStep.sgg, sgg: [allArea, ...sggs]));
   }
 
   void _onAreaSggSelected(AreaSggSelected event, AreaEmitter emit) async {
@@ -48,6 +49,6 @@ extension AreaBlocHandler on AreaBloc {
   }
 
   void _onAreaSubmitted(AreaSubmitted event, AreaEmitter emit) {
-    emit(state.copyWith(submitArea: state.selectedEmd));
+    emit(state.copyWith(submitArea: state.selectedSgg));
   }
 }

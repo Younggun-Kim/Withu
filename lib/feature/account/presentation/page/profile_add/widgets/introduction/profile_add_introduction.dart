@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout3.dart';
 import 'package:withu/shared/widgets/lined_text_form/lined_text_form.dart';
 
-import '../layout/profile_add_layout2.dart';
 
 /// 자기소개 입력
 class ProfileAddIntroduction extends StatefulWidget {
@@ -35,7 +35,7 @@ class _IntroductionState extends State<ProfileAddIntroduction>
   }
 
   @override
-  bool get wantKeepAlive => true; // 🌟 이 부분이 중요!
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +46,21 @@ class _IntroductionState extends State<ProfileAddIntroduction>
           _controller.text = state.introduction.value;
         }
       },
-      child: ProfileAddLayout2(
+      child: ProfileAddLayout3(
         currentStep: ProfileAddStep.introduction,
-        fillRemainingChild: Expanded(
-          child: Container(
-            alignment: Alignment.topCenter,
-            child: LinedTextFormField(
-              controller: _controller,
-              focusNode: _focusNode,
-              lineNum: 3,
-              maxLength: 50,
-              hint: StringRes.selfIntroInputHint.tr,
-              onChanged: (String text) {
-                context.read<ProfileAddBloc>().add(
-                  ProfileAddIntroductionInputted(value: text),
-                );
-              },
-            ),
+        fillRemainingChild: Container(
+          alignment: Alignment.topCenter,
+          child: LinedTextFormField(
+            controller: _controller,
+            focusNode: _focusNode,
+            lineNum: 3,
+            maxLength: 50,
+            hint: StringRes.selfIntroInputHint.tr,
+            onChanged: (String text) {
+              context.read<ProfileAddBloc>().add(
+                ProfileAddIntroductionInputted(value: text),
+              );
+            },
           ),
         ),
       ),
