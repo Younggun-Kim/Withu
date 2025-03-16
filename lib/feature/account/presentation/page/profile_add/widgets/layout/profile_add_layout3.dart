@@ -7,12 +7,12 @@ import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/widgets/base_button/base_button.dart';
 import 'package:withu/shared/widgets/base_button/enabled_btn.dart';
 
-class ProfileAddLayout2 extends StatelessWidget {
+class ProfileAddLayout3 extends StatelessWidget {
   final ProfileAddStep currentStep;
   final Widget? headerWidget;
   final Widget fillRemainingChild;
 
-  const ProfileAddLayout2({
+  const ProfileAddLayout3({
     super.key,
     required this.currentStep,
     required this.fillRemainingChild,
@@ -25,61 +25,40 @@ class ProfileAddLayout2 extends StatelessWidget {
       builder: (context, state) {
         final isCompany = getItGlobalBloc.state.isCompanyUser;
 
-        return Padding(
-          padding: CustomEdgeInsets.horizontalPadding(),
-          child: NestedScrollView(
-            headerSliverBuilder: (
-              BuildContext context,
-              bool innerBoxIsScrolled,
-            ) {
-              return [
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Assets.images.logoPuzzle.svg(),
-                      const SizedBox(height: 11),
-                      _Title(isCompany: isCompany, currentStep: currentStep),
-                      const SizedBox(height: 14),
-                      _Description(
-                        isCompany: isCompany,
-                        currentStep: currentStep,
-                      ),
-                      const SizedBox(height: 30),
-                      headerWidget ?? const SizedBox.shrink(),
-                    ],
+        return Column(
+          children: [
+            const SizedBox(height: 20),
+            Assets.images.logoPuzzle.svg(),
+            const SizedBox(height: 11),
+            _Title(isCompany: isCompany, currentStep: currentStep),
+            const SizedBox(height: 14),
+            _Description(isCompany: isCompany, currentStep: currentStep),
+            const SizedBox(height: 30),
+            headerWidget ?? const SizedBox.shrink(),
+            const SizedBox(height: 20),
+            Expanded(child: SingleChildScrollView(child: Column())),
+            const SizedBox(height: 20),
+            _SkipBtn(),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
+              children: [
+                Visibility(
+                  visible: !state.currentStep.isFirst,
+                  child: Expanded(
+                    flex: 1, // 이전 버튼의 크기 설정
+                    child: _PrevBtn(),
                   ),
                 ),
-              ];
-            },
-            body: Column(
-              children: [
-                fillRemainingChild,
-                const SizedBox(height: 20),
-                _SkipBtn(),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween, // 좌우 정렬을 적절히 배치
-                  children: [
-                    Visibility(
-                      visible: !state.currentStep.isFirst,
-                      child: Expanded(
-                        flex: 1, // 이전 버튼의 크기 설정
-                        child: _PrevBtn(),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
-                      child: _NextBtn(),
-                    ),
-                  ],
+                Expanded(
+                  flex: 2, // 다음 버튼이 더 넓게 차지하도록 설정
+                  child: _NextBtn(),
                 ),
-                const SizedBox(height: 30),
               ],
             ),
-          ),
+            const SizedBox(height: 30),
+          ],
         );
       },
     );

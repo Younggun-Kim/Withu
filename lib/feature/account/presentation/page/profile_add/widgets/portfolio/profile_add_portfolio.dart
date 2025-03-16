@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout2.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
 import 'package:withu/shared/bottom_sheet/image_picker/image_picker_bottom_sheet.dart';
 import 'package:withu/shared/dialogs/dialogs.dart';
 import 'package:withu/shared/widgets/base_button/base_button.dart';
-import '../widgets.dart';
 
 class ProfileAddPortfolio extends StatelessWidget {
   const ProfileAddPortfolio({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileAddLayout(
-      sliverWidget: _ImageAddBtnSliver(),
-      fillRemainingChild: SliverFillRemaining(child: _PortfolioContent()),
+    return ProfileAddLayout2(
+      currentStep: ProfileAddStep.portfolio,
+      headerWidget: _ImageAddBtnSliver(),
+      fillRemainingChild: _PortfolioContent(),
     );
   }
 }
@@ -71,14 +72,16 @@ class _PortfolioContent extends StatelessWidget {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
         return GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: state.portfolioImages.length,
           itemBuilder: (context, index) {
             return _PortfolioImageItem(imageFile: state.portfolioImages[index]);
           },
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 20.0,
-            mainAxisSpacing: 20.0,
+            crossAxisSpacing: 16.0,
+            mainAxisSpacing: 16.0,
             childAspectRatio: 1.0,
           ),
         );

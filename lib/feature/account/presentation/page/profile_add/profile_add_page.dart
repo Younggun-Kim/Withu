@@ -117,7 +117,7 @@ class _StepPageViewState extends State<_StepPageView> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _pageController = PageController(keepPage: true);
   }
 
   @override

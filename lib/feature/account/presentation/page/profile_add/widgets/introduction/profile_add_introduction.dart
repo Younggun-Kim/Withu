@@ -14,18 +14,17 @@ class ProfileAddIntroduction extends StatefulWidget {
   State<StatefulWidget> createState() => _IntroductionState();
 }
 
-class _IntroductionState extends State<ProfileAddIntroduction> {
-  late TextEditingController _controller;
+class _IntroductionState extends State<ProfileAddIntroduction>
+    with AutomaticKeepAliveClientMixin {
+  final TextEditingController _controller = TextEditingController();
   late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    // _controller = TextEditingController();
     _focusNode = FocusNode();
-
-    /// 포커싱이 없으면 초기화 상태에서 값이 사라짐
-    _focusNode.requestFocus();
+    logger.w(_controller.text);
   }
 
   @override
@@ -36,7 +35,11 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
   }
 
   @override
+  bool get wantKeepAlive => true; // 🌟 이 부분이 중요!
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ProfileAddBlocListener(
       listener: (context, state) {
         if (state.introduction.value != _controller.text) {
@@ -44,6 +47,7 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
         }
       },
       child: ProfileAddLayout2(
+        currentStep: ProfileAddStep.introduction,
         fillRemainingChild: Expanded(
           child: Container(
             alignment: Alignment.topCenter,
@@ -51,6 +55,7 @@ class _IntroductionState extends State<ProfileAddIntroduction> {
               controller: _controller,
               focusNode: _focusNode,
               lineNum: 3,
+              maxLength: 50,
               hint: StringRes.selfIntroInputHint.tr,
               onChanged: (String text) {
                 context.read<ProfileAddBloc>().add(

@@ -3,16 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/domain/type/field_type.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_step.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout2.dart';
 import 'package:withu/gen/colors.gen.dart';
-import '../widgets.dart';
 
 class ProfileAddField extends StatelessWidget {
   const ProfileAddField({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileAddLayout(
-      fillRemainingChild: SliverFillRemaining(child: _FieldContent()),
+    return ProfileAddLayout2(
+      currentStep: ProfileAddStep.field,
+      fillRemainingChild: _FieldContent(),
     );
   }
 }

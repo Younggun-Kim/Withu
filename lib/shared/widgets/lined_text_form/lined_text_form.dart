@@ -60,6 +60,7 @@ class LinedTextFormField extends StatelessWidget {
             color: ColorName.secondary,
             height: 48 / 14,
           ),
+          counterText: '',
         ),
       ),
     );

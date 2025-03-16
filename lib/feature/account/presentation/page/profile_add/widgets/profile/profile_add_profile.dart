@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
+import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_step.dart';
+import 'package:withu/feature/account/presentation/page/profile_add/widgets/layout/profile_add_layout2.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/shared/bottom_sheet/image_picker/image_picker_bottom_sheet.dart';
-import '../widgets.dart';
 
 /// 프로필
 class ProfileAddProfile extends StatelessWidget {
@@ -15,8 +16,9 @@ class ProfileAddProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
-        return ProfileAddLayout(
-          fillRemainingChild: SliverFillRemaining(
+        return ProfileAddLayout2(
+          currentStep: ProfileAddStep.profile,
+          fillRemainingChild: Expanded(
             child: Center(
               child: InkWell(
                 splashColor: Colors.transparent,
