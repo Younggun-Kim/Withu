@@ -31,52 +31,59 @@ class _ValidateBusinessPageContent extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return PageRoot(
-          isLoading: state.status.isLoading,
+          isLoading: false,
+          // isLoading: state.status.isLoading,
           appBar: CustomAppBar.back(context: context),
           padding: CustomEdgeInsets.horizontalPadding(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 24),
-                Assets.images.logoPuzzle2.svg(),
-                const SizedBox(height: 10),
-                _Title(),
-                const SizedBox(height: 14),
-                _Description(),
-                const SizedBox(height: 35),
-                _FieldName(text: '사업자등록증 번호'),
-                const SizedBox(height: 11),
-                BusinessNumberInput(),
-                const SizedBox(height: 7),
-                Visibility(
-                  visible: state.iSDuplicated.isVisible,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      '올바른 사업자등록 번호가 아닙니다.',
-                      style: context.textTheme.bodySmall?.setPoint,
+          child: IndexedStack(
+            index: state.status.isLoading ? 1 : 0,
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 24),
+                    Assets.images.logoPuzzle2.svg(),
+                    const SizedBox(height: 10),
+                    _Title(),
+                    const SizedBox(height: 14),
+                    _Description(),
+                    const SizedBox(height: 35),
+                    _FieldName(text: '사업자등록증 번호'),
+                    const SizedBox(height: 11),
+                    BusinessNumberInput(),
+                    const SizedBox(height: 7),
+                    Visibility(
+                      visible: state.iSDuplicated.isVisible,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          '올바른 사업자등록 번호가 아닙니다.',
+                          style: context.textTheme.bodySmall?.setPoint,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    _FieldName(text: '대표자 이름'),
+                    const SizedBox(height: 11),
+                    CeoNameInput(),
+                    const SizedBox(height: 20),
+                    _FieldName(text: '회사 이름'),
+                    const SizedBox(height: 11),
+                    CompanyNameInput(),
+                    const SizedBox(height: 20),
+                    _FieldName(text: '개업일자'),
+                    const SizedBox(height: 11),
+                    OpenDateInput(),
+                    const SizedBox(height: 25),
+                    _CheckDuplicateBtn(),
+                    const SizedBox(height: 40),
+                  ],
                 ),
-                const SizedBox(height: 20),
-                _FieldName(text: '대표자 이름'),
-                const SizedBox(height: 11),
-                CeoNameInput(),
-                const SizedBox(height: 20),
-                _FieldName(text: '회사 이름'),
-                const SizedBox(height: 11),
-                CompanyNameInput(),
-                const SizedBox(height: 20),
-                _FieldName(text: '개업일자'),
-                const SizedBox(height: 11),
-                OpenDateInput(),
-                const SizedBox(height: 25),
-                _CheckDuplicateBtn(),
-                const SizedBox(height: 40),
-              ],
-            ),
+              ),
+              _CheckValidationLoading(),
+            ],
           ),
         );
       },
@@ -309,6 +316,47 @@ class OpenDateInputState extends State<OpenDateInput> {
           ValidateBusinessOpenDateNameInputted(value: OpenDateValue(text)),
         );
       },
+    );
+  }
+}
+
+class _CheckValidationLoading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(child: const SizedBox()),
+          Container(
+            width: 258,
+            height: 258,
+            alignment: Alignment.center,
+            child: Stack(
+              children: [
+                Assets.images.logoLoading.svg(
+                  width: 258,
+                  height: 258,
+                  fit: BoxFit.cover,
+                ),
+                Transform.translate(
+                  offset: Offset(0, -40),
+                  child: LoadingAnimation(),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 50),
+          Text(
+            '사업자 등록 확인중...',
+            style: context.textTheme.headlineMedium?.setBlack,
+          ),
+          Expanded(flex: 2, child: const SizedBox()),
+        ],
+      ),
     );
   }
 }

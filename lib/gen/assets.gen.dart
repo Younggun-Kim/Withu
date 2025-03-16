@@ -85,8 +85,30 @@ class $AssetsImagesGen {
   /// File path: assets/images/guide4.svg
   SvgGenImage get guide4 => const SvgGenImage('assets/images/guide4.svg');
 
+  /// File path: assets/images/loading1.svg
+  SvgGenImage get loading1 => const SvgGenImage('assets/images/loading1.svg');
+
+  /// File path: assets/images/loading2.svg
+  SvgGenImage get loading2 => const SvgGenImage('assets/images/loading2.svg');
+
+  /// File path: assets/images/loading3.svg
+  SvgGenImage get loading3 => const SvgGenImage('assets/images/loading3.svg');
+
+  /// File path: assets/images/loading4.svg
+  SvgGenImage get loading4 => const SvgGenImage('assets/images/loading4.svg');
+
+  /// File path: assets/images/loading5.svg
+  SvgGenImage get loading5 => const SvgGenImage('assets/images/loading5.svg');
+
+  /// File path: assets/images/loading6.svg
+  SvgGenImage get loading6 => const SvgGenImage('assets/images/loading6.svg');
+
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
+
+  /// File path: assets/images/logo_loading.svg
+  SvgGenImage get logoLoading =>
+      const SvgGenImage('assets/images/logo_loading.svg');
 
   /// File path: assets/images/logo_puzzle.svg
   SvgGenImage get logoPuzzle =>
@@ -195,7 +217,14 @@ class $AssetsImagesGen {
         guide2,
         guide3,
         guide4,
+        loading1,
+        loading2,
+        loading3,
+        loading4,
+        loading5,
+        loading6,
         logo,
+        logoLoading,
         logoPuzzle,
         logoPuzzle2,
         logoPuzzle3,
