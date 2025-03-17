@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
-import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
+import 'package:withu/shared/bottom_sheet/career_form/career_form_bottom_sheet.dart';
+import 'package:withu/shared/widgets/base_button/base_button.dart';
 
 import '../widgets.dart';
 
@@ -33,13 +34,13 @@ class _ProfileAddCareerState extends State<ProfileAddCareer> {
   @override
   Widget build(BuildContext context) {
     return ProfileAddBlocBuilder(
+      buildWhen: (previous, current) => previous.careers != current.careers,
       builder: (context, state) {
         return ProfileAddLayout(
           sliverWidget: Column(
             children: [CareerFormWidget(), const SizedBox(height: 28)],
           ),
           fillRemainingChild: SliverReorderableList(
-            key: listStateKey,
             itemBuilder: (context, index) {
               final entity = state.careers[index];
               return Material(
@@ -48,15 +49,7 @@ class _ProfileAddCareerState extends State<ProfileAddCareer> {
                 child: ReorderableDelayedDragStartListener(
                   index: index,
                   enabled: true,
-                  child: _CareerItem(
-                    entity: entity,
-                    onTap: () {
-                      // TODO:  수정 버튼 클릭
-                      // context.read<ProfileAddBloc>().add(
-                      //   ProfileAddCareerSelected(entity: entity),
-                      // );
-                    },
-                  ),
+                  child: _CareerItem(entity: entity),
                 ),
               );
             },

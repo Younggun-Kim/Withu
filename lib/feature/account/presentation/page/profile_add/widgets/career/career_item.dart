@@ -3,9 +3,7 @@ part of 'profile_add_career.dart';
 class _CareerItem extends StatelessWidget {
   final CareerEntity entity;
 
-  final VoidCallback onTap;
-
-  const _CareerItem({required this.entity, required this.onTap});
+  const _CareerItem({required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -21,62 +19,75 @@ class _CareerItem extends StatelessWidget {
     final String company =
         entity.companyName.isValid() ? entity.companyName.value : '회사명';
 
-    return InkWell(
-      splashColor: Colors.transparent,
-      onTap: onTap,
-
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    name,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: getTextColor(entity.name.value.isNotEmpty),
+    return ProfileAddBlocBuilder(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      name,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: getTextColor(entity.name.value.isNotEmpty),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 20),
-                InkWell(
-                  onTap: () {
-                    context.read<ProfileAddBloc>().add(
-                      ProfileAddCareerDeleted(entity: entity),
-                    );
-                  },
-                  child: Assets.images.close.svg(),
-                ),
-              ],
-            ),
-            Text(
-              content,
-              style: context.textTheme.bodySmall?.copyWith(
-                color: getTextColor(entity.content.isValid()),
+                  const SizedBox(width: 20),
+                  BaseButton.fit(
+                    context: context,
+                    text: StringRes.update.tr,
+                    onTap: () {
+                      CareerFormBottomSheet.show(
+                        context: context,
+                        career: entity,
+                        onUpdate: (CareerEntity newEntity) {
+                          context.read<ProfileAddBloc>().add(
+                            ProfileAddCareerUpdated(entity: newEntity),
+                          );
+                        },
+                        onDeleted: () {
+                          context.read<ProfileAddBloc>().add(
+                            ProfileAddCareerDeleted(entity: entity),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-            Row(
-              children: [
-                Text(
-                  period,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: getSecondaryTextColor(entity.startDate.isValid()),
-                  ),
+              Text(
+                content,
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: getTextColor(entity.content.isValid()),
                 ),
-                Spacer(),
-                Text(
-                  company,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: getSecondaryTextColor(entity.companyName.isValid()),
+              ),
+              Row(
+                children: [
+                  Text(
+                    period,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: getSecondaryTextColor(entity.startDate.isValid()),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+                  Spacer(),
+                  Text(
+                    company,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: getSecondaryTextColor(
+                        entity.companyName.isValid(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

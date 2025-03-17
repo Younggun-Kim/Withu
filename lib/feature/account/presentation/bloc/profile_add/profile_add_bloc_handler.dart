@@ -128,6 +128,20 @@ extension ProfileAddBlocHandler on ProfileAddBloc {
     emit(state.copyWith(profileImage: event.image));
   }
 
+  /// 경력 변경
+  void _onProfileAddCareerUpdated(
+    ProfileAddCareerUpdated event,
+    ProfileAddEmitter emit,
+  ) async {
+    final newCareer = CareerEntity.deepCopy(event.entity);
+    final newCareers =
+        [
+          ...state.careers,
+        ].map((c) => c.isEqual(newCareer) ? newCareer : c).toList();
+
+    emit(state.copyWith(careers: newCareers));
+  }
+
   /// 경력 삭제
   void _onProfileAddCareerDeleted(
     ProfileAddCareerDeleted event,

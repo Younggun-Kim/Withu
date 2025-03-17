@@ -51,6 +51,8 @@ enum StringRes {
   mealGuideDescription,
   update,
   delete,
+  doDelete,
+  doSave,
   close,
   cancel,
   isNotDeadlineYetConfirmClose,

@@ -59,6 +59,13 @@ class ProfileAddCareerDeleted extends ProfileAddEvent {
   ProfileAddCareerDeleted({required this.entity});
 }
 
+/// 경력 업데이트
+class ProfileAddCareerUpdated extends ProfileAddEvent {
+  final CareerEntity entity;
+
+  ProfileAddCareerUpdated({required this.entity});
+}
+
 /// 경력 순서 변경
 class ProfileAddCareerReordered extends ProfileAddEvent {
   final int oldIndex;

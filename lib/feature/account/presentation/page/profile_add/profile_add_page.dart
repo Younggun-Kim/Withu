@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
+import 'package:withu/feature/account/presentation/bloc/career_form/career_form_bloc.dart';
 import 'package:withu/feature/account/presentation/page/profile_add/widgets/widgets.dart';
 import 'package:withu/feature/common/common.dart';
 import 'package:withu/gen/colors.gen.dart';
@@ -28,6 +29,7 @@ class ProfileAddPage extends StatelessWidget {
               (context) =>
                   getIt()..add(ProfileAddInitialized(entity: args.entity)),
         ),
+        CareerFormBlocProvider(create: (context) => getIt()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -40,6 +42,7 @@ class ProfileAddPage extends StatelessWidget {
               }
             },
           ),
+          ProfileAddBlocListener(listener: (context, state) {}),
         ],
         child: ProfileAddBlocBuilder(
           builder: (context, state) {

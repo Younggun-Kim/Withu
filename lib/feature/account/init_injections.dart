@@ -1,6 +1,7 @@
 import 'package:withu/core/core.dart';
 import 'package:withu/feature/account/account.dart';
 import '../common/domain/usecase/upload_image/upload_image_use_case.dart';
+import 'presentation/bloc/career_form/career_form_bloc.dart';
 import 'presentation/bloc/change_pw/change_pw_bloc.dart';
 
 void initAccountDataInjections() {
@@ -57,4 +58,5 @@ void initAccountPresentationInjections() {
     () =>
         ProfileAddBloc(uploadImageUseCase: getIt(), profileAddUseCase: getIt()),
   );
+  getIt.registerFactory<CareerFormBloc>(() => CareerFormBloc());
 }

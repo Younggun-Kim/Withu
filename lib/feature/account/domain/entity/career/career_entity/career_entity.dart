@@ -1,6 +1,5 @@
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
-import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:withu/feature/account/account.dart';
@@ -14,7 +13,7 @@ typedef CareerEntities = List<CareerEntity>;
 
 /// 경력 Entity
 @freezed
-class CareerEntity with _$CareerEntity, EquatableMixin {
+class CareerEntity with _$CareerEntity {
   const factory CareerEntity({
     @Default('') String id,
     @Default(NameValue()) NameValue name,
@@ -30,8 +29,9 @@ class CareerEntity with _$CareerEntity, EquatableMixin {
   factory CareerEntity.temp() => CareerEntity(id: nanoid());
 
   factory CareerEntity.deepCopy(CareerEntity other) {
-    final temp = CareerEntity.temp();
+    final temp = CareerEntity();
     return temp.copyWith(
+      id: other.id,
       name: other.name,
       content: other.content,
       companyName: other.companyName,
@@ -48,15 +48,16 @@ class CareerEntity with _$CareerEntity, EquatableMixin {
         startDate.isValid() &&
         endDate.isValid();
   }
-
-  @override
-  List<Object?> get props => [id];
 }
 
 extension CareerEntityEx on CareerEntity {
   String get period => '${startDate.value}-${endDate.value}';
 
   bool get isEmptyEndDate => endDate.value.isEmpty;
+
+  bool isEqual(CareerEntity other) {
+    return id == other.id;
+  }
 
   bool isAfter() {
     try {

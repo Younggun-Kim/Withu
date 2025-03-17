@@ -23,7 +23,6 @@ class _IntroductionState extends State<ProfileAddIntroduction>
     super.initState();
     _controller = TextEditingController();
     _focusNode = FocusNode();
-    logger.w(_controller.text);
   }
 
   @override
@@ -63,36 +62,6 @@ class _IntroductionState extends State<ProfileAddIntroduction>
           ),
         ),
       ),
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProfileAddBlocBuilder(
-      builder: (context, state) {
-        final isCompany = getItGlobalBloc.state.isCompanyUser;
-        return Text(
-          state.currentStep.toTitle(isCompany),
-          style: context.textTheme.headlineMedium?.setBlack,
-        );
-      },
-    );
-  }
-}
-
-class _Description extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ProfileAddBlocBuilder(
-      builder: (context, state) {
-        final isCompany = getItGlobalBloc.state.isCompanyUser;
-        return Text(
-          state.currentStep.toDescription(isCompany),
-          style: context.textTheme.bodyMedium?.setBlack,
-        );
-      },
     );
   }
 }
