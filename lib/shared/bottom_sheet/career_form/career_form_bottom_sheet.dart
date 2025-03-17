@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -6,6 +7,7 @@ import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/account/presentation/bloc/career_form/career_form_bloc.dart';
 import 'package:withu/gen/assets.gen.dart';
 import 'package:withu/gen/colors.gen.dart';
+import 'package:withu/shared/bottom_sheet/select_date_calendar/select_date_calendar_bottom_sheet.dart';
 import 'package:withu/shared/widgets/base_button/base_button.dart';
 import 'package:withu/shared/widgets/base_button/enabled_fit_btn.dart';
 import 'package:withu/shared/widgets/base_input/bottom_border_input.dart';
@@ -413,16 +415,12 @@ class _DatePicker extends StatelessWidget {
     final textColor = dateIsEmpty ? ColorName.secondary : ColorName.text;
     return InkWell(
       onTap: () async {
-        final newDate = await showDatePicker(
+        await SelectDateCalendarBottomSheet.show(
           context: context,
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          firstDate: DateTime(1960),
-          lastDate: DateTime(20500),
-          currentDate: DateTime.now(),
+          initFocusDate:
+              DateFormat('yyyy-MM-dd').tryParse(date) ?? DateTime.now(),
+          onChanged: onChanged,
         );
-        if (newDate != null) {
-          onChanged(newDate);
-        }
       },
       child: Container(
         width: double.infinity,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:withu/core/utils/extensions/theme_ext.dart';
 import 'package:withu/core/utils/resource/string_res.dart';
 import 'package:withu/feature/account/presentation/bloc/profile_add/profile_add_bloc.dart';
@@ -348,16 +349,12 @@ class _DatePicker extends StatelessWidget {
     final textColor = dateIsEmpty ? ColorName.secondary : ColorName.text;
     return InkWell(
       onTap: () async {
-        final newDate = await showDatePicker(
+        await SelectDateCalendarBottomSheet.show(
           context: context,
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          firstDate: DateTime(1960),
-          lastDate: DateTime(20500),
-          currentDate: DateTime.now(),
+          initFocusDate:
+              DateFormat('yyyy-MM-dd').tryParse(date) ?? DateTime.now(),
+          onChanged: onChanged,
         );
-        if (newDate != null) {
-          onChanged(newDate);
-        }
       },
       child: Container(
         width: double.infinity,
