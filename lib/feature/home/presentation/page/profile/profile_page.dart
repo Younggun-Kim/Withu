@@ -33,6 +33,7 @@ class ProfilePage extends StatelessWidget {
                   sliver: SliverFillRemaining(child: _CompanyUnregistered()),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: false,
                   sliver: SliverToBoxAdapter(
                     child: _IntroductionText(
                       text: state.profile.introduction.value,
@@ -40,18 +41,23 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: true,
                   sliver: SliverToBoxAdapter(child: _AreaContent()),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: true,
                   sliver: SliverToBoxAdapter(child: _CareerHeader()),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: true,
                   sliver: SliverToBoxAdapter(child: _CareerContent()),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: false,
                   sliver: SliverToBoxAdapter(child: _PortfolioContent()),
                 ),
                 _RegistrationVisibility(
+                  onlyStaff: false,
                   sliver: SliverGrid(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -186,18 +192,26 @@ class _FieldName extends StatelessWidget {
 }
 
 class _RegistrationVisibility extends StatelessWidget {
+  final bool onlyStaff;
+
   final Widget sliver;
 
-  const _RegistrationVisibility({required this.sliver});
+  const _RegistrationVisibility({
+    required this.onlyStaff,
+    required this.sliver,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ProfileBlocBuilder(
       builder: (context, state) {
-        return SliverVisibility(
-          visible: !state.profile.isEmpty,
-          sliver: sliver,
-        );
+        bool condition = !state.profile.isEmpty;
+
+        if (onlyStaff) {
+          condition = condition && !getItGlobalBloc.state.isCompanyUser;
+        }
+
+        return SliverVisibility(visible: condition, sliver: sliver);
       },
     );
   }
@@ -346,6 +360,7 @@ class _CareerContentState extends State<_CareerContent> {
         return AnimatedContainer(
           duration: Duration(milliseconds: 300),
           height: height,
+          margin: EdgeInsets.only(bottom: 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -438,7 +453,11 @@ class _PortfolioImage extends StatelessWidget {
           imageUrl,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stacktrace) {
-            return Container(color: Colors.grey);
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: ColorName.tertiary,
+            );
           },
         ),
       ),
@@ -454,7 +473,6 @@ class _PortfolioContent extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
             _FieldName.portfolio(),
             Visibility(
               visible: state.profile.firstPortfolioImageUrl.isNotEmpty,

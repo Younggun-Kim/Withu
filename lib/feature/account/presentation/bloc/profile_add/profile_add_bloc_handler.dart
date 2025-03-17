@@ -293,8 +293,9 @@ extension ProfileAddBlocHandlerEx on ProfileAddBloc {
 
   FutureOr<List<String>> getPortfolioImageUrls() async {
     final portfolioImages = [...state.portfolioImages];
+    final bool hasFile = portfolioImages.any((e) => e.hasFile);
 
-    if (portfolioImages.isEmpty) return [];
+    if (portfolioImages.isEmpty || !hasFile) return [];
 
     final hasFileImages = portfolioImages.getOnlyHasFile();
     final files = hasFileImages.toFile();

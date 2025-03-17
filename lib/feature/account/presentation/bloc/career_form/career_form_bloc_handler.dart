@@ -58,11 +58,12 @@ extension CareerFormBlocHandler on CareerFormBloc {
     CareerFormEndDateChanged event,
     Emitter<CareerFormState> emit,
   ) {
-    String startDate = state.endDate.value;
+    String startDate = state.startDate.value;
 
     final entity = state.getCareerEntity().copyWith(endDate: event.date);
     if (entity.isBefore()) {
       startDate = event.date.value;
+      logger.w(startDate);
     }
     emit(
       state.copyWith(

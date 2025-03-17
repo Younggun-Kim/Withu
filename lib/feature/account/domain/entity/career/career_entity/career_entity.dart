@@ -2,6 +2,7 @@
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nanoid/nanoid.dart';
+import 'package:withu/core/utils/library/logger/logger.dart';
 import 'package:withu/feature/account/account.dart';
 import 'package:withu/feature/common/common.dart';
 
@@ -69,6 +70,9 @@ extension CareerEntityEx on CareerEntity {
 
   bool isBefore() {
     try {
+      logger.i(
+        '${startDate.getDate().isBefore(endDate.getDate())}  - ${endDate.getDate().isBefore(startDate.getDate())} -   - ${startDate.getDate()}   -  ${endDate.getDate()}',
+      );
       return endDate.getDate().isBefore(startDate.getDate());
     } catch (e) {
       return false;

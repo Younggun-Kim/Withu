@@ -28,7 +28,7 @@ class _ImageAddBtnSliver extends StatelessWidget {
     return ProfileAddBlocBuilder(
       builder: (context, state) {
         return Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: EdgeInsets.symmetric(vertical: 20),
           child: Row(
             children: [
               BaseButton.fitSecondary(

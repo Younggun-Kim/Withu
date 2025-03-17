@@ -171,7 +171,7 @@ class _NameInputState extends State<_NameInput>
   @override
   void initState() {
     super.initState();
-    _controller;
+    _controller.text = context.read<CareerFormBloc>().state.name.value;
   }
 
   @override
@@ -237,7 +237,7 @@ class _ContentInputState extends State<_ContentInput> {
   @override
   void initState() {
     super.initState();
-    _controller;
+    _controller.text = context.read<CareerFormBloc>().state.content.value;
   }
 
   @override
@@ -299,7 +299,7 @@ class _CompanyNameInputState extends State<_CompanyNameInput> {
   @override
   void initState() {
     super.initState();
-    _controller;
+    _controller.text = context.read<CareerFormBloc>().state.company.value;
   }
 
   @override

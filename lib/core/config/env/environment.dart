@@ -10,6 +10,6 @@ class Environment {
   static bool get isProd => env == EnvironmentType.prod;
 
   // TODO: 테스트
-  // static bool get isRelease => kDebugMode;
-  static bool get isRelease => kReleaseMode;
+  static bool get isRelease => kDebugMode;
+  // static bool get isRelease => kReleaseMode;
 }
